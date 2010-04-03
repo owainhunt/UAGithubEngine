@@ -39,11 +39,19 @@
 	NSError *error;
 	//return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
 	return [[NSXMLDocument alloc] initWithData:[NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error] options:0 error:&error];
+	
 }
 
 - (id)getRepositoriesForUser:(NSString *)aUser withWatched:(BOOL)watched
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil];
+	
+}
+
+- (id)getRepository:(NSString *)repositoryPath;
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] withParameters:nil];
+	
 }
 
 @end
