@@ -69,28 +69,40 @@
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad	timeoutInterval:30];
 	NSURLResponse *response;
 	NSError *error;
-	NSData *theData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-	return theData;
+	return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
 	
 }
 
+
+- (void)parseData:(NSData *)theData requestType:(UAGithubRequestType)requestType
+{
+	switch (requestType) {
+		case UAGithubRepositoriesRequest:
+		case UAGithubRepositoryRequest:
+			[[UAGithubRepositoriesParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			break;
+		default:
+			break;
+	}
+
+}
+	
 
 #pragma mark Repositories
 
 
 - (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
-	[[UAGithubRepositoriesParser alloc] 
-		 initWithXML:[self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil] 
-			delegate:self 
-		 requestType:UAGithubRepositoriesRequest];
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil]
+		requestType:UAGithubRepositoriesRequest];
 	
 }
 
 
-- (id)getRepository:(NSString *)repositoryPath;
+- (void)getRepository:(NSString *)repositoryPath;
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] withParameters:nil];
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] withParameters:nil]
+		requestType:UAGithubRepositoryRequest];
 	
 }
 
