@@ -7,9 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UAGithubEngineRequestTypes.h"
 
 
 @protocol UAGithubParserDelegate
 
+- (void)parsingSucceededForRequestOfType:(UAGithubRequestType)requestType withParsedObjects:(NSArray *)parsedObjects;
+- (void)parsingFailedForRequestOfType:(UAGithubRequestType)requestType withError:(NSError *)parseError;
 
 @end

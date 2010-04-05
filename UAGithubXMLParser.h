@@ -7,10 +7,28 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UAGithubParserDelegate.h"
+#import "UAGithubEngineRequestTypes.h"
 
 
 @interface UAGithubXMLParser : NSObject {
+	id <UAGithubParserDelegate> delegate;
+    NSString *identifier;
+    UAGithubRequestType requestType;
+    NSData *xml;
+    NSMutableArray *parsedObjects;
+    NSXMLParser *parser;
+    __weak NSMutableDictionary *currentNode;
+    NSString *lastOpenedElement;
+	
+	NSArray *numberElements;
+	NSArray *boolElements;
+	NSArray *parentElements;
 
 }
+
+@property (nonatomic, retain) NSString *lastOpenedElement;
+
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType;
 
 @end

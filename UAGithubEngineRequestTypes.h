@@ -12,4 +12,5 @@ typedef enum UAGithubRequestType {
     UAGithubAllIssuesRequest			= 0,    
 	UAGithubOpenIssuesRequest			= 1,
 	UAGithubClosedIssuesRequest			= 2,
+	UAGithubRepositoriesRequest			= 3,
 } UAGithubRequestType;
