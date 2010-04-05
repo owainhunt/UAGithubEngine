@@ -8,6 +8,7 @@
 
 #import "UAGithubEngine.h"
 #import "UAGithubEngineRequestTypes.h"
+#import "UAGithubRepositoriesParser.h"
 
 
 @implementation UAGithubEngine
@@ -68,7 +69,8 @@
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad	timeoutInterval:30];
 	NSURLResponse *response;
 	NSError *error;
-	return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+	NSData *theData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+	return theData;
 	
 }
 
@@ -76,9 +78,12 @@
 #pragma mark Repositories
 
 
-- (id)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
+- (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil];
+	[[UAGithubRepositoriesParser alloc] 
+		 initWithXML:[self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil] 
+			delegate:self 
+		 requestType:UAGithubRepositoriesRequest];
 	
 }
 
@@ -203,9 +208,19 @@
 	
 }
 
-/*
- 
- 
- */
+
+#pragma mark Parser Delegate Methods
+
+- (void)parsingSucceededForRequestOfType:(UAGithubRequestType)requestType withParsedObjects:(NSArray *)parsedObjects
+{
+	
+}
+
+
+- (void)parsingFailedForRequestOfType:(UAGithubRequestType)requestType withError:(NSError *)parseError
+{
+	
+}
+
 
 @end

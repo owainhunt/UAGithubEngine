@@ -9,8 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "UAGithubEngineDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
+#import "UAGithubParserDelegate.h"
 
-@interface UAGithubEngine : NSObject {
+@interface UAGithubEngine : NSObject <UAGithubParserDelegate> {
 	id <UAGithubEngineDelegate> delegate;
 	NSString *username;
 	NSString *apiKey;
@@ -28,7 +29,7 @@
 
 #pragma mark Repositories
 
-- (id)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
+- (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
 - (id)getRepository:(NSString *)repositoryPath;
 
 

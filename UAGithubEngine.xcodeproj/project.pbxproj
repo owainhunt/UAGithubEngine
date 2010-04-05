@@ -144,6 +144,7 @@
 		68E72AD8116652070069B287 /* XMLParsers */ = {
 			isa = PBXGroup;
 			children = (
+				685261E1116A774C003AE003 /* UAGithubParserDelegate.h */,
 				685261DE116A771B003AE003 /* UAGithubXMLParser.h */,
 				685261DF116A771B003AE003 /* UAGithubXMLParser.m */,
 				68E72ACA116651EF0069B287 /* UAGithubRepositoriesParser.h */,
@@ -156,7 +157,6 @@
 				68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */,
 				68E72ABC116651970069B287 /* UAGithubUsersParser.h */,
 				68E72ABD116651970069B287 /* UAGithubUsersParser.m */,
-				685261E1116A774C003AE003 /* UAGithubParserDelegate.h */,
 			);
 			name = XMLParsers;
 			sourceTree = "<group>";

@@ -13,7 +13,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
-	NSLog(@"%@", [githubEngine getRepository:@"owainhunt/ics"]);
+	[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
 	[NSApp terminate:self];
 
 }
