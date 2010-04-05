@@ -30,7 +30,7 @@
 #pragma mark Repositories
 
 - (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
-- (id)getRepository:(NSString *)repositoryPath;
+- (void)getRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Issues 
