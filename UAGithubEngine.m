@@ -7,6 +7,7 @@
 //
 
 #import "UAGithubEngine.h"
+#import "UAGithubEngineRequestTypes.h"
 
 
 @implementation UAGithubEngine
@@ -44,16 +45,30 @@
 }
 
 
-- (id)sendRequest:(NSString *)path withParameters:(NSDictionary *)params
+- (NSData *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params
 {
 	
-	NSURL *theURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://github.com/api/v2/%@/%@?login=%@&token=%@", self.dataFormat, path, self.username, self.apiKey]];
-
+	NSMutableString *querystring = nil;
+	if (![params isEqual:nil]) 
+	{
+		querystring = [NSMutableString stringWithFormat:@"&"];
+		for (NSString *key in [params allKeys]) {
+			[querystring appendFormat:@"%@=%@", key, [params valueForKey:key]];
+		}
+	}
+	
+	NSMutableString *urlString = [NSMutableString stringWithFormat:@"http://github.com/api/v2/%@/%@?login=%@&token=%@", self.dataFormat, path, self.username, self.apiKey];
+	if (![querystring isEqual:nil])
+	{
+		[urlString appendString:querystring];
+	}
+	
+	NSURL *theURL = [NSURL URLWithString:urlString];
 	NSLog(@"Request sent: %@", theURL);
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad	timeoutInterval:30];
 	NSURLResponse *response;
 	NSError *error;
-	return [[NSXMLDocument alloc] initWithData:[NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error] options:0 error:&error];
+	return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
 	
 }
 
@@ -77,46 +92,119 @@
 
 #pragma mark Issues 
 
-/*
- 
- - (id)getIssuesForRepository:(NSString *)repositoryPath;
- - (id)getIssue:(NSString *)issuePath;
- - (id)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
- - (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
- - (id)closeIssue:(NSString *)issuePath;
- - (id)reopenIssue:(NSString *)issuePath;
- 
- */
+- (id)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType
+{
+	id theData;
+	switch (requestType) {
+		case UAGithubAllIssuesRequest:
+		{	
+			theData = [[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] mutableCopy];
+			[theData appendData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]];
+		}
+			break;
+		case UAGithubOpenIssuesRequest:
+		{
+			theData = [self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil];
+		}
+			break;
+		case UAGithubClosedIssuesRequest:
+		{
+			theData = [self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil];
+		}
+			break;
+		default:
+			break;
+	}
+	return theData;
+	
+}
+
+
+- (id)getIssue:(NSString *)issuePath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] withParameters:nil];
+	
+}
+
+
+- (id)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/edit/%@", issuePath] withParameters:issueDictionary];
+	
+}
+
+
+- (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/open/%@", repositoryPath] withParameters:issueDictionary];
+	
+}
+
+
+- (id)closeIssue:(NSString *)issuePath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] withParameters:nil];
+	
+}
+
+
+- (id)reopenIssue:(NSString *)issuePath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] withParameters:nil];
+	
+}
 
 
 #pragma mark Labels
 
-/*
- 
- - (id)getLabelsForRepository:(NSString *)repositoryPath;
- - (id)getIssuesForLabel:(NSString *)label;
- - (id)addLabelForRepository:(NSString *)repositoryPath;
- - (id)addLabel:(NSString *)label toIssue:(NSString *)issuePath;
- - (id)removeLabel:(NSString *)label fromIssue:(NSString *)issuePath;
- 
- */
+- (id)getLabelsForRepository:(NSString *)repositoryPath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] withParameters:nil];
+	
+}
+
+
+- (id)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%@", repositoryPath, label, issueNumber] withParameters:nil];
+	
+}
+
+
+- (id)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%@", repositoryPath, label, issueNumber] withParameters:nil];
+	
+}
 
 
 #pragma mark Comments
 
-/*
- 
- - (id)getCommentsForIssue:(NSString *)issuePath;
- - (id)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
- 
- */
+- (id)getCommentsForIssue:(NSString *)issuePath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] withParameters:nil];
+	
+}
+
+
+- (id)addComment:(NSString *)comment toIssue:(NSString *)issuePath
+{
+	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"comment"];
+	return [self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] withParameters:commentDictionary];
+	
+}
 
 
 #pragma mark Users
 
+- (id)getUser:(NSString *)user
+{
+	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] withParameters:nil];
+	
+}
+
 /*
  
- - (id)getUser:(NSString *)username;
  
  */
 

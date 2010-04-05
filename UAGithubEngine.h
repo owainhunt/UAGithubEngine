@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "UAGithubEngineDelegate.h"
+#import "UAGithubEngineRequestTypes.h"
 
 @interface UAGithubEngine : NSObject {
 	id <UAGithubEngineDelegate> delegate;
@@ -22,53 +23,41 @@
 @property (nonatomic, retain) NSString *dataFormat;
 
 - (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate;
-- (id)sendRequest:(NSString *)path withParameters:(NSDictionary *)params;
+- (NSData *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params;
+
 
 #pragma mark Repositories
 
 - (id)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
 - (id)getRepository:(NSString *)repositoryPath;
 
+
 #pragma mark Issues 
 
-/*
- 
- - (id)getIssuesForRepository:(NSString *)repositoryPath;
- - (id)getIssue:(NSString *)issuePath;
- - (id)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
- - (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
- - (id)closeIssue:(NSString *)issuePath;
- - (id)reopenIssue:(NSString *)issuePath;
+- (id)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
+- (id)getIssue:(NSString *)issuePath;
+- (id)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
+- (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
+- (id)closeIssue:(NSString *)issuePath;
+- (id)reopenIssue:(NSString *)issuePath;
 
-*/
 
 #pragma mark Labels
 
-/*
- 
- - (id)getLabelsForRepository:(NSString *)repositoryPath;
- - (id)getIssuesForLabel:(NSString *)label;
- - (id)addLabelForRepository:(NSString *)repositoryPath;
- - (id)addLabel:(NSString *)label toIssue:(NSString *)issuePath;
- - (id)removeLabel:(NSString *)label fromIssue:(NSString *)issuePath;
- 
-*/
+- (id)getLabelsForRepository:(NSString *)repositoryPath;
+- (id)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;
+- (id)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;;
+
 
 #pragma mark Comments
 
-/*
+- (id)getCommentsForIssue:(NSString *)issuePath;
+- (id)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
  
- - (id)getCommentsForIssue:(NSString *)issuePath;
- - (id)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
 
-*/
- 
 #pragma mark Users
 
-/*
+- (id)getUser:(NSString *)user;
  
- - (id)getUser:(NSString *)username;
- 
-*/
 
 @end
