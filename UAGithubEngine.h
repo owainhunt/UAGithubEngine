@@ -26,7 +26,7 @@
 
 #pragma mark Repositories
 
-- (id)getRepositoriesForUser:(NSString *)aUser withWatched:(BOOL)watched;
+- (id)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
 - (id)getRepository:(NSString *)repositoryPath;
 
 #pragma mark Issues 

@@ -61,7 +61,7 @@
 #pragma mark Repositories
 
 
-- (id)getRepositoriesForUser:(NSString *)aUser withWatched:(BOOL)watched
+- (id)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil];
 	
