@@ -9,6 +9,7 @@
 #import "UAGithubEngine.h"
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubRepositoriesParser.h"
+#import "UAGithubIssuesParser.h"
 
 
 @implementation UAGithubEngine
@@ -81,6 +82,10 @@
 		case UAGithubRepositoryRequest:
 			[[UAGithubRepositoriesParser alloc] initWithXML:theData delegate:self requestType:requestType];
 			break;
+		case UAGithubIssuesRequest:
+		case UAGithubIssueRequest:
+			[[UAGithubIssuesParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			break;
 		default:
 			break;
 	}
@@ -137,9 +142,9 @@
 }
 
 
-- (id)getIssue:(NSString *)issuePath
+- (void)getIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] withParameters:nil];
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] withParameters:nil] requestType:UAGithubIssueRequest];
 	
 }
 

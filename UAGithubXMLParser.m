@@ -41,6 +41,48 @@
     return self;
 }
 
+- (void)parser:(NSXMLParser *)theParser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+    self.lastOpenedElement = elementName;
+    
+    if ([elementName isEqualToString:baseElement]) {
+        // Make new entry in parsedObjects.
+        NSMutableDictionary *newNode = [NSMutableDictionary dictionaryWithCapacity:0];
+        [parsedObjects addObject:newNode];
+        currentNode = newNode;
+    } else if (currentNode) {
+        // Create relevant name-value pair.
+        [currentNode setObject:[NSMutableString string] forKey:elementName];
+    }
+	
+}
+
+
+- (void)parser:(NSXMLParser *)theParser foundCharacters:(NSString *)characters
+{
+    if (lastOpenedElement && currentNode) {
+        [[currentNode objectForKey:lastOpenedElement] appendString:characters];
+    }
+}
+
+
+- (void)parser:(NSXMLParser *)theParser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{
+	self.lastOpenedElement = nil;
+	
+	if ([numberElements containsObject:elementName])
+	{
+		[currentNode setValue:[NSNumber numberWithInt:[[currentNode objectForKey:elementName] intValue]] forKey:elementName];
+	}
+	else if ([boolElements containsObject:elementName])
+	{
+		[currentNode setObject:[NSNumber numberWithBool:[[currentNode objectForKey:elementName] isEqualToString:@"true"]] forKey:elementName];
+	}
+	else if ([elementName isEqualToString:baseElement]) 
+	{
+        currentNode = nil;
+    }
+	
+}
 
 - (void)parserDidEndDocument:(NSXMLParser *)theParser
 {

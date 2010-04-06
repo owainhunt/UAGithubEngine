@@ -11,4 +11,19 @@
 
 @implementation UAGithubIssuesParser
 
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType {
+	
+	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
+	{
+		numberElements = [NSArray arrayWithObjects:@"number", @"votes", @"comments", nil];
+		boolElements = [NSArray arrayWithObject:[NSNull null]];
+		baseElement = @"issue";
+	}
+	
+	[parser parse];
+	
+	return self;
+}
+
+
 @end
