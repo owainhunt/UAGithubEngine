@@ -21,6 +21,7 @@
     __weak NSMutableDictionary *currentNode;
     NSString *lastOpenedElement;
 	
+	NSString *baseElement;
 	NSArray *numberElements;
 	NSArray *boolElements;
 	NSArray *parentElements;
