@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UAGithubXMLParser.h"
 
 
-@interface UAGithubCommentsParser : NSObject {
+@interface UAGithubCommentsParser : UAGithubXMLParser {
 
 }
 

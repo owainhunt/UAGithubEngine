@@ -11,4 +11,19 @@
 
 @implementation UAGithubLabelsParser
 
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType {
+	
+	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
+	{
+		numberElements = [NSArray arrayWithObjects:[NSNull null]];
+		boolElements = [NSArray arrayWithObjects:[NSNull null]];
+		baseElement = @"label";
+	}
+	
+	[parser parse];
+	
+	return self;
+}
+
+
 @end
