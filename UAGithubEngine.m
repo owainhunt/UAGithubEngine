@@ -194,9 +194,9 @@
 
 #pragma mark Labels
 
-- (id)getLabelsForRepository:(NSString *)repositoryPath
+- (void)getLabelsForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] withParameters:nil];
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] withParameters:nil] requestType:UAGithubLabelsRequest];
 	
 }
 
@@ -217,9 +217,9 @@
 
 #pragma mark Comments
 
-- (id)getCommentsForIssue:(NSString *)issuePath
+- (void)getCommentsForIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] withParameters:nil];
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] withParameters:nil] requestType:UAGithubCommentsRequest];
 	
 }
 
@@ -234,9 +234,9 @@
 
 #pragma mark Users
 
-- (id)getUser:(NSString *)user
+- (void)getUser:(NSString *)user
 {
-	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] withParameters:nil];
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] withParameters:nil] requestType:UAGithubUserRequest];
 	
 }
 

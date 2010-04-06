@@ -45,20 +45,20 @@
 
 #pragma mark Labels
 
-- (id)getLabelsForRepository:(NSString *)repositoryPath;
+- (void)getLabelsForRepository:(NSString *)repositoryPath;
 - (id)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;
 - (id)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;;
 
 
 #pragma mark Comments
 
-- (id)getCommentsForIssue:(NSString *)issuePath;
+- (void)getCommentsForIssue:(NSString *)issuePath;
 - (id)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
  
 
 #pragma mark Users
 
-- (id)getUser:(NSString *)user;
+- (void)getUser:(NSString *)user;
  
 
 @end
