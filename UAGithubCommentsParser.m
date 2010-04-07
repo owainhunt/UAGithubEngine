@@ -16,7 +16,7 @@
 	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
 	{
 		numberElements = [NSArray arrayWithObjects:@"id", nil];
-		boolElements = [NSArray arrayWithObjects:[NSNull null]];
+		boolElements = [NSArray arrayWithObject:[NSNull null]];
 		baseElement = @"comment";
 	}
 	
