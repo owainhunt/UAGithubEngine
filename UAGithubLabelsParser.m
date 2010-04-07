@@ -15,8 +15,8 @@
 	
 	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
 	{
-		numberElements = [NSArray arrayWithObjects:[NSNull null]];
-		boolElements = [NSArray arrayWithObjects:[NSNull null]];
+		numberElements = [NSArray arrayWithObject:[NSNull null]];
+		boolElements = [NSArray arrayWithObject:[NSNull null]];
 		baseElement = @"label";
 	}
 	
