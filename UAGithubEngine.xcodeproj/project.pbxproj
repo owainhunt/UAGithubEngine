@@ -13,7 +13,7 @@
 		68AEDF28116E46B20018E490 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */; };
 		68E72ABE116651970069B287 /* UAGithubUsersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72ABD116651970069B287 /* UAGithubUsersParser.m */; };
 		68E72AC3116651C40069B287 /* UAGithubIssuesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC2116651C40069B287 /* UAGithubIssuesParser.m */; };
-		68E72AC6116651D00069B287 /* UAGithubCommentsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC5116651D00069B287 /* UAGithubCommentsParser.m */; };
+		68E72AC6116651D00069B287 /* UAGithubIssueCommentsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC5116651D00069B287 /* UAGithubIssueCommentsParser.m */; };
 		68E72AC9116651D80069B287 /* UAGithubLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */; };
 		68E72ACC116651EF0069B287 /* UAGithubRepositoriesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72ACB116651EF0069B287 /* UAGithubRepositoriesParser.m */; };
 		68E72AE2116653770069B287 /* UAGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AE1116653770069B287 /* UAGithubEngine.m */; };
@@ -43,8 +43,8 @@
 		68E72ABD116651970069B287 /* UAGithubUsersParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubUsersParser.m; sourceTree = "<group>"; };
 		68E72AC1116651C40069B287 /* UAGithubIssuesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssuesParser.h; sourceTree = "<group>"; };
 		68E72AC2116651C40069B287 /* UAGithubIssuesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssuesParser.m; sourceTree = "<group>"; };
-		68E72AC4116651D00069B287 /* UAGithubCommentsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubCommentsParser.h; sourceTree = "<group>"; };
-		68E72AC5116651D00069B287 /* UAGithubCommentsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubCommentsParser.m; sourceTree = "<group>"; };
+		68E72AC4116651D00069B287 /* UAGithubIssueCommentsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssueCommentsParser.h; sourceTree = "<group>"; };
+		68E72AC5116651D00069B287 /* UAGithubIssueCommentsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssueCommentsParser.m; sourceTree = "<group>"; };
 		68E72AC7116651D80069B287 /* UAGithubLabelsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubLabelsParser.h; sourceTree = "<group>"; };
 		68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubLabelsParser.m; sourceTree = "<group>"; };
 		68E72ACA116651EF0069B287 /* UAGithubRepositoriesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubRepositoriesParser.h; sourceTree = "<group>"; };
@@ -156,8 +156,8 @@
 				68E72ACB116651EF0069B287 /* UAGithubRepositoriesParser.m */,
 				68E72AC1116651C40069B287 /* UAGithubIssuesParser.h */,
 				68E72AC2116651C40069B287 /* UAGithubIssuesParser.m */,
-				68E72AC4116651D00069B287 /* UAGithubCommentsParser.h */,
-				68E72AC5116651D00069B287 /* UAGithubCommentsParser.m */,
+				68E72AC4116651D00069B287 /* UAGithubIssueCommentsParser.h */,
+				68E72AC5116651D00069B287 /* UAGithubIssueCommentsParser.m */,
 				68E72AC7116651D80069B287 /* UAGithubLabelsParser.h */,
 				68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */,
 				68E72ABC116651970069B287 /* UAGithubUsersParser.h */,
@@ -245,7 +245,7 @@
 				256AC3DA0F4B6AC300CF3369 /* AppController.m in Sources */,
 				68E72ABE116651970069B287 /* UAGithubUsersParser.m in Sources */,
 				68E72AC3116651C40069B287 /* UAGithubIssuesParser.m in Sources */,
-				68E72AC6116651D00069B287 /* UAGithubCommentsParser.m in Sources */,
+				68E72AC6116651D00069B287 /* UAGithubIssueCommentsParser.m in Sources */,
 				68E72AC9116651D80069B287 /* UAGithubLabelsParser.m in Sources */,
 				68E72ACC116651EF0069B287 /* UAGithubRepositoriesParser.m in Sources */,
 				68E72AE2116653770069B287 /* UAGithubEngine.m in Sources */,

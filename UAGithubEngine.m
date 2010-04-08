@@ -10,7 +10,7 @@
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubRepositoriesParser.h"
 #import "UAGithubIssuesParser.h"
-#import "UAGithubCommentsParser.h"
+#import "UAGithubIssueCommentsParser.h"
 #import "UAGithubLabelsParser.h"
 #import "UAGithubUsersParser.h"
 
@@ -91,7 +91,7 @@
 			break;
 		case UAGithubCommentsRequest:
 		case UAGithubCommentRequest:
-			[[UAGithubCommentsParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			[[UAGithubIssueCommentsParser alloc] initWithXML:theData delegate:self requestType:requestType];
 			break;
 		case UAGithubUsersRequest:
 		case UAGithubUserRequest:

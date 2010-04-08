@@ -6,10 +6,10 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import "UAGithubCommentsParser.h"
+#import "UAGithubIssueCommentsParser.h"
 
 
-@implementation UAGithubCommentsParser
+@implementation UAGithubIssueCommentsParser
 
 - (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType {
 	
@@ -17,7 +17,7 @@
 	{
 		numberElements = [NSArray arrayWithObjects:@"id", nil];
 		boolElements = [NSArray arrayWithObject:[NSNull null]];
-		dateElements = [NSArray arrayWithObject:[NSNull null]];
+		dateElements = [NSArray arrayWithObjects:@"created-at", @"updated-at", nil];
 		baseElement = @"comment";
 	}
 	
