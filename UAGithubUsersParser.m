@@ -17,6 +17,7 @@
 	{
 		numberElements = [NSArray arrayWithObjects:@"collaborators", @"disk-usage", @"public-gist-count", @"public-repo-count", @"following-count", @"id", @"private-gist-count", @"owned-private-repo-count", @"total-private-repo-count", @"followers-count", nil];
 		boolElements = [NSArray arrayWithObject:[NSNull null]];
+		dateElements = [NSArray arrayWithObject:@"created-at"];
 		baseElement = @"user";
 	}
 	

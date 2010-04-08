@@ -17,6 +17,7 @@
 	{
 		numberElements = [NSArray arrayWithObjects:@"number", @"votes", @"comments", nil];
 		boolElements = [NSArray arrayWithObject:[NSNull null]];
+		dateElements = [NSArray arrayWithObject:[NSNull null]];
 		baseElement = @"issue";
 	}
 	

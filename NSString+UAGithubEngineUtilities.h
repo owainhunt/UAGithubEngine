@@ -9,9 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface NSString(UAGithubEngineUtilities) {
-
-}
+@interface NSString(UAGithubEngineUtilities)
 
 - (NSDate *)dateFromGithubDateString;
 
