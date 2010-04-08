@@ -73,9 +73,11 @@
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad	timeoutInterval:30];
 	NSURLResponse *response;
 	NSError *error;
+	//[[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
 	return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-	
 }
+
+
 
 
 - (void)parseData:(NSData *)theData requestType:(UAGithubRequestType)requestType
@@ -129,30 +131,26 @@
 
 #pragma mark Issues 
 
-- (id)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType
+- (void)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType
 {
-	id theData;
 	switch (requestType) {
 		case UAGithubAllIssuesRequest:
-		{	
+			/*
 			theData = [[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] mutableCopy];
 			[theData appendData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]];
-		}
+			 */
+			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] requestType:UAGithubIssuesRequest];
+			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]requestType:UAGithubIssuesRequest];
 			break;
 		case UAGithubOpenIssuesRequest:
-		{
-			theData = [self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil];
-		}
+			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] requestType:UAGithubIssuesRequest];
 			break;
 		case UAGithubClosedIssuesRequest:
-		{
-			theData = [self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil];
-		}
+			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]requestType:UAGithubIssuesRequest];
 			break;
 		default:
 			break;
 	}
-	return theData;
 	
 }
 

@@ -35,7 +35,7 @@
 
 #pragma mark Issues 
 
-- (id)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
+- (void)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
 - (void)getIssue:(NSString *)issuePath;
 - (id)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
 - (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
