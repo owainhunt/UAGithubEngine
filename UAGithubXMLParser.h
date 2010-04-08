@@ -24,6 +24,7 @@
 	NSString *baseElement;
 	NSArray *numberElements;
 	NSArray *boolElements;
+	NSArray *dateElements;
 	NSArray *parentElements;
 
 }
