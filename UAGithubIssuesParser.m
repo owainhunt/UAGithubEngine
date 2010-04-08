@@ -16,7 +16,6 @@
 	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
 	{
 		numberElements = [NSArray arrayWithObjects:@"number", @"votes", @"comments", nil];
-		boolElements = [NSArray arrayWithObject:[NSNull null]];
 		dateElements = [NSArray arrayWithObjects:@"created-at", @"updated-at", nil];
 		baseElement = @"issue";
 	}
