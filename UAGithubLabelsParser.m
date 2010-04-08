@@ -17,6 +17,7 @@
 	{
 		numberElements = [NSArray arrayWithObject:[NSNull null]];
 		boolElements = [NSArray arrayWithObject:[NSNull null]];
+		dateElements = [NSArray arrayWithObject:[NSNull null]];
 		baseElement = @"label";
 	}
 	

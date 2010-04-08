@@ -17,6 +17,7 @@
 	{
 		numberElements = [NSArray arrayWithObjects:@"watchers", @"forks", @"open-issues", nil];
 		boolElements = [NSArray arrayWithObjects:@"has-issues", @"has-downloads", @"fork", @"has-wiki", @"private", nil];
+		dateElements = [NSArray arrayWithObject:[NSNull null]];
 		baseElement = @"repository";
 	}
 	

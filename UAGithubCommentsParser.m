@@ -17,6 +17,7 @@
 	{
 		numberElements = [NSArray arrayWithObjects:@"id", nil];
 		boolElements = [NSArray arrayWithObject:[NSNull null]];
+		dateElements = [NSArray arrayWithObject:[NSNull null]];
 		baseElement = @"comment";
 	}
 	

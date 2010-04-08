@@ -69,6 +69,8 @@
 {
 	self.lastOpenedElement = nil;
 	
+	//Process anything that shouldn't be a string
+	
 	if ([numberElements containsObject:elementName])
 	{
 		[currentNode setValue:[NSNumber numberWithInt:[[currentNode objectForKey:elementName] intValue]] forKey:elementName];
@@ -76,6 +78,10 @@
 	else if ([boolElements containsObject:elementName])
 	{
 		[currentNode setObject:[NSNumber numberWithBool:[[currentNode objectForKey:elementName] isEqualToString:@"true"]] forKey:elementName];
+	}
+	else if ([dateElements containsObject:elementName])
+	{
+		[currentNode setObject:[[currentNode objectForKey:elementName] dateFromGithubDateString] forKey:elementName];
 	}
 	else if ([elementName isEqualToString:baseElement]) 
 	{
