@@ -15,8 +15,9 @@
 	
 	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
 	{
-		numberElements = [NSArray arrayWithObjects:@"collaborators", @"disk-usage", @"public-gist-count", @"public-repo-count", @"following-count", @"id", @"private-gist-count", @"owned-private-repo-count", @"total-private-repo-count", @"followers-count", nil];
+		numberElements = [NSArray arrayWithObjects:@"collaborators", @"space", @"private-repos", @"disk-usage", @"public-gist-count", @"public-repo-count", @"following-count", @"id", @"private-gist-count", @"owned-private-repo-count", @"total-private-repo-count", @"followers-count", nil];
 		dateElements = [NSArray arrayWithObject:@"created-at"];
+		dictionaryElements = [NSArray arrayWithObjects:@"plan", nil];
 		baseElement = @"user";
 	}
 	

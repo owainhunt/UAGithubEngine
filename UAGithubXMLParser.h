@@ -19,13 +19,14 @@
     NSMutableArray *parsedObjects;
     NSXMLParser *parser;
     __weak NSMutableDictionary *currentNode;
+	NSMutableDictionary *parentNode;
     NSString *lastOpenedElement;
 	
 	NSString *baseElement;
 	NSArray *numberElements;
 	NSArray *boolElements;
 	NSArray *dateElements;
-	NSArray *parentElements;
+	NSArray *dictionaryElements;
 
 }
 
