@@ -104,6 +104,7 @@
 			[[UAGithubLabelsParser alloc] initWithXML:theData delegate:self requestType:requestType];
 			break;
 		case UAGithubCommitsRequest:
+		case UAGithubCommitRequest:
 			[[UAGithubCommitsParser alloc] initWithXML:theData delegate:self requestType:requestType];
 			break;
 		default:
@@ -248,6 +249,13 @@
 {
 	[self parseData:[self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] withParameters:nil] requestType:UAGithubCommitsRequest];
 }
+
+
+- (void)getCommit:(NSString *)commitPath
+{
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] withParameters:nil] requestType:UAGithubCommitRequest];
+}
+	
 
 
 #pragma mark Parser Delegate Methods

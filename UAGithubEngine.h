@@ -64,6 +64,7 @@
 #pragma mark Commits
 
 - (void)getCommitsForBranch:(NSString *)branchPath;
+- (void)getCommit:(NSString *)commitPath;
 
 
 @end

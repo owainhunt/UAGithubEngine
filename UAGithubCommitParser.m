@@ -15,9 +15,9 @@
 	
 	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
 	{
-		numberElements = [NSArray arrayWithObjects:@"number", @"votes", @"comments", nil];
-		dateElements = [NSArray arrayWithObjects:@"created-at", @"updated-at", nil];
-		baseElement = @"issue";
+		dateElements = [NSArray arrayWithObjects:@"committed-date", @"authored-date", nil];
+		dictionaryElements = [NSArray arrayWithObjects:@"modified", @"removed", @"parents", @"author", @"committer", nil];
+		baseElement = @"commit";
 	}
 	
 	[parser parse];
