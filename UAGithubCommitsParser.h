@@ -1,5 +1,5 @@
 //
-//  UAGithubFileCommitsParser.h
+//  UAGithubCommitsParser.h
 //  UAGithubEngine
 //
 //  Created by Owain Hunt on 24/04/2010.
@@ -10,7 +10,7 @@
 #import "UAGithubXMLParser.h"
 
 
-@interface UAGithubFileCommitsParser : UAGithubXMLParser {
+@interface UAGithubCommitsParser : UAGithubXMLParser {
 
 }
 
