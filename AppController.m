@@ -12,9 +12,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
-	[githubEngine getCommitsForBranch:@"owainhunt/ics/master"];
+	//[githubEngine getCommitsForBranch:@"owainhunt/ics/master"];
 	//[githubEngine getIssuesForRepository:@"owainhunt/iscore" withRequestType:UAGithubAllIssuesRequest];
-	//[githubEngine getUser:@"owainhunt"];
+	[githubEngine getUser:@"owainhunt"];
 	[NSApp terminate:self];
 
 }

@@ -50,8 +50,14 @@
         [parsedObjects addObject:newNode];
         currentNode = newNode;
     } else if (currentNode) {
-        // Create relevant name-value pair.
-        [currentNode setObject:[NSMutableString string] forKey:elementName];
+		if ([dictionaryElements containsObject:elementName]) {
+			NSMutableDictionary *newNode = [NSMutableDictionary dictionaryWithCapacity:0];
+			[currentNode setObject:newNode forKey:elementName];
+			parentNode = currentNode;
+			currentNode = newNode;
+		} else {
+			[currentNode setObject:[NSMutableString string] forKey:elementName];
+		}
     }
 	
 }
@@ -82,6 +88,10 @@
 	else if ([dateElements containsObject:elementName])
 	{
 		[currentNode setObject:[[currentNode objectForKey:elementName] dateFromGithubDateString] forKey:elementName];
+	}
+	else if ([dictionaryElements containsObject:elementName])
+	{
+		currentNode = parentNode;
 	}
 	else if ([elementName isEqualToString:baseElement]) 
 	{
