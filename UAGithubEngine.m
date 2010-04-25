@@ -13,6 +13,7 @@
 #import "UAGithubIssueCommentsParser.h"
 #import "UAGithubLabelsParser.h"
 #import "UAGithubUsersParser.h"
+#import "UAGithubCommitsParser.h"
 
 
 @implementation UAGithubEngine
@@ -102,7 +103,9 @@
 		case UAGithubLabelsRequest:
 			[[UAGithubLabelsParser alloc] initWithXML:theData delegate:self requestType:requestType];
 			break;
-			
+		case UAGithubCommitsRequest:
+			[[UAGithubCommitsParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			break;
 		default:
 			break;
 	}
@@ -236,6 +239,14 @@
 {
 	[self parseData:[self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] withParameters:nil] requestType:UAGithubUserRequest];
 	
+}
+
+
+#pragma mark Commits
+
+- (void)getCommitsForBranch:(NSString *)branchPath
+{
+	[self parseData:[self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] withParameters:nil] requestType:UAGithubCommitsRequest];
 }
 
 
