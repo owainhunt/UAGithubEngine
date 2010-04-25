@@ -21,4 +21,6 @@ typedef enum UAGithubRequestType {
 	UAGithubUsersRequest				= 9,
 	UAGithubUserRequest					= 10,
 	UAGithubLabelsRequest				= 11,
+	UAGithubCommitRequest				= 12,
+	UAGithubCommitsRequest				= 13,
 } UAGithubRequestType;
