@@ -1,22 +1,21 @@
 //
-//  UAGithubCommitParser.m
+//  UAGithubCommitsParser.m
 //  UAGithubEngine
 //
 //  Created by Owain Hunt on 24/04/2010.
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import "UAGithubCommitParser.h"
+#import "UAGithubCommitsParser.h"
 
 
-@implementation UAGithubCommitParser
+@implementation UAGithubCommitsParser
 
 - (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType {
 	
 	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
 	{
-		numberElements = [NSArray arrayWithObjects:@"number", @"votes", @"comments", nil];
-		dateElements = [NSArray arrayWithObjects:@"created-at", @"updated-at", nil];
+		dateElements = [NSArray arrayWithObjects:@"committed-date", @"authored-date", nil];
 		baseElement = @"issue";
 	}
 	
@@ -24,6 +23,5 @@
 	
 	return self;
 }
-
 
 @end

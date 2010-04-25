@@ -11,9 +11,8 @@
 		256AC3DA0F4B6AC300CF3369 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* AppController.m */; };
 		685261E0116A771B003AE003 /* UAGithubXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685261DF116A771B003AE003 /* UAGithubXMLParser.m */; };
 		68AEDF28116E46B20018E490 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */; };
-		68E6821111839DDF00DD2637 /* UAGithubBranchCommitsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E6821011839DDF00DD2637 /* UAGithubBranchCommitsParser.m */; };
+		68E6821111839DDF00DD2637 /* UAGithubCommitsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E6821011839DDF00DD2637 /* UAGithubCommitsParser.m */; };
 		68E6821411839DF900DD2637 /* UAGithubCommitParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E6821311839DF900DD2637 /* UAGithubCommitParser.m */; };
-		68E6821711839E0600DD2637 /* UAGithubFileCommitsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E6821611839E0600DD2637 /* UAGithubFileCommitsParser.m */; };
 		68E72ABE116651970069B287 /* UAGithubUsersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72ABD116651970069B287 /* UAGithubUsersParser.m */; };
 		68E72AC3116651C40069B287 /* UAGithubIssuesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC2116651C40069B287 /* UAGithubIssuesParser.m */; };
 		68E72AC6116651D00069B287 /* UAGithubIssueCommentsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC5116651D00069B287 /* UAGithubIssueCommentsParser.m */; };
@@ -42,12 +41,10 @@
 		685261E1116A774C003AE003 /* UAGithubParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubParserDelegate.h; sourceTree = "<group>"; };
 		68AEDF26116E46B20018E490 /* NSString+UAGithubEngineUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UAGithubEngineUtilities.h"; sourceTree = "<group>"; };
 		68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UAGithubEngineUtilities.m"; sourceTree = "<group>"; };
-		68E6820F11839DDF00DD2637 /* UAGithubBranchCommitsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubBranchCommitsParser.h; sourceTree = "<group>"; };
-		68E6821011839DDF00DD2637 /* UAGithubBranchCommitsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubBranchCommitsParser.m; sourceTree = "<group>"; };
+		68E6820F11839DDF00DD2637 /* UAGithubCommitsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubCommitsParser.h; sourceTree = "<group>"; };
+		68E6821011839DDF00DD2637 /* UAGithubCommitsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubCommitsParser.m; sourceTree = "<group>"; };
 		68E6821211839DF900DD2637 /* UAGithubCommitParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubCommitParser.h; sourceTree = "<group>"; };
 		68E6821311839DF900DD2637 /* UAGithubCommitParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubCommitParser.m; sourceTree = "<group>"; };
-		68E6821511839E0600DD2637 /* UAGithubFileCommitsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubFileCommitsParser.h; sourceTree = "<group>"; };
-		68E6821611839E0600DD2637 /* UAGithubFileCommitsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubFileCommitsParser.m; sourceTree = "<group>"; };
 		68E72ABC116651970069B287 /* UAGithubUsersParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubUsersParser.h; sourceTree = "<group>"; };
 		68E72ABD116651970069B287 /* UAGithubUsersParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubUsersParser.m; sourceTree = "<group>"; };
 		68E72AC1116651C40069B287 /* UAGithubIssuesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssuesParser.h; sourceTree = "<group>"; };
@@ -171,10 +168,8 @@
 				68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */,
 				68E72ABC116651970069B287 /* UAGithubUsersParser.h */,
 				68E72ABD116651970069B287 /* UAGithubUsersParser.m */,
-				68E6820F11839DDF00DD2637 /* UAGithubBranchCommitsParser.h */,
-				68E6821011839DDF00DD2637 /* UAGithubBranchCommitsParser.m */,
-				68E6821511839E0600DD2637 /* UAGithubFileCommitsParser.h */,
-				68E6821611839E0600DD2637 /* UAGithubFileCommitsParser.m */,
+				68E6820F11839DDF00DD2637 /* UAGithubCommitsParser.h */,
+				68E6821011839DDF00DD2637 /* UAGithubCommitsParser.m */,
 				68E6821211839DF900DD2637 /* UAGithubCommitParser.h */,
 				68E6821311839DF900DD2637 /* UAGithubCommitParser.m */,
 			);
@@ -266,9 +261,8 @@
 				68E72AE2116653770069B287 /* UAGithubEngine.m in Sources */,
 				685261E0116A771B003AE003 /* UAGithubXMLParser.m in Sources */,
 				68AEDF28116E46B20018E490 /* NSString+UAGithubEngineUtilities.m in Sources */,
-				68E6821111839DDF00DD2637 /* UAGithubBranchCommitsParser.m in Sources */,
+				68E6821111839DDF00DD2637 /* UAGithubCommitsParser.m in Sources */,
 				68E6821411839DF900DD2637 /* UAGithubCommitParser.m in Sources */,
-				68E6821711839E0600DD2637 /* UAGithubFileCommitsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

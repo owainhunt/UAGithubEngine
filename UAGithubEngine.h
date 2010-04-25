@@ -61,4 +61,9 @@
 - (void)getUser:(NSString *)user;
  
 
+#pragma mark Commits
+
+- (void)getCommitsForBranch:(NSString *)branchPath;
+
+
 @end
