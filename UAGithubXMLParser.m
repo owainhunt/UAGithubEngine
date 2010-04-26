@@ -102,8 +102,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)theParser
 {
-    NSLog(@"Parsing complete: %@", parsedObjects);
-    //[delegate parsingSucceededForRequestOfType:requestType withParsedObjects:parsedObjects];
+    [delegate parsingSucceededForRequestOfType:requestType withParsedObjects:parsedObjects];
 }
 
 

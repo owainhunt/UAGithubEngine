@@ -1,0 +1,38 @@
+//
+//  UAGithubURLConnection.m
+//  UAGithubEngine
+//
+//  Created by Owain Hunt on 26/04/2010.
+//  Copyright 2010 Owain R Hunt. All rights reserved.
+//
+
+#import "UAGithubURLConnection.h"
+#import "NSString+UUID.h"
+
+
+@implementation UAGithubURLConnection
+
+- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType
+{
+    if (self = [super initWithRequest:request delegate:delegate]) {
+        data = [[NSMutableData alloc] initWithCapacity:0];
+        identifier = [[NSString stringWithNewUUID] retain];
+        requestType = reqType;
+    }
+    
+    return self;
+}
+
+- (void)resetDataLength
+{
+    [data setLength:0];
+}
+
+
+- (void)appendData:(NSData *)newData
+{
+    [data appendData:newData];
+}
+
+
+@end
