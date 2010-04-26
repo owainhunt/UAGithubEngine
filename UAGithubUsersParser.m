@@ -11,9 +11,9 @@
 
 @implementation UAGithubUsersParser
 
-- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType {
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType {
 	
-	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
+	if (self = [super initWithXML:theXML delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType])
 	{
 		numberElements = [NSArray arrayWithObjects:@"collaborators", @"space", @"private-repos", @"disk-usage", @"public-gist-count", @"public-repo-count", @"following-count", @"id", @"private-gist-count", @"owned-private-repo-count", @"total-private-repo-count", @"followers-count", nil];
 		dateElements = [NSArray arrayWithObject:@"created-at"];
