@@ -262,7 +262,7 @@
 
 - (void)parsingSucceededForRequestOfType:(UAGithubRequestType)requestType withParsedObjects:(NSArray *)parsedObjects
 {
-	
+	NSLog(@"Parsed objects: %@", parsedObjects);	
 }
 
 
