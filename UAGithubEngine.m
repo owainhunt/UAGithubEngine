@@ -14,11 +14,12 @@
 #import "UAGithubLabelsParser.h"
 #import "UAGithubUsersParser.h"
 #import "UAGithubCommitsParser.h"
+#import "UAGithubURLConnection.h"
 
 
 @implementation UAGithubEngine
 
-@synthesize delegate, username, apiKey, dataFormat;
+@synthesize delegate, username, apiKey, dataFormat, connections;
 
 
 #pragma mark Initializer
@@ -32,6 +33,7 @@
 		apiKey = [aKey retain];
 		delegate = theDelegate;
 		dataFormat = @"xml";
+		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 	}
 	
 	return self;
@@ -44,6 +46,7 @@
 	[username release];
 	[apiKey release];
 	[dataFormat release];
+	[connections release];
 	delegate = nil;
 	
 	[super dealloc];
@@ -51,14 +54,15 @@
 }
 
 
-- (NSData *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params
+- (NSString *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params
 {
 	
 	NSMutableString *querystring = nil;
 	if (![params isEqual:nil]) 
 	{
 		querystring = [NSMutableString stringWithFormat:@"&"];
-		for (NSString *key in [params allKeys]) {
+		for (NSString *key in [params allKeys]) 
+		{
 			[querystring appendFormat:@"%@=%@", key, [params valueForKey:key]];
 		}
 	}
@@ -71,41 +75,53 @@
 	
 	NSURL *theURL = [NSURL URLWithString:urlString];
 	NSLog(@"Request sent: %@", theURL);
+	
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad	timeoutInterval:30];
-	NSURLResponse *response;
-	NSError *error;
-	//[[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
-	return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+	UAGithubURLConnection *connection;
+	connection = [[UAGithubURLConnection alloc] initWithRequest:urlRequest delegate:self requestType:UAGithubUserRequest];
+	
+	if (!connection) 
+	{
+		return nil;
+	}
+	else
+	{ 
+		[connections setObject:connection forKey:connection.identifier];
+		[connection release];
+	}
+	
+	return connection.identifier;
+	//return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
 }
 
 
 
 
-- (void)parseData:(NSData *)theData requestType:(UAGithubRequestType)requestType
+- (void)parseDataForConnection:(UAGithubURLConnection *)connection
 {
-	switch (requestType) {
+	switch (connection.requestType) {
 		case UAGithubRepositoriesRequest:
 		case UAGithubRepositoryRequest:
-			[[UAGithubRepositoriesParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			[[UAGithubRepositoriesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
 		case UAGithubIssuesRequest:
 		case UAGithubIssueRequest:
-			[[UAGithubIssuesParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			[[UAGithubIssuesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
 		case UAGithubCommentsRequest:
 		case UAGithubCommentRequest:
-			[[UAGithubIssueCommentsParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			[[UAGithubIssueCommentsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
 		case UAGithubUsersRequest:
 		case UAGithubUserRequest:
-			[[UAGithubUsersParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			[[UAGithubUsersParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
 		case UAGithubLabelsRequest:
-			[[UAGithubLabelsParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			[[UAGithubLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
 		case UAGithubCommitsRequest:
 		case UAGithubCommitRequest:
-			[[UAGithubCommitsParser alloc] initWithXML:theData delegate:self requestType:requestType];
+			[[UAGithubCommitsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
 		default:
 			break;
@@ -116,7 +132,7 @@
 
 #pragma mark Repositories
 
-
+/*
 - (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
 	[self parseData:[self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil]
@@ -143,6 +159,7 @@
 			theData = [[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] mutableCopy];
 			[theData appendData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]];
 			 */
+/*
 			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] requestType:UAGithubIssuesRequest];
 			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]requestType:UAGithubIssuesRequest];
 			break;
@@ -233,16 +250,16 @@
 	
 }
 
-
+*/
 #pragma mark Users
 
 - (void)getUser:(NSString *)user
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] withParameters:nil] requestType:UAGithubUserRequest];
+	[self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] withParameters:nil];
 	
 }
 
-
+/*
 #pragma mark Commits
 
 - (void)getCommitsForBranch:(NSString *)branchPath
@@ -257,17 +274,45 @@
 }
 	
 
-
+*/
 #pragma mark Parser Delegate Methods
 
-- (void)parsingSucceededForRequestOfType:(UAGithubRequestType)requestType withParsedObjects:(NSArray *)parsedObjects
+- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier withParsedObjects:(NSArray *)parsedObjects
 {
-	NSLog(@"Parsed objects: %@", parsedObjects);	
+	NSLog(@"Parsed objects: %@, %@", connectionIdentifier, parsedObjects);	
+	[NSApp terminate:self];
+	
 }
 
 
 - (void)parsingFailedForRequestOfType:(UAGithubRequestType)requestType withError:(NSError *)parseError
 {
+	
+}
+
+
+#pragma mark NSURLConnection Delegate Methods
+
+- (void)connection:(UAGithubURLConnection *)connection didFailWithError:(NSError *)error
+{
+}
+
+
+- (void)connection:(UAGithubURLConnection *)connection didReceiveData:(NSData *)data
+{
+	[connection appendData:data];
+	
+}
+
+
+- (void)connection:(UAGithubURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+}
+
+
+- (void)connectionDidFinishLoading:(UAGithubURLConnection *)connection
+{
+	[self parseDataForConnection:connection];
 	
 }
 

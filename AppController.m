@@ -15,7 +15,6 @@
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/251c735cdd8285c63fc952bd58e5f48e22a26e6b"];
 	//[githubEngine getIssuesForRepository:@"owainhunt/iscore" withRequestType:UAGithubAllIssuesRequest];
 	[githubEngine getUser:@"owainhunt"];
-	[NSApp terminate:self];
 
 }
 

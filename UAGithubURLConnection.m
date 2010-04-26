@@ -12,6 +12,8 @@
 
 @implementation UAGithubURLConnection
 
+@synthesize data, requestType, identifier;
+
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType
 {
     if (self = [super initWithRequest:request delegate:delegate]) {

@@ -16,6 +16,11 @@
     NSString *identifier;
 }
 
+
+@property (nonatomic, retain) NSMutableData *data;
+@property (nonatomic, assign) UAGithubRequestType requestType;
+@property (nonatomic, retain) NSString *identifier;
+
 // Initializer
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)requestType;
 

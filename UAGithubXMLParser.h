@@ -13,7 +13,7 @@
 
 @interface UAGithubXMLParser : NSObject {
 	id <UAGithubParserDelegate> delegate;
-    NSString *identifier;
+    NSString *connectionIdentifier;
     UAGithubRequestType requestType;
     NSData *xml;
     NSMutableArray *parsedObjects;
@@ -32,6 +32,5 @@
 
 @property (nonatomic, retain) NSString *lastOpenedElement;
 
-- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType;
-
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType;
 @end

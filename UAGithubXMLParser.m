@@ -16,18 +16,21 @@
 
 - (void)dealloc
 {
+	[xml release];
+	[connectionIdentifier release];
 	[lastOpenedElement release];
 	[super dealloc];
 	
 }
 
 
-- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType
 {
     if (self = [super init]) {
         xml = [theXML retain];
-        requestType = reqType;
         delegate = theDelegate;
+		connectionIdentifier = [theIdentifier retain];
+        requestType = reqType;
         parsedObjects = [[NSMutableArray alloc] initWithCapacity:0];
         
         parser = [[NSXMLParser alloc] initWithData:xml];
@@ -102,7 +105,8 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)theParser
 {
-    [delegate parsingSucceededForRequestOfType:requestType withParsedObjects:parsedObjects];
+    [delegate parsingSucceededForConnection:connectionIdentifier withParsedObjects:parsedObjects];
+	
 }
 
 

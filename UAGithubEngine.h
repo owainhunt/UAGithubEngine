@@ -16,15 +16,17 @@
 	NSString *username;
 	NSString *apiKey;
 	NSString *dataFormat;
+	NSMutableDictionary *connections;
 }
 
 @property (assign) id <UAGithubEngineDelegate> delegate;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *apiKey;
 @property (nonatomic, retain) NSString *dataFormat;
+@property (nonatomic, retain) NSMutableDictionary *connections;
 
 - (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate;
-- (NSData *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params;
+- (NSString *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params;
 
 
 #pragma mark Repositories
