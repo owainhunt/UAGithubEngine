@@ -26,7 +26,6 @@
 @property (nonatomic, retain) NSMutableDictionary *connections;
 
 - (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate;
-- (NSString *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params;
 
 
 #pragma mark Repositories
@@ -39,23 +38,23 @@
 
 - (void)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
 - (void)getIssue:(NSString *)issuePath;
-- (id)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
-- (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
-- (id)closeIssue:(NSString *)issuePath;
-- (id)reopenIssue:(NSString *)issuePath;
+- (void)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
+- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
+- (void)closeIssue:(NSString *)issuePath;
+- (void)reopenIssue:(NSString *)issuePath;
 
 
 #pragma mark Labels
 
 - (void)getLabelsForRepository:(NSString *)repositoryPath;
-- (id)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;
-- (id)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;;
+- (void)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;
+- (void)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;;
 
 
 #pragma mark Comments
 
 - (void)getCommentsForIssue:(NSString *)issuePath;
-- (id)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
+- (void)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
  
 
 #pragma mark Users
