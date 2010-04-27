@@ -11,9 +11,9 @@
 
 @implementation UAGithubLabelsParser
 
-- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType {
-	
-	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType
+{	
+	if (self = [super initWithXML:theXML delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType])
 	{
 		baseElement = @"label";
 	}

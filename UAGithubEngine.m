@@ -16,6 +16,13 @@
 #import "UAGithubCommitsParser.h"
 #import "UAGithubURLConnection.h"
 
+@interface UAGithubEngine (Private)
+
+- (NSString *)sendRequest:(NSString *)path ofType:(UAGithubRequestType)requestType withParameters:(NSDictionary *)params;
+
+
+@end
+
 
 @implementation UAGithubEngine
 
@@ -54,7 +61,7 @@
 }
 
 
-- (NSString *)sendRequest:(NSString *)path withParameters:(NSDictionary *)params
+- (NSString *)sendRequest:(NSString *)path ofType:(UAGithubRequestType)requestType withParameters:(NSDictionary *)params
 {
 	
 	NSMutableString *querystring = nil;
@@ -78,7 +85,7 @@
 	
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad	timeoutInterval:30];
 	UAGithubURLConnection *connection;
-	connection = [[UAGithubURLConnection alloc] initWithRequest:urlRequest delegate:self requestType:UAGithubUserRequest];
+	connection = [[UAGithubURLConnection alloc] initWithRequest:urlRequest delegate:self requestType:requestType];
 	
 	if (!connection) 
 	{
@@ -91,7 +98,7 @@
 	}
 	
 	return connection.identifier;
-	//return [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+	
 }
 
 
@@ -132,19 +139,16 @@
 
 #pragma mark Repositories
 
-/*
 - (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] withParameters:nil]
-		requestType:UAGithubRepositoriesRequest];
+	[self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] ofType:UAGithubRepositoriesRequest withParameters:nil];
 	
 }
 
 
 - (void)getRepository:(NSString *)repositoryPath;
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] withParameters:nil]
-		requestType:UAGithubRepositoryRequest];
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] ofType:UAGithubRepositoryRequest withParameters:nil];
 	
 }
 
@@ -159,15 +163,15 @@
 			theData = [[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] mutableCopy];
 			[theData appendData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]];
 			 */
-/*
-			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] requestType:UAGithubIssuesRequest];
-			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]requestType:UAGithubIssuesRequest];
+
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] ofType:UAGithubIssuesRequest withParameters:nil];
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] ofType:UAGithubIssuesRequest withParameters:nil];
 			break;
 		case UAGithubOpenIssuesRequest:
-			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] requestType:UAGithubIssuesRequest];
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] ofType:UAGithubIssuesRequest withParameters:nil];
 			break;
 		case UAGithubClosedIssuesRequest:
-			[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]requestType:UAGithubIssuesRequest];
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] ofType:UAGithubIssuesRequest withParameters:nil];
 			break;
 		default:
 			break;
@@ -178,35 +182,35 @@
 
 - (void)getIssue:(NSString *)issuePath
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] withParameters:nil] requestType:UAGithubIssueRequest];
+	[self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] ofType:UAGithubIssueRequest withParameters:nil];
 	
 }
 
 
-- (id)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary
+- (void)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/edit/%@", issuePath] withParameters:issueDictionary];
+	[self sendRequest:[NSString stringWithFormat:@"issues/edit/%@", issuePath] ofType:UAGithubEditIssueRequest withParameters:issueDictionary];
 	
 }
 
 
-- (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary
+- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/open/%@", repositoryPath] withParameters:issueDictionary];
+	[self sendRequest:[NSString stringWithFormat:@"issues/open/%@", repositoryPath] ofType:UAGithubAddIssueRequest withParameters:issueDictionary];
 	
 }
 
 
-- (id)closeIssue:(NSString *)issuePath
+- (void)closeIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] ofType:UAGithubCloseIssueRequest withParameters:nil];
 	
 }
 
 
-- (id)reopenIssue:(NSString *)issuePath
+- (void)reopenIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] ofType:UAGithubReopenIssueRequest withParameters:nil];
 	
 }
 
@@ -215,21 +219,21 @@
 
 - (void)getLabelsForRepository:(NSString *)repositoryPath
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] withParameters:nil] requestType:UAGithubLabelsRequest];
+	[self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] ofType:UAGithubLabelsRequest withParameters:nil];
 	
 }
 
 
-- (id)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath
+- (void)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%@", repositoryPath, label, issueNumber] withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%@", repositoryPath, label, issueNumber] ofType:UAGithubAddLabelRequest withParameters:nil];
 	
 }
 
 
-- (id)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath
+- (void)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%@", repositoryPath, label, issueNumber] withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%@", repositoryPath, label, issueNumber] ofType:UAGithubRemoveLabelRequest withParameters:nil];
 	
 }
 
@@ -238,43 +242,43 @@
 
 - (void)getCommentsForIssue:(NSString *)issuePath
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] withParameters:nil] requestType:UAGithubCommentsRequest];
+	[self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] ofType:UAGithubCommentsRequest withParameters:nil];
 	
 }
 
 
-- (id)addComment:(NSString *)comment toIssue:(NSString *)issuePath
+- (void)addComment:(NSString *)comment toIssue:(NSString *)issuePath
 {
 	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"comment"];
-	return [self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] withParameters:commentDictionary];
+	[self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] ofType:UAGithubAddCommentRequest withParameters:commentDictionary];
 	
 }
 
-*/
+
 #pragma mark Users
 
 - (void)getUser:(NSString *)user
 {
-	[self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] ofType:UAGithubUserRequest withParameters:nil];
 	
 }
 
-/*
+
 #pragma mark Commits
 
 - (void)getCommitsForBranch:(NSString *)branchPath
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] withParameters:nil] requestType:UAGithubCommitsRequest];
+	[self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] ofType:UAGithubCommitsRequest withParameters:nil];
 }
 
 
 - (void)getCommit:(NSString *)commitPath
 {
-	[self parseData:[self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] withParameters:nil] requestType:UAGithubCommitRequest];
+	[self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] ofType:UAGithubCommitRequest withParameters:nil];
 }
 	
 
-*/
+
 #pragma mark Parser Delegate Methods
 
 - (void)parsingSucceededForConnection:(NSString *)connectionIdentifier withParsedObjects:(NSArray *)parsedObjects
@@ -295,6 +299,7 @@
 
 - (void)connection:(UAGithubURLConnection *)connection didFailWithError:(NSError *)error
 {
+	
 }
 
 
@@ -307,6 +312,7 @@
 
 - (void)connection:(UAGithubURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+	
 }
 
 

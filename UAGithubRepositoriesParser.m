@@ -11,9 +11,9 @@
 
 @implementation UAGithubRepositoriesParser
 
-- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate requestType:(UAGithubRequestType)reqType {
-	
-	if (self = [super initWithXML:theXML delegate:theDelegate requestType:reqType])
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType
+{	
+	if (self = [super initWithXML:theXML delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType])
 	{
 		numberElements = [NSArray arrayWithObjects:@"watchers", @"forks", @"open-issues", nil];
 		boolElements = [NSArray arrayWithObjects:@"has-issues", @"has-downloads", @"fork", @"has-wiki", @"private", nil];
