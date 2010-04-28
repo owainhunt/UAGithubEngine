@@ -20,10 +20,11 @@
 
 @property (nonatomic, retain) NSMutableData *data;
 @property (nonatomic, assign) UAGithubRequestType requestType;
+@property (nonatomic, assign) UAGithubResponseType responseType;
 @property (nonatomic, retain) NSString *identifier;
 
 // Initializer
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)requestType;
+- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType;
 
 // Data helper methods
 - (void)resetDataLength;
