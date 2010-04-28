@@ -24,13 +24,58 @@
 - (void)requestSucceeded:(NSString *)connectionIdentifier
 {
 	NSLog(@"Request succeeded: %@", connectionIdentifier);
-	
+
 }
 
 
 - (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error
 {
     NSLog(@"Request failed: %@, error: %@ (%@)", connectionIdentifier, [error localizedDescription], [error userInfo]);
+	
+}
+
+
+- (void)repositoriesReceived:(NSArray *)repositories forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received repositories for connection: %@, %@", connectionIdentifier, repositories);
+
+}
+
+
+- (void)issuesReceived:(NSArray *)issues forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received issues for connection: %@, %@", connectionIdentifier, issues);
+
+}
+
+
+- (void)issueCommentsReceived:(NSArray *)issueComments forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received issueComments for connection: %@, %@", connectionIdentifier, issueComments);
+
+	
+}
+
+
+- (void)labelsReceived:(NSArray *)labels forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received labels for connection: %@, %@", connectionIdentifier, labels);
+
+}
+
+
+- (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received users for connection: %@, %@", connectionIdentifier, users);
+
+	
+}
+
+
+- (void)commitsReceived:(NSArray *)commits forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received commits for connection: %@, %@", connectionIdentifier, commits);
+
 	
 }
 
