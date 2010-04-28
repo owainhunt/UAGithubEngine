@@ -18,4 +18,21 @@
 
 }
 
+
+#pragma mark UAGithubEngineDelegate Methods
+
+- (void)requestSucceeded:(NSString *)connectionIdentifier
+{
+	NSLog(@"Request succeeded: %@", connectionIdentifier);
+	
+}
+
+
+- (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error
+{
+    NSLog(@"Request failed: %@, error: %@ (%@)", connectionIdentifier, [error localizedDescription], [error userInfo]);
+	
+}
+
+
 @end

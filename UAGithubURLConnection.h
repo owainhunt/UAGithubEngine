@@ -13,6 +13,7 @@
 {
     NSMutableData *data;                   
     UAGithubRequestType requestType;      
+	UAGithubResponseType responseType;
     NSString *identifier;
 }
 
