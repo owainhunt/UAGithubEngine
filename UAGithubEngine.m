@@ -289,8 +289,9 @@
 }
 
 
-- (void)parsingFailedForRequestOfType:(UAGithubRequestType)requestType withError:(NSError *)parseError
+- (void)parsingFailedForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withError:(NSError *)parseError
 {
+	[delegate requestFailed:connectionIdentifier withError:parseError];
 	
 }
 
