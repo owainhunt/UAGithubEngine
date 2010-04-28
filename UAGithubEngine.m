@@ -67,10 +67,10 @@
 	NSMutableString *querystring = nil;
 	if (![params isEqual:nil]) 
 	{
-		querystring = [NSMutableString stringWithFormat:@"&"];
+		querystring = [NSMutableString stringWithCapacity:0];
 		for (NSString *key in [params allKeys]) 
 		{
-			[querystring appendFormat:@"%@=%@", key, [params valueForKey:key]];
+			[querystring appendFormat:@"&%@=%@", key, CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[params valueForKey:key], NULL,(CFStringRef)@";/?:@&=$+{}<>,", kCFStringEncodingUTF8)];
 		}
 	}
 	
@@ -81,9 +81,7 @@
 	}
 	
 	NSURL *theURL = [NSURL URLWithString:urlString];
-	NSLog(@"Request sent: %@", theURL);
-	
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad	timeoutInterval:30];
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
 	UAGithubURLConnection *connection;
 	connection = [[UAGithubURLConnection alloc] initWithRequest:urlRequest delegate:self requestType:requestType responseType:responseType];
 	
@@ -159,11 +157,6 @@
 {
 	switch (requestType) {
 		case UAGithubAllIssuesRequest:
-			/*
-			theData = [[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] withParameters:nil] mutableCopy];
-			[theData appendData:[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] withParameters:nil]];
-			 */
-
 			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssuesResponse withParameters:nil];
 			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssuesResponse withParameters:nil];
 			break;
@@ -269,12 +262,14 @@
 - (void)getCommitsForBranch:(NSString *)branchPath
 {
 	[self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse withParameters:nil];
+	
 }
 
 
 - (void)getCommit:(NSString *)commitPath
 {
 	[self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse withParameters:nil];
+	
 }
 	
 
@@ -310,6 +305,7 @@
 		default:
 			break;
 	}
+	//[NSApp terminate:self];
 	
 }
 

@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "UAGithubEngine.h"
 
+
 @interface AppController : NSObject <UAGithubEngineDelegate> {
     UAGithubEngine *githubEngine;
+	
 }
 
 @end
