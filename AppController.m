@@ -14,12 +14,23 @@
 {
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
 	
-	
-	//[githubEngine getCommit:@"owainhunt/uagithubengine/251c735cdd8285c63fc952bd58e5f48e22a26e6b"];
-	[githubEngine getIssuesForRepository:@"owainhunt/iscore" withRequestType:UAGithubOpenIssuesRequest];
-	//[githubEngine getUser:@"owainhunt"];
-	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue", @"title", @"Test body", @"body", nil]];
-	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited]", @"body", nil]];
+	[githubEngine getUser:@"owainhunt"];
+	[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
+	[githubEngine getRepository:@"owainhunt/uagithubengine"];
+	[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
+	[githubEngine getCommit:@"owainhunt/uagithubengine/251c735cdd8285c63fc952bd58e5f48e22a26e6b"];
+	[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
+	[githubEngine getIssue:@"owainhunt/uagithubengine/1"];
+	[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited]", @"body", nil]];
+	[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue", @"title", @"Test body", @"body", nil]];
+	[githubEngine closeIssue:@"owainhunt/uagithubengine/1"];
+	[githubEngine reopenIssue:@"owainhunt/uagithubengine/1"];
+	[githubEngine getLabelsForRepository:@"owainhunt/uagithubengine"];
+	[githubEngine addLabel:@"Feature Request" toIssue:1 inRepository:@"owainhunt/uagithubengine"];
+	[githubEngine removeLabel:@"Bug" fromIssue:1 inRepository:@"owainhunt/uagithubengine"];
+	[githubEngine getCommentsForIssue:@"owainhunt/uagithubengine/1"];
+	[githubEngine addComment:@"This thing is awesome." toIssue:@"owainhunt/uagithubengine/1"];
+
 
 }
 

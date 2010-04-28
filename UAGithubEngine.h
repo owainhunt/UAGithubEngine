@@ -28,10 +28,21 @@
 - (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate;
 
 
+#pragma mark Users
+
+- (void)getUser:(NSString *)user;
+
+
 #pragma mark Repositories
 
 - (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
 - (void)getRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Commits
+
+- (void)getCommitsForBranch:(NSString *)branchPath;
+- (void)getCommit:(NSString *)commitPath;
 
 
 #pragma mark Issues 
@@ -47,8 +58,8 @@
 #pragma mark Labels
 
 - (void)getLabelsForRepository:(NSString *)repositoryPath;
-- (void)addLabel:(NSString *)label toIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;
-- (void)removeLabel:(NSString *)label fromIssue:(NSInteger *)issueNumber inRepository:(NSString *)repositoryPath;;
+- (void)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+- (void)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Comments
@@ -56,16 +67,5 @@
 - (void)getCommentsForIssue:(NSString *)issuePath;
 - (void)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
  
-
-#pragma mark Users
-
-- (void)getUser:(NSString *)user;
- 
-
-#pragma mark Commits
-
-- (void)getCommitsForBranch:(NSString *)branchPath;
-- (void)getCommit:(NSString *)commitPath;
-
 
 @end
