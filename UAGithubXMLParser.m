@@ -57,10 +57,22 @@
         [parsedObjects addObject:newNode];
         currentNode = newNode;
     } 
+	else if ([arrayElements containsObject:elementName])
+	{
+		currentArray = [NSMutableArray arrayWithCapacity:0];
+		[currentNode setObject:currentArray forKey:elementName];
+	}
 	else if ([dictionaryElements containsObject:elementName]) 
 	{
 		NSMutableDictionary *newNode = [NSMutableDictionary dictionaryWithCapacity:0];
-		[currentNode setObject:newNode forKey:elementName];
+		if (currentArray)
+		{
+			[currentArray addObject:newNode];
+		}
+		else
+		{
+			[currentNode setObject:newNode forKey:elementName];
+		}
 		parentNode = currentNode;
 		currentNode = newNode;
 	}
@@ -74,7 +86,7 @@
 
 - (void)parser:(NSXMLParser *)theParser foundCharacters:(NSString *)characters
 {
-    if (lastOpenedElement && currentNode) {
+    if (lastOpenedElement && currentNode && ![arrayElements containsObject:lastOpenedElement]) {
         [[currentNode objectForKey:lastOpenedElement] appendString:characters];
     }
 	
@@ -101,7 +113,20 @@
 	}
 	else if ([dictionaryElements containsObject:elementName])
 	{
-		currentNode = parentNode;
+		//if (!currentArray)
+		//{
+			currentNode = parentNode;
+			parentNode = nil;
+		//}
+	}
+	else if ([arrayElements containsObject:elementName])
+	{
+		if (parentNode)
+		{
+			currentNode = parentNode;
+			parentNode = nil;
+		}		
+		currentArray = nil;
 	}
 	else if ([elementName isEqualToString:baseElement]) 
 	{
