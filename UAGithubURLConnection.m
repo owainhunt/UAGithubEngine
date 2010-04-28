@@ -12,9 +12,9 @@
 
 @implementation UAGithubURLConnection
 
-@synthesize data, requestType, identifier;
+@synthesize data, requestType, responseType, identifier;
 
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType
+- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
 {
     if (self = [super initWithRequest:request delegate:delegate]) {
         data = [[NSMutableData alloc] initWithCapacity:0];
