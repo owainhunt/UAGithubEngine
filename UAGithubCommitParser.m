@@ -11,9 +11,9 @@
 
 @implementation UAGithubCommitParser
 
-- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
 {	
-	if (self = [super initWithXML:theXML delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType])
+	if (self = [super initWithXML:theXML delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType])
 	{
 		dateElements = [NSArray arrayWithObjects:@"committed-date", @"authored-date", nil];
 		dictionaryElements = [NSArray arrayWithObjects:@"modified", @"removed", @"parents", @"author", @"committer", nil];

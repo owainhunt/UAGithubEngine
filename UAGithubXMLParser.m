@@ -24,13 +24,14 @@
 }
 
 
-- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType
+- (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
 {
     if (self = [super init]) {
         xml = [theXML retain];
         delegate = theDelegate;
 		connectionIdentifier = [theIdentifier retain];
         requestType = reqType;
+		responseType = respType;
         parsedObjects = [[NSMutableArray alloc] initWithCapacity:0];
         
         parser = [[NSXMLParser alloc] initWithData:xml];
