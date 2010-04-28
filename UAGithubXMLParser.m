@@ -113,4 +113,12 @@
 }
 
 
+- (void)parser:(NSXMLParser *)theParser parseErrorOccurred:(NSError *)parseError
+{
+    [delegate parsingFailedForConnection:connectionIdentifier ofResponseType:responseType withError:parseError];
+	
+}
+
+
+
 @end
