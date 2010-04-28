@@ -6,10 +6,10 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import "UAGithubLabelsParser.h"
+#import "UAGithubIssueLabelsParser.h"
 
 
-@implementation UAGithubLabelsParser
+@implementation UAGithubIssueLabelsParser
 
 - (id)initWithXML:(NSData *)theXML delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
 {	

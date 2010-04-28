@@ -10,6 +10,7 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* AppController.m */; };
 		685261E0116A771B003AE003 /* UAGithubXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 685261DF116A771B003AE003 /* UAGithubXMLParser.m */; };
+		68813F3D11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68813F3C11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m */; };
 		68AEDF28116E46B20018E490 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */; };
 		68D35B121186049900C6E37E /* UAGithubURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D35B111186049900C6E37E /* UAGithubURLConnection.m */; };
 		68D35B191186070300C6E37E /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D35B181186070300C6E37E /* NSString+UUID.m */; };
@@ -18,7 +19,7 @@
 		68E72ABE116651970069B287 /* UAGithubUsersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72ABD116651970069B287 /* UAGithubUsersParser.m */; };
 		68E72AC3116651C40069B287 /* UAGithubIssuesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC2116651C40069B287 /* UAGithubIssuesParser.m */; };
 		68E72AC6116651D00069B287 /* UAGithubIssueCommentsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC5116651D00069B287 /* UAGithubIssueCommentsParser.m */; };
-		68E72AC9116651D80069B287 /* UAGithubLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */; };
+		68E72AC9116651D80069B287 /* UAGithubIssueLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AC8116651D80069B287 /* UAGithubIssueLabelsParser.m */; };
 		68E72ACC116651EF0069B287 /* UAGithubRepositoriesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72ACB116651EF0069B287 /* UAGithubRepositoriesParser.m */; };
 		68E72AE2116653770069B287 /* UAGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AE1116653770069B287 /* UAGithubEngine.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -41,6 +42,8 @@
 		685261DE116A771B003AE003 /* UAGithubXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubXMLParser.h; sourceTree = "<group>"; };
 		685261DF116A771B003AE003 /* UAGithubXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubXMLParser.m; sourceTree = "<group>"; };
 		685261E1116A774C003AE003 /* UAGithubParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubParserDelegate.h; sourceTree = "<group>"; };
+		68813F3B11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubRepositoryLabelsParser.h; sourceTree = "<group>"; };
+		68813F3C11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubRepositoryLabelsParser.m; sourceTree = "<group>"; };
 		68AEDF26116E46B20018E490 /* NSString+UAGithubEngineUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UAGithubEngineUtilities.h"; sourceTree = "<group>"; };
 		68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UAGithubEngineUtilities.m"; sourceTree = "<group>"; };
 		68D35B101186049900C6E37E /* UAGithubURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubURLConnection.h; sourceTree = "<group>"; };
@@ -57,8 +60,8 @@
 		68E72AC2116651C40069B287 /* UAGithubIssuesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssuesParser.m; sourceTree = "<group>"; };
 		68E72AC4116651D00069B287 /* UAGithubIssueCommentsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssueCommentsParser.h; sourceTree = "<group>"; };
 		68E72AC5116651D00069B287 /* UAGithubIssueCommentsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssueCommentsParser.m; sourceTree = "<group>"; };
-		68E72AC7116651D80069B287 /* UAGithubLabelsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubLabelsParser.h; sourceTree = "<group>"; };
-		68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubLabelsParser.m; sourceTree = "<group>"; };
+		68E72AC7116651D80069B287 /* UAGithubIssueLabelsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssueLabelsParser.h; sourceTree = "<group>"; };
+		68E72AC8116651D80069B287 /* UAGithubIssueLabelsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssueLabelsParser.m; sourceTree = "<group>"; };
 		68E72ACA116651EF0069B287 /* UAGithubRepositoriesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubRepositoriesParser.h; sourceTree = "<group>"; };
 		68E72ACB116651EF0069B287 /* UAGithubRepositoriesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubRepositoriesParser.m; sourceTree = "<group>"; };
 		68E72ADC116652450069B287 /* UAGithubEngineDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineDelegate.h; sourceTree = "<group>"; };
@@ -178,8 +181,10 @@
 				68E72AC2116651C40069B287 /* UAGithubIssuesParser.m */,
 				68E72AC4116651D00069B287 /* UAGithubIssueCommentsParser.h */,
 				68E72AC5116651D00069B287 /* UAGithubIssueCommentsParser.m */,
-				68E72AC7116651D80069B287 /* UAGithubLabelsParser.h */,
-				68E72AC8116651D80069B287 /* UAGithubLabelsParser.m */,
+				68813F3B11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.h */,
+				68813F3C11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m */,
+				68E72AC7116651D80069B287 /* UAGithubIssueLabelsParser.h */,
+				68E72AC8116651D80069B287 /* UAGithubIssueLabelsParser.m */,
 				68E72ABC116651970069B287 /* UAGithubUsersParser.h */,
 				68E72ABD116651970069B287 /* UAGithubUsersParser.m */,
 				68E6820F11839DDF00DD2637 /* UAGithubCommitsParser.h */,
@@ -274,7 +279,7 @@
 				68E72ABE116651970069B287 /* UAGithubUsersParser.m in Sources */,
 				68E72AC3116651C40069B287 /* UAGithubIssuesParser.m in Sources */,
 				68E72AC6116651D00069B287 /* UAGithubIssueCommentsParser.m in Sources */,
-				68E72AC9116651D80069B287 /* UAGithubLabelsParser.m in Sources */,
+				68E72AC9116651D80069B287 /* UAGithubIssueLabelsParser.m in Sources */,
 				68E72ACC116651EF0069B287 /* UAGithubRepositoriesParser.m in Sources */,
 				68E72AE2116653770069B287 /* UAGithubEngine.m in Sources */,
 				685261E0116A771B003AE003 /* UAGithubXMLParser.m in Sources */,
@@ -283,6 +288,7 @@
 				68E6821411839DF900DD2637 /* UAGithubCommitParser.m in Sources */,
 				68D35B121186049900C6E37E /* UAGithubURLConnection.m in Sources */,
 				68D35B191186070300C6E37E /* NSString+UUID.m in Sources */,
+				68813F3D11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

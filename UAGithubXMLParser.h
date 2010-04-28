@@ -19,7 +19,7 @@
     NSData *xml;
     NSMutableArray *parsedObjects;
     NSXMLParser *parser;
-    __weak NSMutableDictionary *currentNode;
+    __weak id currentNode;
 	NSMutableDictionary *parentNode;
     NSString *lastOpenedElement;
 	
@@ -28,6 +28,10 @@
 	NSArray *boolElements;
 	NSArray *dateElements;
 	NSArray *dictionaryElements;
+	NSArray *arrayElements;
+	__weak NSMutableArray *currentArray;
+	
+	NSString *currentArrayKey;
 
 }
 

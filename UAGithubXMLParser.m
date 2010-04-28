@@ -48,21 +48,25 @@
 
 - (void)parser:(NSXMLParser *)theParser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     self.lastOpenedElement = elementName;
-    
-    if ([elementName isEqualToString:baseElement]) {
-        // Make new entry in parsedObjects.
+
+	NSLog(@"Element: %@", elementName);
+	
+    if ([elementName isEqualToString:baseElement]) 
+	{
         NSMutableDictionary *newNode = [NSMutableDictionary dictionaryWithCapacity:0];
         [parsedObjects addObject:newNode];
         currentNode = newNode;
-    } else if (currentNode) {
-		if ([dictionaryElements containsObject:elementName]) {
-			NSMutableDictionary *newNode = [NSMutableDictionary dictionaryWithCapacity:0];
-			[currentNode setObject:newNode forKey:elementName];
-			parentNode = currentNode;
-			currentNode = newNode;
-		} else {
-			[currentNode setObject:[NSMutableString string] forKey:elementName];
-		}
+    } 
+	else if ([dictionaryElements containsObject:elementName]) 
+	{
+		NSMutableDictionary *newNode = [NSMutableDictionary dictionaryWithCapacity:0];
+		[currentNode setObject:newNode forKey:elementName];
+		parentNode = currentNode;
+		currentNode = newNode;
+	}
+	else if (currentNode) 
+	{
+		[currentNode setObject:[NSMutableString string] forKey:elementName];
     }
 	
 }
@@ -73,6 +77,7 @@
     if (lastOpenedElement && currentNode) {
         [[currentNode objectForKey:lastOpenedElement] appendString:characters];
     }
+	
 }
 
 

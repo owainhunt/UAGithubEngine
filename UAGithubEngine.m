@@ -11,7 +11,8 @@
 #import "UAGithubRepositoriesParser.h"
 #import "UAGithubIssuesParser.h"
 #import "UAGithubIssueCommentsParser.h"
-#import "UAGithubLabelsParser.h"
+#import "UAGithubIssueLabelsParser.h"
+#import "UAGithubRepositoryLabelsParser.h"
 #import "UAGithubUsersParser.h"
 #import "UAGithubCommitsParser.h"
 #import "UAGithubURLConnection.h"
@@ -122,7 +123,10 @@
 			[[UAGithubUsersParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubLabelsResponse:
-			[[UAGithubLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+			[[UAGithubIssueLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+			break;
+		case UAGithubRepositoryLabelsRequest:
+			[[UAGithubRepositoryLabelsParser alloc] init];
 			break;
 		case UAGithubCommitsResponse:
 		case UAGithubCommitResponse:
@@ -212,7 +216,7 @@
 
 - (void)getLabelsForRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] requestType:UAGithubLabelsRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] requestType:UAGithubRepositoryLabelsRequest responseType:UAGithubRepositoryLabelsResponse withParameters:nil];
 	
 }
 

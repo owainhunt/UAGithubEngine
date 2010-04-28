@@ -17,6 +17,8 @@
 	{
 		numberElements = [NSArray arrayWithObjects:@"number", @"votes", @"comments", nil];
 		dateElements = [NSArray arrayWithObjects:@"created-at", @"updated-at", nil];
+		arrayElements = [NSArray arrayWithObject:@"labels"];
+		dictionaryElements = [NSArray arrayWithObject:@"label"];
 		baseElement = @"issue";
 	}
 	
