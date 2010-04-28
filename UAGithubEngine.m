@@ -106,28 +106,28 @@
 
 - (void)parseDataForConnection:(UAGithubURLConnection *)connection
 {
-	switch (connection.requestType) {
-		case UAGithubRepositoriesRequest:
-		case UAGithubRepositoryRequest:
+	switch (connection.responseType) {
+		case UAGithubRepositoriesResponse:
+		case UAGithubRepositoryResponse:
 			[[UAGithubRepositoriesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
-		case UAGithubIssuesRequest:
-		case UAGithubIssueRequest:
+		case UAGithubIssuesResponse:
+		case UAGithubIssueResponse:
 			[[UAGithubIssuesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
-		case UAGithubCommentsRequest:
-		case UAGithubCommentRequest:
+		case UAGithubCommentsResponse:
+		case UAGithubCommentResponse:
 			[[UAGithubIssueCommentsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
-		case UAGithubUsersRequest:
-		case UAGithubUserRequest:
+		case UAGithubUsersResponse:
+		case UAGithubUserResponse:
 			[[UAGithubUsersParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
-		case UAGithubLabelsRequest:
+		case UAGithubLabelsResponse:
 			[[UAGithubLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
-		case UAGithubCommitsRequest:
-		case UAGithubCommitRequest:
+		case UAGithubCommitsResponse:
+		case UAGithubCommitResponse:
 			[[UAGithubCommitsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType];
 			break;
 		default:

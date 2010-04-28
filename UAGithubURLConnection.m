@@ -20,6 +20,7 @@
         data = [[NSMutableData alloc] initWithCapacity:0];
         identifier = [[NSString stringWithNewUUID] retain];
         requestType = reqType;
+		responseType = respType;
     }
     
     return self;
