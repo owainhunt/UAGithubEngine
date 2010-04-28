@@ -12,7 +12,7 @@
 
 @protocol UAGithubParserDelegate
 
-- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier withParsedObjects:(NSArray *)parsedObjects;
+- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects;
 - (void)parsingFailedForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withError:(NSError *)parseError;
 
 @end

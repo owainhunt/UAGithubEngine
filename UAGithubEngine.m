@@ -281,10 +281,35 @@
 
 #pragma mark Parser Delegate Methods
 
-- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier withParsedObjects:(NSArray *)parsedObjects
+- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
 {
-	NSLog(@"Parsed objects: %@, %@", connectionIdentifier, parsedObjects);	
-	[NSApp terminate:self];
+	switch (responseType) {
+		case UAGithubRepositoriesResponse:
+		case UAGithubRepositoryResponse:
+			[delegate repositoriesReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubIssuesResponse:
+		case UAGithubIssueResponse:
+			[delegate issuesReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubCommentsResponse:
+		case UAGithubCommentResponse:
+			[delegate issueCommentsReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubUsersResponse:
+		case UAGithubUserResponse:
+			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubLabelsResponse:
+			[delegate labelsReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubCommitsResponse:
+		case UAGithubCommitResponse:
+			[delegate commitsReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		default:
+			break;
+	}
 	
 }
 

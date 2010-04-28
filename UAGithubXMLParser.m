@@ -108,7 +108,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)theParser
 {
-    [delegate parsingSucceededForConnection:connectionIdentifier withParsedObjects:parsedObjects];
+    [delegate parsingSucceededForConnection:connectionIdentifier ofResponseType:responseType withParsedObjects:parsedObjects];
 	
 }
 
