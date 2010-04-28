@@ -12,5 +12,6 @@
 @interface NSString(UAGithubEngineUtilities)
 
 - (NSDate *)dateFromGithubDateString;
+- (NSString *)encodedString;
 
 @end
