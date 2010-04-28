@@ -10,7 +10,7 @@
 #import "UAGithubXMLParser.h"
 
 
-@interface UAGithubLabelsParser : UAGithubXMLParser {
+@interface UAGithubIssueLabelsParser : UAGithubXMLParser {
 
 }
 

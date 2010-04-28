@@ -26,10 +26,11 @@ typedef enum UAGithubRequestType {
 	UAGithubUsersRequest				= 14,
 	UAGithubUserRequest					= 15,
 	UAGithubLabelsRequest				= 16,
-	UAGithubAddLabelRequest				= 17,
-	UAGithubRemoveLabelRequest			= 18,
-	UAGithubCommitRequest				= 19,
-	UAGithubCommitsRequest				= 20,
+	UAGithubRepositoryLabelsRequest		= 17,
+	UAGithubAddLabelRequest				= 18,
+	UAGithubRemoveLabelRequest			= 19,
+	UAGithubCommitRequest				= 20,
+	UAGithubCommitsRequest				= 21,
 
 } UAGithubRequestType;
 
@@ -44,7 +45,8 @@ typedef enum UAGithubResponseType {
 	UAGithubUsersResponse				= 6,
 	UAGithubUserResponse				= 7,
 	UAGithubLabelsResponse				= 8,
-	UAGithubCommitsResponse				= 9,
-	UAGithubCommitResponse				= 10,
+	UAGithubRepositoryLabelsResponse	= 9,
+	UAGithubCommitsResponse				= 10,
+	UAGithubCommitResponse				= 11,
 
 } UAGithubResponseType;
