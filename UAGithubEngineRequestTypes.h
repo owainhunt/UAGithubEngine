@@ -32,3 +32,19 @@ typedef enum UAGithubRequestType {
 	UAGithubCommitsRequest				= 20,
 
 } UAGithubRequestType;
+
+
+typedef enum UAGithubResponseType {
+	UAGithubIssuesResponse				= 0,
+	UAGithubIssueResponse				= 1,
+	UAGithubRepositoriesResponse		= 2,
+	UAGithubRepositoryResponse			= 3,
+	UAGithubCommentsResponse			= 4,
+	UAGithubCommentResponse				= 5,
+	UAGithubUsersResponse				= 6,
+	UAGithubUserResponse				= 7,
+	UAGithubLabelsResponse				= 8,
+	UAGithubCommitsResponse				= 9,
+	UAGithubCommitResponse				= 10,
+
+} UAGithubResponseType;
