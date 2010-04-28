@@ -10,12 +10,24 @@
 
 @implementation AppController
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification 
+{
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
+	
+	
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/251c735cdd8285c63fc952bd58e5f48e22a26e6b"];
-	//[githubEngine getIssuesForRepository:@"owainhunt/iscore" withRequestType:UAGithubAllIssuesRequest];
-	[githubEngine getUser:@"owainhunt"];
+	[githubEngine getIssuesForRepository:@"owainhunt/iscore" withRequestType:UAGithubOpenIssuesRequest];
+	//[githubEngine getUser:@"owainhunt"];
+	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue", @"title", @"Test body", @"body", nil]];
+	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited]", @"body", nil]];
 
+}
+
+- (void)dealloc
+{
+	[githubEngine release];
+	[super dealloc];
+	
 }
 
 

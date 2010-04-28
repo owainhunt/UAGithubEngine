@@ -23,18 +23,22 @@
 		responseType = respType;
     }
     
+	NSLog(@"New connection: %@, %@", request, identifier);
+	
     return self;
 }
 
 - (void)resetDataLength
 {
     [data setLength:0];
+	
 }
 
 
 - (void)appendData:(NSData *)newData
 {
     [data appendData:newData];
+	
 }
 
 
