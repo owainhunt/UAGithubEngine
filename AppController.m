@@ -30,9 +30,8 @@
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine addLabel:@"Feature Request" toIssue:1 inRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Bug" fromIssue:1 inRepository:@"owainhunt/uagithubengine"];
-	
 	//[githubEngine getCommentsForIssue:@"owainhunt/uagithubengine/1"];
-	[githubEngine addComment:@"This thing is awesome." toIssue:@"owainhunt/uagithubengine/1"];
+	//[githubEngine addComment:@"This thing is awesome." toIssue:@"owainhunt/uagithubengine/1"];
 
 
 }
