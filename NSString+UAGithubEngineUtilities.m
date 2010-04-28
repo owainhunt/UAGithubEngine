@@ -15,4 +15,11 @@
 	return [NSDate dateWithString:[NSString stringWithFormat:@"%@ %@ %@%@%@", [self substringToIndex:10], [self substringWithRange:NSMakeRange(11, 8)], [self substringWithRange:NSMakeRange(19, 1)], [self substringWithRange:NSMakeRange(20, 2)], [self substringFromIndex:23]]];
 }
 
+- (NSString *)encodedString
+{
+    return (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, (CFStringRef)@";/?:@&=$+{}<>,", kCFStringEncodingUTF8);
+
+}
+
+
 @end

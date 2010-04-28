@@ -58,6 +58,8 @@
 #pragma mark Labels
 
 - (void)getLabelsForRepository:(NSString *)repositoryPath;
+- (void)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath;
+- (void)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath;
 - (void)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 - (void)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 

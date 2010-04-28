@@ -70,11 +70,11 @@
 		querystring = [NSMutableString stringWithCapacity:0];
 		for (NSString *key in [params allKeys]) 
 		{
-			[querystring appendFormat:@"&%@=%@", key, CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)[params valueForKey:key], NULL,(CFStringRef)@";/?:@&=$+{}<>,", kCFStringEncodingUTF8)];
+			[querystring appendFormat:@"&%@=%@", key, [[params valueForKey:key] encodedString]];
 		}
 	}
 	
-	NSMutableString *urlString = [NSMutableString stringWithFormat:@"http://github.com/api/v2/%@/%@?login=%@&token=%@", self.dataFormat, path, self.username, self.apiKey];
+	NSMutableString *urlString = [NSMutableString stringWithFormat:@"https://github.com/api/v2/%@/%@?login=%@&token=%@", self.dataFormat, path, self.username, self.apiKey];
 	if (![querystring isEqual:nil])
 	{
 		[urlString appendString:querystring];
@@ -217,16 +217,31 @@
 }
 
 
+- (void)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath
+{
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubAddLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	
+}
+
+
+- (void)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath
+{
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubRemoveLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	
+	
+}
+
+
 - (void)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, label, issueNumber] requestType:UAGithubAddLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubAddLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
 	
 }
 
 
 - (void)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, label, issueNumber] requestType:UAGithubRemoveLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubRemoveLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
 	
 }
 
@@ -278,7 +293,7 @@
 
 - (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
 {
-	/*
+	
 	switch (responseType) {
 		case UAGithubRepositoriesResponse:
 		case UAGithubRepositoryResponse:
@@ -307,7 +322,7 @@
 			break;
 	}
 	//[NSApp terminate:self];
-	 */
+	
 	
 }
 
