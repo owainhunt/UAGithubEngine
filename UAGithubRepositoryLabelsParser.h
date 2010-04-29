@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UAGithubXMLParser.h"
 
 
-@interface UAGithubRepositoryLabelsParser : NSObject {
+@interface UAGithubRepositoryLabelsParser : UAGithubXMLParser {
+	NSMutableArray *theNode;
 
 }
 

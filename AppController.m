@@ -25,7 +25,7 @@
 	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue", @"title", @"Test body", @"body", nil]];
 	//[githubEngine closeIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine reopenIssue:@"owainhunt/uagithubengine/1"];
-	//[githubEngine getLabelsForRepository:@"owainhunt/uagithubengine"];
+	[githubEngine getLabelsForRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine addLabel:@"Major Bug" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine addLabel:@"Mega Bug" toIssue:1 inRepository:@"owainhunt/uagithubengine"];

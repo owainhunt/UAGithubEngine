@@ -126,8 +126,8 @@
 		case UAGithubLabelsResponse:
 			[[UAGithubIssueLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
-		case UAGithubRepositoryLabelsRequest:
-			[[UAGithubRepositoryLabelsParser alloc] init];
+		case UAGithubRepositoryLabelsResponse:
+			[[UAGithubRepositoryLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubCommitsResponse:
 		case UAGithubCommitResponse:
@@ -174,6 +174,7 @@
 			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		case UAGithubLabelsResponse:
+		case UAGithubRepositoryLabelsResponse:
 			[delegate labelsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		case UAGithubCommitsResponse:

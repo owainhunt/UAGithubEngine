@@ -12,6 +12,7 @@
 
 @interface UAGithubCollaboratorsParser : UAGithubXMLParser {
 	NSMutableArray *theNode;
+	
 }
 
 @end
