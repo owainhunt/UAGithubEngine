@@ -17,8 +17,8 @@
 	//[githubEngine getUser:@"owainhunt"];
 	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
 	//[githubEngine getRepository:@"owainhunt/uagithubengine"];
-	[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
-	//[githubEngine getCommit:@"owainhunt/uagithubengine/251c735cdd8285c63fc952bd58e5f48e22a26e6b"];
+	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
+	//[githubEngine getCommit:@"owainhunt/uagithubengine/f7e0012470166d8e1a88"];
 	//[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
 	//[githubEngine getIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited]", @"body", nil]];
@@ -32,6 +32,9 @@
 	//[githubEngine removeLabel:@"Bug" fromIssue:1 inRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine getCommentsForIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine addComment:@"This thing is awesome." toIssue:@"owainhunt/uagithubengine/1"];
+	//[githubEngine getBlobsForSHA:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88"];
+	//[githubEngine getBlob:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88/main.m"];
+	[githubEngine getRawBlob:@"owainhunt/uagithubengine/14d56058704dd3e046edaec20e93597867ef761e"];
 
 
 }
@@ -102,6 +105,27 @@
 	NSLog(@"Received commits for connection: %@, %@", connectionIdentifier, commits);
 
 	
+}
+
+
+- (void)blobsReceieved:(NSArray *)blobs forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received blobs for connection: %@, %@", connectionIdentifier, blobs);
+
+}
+
+
+- (void)blobReceived:(NSArray *)blob forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received blob for connection: %@, %@", connectionIdentifier, blob);
+
+}
+
+
+- (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received blob for connection: %@, %@", connectionIdentifier, [[[NSString alloc] initWithData:blob encoding:NSASCIIStringEncoding] autorelease]);
+
 }
 
 

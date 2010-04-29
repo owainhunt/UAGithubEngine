@@ -15,6 +15,7 @@
 #import "UAGithubRepositoryLabelsParser.h"
 #import "UAGithubUsersParser.h"
 #import "UAGithubCommitsParser.h"
+#import "UAGithubBlobParser.h"
 #import "UAGithubURLConnection.h"
 
 @interface UAGithubEngine (Private)
@@ -101,8 +102,6 @@
 }
 
 
-
-
 - (void)parseDataForConnection:(UAGithubURLConnection *)connection
 {
 	switch (connection.responseType) {
@@ -132,12 +131,71 @@
 		case UAGithubCommitResponse:
 			[[UAGithubCommitsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
+		case UAGithubBlobsResponse:
+			break;
+		case UAGithubBlobResponse:
+			[[UAGithubBlobParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+			break;
+		case UAGithubRawBlobResponse:
+			[delegate rawBlobReceived:connection.data forConnection:connection.identifier];
+			break;
 		default:
 			break;
 	}
 
 }
 	
+
+#pragma mark Parser Delegate Methods
+
+- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
+{
+	
+	switch (responseType) {
+		case UAGithubRepositoriesResponse:
+		case UAGithubRepositoryResponse:
+			[delegate repositoriesReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubIssuesResponse:
+		case UAGithubIssueResponse:
+			[delegate issuesReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubCommentsResponse:
+		case UAGithubCommentResponse:
+			[delegate issueCommentsReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubUsersResponse:
+		case UAGithubUserResponse:
+			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubLabelsResponse:
+			[delegate labelsReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubCommitsResponse:
+		case UAGithubCommitResponse:
+			[delegate commitsReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubBlobsResponse:
+			[delegate blobsReceieved:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubBlobResponse:
+			[delegate blobReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		default:
+			break;
+	}
+	//[NSApp terminate:self];
+	
+	
+}
+
+
+- (void)parsingFailedForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withError:(NSError *)parseError
+{
+	[delegate requestFailed:connectionIdentifier withError:parseError];
+	
+}
+
 
 #pragma mark Repositories
 
@@ -292,48 +350,34 @@
 }
 	
 
+#pragma mark Trees
 
-#pragma mark Parser Delegate Methods
-
-- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
+- (void)getTree:(NSString *)treePath
 {
-	
-	switch (responseType) {
-		case UAGithubRepositoriesResponse:
-		case UAGithubRepositoryResponse:
-			[delegate repositoriesReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-		case UAGithubIssuesResponse:
-		case UAGithubIssueResponse:
-			[delegate issuesReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-		case UAGithubCommentsResponse:
-		case UAGithubCommentResponse:
-			[delegate issueCommentsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-		case UAGithubUsersResponse:
-		case UAGithubUserResponse:
-			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-		case UAGithubLabelsResponse:
-			[delegate labelsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-		case UAGithubCommitsResponse:
-		case UAGithubCommitResponse:
-			[delegate commitsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-		default:
-			break;
-	}
-	//[NSApp terminate:self];
-	
+	[self sendRequest:[NSString stringWithFormat:@"tree/show/%@", treePath] requestType:UAGithubTreeRequest responseType:UAGithubTreeResponse withParameters:nil];
 	
 }
 
 
-- (void)parsingFailedForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withError:(NSError *)parseError
+#pragma mark Blobs
+
+- (void)getBlobsForSHA:(NSString *)shaPath
 {
-	[delegate requestFailed:connectionIdentifier withError:parseError];
+	[self sendRequest:[NSString stringWithFormat:@"blob/all/%@", shaPath] requestType:UAGithubBlobsRequest responseType:UAGithubBlobsResponse withParameters:nil];
+	
+}
+
+
+- (void)getBlob:(NSString *)blobPath
+{
+	[self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubBlobRequest responseType:UAGithubBlobResponse withParameters:nil];
+	
+}
+
+
+- (void)getRawBlob:(NSString *)blobPath
+{
+	[self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubRawBlobRequest responseType:UAGithubRawBlobResponse withParameters:nil];
 	
 }
 
