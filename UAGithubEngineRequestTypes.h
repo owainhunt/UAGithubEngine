@@ -35,6 +35,12 @@ typedef enum UAGithubRequestType {
 	UAGithubBlobsRequest				= 23,
 	UAGithubBlobRequest					= 24,
 	UAGithubRawBlobRequest				= 25,
+	UAGithubDeleteRepositoryRequest		= 26,
+	UAGithubDeleteRepositoryConfirmationRequest	= 27,
+	UAGithubDeployKeysRequest			= 28,
+	UAGithubLanguagesRequest,
+	UAGithubTagsRequest,
+	UAGithubBranchesRequest,
 
 } UAGithubRequestType;
 
@@ -56,5 +62,11 @@ typedef enum UAGithubResponseType {
 	UAGithubBlobsResponse				= 13,
 	UAGithubBlobResponse				= 14,
 	UAGithubRawBlobResponse				= 15,
-
+	UAGithubDeleteRepositoryResponse	= 16,
+	UAGithubDeleteRepositoryConfirmationResponse = 17,
+	UAGithubDeployKeysResponse			= 18,
+	UAGithubLanguagesResponse,
+	UAGithubTagsResponse,
+	UAGithubBranchesResponse,
+	
 } UAGithubResponseType;

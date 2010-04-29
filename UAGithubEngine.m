@@ -215,101 +215,158 @@
 
 - (void)searchRepositories:(NSString *)query
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/search/%@", [query encodedString]] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];
+	 
 }
 
 
 - (void)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary
 {
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
+	for (NSString *key in [infoDictionary allKeys])
+	{
+		[params setObject:[infoDictionary objectForKey:key] forKey:[NSString stringWithFormat:@"values[%@]", key]];
+		
+	}
+	
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:params];
+	
 }
 
 
 - (void)watchRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/watch/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	 
 }
 
 
 - (void)unwatchRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/unwatch/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+
 }
 
 
 - (void)forkRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/fork/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+
 }
 
 
-- (void)createRepository:(NSString *)repositoryName withInfo:(NSDictionary *)infoDictionary
+- (void)createRepositoryWithInfo:(NSDictionary *)infoDictionary
 {
+	[self sendRequest:@"repos/create" requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	
 }
 
 
-- (void)deleteRepository:(NSString *)repositoryPath
+- (void)deleteRepository:(NSString *)repositoryName
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/delete/%@", repositoryName] requestType:UAGithubDeleteRepositoryRequest responseType:UAGithubDeleteRepositoryResponse withParameters:nil];
+
+}
+
+
+- (void)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken
+{
+	NSDictionary *params = [NSDictionary dictionaryWithObject:deleteToken forKey:@"delete_token"];
+	[self sendRequest:[NSString stringWithFormat:@"repos/delete/%@", repositoryName] requestType:UAGithubDeleteRepositoryConfirmationRequest responseType:UAGithubDeleteRepositoryConfirmationResponse withParameters:params];
+	
 }
 
 
 - (void)privatiseRepository:(NSString *)repositoryName
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/set/private/%@", repositoryName] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	
 }
 
 
 - (void)publiciseRepository:(NSString *)repositoryName
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/set/public/%@", repositoryName] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+
 }
 
 
 - (void)getDeployKeysForRepository:(NSString *)repositoryName
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/keys/%@", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:nil];
+
 }
 
 
 - (void)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName
 {
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:keyData, @"key", keyTitle, @"title", nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/keys/%@/add", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:params];
+
 }
 
 
 - (void)removeDeployKey:(NSString *)keyID fromRepository:(NSString *)repositoryName
 {
+	NSDictionary *params = [NSDictionary dictionaryWithObject:keyID forKey:@"id"];
+	[self sendRequest:[NSString stringWithFormat:@"repos/keys/%@/remove", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:params];
+
 }
 
 
 - (void)getCollaboratorsForRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/collaborators", repositoryPath] requestType:UAGithubUsersRequest responseType:UAGithubUsersResponse withParameters:nil];
+	
 }
 
 
-- (void)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath
+- (void)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryName
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/add/%@", repositoryName, collaborator] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];
+
 }
 
 
-- (void)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath
+- (void)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryName
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/remove/%@", repositoryName, collaborator] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];
+
 }
 
 
 - (void)getPushableRepositories
 {
+	[self sendRequest:@"repos/pushable" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];
+	
 }
 
 
 - (void)getNetworkForRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/network", repositoryPath] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];
+	
 }
 
 
 - (void)getLanguageBreakdownForRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/languages", repositoryPath] requestType:UAGithubLanguagesRequest responseType:UAGithubLanguagesResponse withParameters:nil];
+	
 }
 
 
 - (void)getTagsForRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/tags", repositoryPath] requestType:UAGithubTagsRequest responseType:UAGithubTagsResponse withParameters:nil];
+	
 }
 
 
 - (void)getBranchesForRepository:(NSString *)repositoryPath
 {
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/branches", repositoryPath] requestType:UAGithubBranchesRequest responseType:UAGithubBranchesResponse withParameters:nil];
+	
 }
 
 
