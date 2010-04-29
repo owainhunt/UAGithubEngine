@@ -25,7 +25,7 @@
 	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue", @"title", @"Test body", @"body", nil]];
 	//[githubEngine closeIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine reopenIssue:@"owainhunt/uagithubengine/1"];
-	[githubEngine getLabelsForRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine getLabelsForRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine addLabel:@"Major Bug" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine addLabel:@"Mega Bug" toIssue:1 inRepository:@"owainhunt/uagithubengine"];
@@ -35,7 +35,7 @@
 	//[githubEngine getBlobsForSHA:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88"];
 	//[githubEngine getBlob:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88/main.m"];
 	//[githubEngine getRawBlob:@"owainhunt/uagithubengine/14d56058704dd3e046edaec20e93597867ef761e"];
-
+	[githubEngine getCollaboratorsForRepository:@"rails/rails"];
 
 }
 
@@ -70,14 +70,14 @@
 }
 
 
-- (void)deployKeysReceieved:(NSArray *)deployKeys forConnection:(NSString *)connectionIdentifier
+- (void)deployKeysReceived:(NSArray *)deployKeys forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received deployKeys for connection: %@, %@", connectionIdentifier, deployKeys);
 
 }
 
 
-- (void)collaboratorsReceievd:(NSArray *)collaborators forConnection:(NSString *)connectionIdentifier
+- (void)collaboratorsReceived:(NSArray *)collaborators forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received collaborators for connection: %@, %@", connectionIdentifier, collaborators);
 
