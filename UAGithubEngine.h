@@ -37,6 +37,26 @@
 
 - (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
 - (void)getRepository:(NSString *)repositoryPath;
+- (void)searchRepositories:(NSString *)query;
+- (void)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
+- (void)watchRepository:(NSString *)repositoryPath;
+- (void)unwatchRepository:(NSString *)repositoryPath;
+- (void)forkRepository:(NSString *)repositoryPath;
+- (void)createRepository:(NSString *)repositoryName withInfo:(NSDictionary *)infoDictionary;
+- (void)deleteRepository:(NSString *)repositoryPath;
+- (void)privatiseRepository:(NSString *)repositoryName;
+- (void)publiciseRepository:(NSString *)repositoryName;
+- (void)getDeployKeysForRepository:(NSString *)repositoryName;
+- (void)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
+- (void)removeDeployKey:(NSString *)keyID fromRepository:(NSString *)repositoryName;
+- (void)getCollaboratorsForRepository:(NSString *)repositoryPath;
+- (void)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath;
+- (void)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
+- (void)getPushableRepositories;
+- (void)getNetworkForRepository:(NSString *)repositoryPath;
+- (void)getLanguageBreakdownForRepository:(NSString *)repositoryPath;
+- (void)getTagsForRepository:(NSString *)repositoryPath;
+- (void)getBranchesForRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Commits
