@@ -15,12 +15,54 @@
 {	
 	if (self = [super initWithXML:theXML delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType])
 	{
-		arrayElements = [NSArray arrayWithObject:@"collaborators"];
+		baseElement = @"collaborators";
 	}
 	
 	[parser parse];
 	
 	return self;
 }
+
+
+- (void)parser:(NSXMLParser *)theParser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+    self.lastOpenedElement = elementName;
+	
+    if ([elementName isEqualToString:baseElement]) 
+	{
+        NSMutableArray *newNode = [NSMutableArray arrayWithCapacity:0];
+        [parsedObjects addObject:newNode];
+        theNode = newNode;
+    } 
+	else if (theNode) 
+	{
+		[theNode addObject:[NSMutableString string]];
+    }
+	
+}
+
+
+- (void)parser:(NSXMLParser *)theParser foundCharacters:(NSString *)characters
+{
+    if (lastOpenedElement && theNode) {
+        [[theNode lastObject] appendString:characters];
+    }
+	
+}
+
+
+- (void)parser:(NSXMLParser *)theParser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{
+	self.lastOpenedElement = nil;
+	
+	//Process anything that shouldn't be a string
+	
+	if ([elementName isEqualToString:baseElement]) 
+	{
+        theNode = nil;
+    }
+	
+}
+
+
 
 @end

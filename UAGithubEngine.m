@@ -16,7 +16,9 @@
 #import "UAGithubUsersParser.h"
 #import "UAGithubCommitsParser.h"
 #import "UAGithubBlobParser.h"
+#import "UAGithubCollaboratorsParser.h"
 #import "UAGithubURLConnection.h"
+
 
 @interface UAGithubEngine (Private)
 
@@ -139,6 +141,9 @@
 		case UAGithubRawBlobResponse:
 			[delegate rawBlobReceived:connection.data forConnection:connection.identifier];
 			break;
+		case UAGithubCollaboratorsResponse:
+			[[UAGithubCollaboratorsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+			break;
 		default:
 			break;
 	}
@@ -180,6 +185,9 @@
 			break;
 		case UAGithubBlobResponse:
 			[delegate blobReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubCollaboratorsResponse:
+			[delegate collaboratorsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		default:
 			break;
