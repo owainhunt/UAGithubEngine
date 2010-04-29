@@ -23,6 +23,12 @@
 	return self;
 }
 
+- (void)dealloc
+{
+	[theNode release];
+	[super dealloc];
+	
+}
 
 - (void)parser:(NSXMLParser *)theParser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     self.lastOpenedElement = elementName;
