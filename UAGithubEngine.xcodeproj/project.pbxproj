@@ -13,6 +13,7 @@
 		68813F3D11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68813F3C11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m */; };
 		68AEDF28116E46B20018E490 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */; };
 		68B7FED01189DFC60058EE3B /* UAGithubBlobParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7FECF1189DFC60058EE3B /* UAGithubBlobParser.m */; };
+		68B7FF3A1189FDE60058EE3B /* UAGithubCollaboratorsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7FF391189FDE60058EE3B /* UAGithubCollaboratorsParser.m */; };
 		68D35B121186049900C6E37E /* UAGithubURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D35B111186049900C6E37E /* UAGithubURLConnection.m */; };
 		68D35B191186070300C6E37E /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D35B181186070300C6E37E /* NSString+UUID.m */; };
 		68E6821111839DDF00DD2637 /* UAGithubCommitsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E6821011839DDF00DD2637 /* UAGithubCommitsParser.m */; };
@@ -49,6 +50,8 @@
 		68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UAGithubEngineUtilities.m"; sourceTree = "<group>"; };
 		68B7FECE1189DFC60058EE3B /* UAGithubBlobParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubBlobParser.h; sourceTree = "<group>"; };
 		68B7FECF1189DFC60058EE3B /* UAGithubBlobParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubBlobParser.m; sourceTree = "<group>"; };
+		68B7FF381189FDE60058EE3B /* UAGithubCollaboratorsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubCollaboratorsParser.h; sourceTree = "<group>"; };
+		68B7FF391189FDE60058EE3B /* UAGithubCollaboratorsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubCollaboratorsParser.m; sourceTree = "<group>"; };
 		68D35B101186049900C6E37E /* UAGithubURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubURLConnection.h; sourceTree = "<group>"; };
 		68D35B111186049900C6E37E /* UAGithubURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubURLConnection.m; sourceTree = "<group>"; };
 		68D35B171186070300C6E37E /* NSString+UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUID.h"; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				68E6821311839DF900DD2637 /* UAGithubCommitParser.m */,
 				68B7FECE1189DFC60058EE3B /* UAGithubBlobParser.h */,
 				68B7FECF1189DFC60058EE3B /* UAGithubBlobParser.m */,
+				68B7FF381189FDE60058EE3B /* UAGithubCollaboratorsParser.h */,
+				68B7FF391189FDE60058EE3B /* UAGithubCollaboratorsParser.m */,
 			);
 			name = XMLParsers;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				68D35B191186070300C6E37E /* NSString+UUID.m in Sources */,
 				68813F3D11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m in Sources */,
 				68B7FED01189DFC60058EE3B /* UAGithubBlobParser.m in Sources */,
+				68B7FF3A1189FDE60058EE3B /* UAGithubCollaboratorsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
