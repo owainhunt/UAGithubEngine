@@ -14,10 +14,10 @@
 {
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
 	
-	[githubEngine getUser:@"owainhunt"];
+	//[githubEngine getUser:@"owainhunt"];
 	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
 	//[githubEngine getRepository:@"owainhunt/uagithubengine"];
-	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
+	[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/251c735cdd8285c63fc952bd58e5f48e22a26e6b"];
 	//[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
 	//[githubEngine getIssue:@"owainhunt/uagithubengine/1"];

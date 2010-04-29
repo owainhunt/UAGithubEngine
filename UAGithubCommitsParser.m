@@ -16,7 +16,8 @@
 	if (self = [super initWithXML:theXML delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType])
 	{
 		dateElements = [NSArray arrayWithObjects:@"committed-date", @"authored-date", nil];
-		dictionaryElements = [NSArray arrayWithObjects:@"parents", @"author", @"committer", nil];
+		dictionaryElements = [NSArray arrayWithObjects:@"parent", @"author", @"committer", nil];
+		arrayElements = [NSArray arrayWithObjects:@"parents", nil];
 		baseElement = @"commit";
 	}
 	
