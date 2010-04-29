@@ -316,21 +316,21 @@
 
 - (void)getCollaboratorsForRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/collaborators", repositoryPath] requestType:UAGithubUsersRequest responseType:UAGithubUsersResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/collaborators", repositoryPath] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];
 	
 }
 
 
 - (void)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryName
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/add/%@", repositoryName, collaborator] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/add/%@", repositoryName, collaborator] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];
 
 }
 
 
 - (void)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryName
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/remove/%@", repositoryName, collaborator] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/remove/%@", repositoryName, collaborator] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];
 
 }
 

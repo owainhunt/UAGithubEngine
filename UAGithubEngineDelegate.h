@@ -18,6 +18,11 @@
 @optional
 
 - (void)repositoriesReceived:(NSArray *)repositories forConnection:(NSString *)connectionIdentifier;
+- (void)deployKeysReceieved:(NSArray *)deployKeys forConnection:(NSString *)connectionIdentifier;
+- (void)collaboratorsReceievd:(NSArray *)collaborators forConnection:(NSString *)connectionIdentifier;
+- (void)languagesReceieved:(NSArray *)languages forConnection:(NSString *)connectionIdentifier;
+- (void)tagsReceived:(NSArray *)tags forConnection:(NSString *)connectionIdentifier;
+- (void)branchesReceived:(NSArray *)branches forConnection:(NSString *)connectionIdentifier;
 - (void)issuesReceived:(NSArray *)issues forConnection:(NSString *)connectionIdentifier;
 - (void)issueCommentsReceived:(NSArray *)issueComments forConnection:(NSString *)connectionIdentifier;
 - (void)labelsReceived:(NSArray *)labels forConnection:(NSString *)connectionIdentifier;
@@ -26,6 +31,7 @@
 - (void)blobsReceieved:(NSArray *)blobs forConnection:(NSString *)connectionIdentifier;
 - (void)blobReceived:(NSArray *)blob forConnection:(NSString *)connectionIdentifier;
 - (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier;
+
 
 
 @end

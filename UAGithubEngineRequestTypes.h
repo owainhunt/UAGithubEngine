@@ -41,6 +41,7 @@ typedef enum UAGithubRequestType {
 	UAGithubLanguagesRequest,
 	UAGithubTagsRequest,
 	UAGithubBranchesRequest,
+	UAGithubCollaboratorsRequest,
 
 } UAGithubRequestType;
 
@@ -68,5 +69,6 @@ typedef enum UAGithubResponseType {
 	UAGithubLanguagesResponse,
 	UAGithubTagsResponse,
 	UAGithubBranchesResponse,
+	UAGithubCollaboratorsResponse,
 	
 } UAGithubResponseType;

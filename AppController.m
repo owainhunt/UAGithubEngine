@@ -70,6 +70,41 @@
 }
 
 
+- (void)deployKeysReceieved:(NSArray *)deployKeys forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received deployKeys for connection: %@, %@", connectionIdentifier, deployKeys);
+
+}
+
+
+- (void)collaboratorsReceievd:(NSArray *)collaborators forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received collaborators for connection: %@, %@", connectionIdentifier, collaborators);
+
+}
+
+
+- (void)languagesReceieved:(NSArray *)languages forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received languages for connection: %@, %@", connectionIdentifier, languages);
+
+}
+
+
+- (void)tagsReceived:(NSArray *)tags forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received tags for connection: %@, %@", connectionIdentifier, tags);
+
+}
+
+
+- (void)branchesReceived:(NSArray *)branches forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received branches for connection: %@, %@", connectionIdentifier, branches);
+
+}
+
+
 - (void)issuesReceived:(NSArray *)issues forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received issues for connection: %@, %@", connectionIdentifier, issues);
