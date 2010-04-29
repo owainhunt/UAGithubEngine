@@ -49,8 +49,6 @@
 - (void)parser:(NSXMLParser *)theParser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     self.lastOpenedElement = elementName;
 
-	NSLog(@"Element: %@", elementName);
-	
     if ([elementName isEqualToString:baseElement]) 
 	{
         NSMutableDictionary *newNode = [NSMutableDictionary dictionaryWithCapacity:0];

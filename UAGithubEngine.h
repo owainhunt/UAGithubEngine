@@ -68,6 +68,18 @@
 
 - (void)getCommentsForIssue:(NSString *)issuePath;
 - (void)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
+
+
+#pragma mark Trees
+
+- (void)getTree:(NSString *)treePath;
+
+
+#pragma mark Blobs
+
+- (void)getBlobsForSHA:(NSString *)shaPath;
+- (void)getBlob:(NSString *)blobPath;
+- (void)getRawBlob:(NSString *)blobPath;
  
 
 @end
