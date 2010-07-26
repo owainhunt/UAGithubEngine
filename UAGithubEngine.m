@@ -19,6 +19,8 @@
 #import "UAGithubCollaboratorsParser.h"
 #import "UAGithubURLConnection.h"
 
+#import "CJSONDeserializer.h"
+
 
 @interface UAGithubEngine (Private)
 
@@ -43,7 +45,8 @@
 		username = [aUsername retain];
 		apiKey = [aKey retain];
 		delegate = theDelegate;
-		dataFormat = @"xml";
+		//dataFormat = @"xml";
+        dataFormat = @"json";
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 	}
 	
@@ -106,6 +109,7 @@
 
 - (void)parseDataForConnection:(UAGithubURLConnection *)connection
 {
+    /*
 	switch (connection.responseType) {
 		case UAGithubRepositoriesResponse:
 		case UAGithubRepositoryResponse:
@@ -147,7 +151,10 @@
 		default:
 			break;
 	}
-
+     */
+    //NSData *jsonData = [connection.data dataUsingEncoding:NSUTF32BigEndianStringEncoding]; 
+    NSError *error = nil; 
+    NSLog(@"%@", [[CJSONDeserializer deserializer] deserializeAsDictionary:connection.data error:&error]);
 }
 	
 
