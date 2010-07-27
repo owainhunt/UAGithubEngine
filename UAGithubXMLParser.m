@@ -35,7 +35,7 @@
         parsedObjects = [[NSMutableArray alloc] initWithCapacity:0];
         
         parser = [[NSXMLParser alloc] initWithData:xml];
-        [parser setDelegate:self];
+        //[parser setDelegate:self];
         [parser setShouldReportNamespacePrefixes:NO];
         [parser setShouldProcessNamespaces:NO];
         [parser setShouldResolveExternalEntities:NO];
