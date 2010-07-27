@@ -172,7 +172,7 @@ if (outObject != NULL)
 return(theResult);
 }
 
-- (BOOL)scanJSONDictionary:(NSDictionary **)outDictionary error:(NSError **)outError
+- (BOOL)scanJSONDictionary:(NSMutableDictionary **)outDictionary error:(NSError **)outError
 {
 NSUInteger theScanLocation = [self scanLocation];
 
@@ -286,7 +286,10 @@ if ([self scanCharacter:'}'] == NO)
 	}
 
 if (outDictionary != NULL)
-	*outDictionary = [[theDictionary copy] autorelease];
+#pragma mark Modified
+	//Was *outDictionary = [[theDictionary mutableCopy] autorelease];
+	// Changed to allow modifications to returned data
+	*outDictionary = [[theDictionary mutableCopy] autorelease];
 
 [theDictionary release];
 
