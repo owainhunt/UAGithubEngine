@@ -31,6 +31,7 @@
 #pragma mark Users
 
 - (void)getUser:(NSString *)user;
+- (void)searchUsers:(NSString *)query byEmail:(BOOL)email;
 
 
 #pragma mark Repositories

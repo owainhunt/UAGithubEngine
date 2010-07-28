@@ -15,28 +15,36 @@
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
 	
 	//[githubEngine getUser:@"owainhunt"];
-	[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
+	//[githubEngine searchUsers:@"owain" byEmail:NO];
+	
+	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
 	//[githubEngine getRepository:@"owainhunt/uagithubengine"];
+	
+	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine getCollaboratorsForRepository:@"rails/rails"];
+
 	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/f7e0012470166d8e1a88"];
-	//[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
+
+	[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
 	//[githubEngine getIssue:@"owainhunt/uagithubengine/1"];
-	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited]", @"body", nil]];
-	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue", @"title", @"Test body", @"body", nil]];
+	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited again]", @"body", nil]];
+	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue mkII", @"title", @"Test body", @"body", nil]];
 	//[githubEngine closeIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine reopenIssue:@"owainhunt/uagithubengine/1"];
+
 	//[githubEngine getLabelsForRepository:@"owainhunt/uagithubengine"];
-	//[githubEngine addLabel:@"Major Bug" toRepository:@"owainhunt/uagithubengine"];
-	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine addLabel:@"Mega Bug" toIssue:1 inRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Bug" fromIssue:1 inRepository:@"owainhunt/uagithubengine"];
+	
 	//[githubEngine getCommentsForIssue:@"owainhunt/uagithubengine/1"];
-	//[githubEngine addComment:@"This thing is awesome." toIssue:@"owainhunt/uagithubengine/1"];
+	//[githubEngine addComment:@"This thing is still awesome." toIssue:@"owainhunt/uagithubengine/1"];
+	
 	//[githubEngine getBlobsForSHA:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88"];
 	//[githubEngine getBlob:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88/main.m"];
 	//[githubEngine getRawBlob:@"owainhunt/uagithubengine/14d56058704dd3e046edaec20e93597867ef761e"];
-	//[githubEngine getCollaboratorsForRepository:@"rails/rails"];
-
+	
 }
 
 - (void)dealloc

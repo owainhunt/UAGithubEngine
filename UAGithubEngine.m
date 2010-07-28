@@ -19,8 +19,15 @@
 #import "UAGithubCollaboratorsParser.h"
 #import "UAGithubURLConnection.h"
 
-#import "UAGithubRepositoriesJSONParser.h"
 #import "UAGithubUsersJSONParser.h"
+#import "UAGithubRepositoriesJSONParser.h"
+#import "UAGithubRepositoryLabelsJSONParser.h"
+#import "UAGithubCollaboratorsJSONParser.h"
+#import "UAGithubCommitsJSONParser.h"
+#import "UAGithubIssuesJSONParser.h"
+#import "UAGithubIssueLabelsJSONParser.h"
+#import "UAGithubIssueCommentsJSONParser.h"
+#import "UAGithubBlobJSONParser.h"
 
 #import "CJSONDeserializer.h"
 
@@ -121,10 +128,14 @@
 			break;
 		case UAGithubIssuesResponse:
 		case UAGithubIssueResponse:
+			[[UAGithubIssuesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+
 			//[[UAGithubIssuesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubCommentsResponse:
 		case UAGithubCommentResponse:
+			[[UAGithubIssueCommentsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+
 			//[[UAGithubIssueCommentsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubUsersResponse:
@@ -134,24 +145,33 @@
 			//[[UAGithubUsersParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubLabelsResponse:
+			[[UAGithubIssueLabelsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+
 			//[[UAGithubIssueLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubRepositoryLabelsResponse:
+			[[UAGithubRepositoryLabelsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+
 			//[[UAGithubRepositoryLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubCommitsResponse:
 		case UAGithubCommitResponse:
+			[[UAGithubCommitsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+
 			//[[UAGithubCommitsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubBlobsResponse:
-			break;
 		case UAGithubBlobResponse:
+			[[UAGithubBlobJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+
 			//[[UAGithubBlobParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubRawBlobResponse:
 			[delegate rawBlobReceived:connection.data forConnection:connection.identifier];
 			break;
 		case UAGithubCollaboratorsResponse:
+			[[UAGithubCollaboratorsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+
 			//[[UAGithubCollaboratorsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		default:
@@ -203,7 +223,7 @@
 		default:
 			break;
 	}
-	//[NSApp terminate:self];
+	[NSApp terminate:self];
 	
 	
 }
@@ -506,6 +526,13 @@
 - (void)getUser:(NSString *)user
 {
 	[self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];
+	
+}
+
+
+- (void)searchUsers:(NSString *)query byEmail:(BOOL)email
+{
+	[self sendRequest:[NSString stringWithFormat:@"user/%@/%@", email ? @"email" : @"search", query] requestType:UAGithubUserRequest responseType:UAGithubUsersResponse withParameters:nil];
 	
 }
 

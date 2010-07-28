@@ -26,6 +26,13 @@
 		6879ABB011FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6879ABAF11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m */; };
 		6879AC0111FF43DA00F29BDE /* NSArray+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6879AC0011FF43DA00F29BDE /* NSArray+Utilities.m */; };
 		68813F3D11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68813F3C11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m */; };
+		688ECC4F1200A7390087ADB3 /* UAGithubCollaboratorsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC4E1200A7390087ADB3 /* UAGithubCollaboratorsJSONParser.m */; };
+		688ECC8F1200A9240087ADB3 /* UAGithubIssuesJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC8E1200A9240087ADB3 /* UAGithubIssuesJSONParser.m */; };
+		688ECC921200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC911200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m */; };
+		688ECC951200A9480087ADB3 /* UAGithubIssueLabelsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC941200A9480087ADB3 /* UAGithubIssueLabelsJSONParser.m */; };
+		688ECC981200A9580087ADB3 /* UAGithubRepositoryLabelsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC971200A9580087ADB3 /* UAGithubRepositoryLabelsJSONParser.m */; };
+		688ECC9B1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC9A1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m */; };
+		688ECC9E1200A9870087ADB3 /* UAGithubBlobJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC9D1200A9870087ADB3 /* UAGithubBlobJSONParser.m */; };
 		68AEDF28116E46B20018E490 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */; };
 		68B7FED01189DFC60058EE3B /* UAGithubBlobParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7FECF1189DFC60058EE3B /* UAGithubBlobParser.m */; };
 		68B7FF3A1189FDE60058EE3B /* UAGithubCollaboratorsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B7FF391189FDE60058EE3B /* UAGithubCollaboratorsParser.m */; };
@@ -90,6 +97,20 @@
 		6879AC0011FF43DA00F29BDE /* NSArray+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Utilities.m"; sourceTree = "<group>"; };
 		68813F3B11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubRepositoryLabelsParser.h; sourceTree = "<group>"; };
 		68813F3C11889CB100F1FF7C /* UAGithubRepositoryLabelsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubRepositoryLabelsParser.m; sourceTree = "<group>"; };
+		688ECC4D1200A7390087ADB3 /* UAGithubCollaboratorsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubCollaboratorsJSONParser.h; sourceTree = "<group>"; };
+		688ECC4E1200A7390087ADB3 /* UAGithubCollaboratorsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubCollaboratorsJSONParser.m; sourceTree = "<group>"; };
+		688ECC8D1200A9240087ADB3 /* UAGithubIssuesJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssuesJSONParser.h; sourceTree = "<group>"; };
+		688ECC8E1200A9240087ADB3 /* UAGithubIssuesJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssuesJSONParser.m; sourceTree = "<group>"; };
+		688ECC901200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssueCommentsJSONParser.h; sourceTree = "<group>"; };
+		688ECC911200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssueCommentsJSONParser.m; sourceTree = "<group>"; };
+		688ECC931200A9480087ADB3 /* UAGithubIssueLabelsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssueLabelsJSONParser.h; sourceTree = "<group>"; };
+		688ECC941200A9480087ADB3 /* UAGithubIssueLabelsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssueLabelsJSONParser.m; sourceTree = "<group>"; };
+		688ECC961200A9580087ADB3 /* UAGithubRepositoryLabelsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubRepositoryLabelsJSONParser.h; sourceTree = "<group>"; };
+		688ECC971200A9580087ADB3 /* UAGithubRepositoryLabelsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubRepositoryLabelsJSONParser.m; sourceTree = "<group>"; };
+		688ECC991200A96D0087ADB3 /* UAGithubCommitsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubCommitsJSONParser.h; sourceTree = "<group>"; };
+		688ECC9A1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubCommitsJSONParser.m; sourceTree = "<group>"; };
+		688ECC9C1200A9870087ADB3 /* UAGithubBlobJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubBlobJSONParser.h; sourceTree = "<group>"; };
+		688ECC9D1200A9870087ADB3 /* UAGithubBlobJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubBlobJSONParser.m; sourceTree = "<group>"; };
 		68AEDF26116E46B20018E490 /* NSString+UAGithubEngineUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UAGithubEngineUtilities.h"; sourceTree = "<group>"; };
 		68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UAGithubEngineUtilities.m"; sourceTree = "<group>"; };
 		68B7FECE1189DFC60058EE3B /* UAGithubBlobParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubBlobParser.h; sourceTree = "<group>"; };
@@ -267,10 +288,24 @@
 			children = (
 				6879AB6411FF0FAA00F29BDE /* UAGithubJSONParser.h */,
 				6879AB6511FF0FAA00F29BDE /* UAGithubJSONParser.m */,
-				6879ABAE11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.h */,
-				6879ABAF11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m */,
 				6879AB6B11FF145200F29BDE /* UAGithubUsersJSONParser.h */,
 				6879AB6C11FF145200F29BDE /* UAGithubUsersJSONParser.m */,
+				6879ABAE11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.h */,
+				6879ABAF11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m */,
+				688ECC961200A9580087ADB3 /* UAGithubRepositoryLabelsJSONParser.h */,
+				688ECC971200A9580087ADB3 /* UAGithubRepositoryLabelsJSONParser.m */,
+				688ECC4D1200A7390087ADB3 /* UAGithubCollaboratorsJSONParser.h */,
+				688ECC4E1200A7390087ADB3 /* UAGithubCollaboratorsJSONParser.m */,
+				688ECC991200A96D0087ADB3 /* UAGithubCommitsJSONParser.h */,
+				688ECC9A1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m */,
+				688ECC8D1200A9240087ADB3 /* UAGithubIssuesJSONParser.h */,
+				688ECC8E1200A9240087ADB3 /* UAGithubIssuesJSONParser.m */,
+				688ECC931200A9480087ADB3 /* UAGithubIssueLabelsJSONParser.h */,
+				688ECC941200A9480087ADB3 /* UAGithubIssueLabelsJSONParser.m */,
+				688ECC901200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.h */,
+				688ECC911200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m */,
+				688ECC9C1200A9870087ADB3 /* UAGithubBlobJSONParser.h */,
+				688ECC9D1200A9870087ADB3 /* UAGithubBlobJSONParser.m */,
 			);
 			name = "JSON Parsers";
 			sourceTree = "<group>";
@@ -432,6 +467,13 @@
 				6879AB6D11FF145200F29BDE /* UAGithubUsersJSONParser.m in Sources */,
 				6879ABB011FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m in Sources */,
 				6879AC0111FF43DA00F29BDE /* NSArray+Utilities.m in Sources */,
+				688ECC4F1200A7390087ADB3 /* UAGithubCollaboratorsJSONParser.m in Sources */,
+				688ECC8F1200A9240087ADB3 /* UAGithubIssuesJSONParser.m in Sources */,
+				688ECC921200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m in Sources */,
+				688ECC951200A9480087ADB3 /* UAGithubIssueLabelsJSONParser.m in Sources */,
+				688ECC981200A9580087ADB3 /* UAGithubRepositoryLabelsJSONParser.m in Sources */,
+				688ECC9B1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m in Sources */,
+				688ECC9E1200A9870087ADB3 /* UAGithubBlobJSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

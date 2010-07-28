@@ -42,10 +42,18 @@
 	
 	if (!error)
 	{
+		if ([[dictionary allKeys] containsObject:@"error"])
+		{
+			error = [NSError errorWithDomain:@"UAGithubEngineGithubError" code:0 userInfo:[NSDictionary dictionaryWithObject:[dictionary objectForKey:@"error"] forKey:@"errorMessage"]];
+			[delegate parsingFailedForConnection:connectionIdentifier ofResponseType:responseType withError:error];
+			return;
+		}
+		
 		NSArray *parsedObjects = nil;
-		//parsedObjects is expected to be an NSArray, so we have to check if the parser has returned an array or a dictionary.
-		//This would be the case if there is only one result for our API call, such as for a single user.
-		//If we're dealing with a single object, we have to wrap it in an array before we return it.
+
+		// parsedObjects is expected to be an NSArray, so we have to check if the parser has returned an array or a dictionary.
+		// This would be the case if there is only one result for our API call, such as for a single user.
+		// If we're dealing with a single object, we have to wrap it in an array before we return it.
 		if ([[[dictionary allValues] firstObject] isKindOfClass:[NSDictionary class]]) 
 		{
 			parsedObjects = [NSArray arrayWithObject:[[dictionary allValues] firstObject]];
@@ -55,11 +63,15 @@
 			parsedObjects = [[dictionary allValues] firstObject];
 		}
 		
+
+		
+		// Numbers and 'TRUE'/'FALSE' boolean are handled by the parser
+		// We need to handle date elements and 0/1 boolean values 
 		for (NSMutableDictionary *theDictionary in parsedObjects)
 		{
 			for (NSString *keyString in dateElements)
 			{
-				if ([theDictionary objectForKey:keyString]) {
+				if ([theDictionary objectForKey:keyString] && ![[theDictionary objectForKey:keyString] isEqual:[NSNull null]]) {
 					NSDate *date = [[theDictionary objectForKey:keyString] dateFromGithubDateString];
 					[theDictionary setObject:date forKey:keyString];
 				}

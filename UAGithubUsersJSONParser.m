@@ -16,10 +16,8 @@
 	
 	if (self = [super initWithJSON:theJSON delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType])
 	{
-		numberElements = [NSArray arrayWithObjects:@"collaborators", @"space", @"private-repos", @"disk-usage", @"public-gist-count", @"public-repo-count", @"following-count", @"id", @"private-gist-count", @"owned-private-repo-count", @"total-private-repo-count", @"followers-count", nil];
 		dateElements = [NSArray arrayWithObject:@"created_at"];
 		dictionaryElements = [NSArray arrayWithObjects:@"plan", nil];
-		baseElement = @"user";
 	}
 	
 	[self parse];
