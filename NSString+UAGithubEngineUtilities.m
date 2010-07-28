@@ -12,10 +12,18 @@
 @implementation NSString(UAGithubEngineUtilities)
 
 - (NSDate *)dateFromGithubDateString {
-	//return [NSDate dateWithString:[NSString stringWithFormat:@"%@ %@ %@%@%@", [self substringToIndex:10], [self substringWithRange:NSMakeRange(11, 8)], [self substringWithRange:NSMakeRange(19, 1)], [self substringWithRange:NSMakeRange(20, 2)], [self substringFromIndex:23]]];
 	
+	// Because Github returns two different date string formats throughout the API, 
+	// we need to check how to process the string based on the format used
+	if ([[self substringWithRange:NSMakeRange(10, 1)] isEqualToString:@"T"]) 
+	{
+		return [NSDate dateWithString:[NSString stringWithFormat:@"%@ %@ %@%@%@", [self substringToIndex:10], [self substringWithRange:NSMakeRange(11, 8)], [self substringWithRange:NSMakeRange(19, 1)], [self substringWithRange:NSMakeRange(20, 2)], [self substringFromIndex:23]]];
+	}	
+		
 	return [NSDate dateWithString:[self stringByReplacingOccurrencesOfString:@"/" withString:@"-"]];
+	
 }
+
 
 - (NSString *)encodedString
 {
