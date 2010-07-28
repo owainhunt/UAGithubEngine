@@ -223,7 +223,7 @@
 		default:
 			break;
 	}
-	[NSApp terminate:self];
+	//[NSApp terminate:self];
 	
 	
 }

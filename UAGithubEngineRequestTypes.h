@@ -8,7 +8,8 @@
 
 
 
-typedef enum UAGithubRequestType {
+typedef enum UAGithubRequestType 
+{
     UAGithubAllIssuesRequest			= 0,    
 	UAGithubOpenIssuesRequest			= 1,
 	UAGithubClosedIssuesRequest			= 2,
@@ -46,7 +47,12 @@ typedef enum UAGithubRequestType {
 } UAGithubRequestType;
 
 
-typedef enum UAGithubResponseType {
+
+
+
+
+typedef enum UAGithubResponseType 
+{
 	UAGithubIssuesResponse				= 0,
 	UAGithubIssueResponse				= 1,
 	UAGithubRepositoriesResponse		= 2,
