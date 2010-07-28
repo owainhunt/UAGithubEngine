@@ -14,8 +14,8 @@
 {
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
 	
-	//[githubEngine getUser:@"owainhunt"];
-	//[githubEngine searchUsers:@"owain" byEmail:NO];
+	[githubEngine getUser:@"owainhunt"];
+	[githubEngine searchUsers:@"owainhunt" byEmail:NO];
 	
 	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
 	//[githubEngine getRepository:@"owainhunt/uagithubengine"];
@@ -27,7 +27,7 @@
 	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/f7e0012470166d8e1a88"];
 
-	[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
+	//[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
 	//[githubEngine getIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited again]", @"body", nil]];
 	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue mkII", @"title", @"Test body", @"body", nil]];
