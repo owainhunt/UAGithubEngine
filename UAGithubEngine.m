@@ -201,6 +201,7 @@
 		case UAGithubRepositoryLanguageBreakdownResponse:
 		case UAGithubTagsResponse:
 		case UAGithubBranchesResponse:
+		case UAGithubTreeResponse:
 			[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		default:
@@ -260,6 +261,9 @@
 			break;
 		case UAGithubBranchesResponse:
 			[delegate branchesReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubTreeResponse:
+			[delegate treeReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		default:
 			break;

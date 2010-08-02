@@ -28,6 +28,7 @@
 - (void)labelsReceived:(NSArray *)labels forConnection:(NSString *)connectionIdentifier;
 - (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier;
 - (void)commitsReceived:(NSArray *)commits forConnection:(NSString *)connectionIdentifier;
+- (void)treeReceived:(NSArray *)treeContents forConnection:(NSString *)connectionIdentifier;
 - (void)blobsReceieved:(NSArray *)blobs forConnection:(NSString *)connectionIdentifier;
 - (void)blobReceived:(NSArray *)blob forConnection:(NSString *)connectionIdentifier;
 - (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier;
