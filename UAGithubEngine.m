@@ -633,6 +633,11 @@
 - (void)connectionDidFinishLoading:(UAGithubURLConnection *)connection
 {
 	[self parseDataForConnection:connection];
+	[self.connections removeObjectForKey:connection.identifier];
+	if ([self isValidDelegateForSelector:@selector(connectionFinished:)])
+	{
+		[delegate connectionFinished:connection.identifier];
+	}
 	
 }
 
