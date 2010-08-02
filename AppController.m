@@ -14,11 +14,12 @@
 {
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
 	
-	[githubEngine getUser:@"owainhunt"];
-	[githubEngine searchUsers:@"owainhunt" byEmail:NO];
+	//[githubEngine getUser:@"owainhunt"];
+	//[githubEngine searchUsers:@"owainhunt" byEmail:NO];
 	
 	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
-	//[githubEngine getRepository:@"owainhunt/uagithubengine"];
+	[githubEngine getRepository:@"owainhunt/uagithubengine"];
+	[githubEngine searchRepositories:@"rails"];
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];

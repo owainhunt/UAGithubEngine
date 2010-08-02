@@ -16,7 +16,7 @@
 	if (self = [super initWithJSON:theJSON delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType])
 	{
 		boolElements = [NSArray arrayWithObjects:@"has_issues", @"has_downloads", @"fork", @"has_wiki", @"private", nil];
-		dateElements = [NSArray arrayWithObjects:@"created_at", @"pushed_at", nil];
+		dateElements = [NSArray arrayWithObjects:@"created_at", @"pushed_at", @"created", @"pushed", nil];
 	}
 	
 	[self parse];
