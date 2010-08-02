@@ -40,13 +40,10 @@
 	//[githubEngine getTagsForRepository:@"owainhunt/loops"];
 	//[githubEngine getBranchesForRepository:@"owainhunt/uagithubengine"];
 	
-	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
-	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
-
 	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/json"];
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/e7777a70edc4f656678c6f79efcf82a44d5bd041"];
 
-	[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubIssuesClosedRequest];
+	//[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubIssuesClosedRequest];
 	//[githubEngine getIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited again]", @"body", nil]];
 	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue mkII", @"title", @"Test body", @"body", nil]];
@@ -54,11 +51,13 @@
 	//[githubEngine reopenIssue:@"owainhunt/uagithubengine/1"];
 
 	//[githubEngine getLabelsForRepository:@"owainhunt/uagithubengine"];
-	//[githubEngine addLabel:@"Mega Bug" toIssue:1 inRepository:@"owainhunt/uagithubengine"];
-	//[githubEngine removeLabel:@"Bug" fromIssue:1 inRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine addLabel:@"Super_Hyper_Mega_Bug" toIssue:1 inRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine removeLabel:@"Mega Bug" fromIssue:1 inRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine addLabel:@"Major_Bug_No_Really" toRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
 	
 	//[githubEngine getCommentsForIssue:@"owainhunt/uagithubengine/1"];
-	//[githubEngine addComment:@"This thing is still awesome." toIssue:@"owainhunt/uagithubengine/1"];
+	[githubEngine addComment:@"This thing is still awesome." toIssue:@"owainhunt/uagithubengine/1"];
 	
 	//[githubEngine getBlobsForSHA:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88"];
 	//[githubEngine getBlob:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88/main.m"];
