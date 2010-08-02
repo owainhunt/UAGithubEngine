@@ -23,7 +23,7 @@
 	//[githubEngine updateRepository:@"owainhunt/uagithubengine" withInfo:[NSDictionary dictionaryWithObject:@"1" forKey:@"has_downloads"]];
 	//[githubEngine watchRepository:@"github/markup"];
 	//[githubEngine unwatchRepository:@"github/markup"];
-	
+	[githubEngine forkRepository:@"github/markup"];
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
