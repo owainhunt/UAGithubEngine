@@ -105,6 +105,8 @@
 		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
 		case UAGithubRepositoryDeleteConfirmationRequest:
+		case UAGithubDeployKeyAddRequest:
+		case UAGithubDeployKeyDeleteRequest:
 		{
 			urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
 			[urlRequest setHTTPMethod:@"POST"];
@@ -364,7 +366,7 @@
 - (void)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName
 {
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:keyData, @"key", keyTitle, @"title", nil];
-	[self sendRequest:[NSString stringWithFormat:@"repos/keys/%@/add", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:params];
+	[self sendRequest:[NSString stringWithFormat:@"repos/key/%@/add", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:params];
 
 }
 

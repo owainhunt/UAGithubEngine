@@ -46,6 +46,8 @@ typedef enum UAGithubRequestType
 	UAGithubRepositoryDeleteRequest		= 26,
 	UAGithubRepositoryDeleteConfirmationRequest	= 27,
 	UAGithubDeployKeysRequest			= 28,
+	UAGithubDeployKeyAddRequest,
+	UAGithubDeployKeyDeleteRequest,
 	UAGithubLanguagesRequest,
 	UAGithubTagsRequest,
 	UAGithubBranchesRequest,
