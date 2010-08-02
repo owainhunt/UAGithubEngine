@@ -366,7 +366,7 @@
 - (void)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName
 {
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:keyData, @"key", keyTitle, @"title", nil];
-	[self sendRequest:[NSString stringWithFormat:@"repos/key/%@/add", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:params];
+	[self sendRequest:[NSString stringWithFormat:@"repos/key/%@/add", repositoryName] requestType:UAGithubDeployKeyAddRequest responseType:UAGithubDeployKeysResponse withParameters:params];
 
 }
 
@@ -374,7 +374,7 @@
 - (void)removeDeployKey:(NSString *)keyID fromRepository:(NSString *)repositoryName
 {
 	NSDictionary *params = [NSDictionary dictionaryWithObject:keyID forKey:@"id"];
-	[self sendRequest:[NSString stringWithFormat:@"repos/keys/%@/remove", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:params];
+	[self sendRequest:[NSString stringWithFormat:@"repos/key/%@/remove", repositoryName] requestType:UAGithubDeployKeyDeleteRequest responseType:UAGithubDeployKeysResponse withParameters:params];
 
 }
 
