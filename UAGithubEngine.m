@@ -109,6 +109,7 @@
 		case UAGithubDeployKeyDeleteRequest:
 		case UAGithubCollaboratorAddRequest:
 		case UAGithubCollaboratorRemoveRequest:
+		case UAGithubCommentAddRequest:
 		{
 			urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
 			[urlRequest setHTTPMethod:@"POST"];
