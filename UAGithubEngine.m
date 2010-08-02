@@ -146,57 +146,33 @@
 		case UAGithubRepositoriesResponse:
 		case UAGithubRepositoryResponse:
 			[[UAGithubRepositoriesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubRepositoriesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubIssuesResponse:
 		case UAGithubIssueResponse:
 			[[UAGithubIssuesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubIssuesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubIssueCommentsResponse:
 		case UAGithubIssueCommentResponse:
 			[[UAGithubIssueCommentsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubIssueCommentsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubUsersResponse:
 		case UAGithubUserResponse:
 			[[UAGithubUsersJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubUsersParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-			break;
-		case UAGithubIssueLabelsResponse:
-			[[UAGithubIssueLabelsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubIssueLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-			break;
-		case UAGithubRepositoryLabelsResponse:
-			[[UAGithubRepositoryLabelsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubRepositoryLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubCommitsResponse:
 		case UAGithubCommitResponse:
 			[[UAGithubCommitsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubCommitsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-			break;
-		case UAGithubBlobsResponse:
-		case UAGithubBlobResponse:
-			[[UAGithubBlobJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubBlobParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubRawBlobResponse:
 			[delegate rawBlobReceived:connection.data forConnection:connection.identifier];
 			break;
 		case UAGithubCollaboratorsResponse:
 			[[UAGithubCollaboratorsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-
-			//[[UAGithubCollaboratorsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
+		case UAGithubBlobsResponse:
+		case UAGithubBlobResponse:
+		case UAGithubIssueLabelsResponse:
+		case UAGithubRepositoryLabelsResponse:
 		case UAGithubDeployKeysResponse:
 		case UAGithubRepositoryLanguageBreakdownResponse:
 		case UAGithubTagsResponse:
