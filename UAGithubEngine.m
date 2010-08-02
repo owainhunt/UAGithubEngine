@@ -102,6 +102,7 @@
 	id urlRequest;
 	switch (requestType) {
 		case UAGithubRepositoryUpdateRequest:
+		case UAGithubRepositoryCreateRequest:
 		{
 			urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
 			[urlRequest setHTTPMethod:@"POST"];
@@ -290,28 +291,35 @@
 
 - (void)watchRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/watch/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/watch/%@", repositoryPath] requestType:UAGithubRepositoryWatchRequest responseType:UAGithubRepositoryResponse withParameters:nil];
 	 
 }
 
 
 - (void)unwatchRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/unwatch/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/unwatch/%@", repositoryPath] requestType:UAGithubRepositoryUnwatchRequest responseType:UAGithubRepositoryResponse withParameters:nil];
 
 }
 
 
 - (void)forkRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/fork/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/fork/%@", repositoryPath] requestType:UAGithubRepositoryForkRequest responseType:UAGithubRepositoryResponse withParameters:nil];
 
 }
 
 
 - (void)createRepositoryWithInfo:(NSDictionary *)infoDictionary
 {
-	[self sendRequest:@"repos/create" requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
+	for (NSString *key in [infoDictionary allKeys])
+	{
+		[params setObject:[infoDictionary objectForKey:key] forKey:[NSString stringWithFormat:@"values[%@]", key]];
+		
+	}
+	
+	[self sendRequest:@"repos/create" requestType:UAGithubRepositoryCreateRequest responseType:UAGithubRepositoryResponse withParameters:params];
 	
 }
 
