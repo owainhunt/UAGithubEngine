@@ -312,14 +312,7 @@
 
 - (void)createRepositoryWithInfo:(NSDictionary *)infoDictionary
 {
-	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-	for (NSString *key in [infoDictionary allKeys])
-	{
-		[params setObject:[infoDictionary objectForKey:key] forKey:[NSString stringWithFormat:@"values[%@]", key]];
-		
-	}
-	
-	[self sendRequest:@"repos/create" requestType:UAGithubRepositoryCreateRequest responseType:UAGithubRepositoryResponse withParameters:params];
+	[self sendRequest:@"repos/create" requestType:UAGithubRepositoryCreateRequest responseType:UAGithubRepositoryResponse withParameters:infoDictionary];
 	
 }
 
