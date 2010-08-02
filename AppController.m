@@ -37,7 +37,8 @@
 	//[githubEngine getPushableRepositories];
 	//[githubEngine getNetworkForRepository:@"rails/rails"];
 	//[githubEngine getLanguageBreakdownForRepository:@"rails/rails"];
-	[githubEngine getTagsForRepository:@"owainhunt/Loops"];
+	//[githubEngine getTagsForRepository:@"owainhunt/loops"];
+	[githubEngine getBranchesForRepository:@"owainhunt/uagithubengine"];
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
