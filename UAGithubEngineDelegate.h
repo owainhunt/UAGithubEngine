@@ -9,13 +9,17 @@
 #import <Cocoa/Cocoa.h>
 
 
-@protocol UAGithubEngineDelegate
+@protocol UAGithubEngineDelegate <NSObject>
 
 - (void)requestSucceeded:(NSString *)connectionIdentifier;
 - (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error;
 
 
 @optional
+
+#pragma mark Connections
+- (void)connectionStarted:(NSString *)connectionIdentifier;
+- (void)connectionFinished:(NSString *)connectionIdentifier;
 
 #pragma mark Users
 - (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier;

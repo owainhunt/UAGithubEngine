@@ -287,11 +287,11 @@
 		68E72ADD116652530069B287 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				68E72ADC116652450069B287 /* UAGithubEngineDelegate.h */,
-				685261E1116A774C003AE003 /* UAGithubParserDelegate.h */,
-				6852614E116A51A8003AE003 /* UAGithubEngineRequestTypes.h */,
 				68E72AE0116653770069B287 /* UAGithubEngine.h */,
 				68E72AE1116653770069B287 /* UAGithubEngine.m */,
+				68E72ADC116652450069B287 /* UAGithubEngineDelegate.h */,
+				6852614E116A51A8003AE003 /* UAGithubEngineRequestTypes.h */,
+				685261E1116A774C003AE003 /* UAGithubParserDelegate.h */,
 				68D35B101186049900C6E37E /* UAGithubURLConnection.h */,
 				68D35B111186049900C6E37E /* UAGithubURLConnection.m */,
 				6879AB6311FF0F6800F29BDE /* JSON Parsers */,
