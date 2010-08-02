@@ -132,8 +132,8 @@
 
 			//[[UAGithubIssuesParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
-		case UAGithubCommentsResponse:
-		case UAGithubCommentResponse:
+		case UAGithubIssueCommentsResponse:
+		case UAGithubIssueCommentResponse:
 			[[UAGithubIssueCommentsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 
 			//[[UAGithubIssueCommentsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
@@ -144,7 +144,7 @@
 
 			//[[UAGithubUsersParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
-		case UAGithubLabelsResponse:
+		case UAGithubIssueLabelsResponse:
 			[[UAGithubIssueLabelsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 
 			//[[UAGithubIssueLabelsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
@@ -195,15 +195,15 @@
 		case UAGithubIssueResponse:
 			[delegate issuesReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
-		case UAGithubCommentsResponse:
-		case UAGithubCommentResponse:
+		case UAGithubIssueCommentsResponse:
+		case UAGithubIssueCommentResponse:
 			[delegate issueCommentsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		case UAGithubUsersResponse:
 		case UAGithubUserResponse:
 			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
-		case UAGithubLabelsResponse:
+		case UAGithubIssueLabelsResponse:
 		case UAGithubRepositoryLabelsResponse:
 			[delegate labelsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
@@ -477,14 +477,14 @@
 
 - (void)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubAddLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubAddLabelRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
 	
 }
 
 
 - (void)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubRemoveLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubRemoveLabelRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
 	
 	
 }
@@ -492,14 +492,14 @@
 
 - (void)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubAddLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubAddLabelRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
 	
 }
 
 
 - (void)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubRemoveLabelRequest responseType:UAGithubLabelsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubRemoveLabelRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
 	
 }
 
@@ -508,7 +508,7 @@
 
 - (void)getCommentsForIssue:(NSString *)issuePath
 {
-	[self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubCommentsRequest responseType:UAGithubCommentsResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];
 	
 }
 
@@ -516,7 +516,7 @@
 - (void)addComment:(NSString *)comment toIssue:(NSString *)issuePath
 {
 	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"comment"];
-	[self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] requestType:UAGithubAddCommentRequest responseType:UAGithubCommentResponse withParameters:commentDictionary];
+	[self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] requestType:UAGithubAddCommentRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
 	
 }
 
