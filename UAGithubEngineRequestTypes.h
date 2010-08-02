@@ -15,6 +15,7 @@ typedef enum UAGithubRequestType
 	UAGithubClosedIssuesRequest			= 2,
 	UAGithubRepositoriesRequest			= 3,
 	UAGithubRepositoryRequest			= 4,
+	UAGithubRepositoryUpdateRequest,
 	UAGithubIssuesRequest				= 5,
 	UAGithubIssueRequest				= 6,
 	UAGithubAddIssueRequest				= 7,
