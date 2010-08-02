@@ -103,6 +103,7 @@
 	switch (requestType) {
 		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
+		case UAGithubRepositoryDeleteConfirmationRequest:
 		{
 			urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
 			[urlRequest setHTTPMethod:@"POST"];
@@ -334,14 +335,14 @@
 
 - (void)privatiseRepository:(NSString *)repositoryName
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/set/private/%@", repositoryName] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/set/private/%@", repositoryName] requestType:UAGithubRepositoryPrivatiseRequest responseType:UAGithubRepositoryResponse withParameters:nil];
 	
 }
 
 
 - (void)publiciseRepository:(NSString *)repositoryName
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/set/public/%@", repositoryName] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/set/public/%@", repositoryName] requestType:UAGithubRepositoryPubliciseRequest responseType:UAGithubRepositoryResponse withParameters:nil];
 
 }
 
