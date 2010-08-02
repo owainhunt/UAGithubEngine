@@ -198,6 +198,7 @@
 			break;
 		case UAGithubDeployKeysResponse:
 		case UAGithubRepositoryLanguageBreakdownResponse:
+		case UAGithubTagsResponse:
 			[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		default:
@@ -251,6 +252,9 @@
 			break;
 		case UAGithubRepositoryLanguageBreakdownResponse:
 			[delegate languagesReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubTagsResponse:
+			[delegate tagsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		default:
 			break;
