@@ -34,7 +34,8 @@
 	//[githubEngine getCollaboratorsForRepository:@"rails/rails"];
 	//[githubEngine addCollaborator:@"orhunt" toRepository:@"uagithubengine"];
 	//[githubEngine removeCollaborator:@"orhunt" fromRepository:@"uagithubengine"];
-	[githubEngine getPushableRepositories];
+	//[githubEngine getPushableRepositories];
+	[githubEngine getNetworkForRepository:@"rails/rails"];
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
