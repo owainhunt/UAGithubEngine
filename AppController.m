@@ -35,7 +35,9 @@
 	//[githubEngine addCollaborator:@"orhunt" toRepository:@"uagithubengine"];
 	//[githubEngine removeCollaborator:@"orhunt" fromRepository:@"uagithubengine"];
 	//[githubEngine getPushableRepositories];
-	[githubEngine getNetworkForRepository:@"rails/rails"];
+	//[githubEngine getNetworkForRepository:@"rails/rails"];
+	//[githubEngine getLanguageBreakdownForRepository:@"rails/rails"];
+	
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
@@ -108,7 +110,7 @@
 }
 
 
-- (void)languagesReceieved:(NSArray *)languages forConnection:(NSString *)connectionIdentifier
+- (void)languagesReceived:(NSArray *)languages forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received languages for connection: %@, %@", connectionIdentifier, languages);
 

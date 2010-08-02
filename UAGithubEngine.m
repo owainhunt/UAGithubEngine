@@ -197,6 +197,7 @@
 			//[[UAGithubCollaboratorsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		case UAGithubDeployKeysResponse:
+		case UAGithubRepositoryLanguageBreakdownResponse:
 			[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
 		default:
@@ -247,6 +248,9 @@
 			break;
 		case UAGithubDeployKeysResponse:
 			[delegate deployKeysReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubRepositoryLanguageBreakdownResponse:
+			[delegate languagesReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		default:
 			break;
@@ -418,7 +422,7 @@
 
 - (void)getLanguageBreakdownForRepository:(NSString *)repositoryPath
 {
-	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/languages", repositoryPath] requestType:UAGithubLanguagesRequest responseType:UAGithubLanguagesResponse withParameters:nil];
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@/languages", repositoryPath] requestType:UAGithubRepositoryLanguageBreakdownRequest responseType:UAGithubRepositoryLanguageBreakdownResponse withParameters:nil];
 	
 }
 

@@ -20,7 +20,7 @@
 - (void)repositoriesReceived:(NSArray *)repositories forConnection:(NSString *)connectionIdentifier;
 - (void)deployKeysReceived:(NSArray *)deployKeys forConnection:(NSString *)connectionIdentifier;
 - (void)collaboratorsReceived:(NSArray *)collaborators forConnection:(NSString *)connectionIdentifier;
-- (void)languagesReceieved:(NSArray *)languages forConnection:(NSString *)connectionIdentifier;
+- (void)languagesReceived:(NSArray *)languages forConnection:(NSString *)connectionIdentifier;
 - (void)tagsReceived:(NSArray *)tags forConnection:(NSString *)connectionIdentifier;
 - (void)branchesReceived:(NSArray *)branches forConnection:(NSString *)connectionIdentifier;
 - (void)issuesReceived:(NSArray *)issues forConnection:(NSString *)connectionIdentifier;
