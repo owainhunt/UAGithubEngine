@@ -19,6 +19,7 @@
 #import "UAGithubCollaboratorsParser.h"
 #import "UAGithubURLConnection.h"
 
+#import "UAGithubSimpleJSONParser.h"
 #import "UAGithubUsersJSONParser.h"
 #import "UAGithubRepositoriesJSONParser.h"
 #import "UAGithubRepositoryLabelsJSONParser.h"
@@ -191,6 +192,9 @@
 
 			//[[UAGithubCollaboratorsParser alloc] initWithXML:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
 			break;
+		case UAGithubDeployKeysResponse:
+			[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
+			break;
 		default:
 			break;
 	}
@@ -236,6 +240,9 @@
 			break;
 		case UAGithubCollaboratorsResponse:
 			[delegate collaboratorsReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+		case UAGithubDeployKeysResponse:
+			[delegate deployKeysReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 		default:
 			break;

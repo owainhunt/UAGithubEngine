@@ -26,7 +26,8 @@
 	//[githubEngine forkRepository:@"github/markup"];
 	//[githubEngine createRepositoryWithInfo:[NSDictionary dictionaryWithObject:@"APICreation" forKey:@"name"]];
 	//[githubEngine publiciseRepository:@"uagithubengine"];
-	[githubEngine privatiseRepository:@"uagithubengine"];
+	//[githubEngine privatiseRepository:@"uagithubengine"];
+	[githubEngine getDeployKeysForRepository:@"uagithubengine"];
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
