@@ -455,14 +455,14 @@
 {
 	switch (requestType) {
 		case UAGithubIssuesAllRequest:
-			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssuesResponse withParameters:nil];
-			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssuesResponse withParameters:nil];
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:nil];
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] requestType:UAGithubIssuesClosedRequest responseType:UAGithubIssuesResponse withParameters:nil];
 			break;
 		case UAGithubIssuesOpenRequest:
-			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssuesResponse withParameters:nil];
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:nil];
 			break;
 		case UAGithubIssuesClosedRequest:
-			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssuesResponse withParameters:nil];
+			[self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] requestType:UAGithubIssuesClosedRequest responseType:UAGithubIssuesResponse withParameters:nil];
 			break;
 		default:
 			break;

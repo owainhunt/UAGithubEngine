@@ -38,15 +38,15 @@
 	//[githubEngine getNetworkForRepository:@"rails/rails"];
 	//[githubEngine getLanguageBreakdownForRepository:@"rails/rails"];
 	//[githubEngine getTagsForRepository:@"owainhunt/loops"];
-	[githubEngine getBranchesForRepository:@"owainhunt/uagithubengine"];
+	//[githubEngine getBranchesForRepository:@"owainhunt/uagithubengine"];
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
 
-	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
-	//[githubEngine getCommit:@"owainhunt/uagithubengine/f7e0012470166d8e1a88"];
+	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/json"];
+	//[githubEngine getCommit:@"owainhunt/uagithubengine/e7777a70edc4f656678c6f79efcf82a44d5bd041"];
 
-	//[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubOpenIssuesRequest];
+	[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubIssuesClosedRequest];
 	//[githubEngine getIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited again]", @"body", nil]];
 	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue mkII", @"title", @"Test body", @"body", nil]];
