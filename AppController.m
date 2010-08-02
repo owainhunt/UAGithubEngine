@@ -57,7 +57,9 @@
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
 	
 	//[githubEngine getCommentsForIssue:@"owainhunt/uagithubengine/1"];
-	[githubEngine addComment:@"This thing is still awesome." toIssue:@"owainhunt/uagithubengine/1"];
+	//[githubEngine addComment:@"This thing is still awesome." toIssue:@"owainhunt/uagithubengine/1"];
+	
+	[githubEngine getTree:@"owainhunt/uagithubengine/2af97f0e241c13345212"];
 	
 	//[githubEngine getBlobsForSHA:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88"];
 	//[githubEngine getBlob:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88/main.m"];
@@ -165,6 +167,13 @@
 {
 	NSLog(@"Received commits for connection: %@, %@", connectionIdentifier, commits);
 
+	
+}
+
+
+- (void)treeReceived:(NSArray *)treeContents forConnection:(NSString *)connectionIdentifier
+{
+	NSLog(@"Received tree contents for connection: %@, %@", connectionIdentifier, treeContents);
 	
 }
 
