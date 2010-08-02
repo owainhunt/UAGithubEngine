@@ -17,10 +17,13 @@
 	//[githubEngine getUser:@"owainhunt"];
 	//[githubEngine searchUsers:@"owainhunt" byEmail:NO];
 	
-	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:NO];
+	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:YES];
 	//[githubEngine getRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine searchRepositories:@"rails"];
-	[githubEngine updateRepository:@"owainhunt/uagithubengine" withInfo:[NSDictionary dictionaryWithObject:@"0" forKey:@"has_downloads"]];
+	//[githubEngine updateRepository:@"owainhunt/uagithubengine" withInfo:[NSDictionary dictionaryWithObject:@"1" forKey:@"has_downloads"]];
+	//[githubEngine watchRepository:@"github/markup"];
+	//[githubEngine unwatchRepository:@"github/markup"];
+	
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
