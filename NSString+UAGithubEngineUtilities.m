@@ -15,9 +15,9 @@
 	
 	// Because Github returns three different date string formats throughout the API, 
 	// we need to check how to process the string based on the format used
-	if ([[self characterAtIndex:10] isEqualToString:@"T"])
+	if ([[self substringWithRange:NSMakeRange(10, 1)] isEqualToString:@"T"])
 	{
-		if ([[self characterAtIndex:[self length] - 1] isEqualToString:@"Z"])
+		if ([[self substringWithRange:NSMakeRange([self length] - 1, 1)] isEqualToString:@"Z"])
 			// eg 2010-05-23T21:26:03.921Z (UTC with milliseconds)
 		{
 			return [NSDate dateWithString:[NSString stringWithFormat:@"%@ %@ +0000", [self substringToIndex:10], [self substringWithRange:NSMakeRange(11, 8)]]];
