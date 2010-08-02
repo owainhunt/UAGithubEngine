@@ -29,11 +29,13 @@
 	//[githubEngine privatiseRepository:@"uagithubengine"];
 	//[githubEngine getDeployKeysForRepository:@"uagithubengine"];
 	//[githubEngine addDeployKey:@"ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAzavRnP2iPCTjhh6gOsAmQSS59zrMwR+YVsGYHmu4qlbKJNUvY1R1SGIe7+GBRsxiB/OV+esC9tgWFVSI7uZzDKNoCVnvmJzfueIxn7wddoHglbJ8vT2bI2G1hdQ/8tn11TaaEUcsopEMPp6Asx1UzLqtkTmP4kKdBMem3G2yfbe0va89NSah1wUow8YZkvxKaVl/ghvlV2byRpr5KSAQ2RYqyJdwZCNtFWZs6SgsJUXMBUp2Ahhb7g1vQWhjMj+PLPTtH24KWpTxXcZtwF0G7Gj8SdCP71b06BD3zEi3J6LEoAyJCk8mEM7Lu59pT1w7KtY+twp94dZEuJEDgcS2+w== owain@underscoreapps.com" withTitle:@"Test Key" ToRepository:@"uagithubengine"];
-	[githubEngine removeDeployKey:@"391578" fromRepository:@"uagithubengine"];
+	//[githubEngine removeDeployKey:@"391578" fromRepository:@"uagithubengine"];
+	//[githubEngine getCollaboratorsForRepository:@"rails/rails"];
+	[githubEngine addCollaborator:@"orhunt" toRepository:@"uagithubengine"];
+	//[githubEngine removeCollaborator:@"orhunt" fromRepository:@"uagithubengine"];
 	
 	//[githubEngine addLabel:@"Major Bug No Really" toRepository:@"owainhunt/uagithubengine"];
 	//[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
-	//[githubEngine getCollaboratorsForRepository:@"rails/rails"];
 
 	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/master"];
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/f7e0012470166d8e1a88"];

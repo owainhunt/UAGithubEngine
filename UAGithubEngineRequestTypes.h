@@ -52,6 +52,8 @@ typedef enum UAGithubRequestType
 	UAGithubTagsRequest,
 	UAGithubBranchesRequest,
 	UAGithubCollaboratorsRequest,
+	UAGithubCollaboratorAddRequest,
+	UAGithubCollaboratorRemoveRequest,
 
 } UAGithubRequestType;
 
