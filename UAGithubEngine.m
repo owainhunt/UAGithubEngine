@@ -24,6 +24,7 @@
 @interface UAGithubEngine (Private)
 
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params;
+- (BOOL)isValidDelegateForSelector:(SEL)selector;
 
 
 @end
@@ -66,6 +67,16 @@
 	
 }
 
+
+#pragma mark Delegate Check
+
+- (BOOL)isValidDelegateForSelector:(SEL)selector
+{
+	return ((delegate != nil) && [delegate respondsToSelector:selector]);
+}
+
+
+#pragma mark Request Management
 
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params
 {
@@ -596,7 +607,13 @@
 
 - (void)connection:(UAGithubURLConnection *)connection didFailWithError:(NSError *)error
 {
-	
+	NSLog(@"Connection failed: %@", error);
+	[self.connections removeObjectForKey:connection.identifier];
+	if ([self isValidDelegateForSelector:@selector(connectionFinished:)])
+	{
+		[delegate connectionFinished:connection.identifier];
+	}
+
 }
 
 
