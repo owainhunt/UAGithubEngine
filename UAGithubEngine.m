@@ -98,7 +98,22 @@
 	}
 	
 	NSURL *theURL = [NSURL URLWithString:urlString];
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+	
+	id urlRequest;
+	switch (requestType) {
+		case UAGithubRepositoryUpdateRequest:
+		{
+			urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+			[urlRequest setHTTPMethod:@"POST"];
+		}
+			break;
+		default:
+		{
+			urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+		}
+			break;
+	}
+	
 	UAGithubURLConnection *connection;
 	connection = [[UAGithubURLConnection alloc] initWithRequest:urlRequest delegate:self requestType:requestType responseType:responseType];
 	
@@ -268,7 +283,7 @@
 		
 	}
 	
-	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:params];
+	[self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] requestType:UAGithubRepositoryUpdateRequest responseType:UAGithubRepositoryResponse withParameters:params];
 	
 }
 
