@@ -8,27 +8,15 @@
 
 #import "UAGithubEngine.h"
 #import "UAGithubEngineRequestTypes.h"
-#import "UAGithubRepositoriesParser.h"
-#import "UAGithubIssuesParser.h"
-#import "UAGithubIssueCommentsParser.h"
-#import "UAGithubIssueLabelsParser.h"
-#import "UAGithubRepositoryLabelsParser.h"
-#import "UAGithubUsersParser.h"
-#import "UAGithubCommitsParser.h"
-#import "UAGithubBlobParser.h"
-#import "UAGithubCollaboratorsParser.h"
+
 #import "UAGithubURLConnection.h"
 
 #import "UAGithubSimpleJSONParser.h"
 #import "UAGithubUsersJSONParser.h"
 #import "UAGithubRepositoriesJSONParser.h"
-#import "UAGithubRepositoryLabelsJSONParser.h"
-#import "UAGithubCollaboratorsJSONParser.h"
 #import "UAGithubCommitsJSONParser.h"
 #import "UAGithubIssuesJSONParser.h"
-#import "UAGithubIssueLabelsJSONParser.h"
 #import "UAGithubIssueCommentsJSONParser.h"
-#import "UAGithubBlobJSONParser.h"
 
 #import "CJSONDeserializer.h"
 
@@ -167,8 +155,6 @@
 			[delegate rawBlobReceived:connection.data forConnection:connection.identifier];
 			break;
 		case UAGithubCollaboratorsResponse:
-			[[UAGithubCollaboratorsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType];
-			break;
 		case UAGithubBlobsResponse:
 		case UAGithubBlobResponse:
 		case UAGithubIssueLabelsResponse:
