@@ -23,7 +23,7 @@
 		responseType = respType;
     }
     
-	NSLog(@"New %@ connection: %@, %@", [request HTTPMethod], request, identifier);
+	NSLog(@"New %@ connection: %@, %@", request.HTTPMethod, request, identifier);
 	
     return self;
 }

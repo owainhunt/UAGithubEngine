@@ -451,25 +451,25 @@
 
 - (NSString *)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubLabelRemovedRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubLabelRemovedRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
