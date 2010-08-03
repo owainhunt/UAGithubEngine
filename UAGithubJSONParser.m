@@ -21,6 +21,7 @@
         requestType = reqType;
 		responseType = respType;
     }
+	
     return self;
 	
 }

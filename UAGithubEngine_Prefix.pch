@@ -6,4 +6,5 @@
     #import <Cocoa/Cocoa.h>
 	#import "NSString+UAGithubEngineUtilities.h"
 	#import "NSArray+Utilities.h"
+
 #endif

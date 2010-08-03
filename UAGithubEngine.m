@@ -7,7 +7,14 @@
 //
 
 #import "UAGithubEngine.h"
-#import "UAGithubJSONParserHeader.h"
+#import "UAGithubParserDelegate.h"
+#import "UAGithubSimpleJSONParser.h"
+#import "UAGithubUsersJSONParser.h"
+#import "UAGithubRepositoriesJSONParser.h"
+#import "UAGithubCommitsJSONParser.h"
+#import "UAGithubIssuesJSONParser.h"
+#import "UAGithubIssueCommentsJSONParser.h"
+#import "CJSONDeserializer.h"
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubURLConnection.h"
 

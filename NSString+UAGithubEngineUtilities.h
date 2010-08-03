@@ -6,7 +6,8 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "UAGithubEngineGlobalHeader.h"
+
 
 
 @interface NSString(UAGithubEngineUtilities)
