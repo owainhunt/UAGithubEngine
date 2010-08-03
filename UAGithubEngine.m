@@ -100,7 +100,7 @@
 		case UAGithubDeployKeyDeleteRequest:
 		case UAGithubCollaboratorAddRequest:
 		case UAGithubCollaboratorRemoveRequest:
-		case UAGithubCommentAddRequest:
+		case UAGithubIssueCommentAddRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -451,13 +451,13 @@
 
 - (NSString *)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubRepositoryLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubRepositoryLabelRemoveRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
@@ -477,14 +477,14 @@
 
 - (NSString *)getCommentsForIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubIssueCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];	
 }
 
 
 - (NSString *)addComment:(NSString *)comment toIssue:(NSString *)issuePath
 {
 	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"comment"];
-	return [self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] requestType:UAGithubCommentAddRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
+	return [self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] requestType:UAGithubIssueCommentAddRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
 	
 }
 
