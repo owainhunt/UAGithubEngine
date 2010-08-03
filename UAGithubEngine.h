@@ -30,78 +30,78 @@
 
 #pragma mark Users
 
-- (void)getUser:(NSString *)user;
-- (void)searchUsers:(NSString *)query byEmail:(BOOL)email;
+- (NSString *)getUser:(NSString *)user;
+- (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email;
 
 
 #pragma mark Repositories
 
-- (void)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
-- (void)getRepository:(NSString *)repositoryPath;
-- (void)searchRepositories:(NSString *)query;
-- (void)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
-- (void)watchRepository:(NSString *)repositoryPath;
-- (void)unwatchRepository:(NSString *)repositoryPath;
-- (void)forkRepository:(NSString *)repositoryPath;
-- (void)createRepositoryWithInfo:(NSDictionary *)infoDictionary;
-- (void)deleteRepository:(NSString *)repositoryName;
-- (void)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken;
-- (void)privatiseRepository:(NSString *)repositoryName;
-- (void)publiciseRepository:(NSString *)repositoryName;
-- (void)getDeployKeysForRepository:(NSString *)repositoryName;
-- (void)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
-- (void)removeDeployKey:(NSString *)keyID fromRepository:(NSString *)repositoryName;
-- (void)getCollaboratorsForRepository:(NSString *)repositoryName;
-- (void)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryName;
-- (void)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
-- (void)getPushableRepositories;
-- (void)getNetworkForRepository:(NSString *)repositoryPath;
-- (void)getLanguageBreakdownForRepository:(NSString *)repositoryPath;
-- (void)getTagsForRepository:(NSString *)repositoryPath;
-- (void)getBranchesForRepository:(NSString *)repositoryPath;
+- (NSString *)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
+- (NSString *)getRepository:(NSString *)repositoryPath;
+- (NSString *)searchRepositories:(NSString *)query;
+- (NSString *)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
+- (NSString *)watchRepository:(NSString *)repositoryPath;
+- (NSString *)unwatchRepository:(NSString *)repositoryPath;
+- (NSString *)forkRepository:(NSString *)repositoryPath;
+- (NSString *)createRepositoryWithInfo:(NSDictionary *)infoDictionary;
+- (NSString *)deleteRepository:(NSString *)repositoryName;
+- (NSString *)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken;
+- (NSString *)privatiseRepository:(NSString *)repositoryName;
+- (NSString *)publiciseRepository:(NSString *)repositoryName;
+- (NSString *)getDeployKeysForRepository:(NSString *)repositoryName;
+- (NSString *)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
+- (NSString *)removeDeployKey:(NSString *)keyID fromRepository:(NSString *)repositoryName;
+- (NSString *)getCollaboratorsForRepository:(NSString *)repositoryName;
+- (NSString *)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryName;
+- (NSString *)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
+- (NSString *)getPushableRepositories;
+- (NSString *)getNetworkForRepository:(NSString *)repositoryPath;
+- (NSString *)getLanguageBreakdownForRepository:(NSString *)repositoryPath;
+- (NSString *)getTagsForRepository:(NSString *)repositoryPath;
+- (NSString *)getBranchesForRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Commits
 
-- (void)getCommitsForBranch:(NSString *)branchPath;
-- (void)getCommit:(NSString *)commitPath;
+- (NSString *)getCommitsForBranch:(NSString *)branchPath;
+- (NSString *)getCommit:(NSString *)commitPath;
 
 
 #pragma mark Issues 
 
-- (void)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
-- (void)getIssue:(NSString *)issuePath;
-- (void)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
-- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
-- (void)closeIssue:(NSString *)issuePath;
-- (void)reopenIssue:(NSString *)issuePath;
+- (NSString *)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
+- (NSString *)getIssue:(NSString *)issuePath;
+- (NSString *)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
+- (NSString *)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
+- (NSString *)closeIssue:(NSString *)issuePath;
+- (NSString *)reopenIssue:(NSString *)issuePath;
 
 
 #pragma mark Labels
 
-- (void)getLabelsForRepository:(NSString *)repositoryPath;
-- (void)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath;
-- (void)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath;
-- (void)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
-- (void)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+- (NSString *)getLabelsForRepository:(NSString *)repositoryPath;
+- (NSString *)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath;
+- (NSString *)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath;
+- (NSString *)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+- (NSString *)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Comments
 
-- (void)getCommentsForIssue:(NSString *)issuePath;
-- (void)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
+- (NSString *)getCommentsForIssue:(NSString *)issuePath;
+- (NSString *)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
 
 
 #pragma mark Trees
 
-- (void)getTree:(NSString *)treePath;
+- (NSString *)getTree:(NSString *)treePath;
 
 
 #pragma mark Blobs
 
-- (void)getBlobsForSHA:(NSString *)shaPath;
-- (void)getBlob:(NSString *)blobPath;
-- (void)getRawBlob:(NSString *)blobPath;
+- (NSString *)getBlobsForSHA:(NSString *)shaPath;
+- (NSString *)getBlob:(NSString *)blobPath;
+- (NSString *)getRawBlob:(NSString *)blobPath;
  
 
 @end
