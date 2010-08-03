@@ -59,28 +59,28 @@ typedef enum UAGithubRequestType
 
 typedef enum UAGithubResponseType 
 {
-	UAGithubUsersResponse = 0,
-	UAGithubUserResponse,
-	UAGithubRepositoriesResponse,
-	UAGithubRepositoryResponse,
-	UAGithubDeleteRepositoryResponse,
-	UAGithubDeleteRepositoryConfirmationResponse,
-	UAGithubDeployKeysResponse,
-	UAGithubRepositoryLanguageBreakdownResponse,
-	UAGithubTagsResponse,
-	UAGithubBranchesResponse,
-	UAGithubCollaboratorsResponse,
-	UAGithubCommitsResponse,
-	UAGithubCommitResponse,
-	UAGithubIssuesResponse,
-	UAGithubIssueResponse,
-	UAGithubIssueCommentsResponse,
-	UAGithubIssueCommentResponse,
-	UAGithubIssueLabelsResponse,
-	UAGithubRepositoryLabelsResponse,
-	UAGithubTreeResponse,
-	UAGithubBlobsResponse,
-	UAGithubBlobResponse,
-	UAGithubRawBlobResponse,
+	UAGithubUsersResponse = 0,						// One or more users
+	UAGithubUserResponse,							// Exactly one user
+	UAGithubRepositoriesResponse,					// One or more repositories 
+	UAGithubRepositoryResponse,						// Exactly one repository
+	UAGithubDeleteRepositoryResponse,				// Token to send in delete confirmation request
+	UAGithubDeleteRepositoryConfirmationResponse,	// Confirmation of deletion
+	UAGithubDeployKeysResponse,						// One or more deploy keys
+	UAGithubRepositoryLanguageBreakdownResponse,	// Breakdown in language-bytes pairs
+	UAGithubTagsResponse,							// Tags in name-SHA pairs
+	UAGithubBranchesResponse,						// Branches in name-SHA pairs
+	UAGithubCollaboratorsResponse,					// One or more usernames
+	UAGithubCommitsResponse,						// One or more commits
+	UAGithubCommitResponse,							// Exactly one commit
+	UAGithubIssuesResponse,							// One or more issues
+	UAGithubIssueResponse,							// Exactly one issue
+	UAGithubIssueCommentsResponse,					// One or more issue comments
+	UAGithubIssueCommentResponse,					// Exactly one issue comment
+	UAGithubIssueLabelsResponse,					// One or more issue labels
+	UAGithubRepositoryLabelsResponse,				// One or more repository-wide issue labels
+	UAGithubTreeResponse,							// Metadata for all files in given commit
+	UAGithubBlobsResponse,							// Name and SHA for all files in given tree SHA
+	UAGithubBlobResponse,							// Metadata and file data for given tree SHA and path 
+	UAGithubRawBlobResponse,						// Raw file
 	
 } UAGithubResponseType;

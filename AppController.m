@@ -15,7 +15,7 @@
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
 	//githubEngine = [[UAGithubEngine alloc] initWithUsername:@"orhunt" apiKey:@"21b32f25a201e29005ec14d2f39361ff" delegate:self];
 	
-	[githubEngine getUser:@"owainhunt"];
+	//[githubEngine getUser:@"owainhunt"];
 	//[githubEngine searchUsers:@"owainhunt" byEmail:NO];
 	
 	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:YES];
@@ -38,7 +38,7 @@
 	//[githubEngine getNetworkForRepository:@"rails/rails"];
 	//[githubEngine getLanguageBreakdownForRepository:@"rails/rails"];
 	//[githubEngine getTagsForRepository:@"owainhunt/loops"];
-	//[githubEngine getBranchesForRepository:@"owainhunt/uagithubengine"];
+	[githubEngine getBranchesForRepository:@"owainhunt/uagithubengine"];
 	
 	//[githubEngine getCommitsForBranch:@"owainhunt/uagithubengine/json"];
 	//[githubEngine getCommit:@"owainhunt/uagithubengine/e7777a70edc4f656678c6f79efcf82a44d5bd041"];
