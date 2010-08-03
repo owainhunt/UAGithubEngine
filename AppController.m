@@ -97,7 +97,7 @@
 	
 	if ([githubEngine.connections count] == 0)
 	{
-		[NSApp terminate:self];
+		//[NSApp terminate:self];
 	}
 	
 }

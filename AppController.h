@@ -6,14 +6,12 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import "UAGithubEngineGlobalHeader.h"
-
+#import <Cocoa/Cocoa.h>
 #import "UAGithubEngine.h"
 
 
 @interface AppController : NSObject <UAGithubEngineDelegate> {
-    UAGithubEngine *githubEngine;
-	
+    UAGithubEngine *githubEngine;	
 }
 
 @end
