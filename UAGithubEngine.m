@@ -7,7 +7,7 @@
 //
 
 #import "UAGithubEngine.h"
-#import "UAGithubParserDelegate.h"
+
 #import "UAGithubSimpleJSONParser.h"
 #import "UAGithubUsersJSONParser.h"
 #import "UAGithubRepositoriesJSONParser.h"
@@ -15,11 +15,13 @@
 #import "UAGithubIssuesJSONParser.h"
 #import "UAGithubIssueCommentsJSONParser.h"
 #import "CJSONDeserializer.h"
+
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubURLConnection.h"
 
 #define API_DOMAIN @"https://github.com/api"
 #define API_VERSION @"v2"
+
 
 @interface UAGithubEngine (Private)
 
@@ -35,7 +37,6 @@
 
 
 #pragma mark Initializer
-
 
 - (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate
 {

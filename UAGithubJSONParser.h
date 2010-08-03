@@ -18,13 +18,9 @@
 	UAGithubResponseType responseType;
     NSData *json;
 	
-	NSString *baseElement;
-	NSArray *numberElements;
 	NSArray *boolElements;
 	NSArray *dateElements;
-	NSArray *dictionaryElements;
-	NSArray *arrayElements;
-	
+
 }
 
 - (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType;
