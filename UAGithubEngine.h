@@ -6,7 +6,7 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import "UAGithubEngineGlobalHeader.h"
+#import <Cocoa/Cocoa.h>
 #import "UAGithubEngineDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubParserDelegate.h"
