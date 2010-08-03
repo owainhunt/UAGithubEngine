@@ -229,6 +229,7 @@
 		6879AB6311FF0F6800F29BDE /* JSON Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				6839D03D11FE2AD7009AB715 /* TouchJSON */,
 				6879AB6411FF0FAA00F29BDE /* UAGithubJSONParser.h */,
 				6879AB6511FF0FAA00F29BDE /* UAGithubJSONParser.m */,
 				68DEB6291207334800A9C0C2 /* UAGithubSimpleJSONParser.h */,
@@ -280,7 +281,6 @@
 				685261E1116A774C003AE003 /* UAGithubParserDelegate.h */,
 				68D35B111186049900C6E37E /* UAGithubURLConnection.m */,
 				68D35B1A1186071500C6E37E /* Categories */,
-				6839D03D11FE2AD7009AB715 /* TouchJSON */,
 				6879AB6311FF0F6800F29BDE /* JSON Parsers */,
 			);
 			name = Engine;

@@ -17,8 +17,6 @@
 	if (self = [super initWithJSON:theJSON delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType])
 	{
 		dateElements = [NSArray arrayWithObjects:@"committed_date", @"authored_date", nil];
-		dictionaryElements = [NSArray arrayWithObjects:@"parent", @"author", @"committer", nil];
-		arrayElements = [NSArray arrayWithObjects:@"parents", nil];
 	}
 	
 	[self parse];
