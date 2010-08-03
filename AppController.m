@@ -89,6 +89,20 @@
 }
 
 
+#pragma mark UAGithubURLConnection Delegate Methods
+
+- (void)connectionFinished:(NSString *)connectionIdentifier
+{
+    NSLog(@"Connection finished %@", connectionIdentifier);
+	
+	if ([githubEngine.connections count] == 0)
+	{
+		[NSApp terminate:self];
+	}
+	
+}
+
+
 - (void)repositoriesReceived:(NSArray *)repositories forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received repositories for connection: %@, %@", connectionIdentifier, repositories);
@@ -177,19 +191,6 @@
 {
 	NSLog(@"Received blob for connection: %@, %@", connectionIdentifier, [[[NSString alloc] initWithData:blob encoding:NSASCIIStringEncoding] autorelease]);
 }
-
-
-- (void)connectionFinished:(NSString *)connectionIdentifier
-{
-    NSLog(@"Connection finished %@", connectionIdentifier);
-	
-	if ([githubEngine.connections count] == 0)
-	{
-		[NSApp terminate:self];
-	}
-	
-}
-
 
 
 @end

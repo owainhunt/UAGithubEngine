@@ -90,7 +90,8 @@
 	
 	NSURL *theURL = [NSURL URLWithString:urlString];
 	
-	id urlRequest;
+	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+
 	switch (requestType) {
 		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
@@ -101,14 +102,10 @@
 		case UAGithubCollaboratorRemoveRequest:
 		case UAGithubCommentAddRequest:
 		{
-			urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
 			[urlRequest setHTTPMethod:@"POST"];
 		}
 			break;
 		default:
-		{
-			urlRequest = [NSURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
-		}
 			break;
 	}
 	

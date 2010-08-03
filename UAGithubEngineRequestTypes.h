@@ -58,10 +58,6 @@ typedef enum UAGithubRequestType
 } UAGithubRequestType;
 
 
-
-
-
-
 typedef enum UAGithubResponseType 
 {
 	UAGithubIssuesResponse				= 0,
