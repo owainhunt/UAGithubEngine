@@ -80,122 +80,102 @@
 - (void)requestSucceeded:(NSString *)connectionIdentifier
 {
 	NSLog(@"Request succeeded: %@", connectionIdentifier);
-
 }
 
 
 - (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error
 {
-    NSLog(@"Request failed: %@, error: %@ (%@)", connectionIdentifier, [error localizedDescription], [error userInfo]);
-	
+    NSLog(@"Request failed: %@, error: %@ (%@)", connectionIdentifier, [error localizedDescription], [error userInfo]);	
 }
 
 
 - (void)repositoriesReceived:(NSArray *)repositories forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received repositories for connection: %@, %@", connectionIdentifier, repositories);
-
 }
 
 
 - (void)deployKeysReceived:(NSArray *)deployKeys forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received deployKeys for connection: %@, %@", connectionIdentifier, deployKeys);
-
 }
 
 
 - (void)collaboratorsReceived:(NSArray *)collaborators forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received collaborators for connection: %@, %@", connectionIdentifier, collaborators);
-
 }
 
 
 - (void)languagesReceived:(NSArray *)languages forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received languages for connection: %@, %@", connectionIdentifier, languages);
-
 }
 
 
 - (void)tagsReceived:(NSArray *)tags forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received tags for connection: %@, %@", connectionIdentifier, tags);
-
 }
 
 
 - (void)branchesReceived:(NSArray *)branches forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received branches for connection: %@, %@", connectionIdentifier, branches);
-
 }
 
 
 - (void)issuesReceived:(NSArray *)issues forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received issues for connection: %@, %@", connectionIdentifier, issues);
-
 }
 
 
 - (void)issueCommentsReceived:(NSArray *)issueComments forConnection:(NSString *)connectionIdentifier
 {
-	NSLog(@"Received issueComments for connection: %@, %@", connectionIdentifier, issueComments);
-
-	
+	NSLog(@"Received issueComments for connection: %@, %@", connectionIdentifier, issueComments);	
 }
 
 
 - (void)labelsReceived:(NSArray *)labels forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received labels for connection: %@, %@", connectionIdentifier, labels);
-
 }
 
 
 - (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier
 {
-	NSLog(@"Received users for connection: %@, %@", connectionIdentifier, users);
-
-	
+	NSLog(@"Received users for connection: %@, %@", connectionIdentifier, users);	
 }
 
 
 - (void)commitsReceived:(NSArray *)commits forConnection:(NSString *)connectionIdentifier
 {
-	NSLog(@"Received commits for connection: %@, %@", connectionIdentifier, commits);
-
-	
+	NSLog(@"Received commits for connection: %@, %@", connectionIdentifier, commits);	
 }
 
 
 - (void)treeReceived:(NSArray *)treeContents forConnection:(NSString *)connectionIdentifier
 {
-	NSLog(@"Received tree contents for connection: %@, %@", connectionIdentifier, treeContents);
-	
+	NSLog(@"Received tree contents for connection: %@, %@", connectionIdentifier, treeContents);	
 }
 
 
 - (void)blobsReceieved:(NSArray *)blobs forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received blobs for connection: %@, %@", connectionIdentifier, blobs);
-
 }
 
 
 - (void)blobReceived:(NSArray *)blob forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received blob for connection: %@, %@", connectionIdentifier, blob);
-
 }
 
 
 - (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received blob for connection: %@, %@", connectionIdentifier, [[[NSString alloc] initWithData:blob encoding:NSASCIIStringEncoding] autorelease]);
-
 }
 
 
@@ -207,6 +187,7 @@
 	{
 		[NSApp terminate:self];
 	}
+	
 }
 
 
