@@ -19,7 +19,6 @@
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params;
 - (BOOL)isValidSelectorForDelegate:(SEL)selector;
 
-
 @end
 
 
@@ -38,7 +37,6 @@
 		username = [aUsername retain];
 		apiKey = [aKey retain];
 		delegate = theDelegate;
-		//dataFormat = @"xml";
         dataFormat = @"json";
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 	}
@@ -234,16 +232,13 @@
 		default:
 			break;
 	}
-	//[NSApp terminate:self];
-	
 	
 }
 
 
 - (void)parsingFailedForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withError:(NSError *)parseError
 {
-	[delegate requestFailed:connectionIdentifier withError:parseError];
-	
+	[delegate requestFailed:connectionIdentifier withError:parseError];	
 }
 
 
@@ -251,22 +246,19 @@
 
 - (NSString *)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
 }
 
 
 - (NSString *)getRepository:(NSString *)repositoryPath;
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];	
 }
 
 
 - (NSString *)searchRepositories:(NSString *)query
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/search/%@", [query encodedString]] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];
-	 
+	return [self sendRequest:[NSString stringWithFormat:@"repos/search/%@", [query encodedString]] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	 
 }
 
 
@@ -286,36 +278,31 @@
 
 - (NSString *)watchRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/watch/%@", repositoryPath] requestType:UAGithubRepositoryWatchRequest responseType:UAGithubRepositoryResponse withParameters:nil];
-	 
+	return [self sendRequest:[NSString stringWithFormat:@"repos/watch/%@", repositoryPath] requestType:UAGithubRepositoryWatchRequest responseType:UAGithubRepositoryResponse withParameters:nil];	 
 }
 
 
 - (NSString *)unwatchRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/unwatch/%@", repositoryPath] requestType:UAGithubRepositoryUnwatchRequest responseType:UAGithubRepositoryResponse withParameters:nil];
-
 }
 
 
 - (NSString *)forkRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/fork/%@", repositoryPath] requestType:UAGithubRepositoryForkRequest responseType:UAGithubRepositoryResponse withParameters:nil];
-
 }
 
 
 - (NSString *)createRepositoryWithInfo:(NSDictionary *)infoDictionary
 {
-	return [self sendRequest:@"repos/create" requestType:UAGithubRepositoryCreateRequest responseType:UAGithubRepositoryResponse withParameters:infoDictionary];
-	
+	return [self sendRequest:@"repos/create" requestType:UAGithubRepositoryCreateRequest responseType:UAGithubRepositoryResponse withParameters:infoDictionary];	
 }
 
 
 - (NSString *)deleteRepository:(NSString *)repositoryName
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/delete/%@", repositoryName] requestType:UAGithubRepositoryDeleteRequest responseType:UAGithubDeleteRepositoryResponse withParameters:nil];
-
 }
 
 
@@ -329,22 +316,19 @@
 
 - (NSString *)privatiseRepository:(NSString *)repositoryName
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/set/private/%@", repositoryName] requestType:UAGithubRepositoryPrivatiseRequest responseType:UAGithubRepositoryResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/set/private/%@", repositoryName] requestType:UAGithubRepositoryPrivatiseRequest responseType:UAGithubRepositoryResponse withParameters:nil];	
 }
 
 
 - (NSString *)publiciseRepository:(NSString *)repositoryName
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/set/public/%@", repositoryName] requestType:UAGithubRepositoryPubliciseRequest responseType:UAGithubRepositoryResponse withParameters:nil];
-
 }
 
 
 - (NSString *)getDeployKeysForRepository:(NSString *)repositoryName
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/keys/%@", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:nil];
-
 }
 
 
@@ -366,57 +350,49 @@
 
 - (NSString *)getCollaboratorsForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/collaborators", repositoryPath] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/collaborators", repositoryPath] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];	
 }
 
 
 - (NSString *)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryName
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/add/%@", repositoryName, collaborator] requestType:UAGithubCollaboratorAddRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];
-
 }
 
 
 - (NSString *)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryName
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/collaborators/%@/remove/%@", repositoryName, collaborator] requestType:UAGithubCollaboratorRemoveRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];
-
 }
 
 
 - (NSString *)getPushableRepositories
 {
-	return [self sendRequest:@"repos/pushable" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];
-	
+	return [self sendRequest:@"repos/pushable" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
 }
 
 
 - (NSString *)getNetworkForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/network", repositoryPath] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/network", repositoryPath] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
 }
 
 
 - (NSString *)getLanguageBreakdownForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/languages", repositoryPath] requestType:UAGithubRepositoryLanguageBreakdownRequest responseType:UAGithubRepositoryLanguageBreakdownResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/languages", repositoryPath] requestType:UAGithubRepositoryLanguageBreakdownRequest responseType:UAGithubRepositoryLanguageBreakdownResponse withParameters:nil];	
 }
 
 
 - (NSString *)getTagsForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/tags", repositoryPath] requestType:UAGithubTagsRequest responseType:UAGithubTagsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/tags", repositoryPath] requestType:UAGithubTagsRequest responseType:UAGithubTagsResponse withParameters:nil];	
 }
 
 
 - (NSString *)getBranchesForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/branches", repositoryPath] requestType:UAGithubBranchesRequest responseType:UAGithubBranchesResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/branches", repositoryPath] requestType:UAGithubBranchesRequest responseType:UAGithubBranchesResponse withParameters:nil];	
 }
 
 
@@ -440,36 +416,31 @@
 
 - (NSString *)getIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse withParameters:nil];	
 }
 
 
 - (NSString *)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/edit/%@", issuePath] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/edit/%@", issuePath] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
 }
 
 
 - (NSString *)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/open/%@", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/open/%@", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
 }
 
 
 - (NSString *)closeIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] requestType:UAGithubIssueCloseRequest responseType:UAGithubIssueResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] requestType:UAGithubIssueCloseRequest responseType:UAGithubIssueResponse withParameters:nil];	
 }
 
 
 - (NSString *)reopenIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] requestType:UAGithubIssueReopenRequest responseType:UAGithubIssueResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] requestType:UAGithubIssueReopenRequest responseType:UAGithubIssueResponse withParameters:nil];	
 }
 
 
@@ -477,37 +448,31 @@
 
 - (NSString *)getLabelsForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] requestType:UAGithubRepositoryLabelsRequest responseType:UAGithubRepositoryLabelsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] requestType:UAGithubRepositoryLabelsRequest responseType:UAGithubRepositoryLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubLabelRemovedRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
-	
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@", repositoryPath, [label encodedString]] requestType:UAGithubLabelRemovedRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 - (NSString *)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubLabelRemovedRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/label/remove/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubLabelRemovedRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
@@ -515,8 +480,7 @@
 
 - (NSString *)getCommentsForIssue:(NSString *)issuePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];	
 }
 
 
@@ -532,15 +496,13 @@
 
 - (NSString *)getUser:(NSString *)user
 {
-	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];	
 }
 
 
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email
 {
-	return [self sendRequest:[NSString stringWithFormat:@"user/%@/%@", email ? @"email" : @"search", query] requestType:UAGithubUserRequest responseType:UAGithubUsersResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"user/%@/%@", email ? @"email" : @"search", query] requestType:UAGithubUserRequest responseType:UAGithubUsersResponse withParameters:nil];	
 }
 
 
@@ -548,15 +510,13 @@
 
 - (NSString *)getCommitsForBranch:(NSString *)branchPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse withParameters:nil];	
 }
 
 
 - (NSString *)getCommit:(NSString *)commitPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse withParameters:nil];	
 }
 	
 
@@ -564,8 +524,7 @@
 
 - (NSString *)getTree:(NSString *)treePath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"tree/show/%@", treePath] requestType:UAGithubTreeRequest responseType:UAGithubTreeResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"tree/show/%@", treePath] requestType:UAGithubTreeRequest responseType:UAGithubTreeResponse withParameters:nil];	
 }
 
 
@@ -573,22 +532,19 @@
 
 - (NSString *)getBlobsForSHA:(NSString *)shaPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"blob/all/%@", shaPath] requestType:UAGithubBlobsRequest responseType:UAGithubBlobsResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"blob/all/%@", shaPath] requestType:UAGithubBlobsRequest responseType:UAGithubBlobsResponse withParameters:nil];	
 }
 
 
 - (NSString *)getBlob:(NSString *)blobPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubBlobRequest responseType:UAGithubBlobResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubBlobRequest responseType:UAGithubBlobResponse withParameters:nil];	
 }
 
 
 - (NSString *)getRawBlob:(NSString *)blobPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubRawBlobRequest responseType:UAGithubRawBlobResponse withParameters:nil];
-	
+	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubRawBlobRequest responseType:UAGithubRawBlobResponse withParameters:nil];	
 }
 
 
@@ -613,8 +569,7 @@
 
 - (void)connection:(UAGithubURLConnection *)connection didReceiveData:(NSData *)data
 {
-	[connection appendData:data];
-	
+	[connection appendData:data];	
 }
 
 
@@ -624,48 +579,24 @@
     
     // Get response code.
     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
-    int statusCode = [resp statusCode];
+    int statusCode = resp.statusCode;
     
     if (statusCode >= 400) {
-        // Assume failure, and report to delegate.
         NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
 		if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
 		{
 			[delegate requestFailed:connection.identifier withError:error];
 		}
         
-        // Destroy the connection.
         [connection cancel];
 		NSString *connectionIdentifier = connection.identifier;
 		[connections removeObjectForKey:connectionIdentifier];
 		if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
+		{
 			[delegate connectionFinished:connectionIdentifier];
+		}
 		
     } 
-	/*
-	else if (statusCode == 304) 
-	{
-		if ([self isValidSelectorForDelegate:@selector(requestSucceeded:)])
-		{
-			[delegate requestSucceeded:connection.identifier];
-		}
-        
-		if (statusCode == 304) 
-		{
-            [self parsingSucceededForConnection:connection.identifier 
-                              ofResponseType:connection.responseType 
-                           withParsedObjects:[NSArray array]];
-        }
-        
-        [connection cancel];
-		NSString *connectionIdentifier = [connection identifier];
-		[connections removeObjectForKey:connectionIdentifier];
-		if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-		{
-			[delegate connectionFinished:connectionIdentifier];
-		}
-    }
-	 */
 	
 }
 
