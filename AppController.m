@@ -13,6 +13,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification 
 {
 	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"owainhunt" apiKey:@"cb67aaa5fe26f4a0509b5a04d8a4a19b" delegate:self];
+
 	//githubEngine = [[UAGithubEngine alloc] initWithUsername:@"orhunt" apiKey:@"21b32f25a201e29005ec14d2f39361ff" delegate:self];
 	
 	//[githubEngine getUser:@"owainhunt"];
