@@ -41,7 +41,7 @@ How do I use it?
     UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"aUser" apiKey:@"aKey" delegate:self];
     [engine getUser:@"owainhunt"];
 
-* Enjoy. The included AppController class will log the received data, so have a play around and see what happens - and happy app building!
+* Enjoy. The included AppController class will log the received data from any API calls the engine makes, so have a play around and see what happens - and happy app building!
 
 Any questions, comments, improvements and so on, you can find me on Twitter (@orhunt) or send me an email (owain@underscoreapps.com).
 
