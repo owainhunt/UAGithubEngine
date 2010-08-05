@@ -44,3 +44,8 @@ How do I use it?
 * Enjoy. The included AppController class will log the received data, so have a play around and see what happens - and happy app building!
 
 Any questions, comments, improvements and so on, you can find me on Twitter (@orhunt) or send me an email (owain@underscoreapps.com).
+
+Acknowledgements
+=================
+UAGithubEngine is heavily based on the structure (and in some places the code) of Matt Gemmell's awesome MGTwitterEngine.
+UAGithubEngine uses a barely modified version of Jonathan Wight's TouchJSON parser.
