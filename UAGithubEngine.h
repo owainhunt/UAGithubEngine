@@ -27,7 +27,6 @@
 
 - (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate;
 
-<<<<<<< HEAD:UAGithubEngine.h
 /*
  Where methods take a 'whateverPath' argument, supply the full path to 'whatever'.
  For example, if the method calls for 'repositoryPath', supply @"username/repository".
@@ -37,8 +36,6 @@
  For methods that take an NSDictionary as an argument, this should contain the relevant keys and values for the required API call.
  See the documentation for more details on updating repositories, and adding and editing issues.
 */
-=======
->>>>>>> bbd4f052686470b0b4acbaf62c7b9b09c090d4f9:UAGithubEngine.h
 
 #pragma mark Users
 
