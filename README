@@ -4,6 +4,8 @@ by Owain R Hunt, http://owainrhunt.com
 
 UAGithubEngine is a practically-complete wrapper around the Github API (the exceptions being the network graph and Gist APIs, which are not currently implemented). Check out the API documentation (http://develop.github.com/) for full details of what the API can do. 
 
+UAGithubEngine is compatible with Mac OS X 10.5 and above, and iOS 4.0.
+
 How do I use it?
 =================
 
