@@ -8,6 +8,8 @@
 
 #import "UAGithubJSONParser.h"
 #import "CJSONDeserializer.h"
+#import "NSArray+Utilities.h"
+#import "NSString+UAGithubEngineUtilities.h"
 
 @implementation UAGithubJSONParser
 
