@@ -1,7 +1,7 @@
 #UAGithubEngine
 by [Owain R Hunt](http://owainrhunt.com/ "Owain R Hunt")
 
-UAGithubEngine is a practically-complete wrapper around the Github API (the exceptions being the network graph and Gist APIs, which are currently not implemented). Check out the [API documentation](http://develop.github.com/ "Github API Documentation) for full details of what the API can do.
+UAGithubEngine is a practically-complete wrapper around the Github API (the exceptions being the network graph and Gist APIs, which are not currently implemented). Check out the [API documentation](http://develop.github.com/ "Github API Documentation) for full details of what the API can do.
 
 ##How do I use it?
 
@@ -50,4 +50,11 @@ UAGithubEngine is a practically-complete wrapper around the Github API (the exce
 
     `- (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier;`
 
+* Instantiate an engine, passing a username and API key, then call some methods. For example:
 
+    `UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"aUser" apiKey:@"aKey" delegate:self];`
+    `[engine getUser:@"owainhunt"];`
+
+* Enjoy. The included AppController class will log the received data, so have a play around - and happy app building!
+
+Any questions, comments, improvements and so on, you can find me on Twitter ([@orhunt](http://twitter.com/orhunt "@orhunt on Twitter")) or send me an email ([owain@underscoreapps.com](mailto:owain@underscoreapps.com)).
