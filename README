@@ -1,8 +1,8 @@
 UAGithubEngine
-by [Owain R Hunt](http://owainrhunt.com/ "Owain R Hunt")
+by Owain R Hunt, http://owainrhunt.com
 =================
 
-UAGithubEngine is a practically-complete wrapper around the Github API (the exceptions being the network graph and Gist APIs, which are not currently implemented). Check out the [API documentation](http://develop.github.com/ "Github API Documentation) for full details of what the API can do.
+UAGithubEngine is a practically-complete wrapper around the Github API (the exceptions being the network graph and Gist APIs, which are not currently implemented). Check out the API documentation (http://develop.github.com/) for full details of what the API can do.
 
 How do I use it?
 =================
@@ -47,5 +47,5 @@ Any questions, comments, improvements and so on, you can find me on Twitter (@or
 
 Acknowledgements
 =================
-UAGithubEngine is heavily based on the structure (and in some places the code) of Matt Gemmell's awesome MGTwitterEngine.
+UAGithubEngine is heavily based on the structure (and in some places the code) of Matt Gemmell's MGTwitterEngine.
 UAGithubEngine uses a barely modified version of Jonathan Wight's TouchJSON parser.
