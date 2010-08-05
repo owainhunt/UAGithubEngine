@@ -19,6 +19,8 @@
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubURLConnection.h"
 
+#import "NSString+UAGithubEngineUtilities.h"
+
 #define API_DOMAIN @"https://github.com/api"
 #define API_VERSION @"v2"
 
