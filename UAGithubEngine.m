@@ -407,6 +407,7 @@
 
 - (NSString *)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType
 {
+	// User UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues
 	switch (requestType) {
 		case UAGithubIssuesOpenRequest:
 			return [self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:nil];

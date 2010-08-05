@@ -27,6 +27,15 @@
 
 - (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate;
 
+/*
+ Where methods take a 'whateverPath' argument, supply the full path to 'whatever'.
+ For example, if the method calls for 'repositoryPath', supply @"username/repository".
+
+ Where methods take a 'whateverName' argument, supply just the name of 'whatever'. The username used will be that set in the engine instance.
+ 
+ For methods that take an NSDictionary as an argument, this should contain the relevant keys and values for the required API call.
+ See the documentation for more details on updating repositories, and adding and editing issues.
+*/
 
 #pragma mark Users
 
