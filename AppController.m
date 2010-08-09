@@ -12,9 +12,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification 
 {
-	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"aUser" apiKey:@"aKey" delegate:self];
+	githubEngine = [[UAGithubEngine alloc] initWithUsername:@"aUser" password:@"aPassword" delegate:self];
 
-	//[githubEngine getUser:@"owainhunt"];
+	[githubEngine getUser:githubEngine.username];
 	//[githubEngine searchUsers:@"owainhunt" byEmail:NO];
 	
 	//[githubEngine getRepositoriesForUser:@"owainhunt" includeWatched:YES];
@@ -45,7 +45,7 @@
 	//[githubEngine getIssuesForRepository:@"owainhunt/uagithubengine" withRequestType:UAGithubIssuesClosedRequest];
 	//[githubEngine getIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited again]", @"body", nil]];
-	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test issue mkII", @"title", @"Test body", @"body", nil]];
+	//[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Testing basic auth", @"title", @"Test body", @"body", nil]];
 	//[githubEngine closeIssue:@"owainhunt/uagithubengine/1"];
 	//[githubEngine reopenIssue:@"owainhunt/uagithubengine/1"];
 

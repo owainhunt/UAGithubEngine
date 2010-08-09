@@ -20,9 +20,12 @@
 #import "UAGithubURLConnection.h"
 
 #import "NSString+UAGithubEngineUtilities.h"
+#import "NSData+Base64.h"
 
-#define API_DOMAIN @"https://github.com/api"
+#define API_PROTOCOL @"https://"
+#define API_DOMAIN @"github.com/api"
 #define API_VERSION @"v2"
+#define API_FORMAT @"json"
 
 
 @interface UAGithubEngine (Private)
@@ -35,19 +38,18 @@
 
 @implementation UAGithubEngine
 
-@synthesize delegate, username, apiKey, dataFormat, connections;
+@synthesize delegate, username, password, connections;
 
 
 #pragma mark Initializer
 
-- (id)initWithUsername:(NSString *)aUsername apiKey:(NSString *)aKey delegate:(id)theDelegate
+- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate
 {
 	if (self = [super init]) 
 	{
 		username = [aUsername retain];
-		apiKey = [aKey retain];
+		password = [aPassword retain];
 		delegate = theDelegate;
-        dataFormat = @"json";
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 	}
 	
@@ -59,8 +61,7 @@
 - (void)dealloc
 {
 	[username release];
-	[apiKey release];
-	[dataFormat release];
+	[password release];
 	[connections release];
 	delegate = nil;
 	
@@ -83,25 +84,28 @@
 {
 	
 	NSMutableString *querystring = nil;
-	if (![params isEqual:nil]) 
+	if ([params count] > 0) 
 	{
-		querystring = [NSMutableString stringWithCapacity:0];
+		querystring = [NSMutableString stringWithString:@"?"];
 		for (NSString *key in [params allKeys]) 
 		{
-			[querystring appendFormat:@"&%@=%@", key, [[params valueForKey:key] encodedString]];
+			[querystring appendFormat:@"%@%@=%@", [querystring length] == 1 ? @"" : @"&", key, [[params valueForKey:key] encodedString]];
 		}
 	}
 	
-	NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@/%@/%@?login=%@&token=%@", API_DOMAIN, API_VERSION, self.dataFormat, path, self.username, self.apiKey];
-	if (![querystring isEqual:nil])
+	NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
+	
+	if ([querystring length] > 0)
 	{
 		[urlString appendString:querystring];
 	}
+	 
 	
 	NSURL *theURL = [NSURL URLWithString:urlString];
 	
 	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
-
+	[urlRequest setValue:[NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];	
+	
 	switch (requestType) {
 		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
