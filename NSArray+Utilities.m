@@ -22,4 +22,10 @@
 }
 
 
+- (NSArray *)sortedWithKey:(NSString *)theKey ascending:(BOOL)ascending 
+{
+    return [self sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:theKey ascending:ascending selector:@selector(caseInsensitiveCompare:)] autorelease]]];
+}
+
+
 @end
