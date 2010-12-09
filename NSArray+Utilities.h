@@ -11,6 +11,7 @@
 @interface NSArray (Utilities) 
 
 - (id)firstObject;
+- (NSArray *)sortedWithKey:(NSString *)theKey ascending:(BOOL)ascending;
 
 
 @end
