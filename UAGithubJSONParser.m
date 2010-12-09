@@ -74,15 +74,21 @@
 		{
 			for (NSString *keyString in dateElements)
 			{
-				if ([theDictionary objectForKey:keyString] && ![[theDictionary objectForKey:keyString] isEqual:[NSNull null]]) {
-					NSDate *date = [[theDictionary objectForKey:keyString] dateFromGithubDateString];
-					[theDictionary setObject:date forKey:keyString];
+				if ([theDictionary objectForKey:keyString] && ![[theDictionary objectForKey:keyString] isEqual:nil]) {
+					if ([[theDictionary objectForKey:keyString] respondsToSelector:@selector(dateFromGithubDateString)])
+					{
+						NSDate *date = [[theDictionary objectForKey:keyString] dateFromGithubDateString];
+						if (date != nil) 
+						{
+							[theDictionary setObject:date forKey:keyString];
+						}
+					}
 				}
 			}
 			
 			for (NSString *keyString in boolElements)
 			{
-				if ([theDictionary objectForKey:keyString]) {
+				if ([theDictionary objectForKey:keyString] && ![[theDictionary objectForKey:keyString] isEqual:nil]) {
 					[theDictionary setObject:[NSNumber numberWithBool:[[theDictionary objectForKey:keyString] intValue]] forKey:keyString];
 				}
 			}
