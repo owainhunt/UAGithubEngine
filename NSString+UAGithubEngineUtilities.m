@@ -38,6 +38,7 @@
 			[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
 			[dateString release];
 			dateString = newDate;
+			[newDate release];
 		}
 	} else {
 		// eg 2010/07/28 21:21:00 +0100
