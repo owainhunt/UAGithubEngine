@@ -22,23 +22,20 @@
         requestType = reqType;
 		responseType = respType;
     }
-    
 	NSLog(@"New %@ connection: %@, %@", request.HTTPMethod, request, identifier);
-	
+    
     return self;
 }
 
 - (void)resetDataLength
 {
-    [data setLength:0];
-	
+    [data setLength:0];	
 }
 
 
 - (void)appendData:(NSData *)newData
 {
     [data appendData:newData];
-	
 }
 
 
