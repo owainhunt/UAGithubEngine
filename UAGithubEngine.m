@@ -103,8 +103,11 @@
 	
 	NSURL *theURL = [NSURL URLWithString:urlString];
 	
-	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
-	[urlRequest setValue:[NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];	
+	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+	if (self.username && self.password)
+	{
+		[urlRequest setValue:[NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];	
+	}
 	
 	switch (requestType) {
 		case UAGithubRepositoryUpdateRequest:
@@ -190,6 +193,7 @@
 
 - (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
 {
+	[delegate requestSucceeded:connectionIdentifier];
 	
 	switch (responseType) {
 		case UAGithubRepositoriesResponse:
@@ -255,13 +259,13 @@
 
 #pragma mark Repositories
 
-- (NSString *)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
+- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
 }
 
 
-- (NSString *)getRepository:(NSString *)repositoryPath;
+- (NSString *)repository:(NSString *)repositoryPath;
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse withParameters:nil];	
 }
@@ -337,7 +341,7 @@
 }
 
 
-- (NSString *)getDeployKeysForRepository:(NSString *)repositoryName
+- (NSString *)deployKeysForRepository:(NSString *)repositoryName
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/keys/%@", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse withParameters:nil];
 }
@@ -359,7 +363,7 @@
 }
 
 
-- (NSString *)getCollaboratorsForRepository:(NSString *)repositoryPath
+- (NSString *)collaboratorsForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/collaborators", repositoryPath] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse withParameters:nil];	
 }
@@ -377,31 +381,31 @@
 }
 
 
-- (NSString *)getPushableRepositories
+- (NSString *)pushableRepositories
 {
 	return [self sendRequest:@"repos/pushable" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
 }
 
 
-- (NSString *)getNetworkForRepository:(NSString *)repositoryPath
+- (NSString *)networkForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/network", repositoryPath] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
 }
 
 
-- (NSString *)getLanguageBreakdownForRepository:(NSString *)repositoryPath
+- (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/languages", repositoryPath] requestType:UAGithubRepositoryLanguageBreakdownRequest responseType:UAGithubRepositoryLanguageBreakdownResponse withParameters:nil];	
 }
 
 
-- (NSString *)getTagsForRepository:(NSString *)repositoryPath
+- (NSString *)tagsForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/tags", repositoryPath] requestType:UAGithubTagsRequest responseType:UAGithubTagsResponse withParameters:nil];	
 }
 
 
-- (NSString *)getBranchesForRepository:(NSString *)repositoryPath
+- (NSString *)branchesForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/branches", repositoryPath] requestType:UAGithubBranchesRequest responseType:UAGithubBranchesResponse withParameters:nil];	
 }
@@ -409,7 +413,7 @@
 
 #pragma mark Issues 
 
-- (NSString *)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType
+- (NSString *)issuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType
 {
 	// Use UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues
 
@@ -427,7 +431,7 @@
 }
 
 
-- (NSString *)getIssue:(NSString *)issuePath
+- (NSString *)issue:(NSString *)issuePath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse withParameters:nil];	
 }
@@ -459,7 +463,7 @@
 
 #pragma mark Labels
 
-- (NSString *)getLabelsForRepository:(NSString *)repositoryPath
+- (NSString *)labelsForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"issues/labels/%@", repositoryPath] requestType:UAGithubRepositoryLabelsRequest responseType:UAGithubRepositoryLabelsResponse withParameters:nil];	
 }
@@ -491,7 +495,7 @@
 
 #pragma mark Comments
 
-- (NSString *)getCommentsForIssue:(NSString *)issuePath
+- (NSString *)commentsForIssue:(NSString *)issuePath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubIssueCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];	
 }
@@ -507,7 +511,7 @@
 
 #pragma mark Users
 
-- (NSString *)getUser:(NSString *)user
+- (NSString *)user:(NSString *)user
 {
 	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];	
 }
@@ -521,13 +525,13 @@
 
 #pragma mark Commits
 
-- (NSString *)getCommitsForBranch:(NSString *)branchPath
+- (NSString *)commitsForBranch:(NSString *)branchPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse withParameters:nil];	
 }
 
 
-- (NSString *)getCommit:(NSString *)commitPath
+- (NSString *)commit:(NSString *)commitPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse withParameters:nil];	
 }
@@ -535,7 +539,7 @@
 
 #pragma mark Trees
 
-- (NSString *)getTree:(NSString *)treePath
+- (NSString *)tree:(NSString *)treePath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"tree/show/%@", treePath] requestType:UAGithubTreeRequest responseType:UAGithubTreeResponse withParameters:nil];	
 }
@@ -543,19 +547,19 @@
 
 #pragma mark Blobs
 
-- (NSString *)getBlobsForSHA:(NSString *)shaPath
+- (NSString *)blobsForSHA:(NSString *)shaPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"blob/all/%@", shaPath] requestType:UAGithubBlobsRequest responseType:UAGithubBlobsResponse withParameters:nil];	
 }
 
 
-- (NSString *)getBlob:(NSString *)blobPath
+- (NSString *)blob:(NSString *)blobPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubBlobRequest responseType:UAGithubBlobResponse withParameters:nil];	
 }
 
 
-- (NSString *)getRawBlob:(NSString *)blobPath
+- (NSString *)rawBlob:(NSString *)blobPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubRawBlobRequest responseType:UAGithubRawBlobResponse withParameters:nil];	
 }
@@ -593,6 +597,21 @@
     // Get response code.
     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
     int statusCode = resp.statusCode;
+	
+	//
+	if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
+	{
+		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
+		[self.connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+		 {
+			 [(UAGithubURLConnection *)obj cancel];
+		 }];
+	}
+		
+	//If X-Ratelimit-Remaining == 0:
+	//Add connection to list to retry
+	//Get all remaining connections from self.connections and add to retry list
+	//Post notification in 60s to allow new connections
     
     if (statusCode >= 400) {
         NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
