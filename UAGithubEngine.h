@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "UAGithubEngineDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
+#import "UAGithubEngineConstants.h"
 #import "UAGithubParserDelegate.h"
 
 @interface UAGithubEngine : NSObject <UAGithubParserDelegate> {
@@ -24,6 +25,7 @@
 @property (nonatomic, retain) NSMutableDictionary *connections;
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate;
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params;
 
 /*
  Where methods take a 'whateverPath' argument, supply the full path to 'whatever'.
@@ -37,14 +39,14 @@
 
 #pragma mark Users
 
-- (NSString *)getUser:(NSString *)user;
+- (NSString *)user:(NSString *)user;
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email;
 
 
 #pragma mark Repositories
 
-- (NSString *)getRepositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
-- (NSString *)getRepository:(NSString *)repositoryPath;
+- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
+- (NSString *)repository:(NSString *)repositoryPath;
 - (NSString *)searchRepositories:(NSString *)query;
 - (NSString *)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
 - (NSString *)watchRepository:(NSString *)repositoryPath;
@@ -55,29 +57,29 @@
 - (NSString *)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken;
 - (NSString *)privatiseRepository:(NSString *)repositoryName;
 - (NSString *)publiciseRepository:(NSString *)repositoryName;
-- (NSString *)getDeployKeysForRepository:(NSString *)repositoryName;
+- (NSString *)deployKeysForRepository:(NSString *)repositoryName;
 - (NSString *)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
 - (NSString *)removeDeployKey:(NSString *)keyID fromRepository:(NSString *)repositoryName;
-- (NSString *)getCollaboratorsForRepository:(NSString *)repositoryName;
+- (NSString *)collaboratorsForRepository:(NSString *)repositoryName;
 - (NSString *)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryName;
 - (NSString *)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
-- (NSString *)getPushableRepositories;
-- (NSString *)getNetworkForRepository:(NSString *)repositoryPath;
-- (NSString *)getLanguageBreakdownForRepository:(NSString *)repositoryPath;
-- (NSString *)getTagsForRepository:(NSString *)repositoryPath;
-- (NSString *)getBranchesForRepository:(NSString *)repositoryPath;
+- (NSString *)pushableRepositories;
+- (NSString *)networkForRepository:(NSString *)repositoryPath;
+- (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath;
+- (NSString *)tagsForRepository:(NSString *)repositoryPath;
+- (NSString *)branchesForRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Commits
 
-- (NSString *)getCommitsForBranch:(NSString *)branchPath;
-- (NSString *)getCommit:(NSString *)commitPath;
+- (NSString *)commitsForBranch:(NSString *)branchPath;
+- (NSString *)commit:(NSString *)commitPath;
 
 
 #pragma mark Issues 
 
-- (NSString *)getIssuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
-- (NSString *)getIssue:(NSString *)issuePath;
+- (NSString *)issuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
+- (NSString *)issue:(NSString *)issuePath;
 - (NSString *)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
 - (NSString *)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
 - (NSString *)closeIssue:(NSString *)issuePath;
@@ -86,7 +88,7 @@
 
 #pragma mark Labels
 
-- (NSString *)getLabelsForRepository:(NSString *)repositoryPath;
+- (NSString *)labelsForRepository:(NSString *)repositoryPath;
 - (NSString *)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath;
 - (NSString *)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath;
 - (NSString *)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
@@ -95,20 +97,20 @@
 
 #pragma mark Comments
 
-- (NSString *)getCommentsForIssue:(NSString *)issuePath;
+- (NSString *)commentsForIssue:(NSString *)issuePath;
 - (NSString *)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
 
 
 #pragma mark Trees
 
-- (NSString *)getTree:(NSString *)treePath;
+- (NSString *)tree:(NSString *)treePath;
 
 
 #pragma mark Blobs
 
-- (NSString *)getBlobsForSHA:(NSString *)shaPath;
-- (NSString *)getBlob:(NSString *)blobPath;
-- (NSString *)getRawBlob:(NSString *)blobPath;
+- (NSString *)blobsForSHA:(NSString *)shaPath;
+- (NSString *)blob:(NSString *)blobPath;
+- (NSString *)rawBlob:(NSString *)blobPath;
  
 
 @end
