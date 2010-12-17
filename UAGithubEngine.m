@@ -38,7 +38,7 @@
 
 @implementation UAGithubEngine
 
-@synthesize delegate, username, password, connections;
+@synthesize delegate, username, password, connections, isReachable;
 
 
 #pragma mark Initializer
@@ -52,6 +52,7 @@
 		delegate = theDelegate;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 	}
+	
 	
 	return self;
 		
@@ -77,6 +78,30 @@
 	return ((delegate != nil) && [delegate respondsToSelector:selector]);
 }
 
+
+#pragma mark -
+#pragma mark Reachability Check
+
+- (BOOL)isReachable
+{
+	BOOL wasReachable = isReachable;
+	
+	bool success = false;
+	const char *host_name = [@"github.com" cStringUsingEncoding:NSASCIIStringEncoding];	
+	SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, host_name);
+	SCNetworkReachabilityFlags flags;
+	success = SCNetworkReachabilityGetFlags(reachability, &flags);
+	bool nowReachable = success && (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
+	
+	if (nowReachable != wasReachable)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:(nowReachable ? UAGithubReachableNotification : UAGithubUnreachableNotification) object:self userInfo:nil];
+	}
+	
+	self.isReachable = nowReachable;
+	
+	return isReachable;
+}	
 
 #pragma mark Request Management
 
@@ -598,7 +623,7 @@
     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
     int statusCode = resp.statusCode;
 	
-	//
+	
 	if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
 	{
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
