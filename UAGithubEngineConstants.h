@@ -10,4 +10,6 @@
 
 
 extern NSString * const UAGithubAPILimitReached;
+#define UAGithubReachableNotification @"UAGithubReachableNotification"
+#define UAGithubUnreachableNotification @"UAGithubUnreachableNotification"
 
