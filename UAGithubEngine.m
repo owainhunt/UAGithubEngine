@@ -7,6 +7,7 @@
 //
 
 #import "UAGithubEngine.h"
+#import "UAReachability.h"
 
 #import "UAGithubSimpleJSONParser.h"
 #import "UAGithubUsersJSONParser.h"
@@ -38,7 +39,7 @@
 
 @implementation UAGithubEngine
 
-@synthesize delegate, username, password, connections, isReachable;
+@synthesize delegate, username, password, connections, reachability, isReachable;
 
 
 #pragma mark Initializer
@@ -51,6 +52,9 @@
 		password = [aPassword retain];
 		delegate = theDelegate;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
+		UAReachability *_reachability = [[UAReachability alloc] init];
+		reachability = [_reachability retain];
+		[_reachability release];
 	}
 	
 	
@@ -64,6 +68,7 @@
 	[username release];
 	[password release];
 	[connections release];
+	[reachability release];
 	delegate = nil;
 	
 	[super dealloc];
@@ -84,24 +89,9 @@
 
 - (BOOL)isReachable
 {
-	BOOL wasReachable = isReachable;
-	
-	bool success = false;
-	const char *host_name = [@"github.com" cStringUsingEncoding:NSASCIIStringEncoding];	
-	SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, host_name);
-	SCNetworkReachabilityFlags flags;
-	success = SCNetworkReachabilityGetFlags(reachability, &flags);
-	bool nowReachable = success && (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
-	
-	if (nowReachable != wasReachable)
-	{
-		[[NSNotificationCenter defaultCenter] postNotificationName:(nowReachable ? UAGithubReachableNotification : UAGithubUnreachableNotification) object:self userInfo:nil];
-	}
-	
-	self.isReachable = nowReachable;
-	
-	return isReachable;
+	return [self.reachability currentReachabilityStatus];
 }	
+
 
 #pragma mark Request Management
 

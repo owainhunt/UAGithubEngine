@@ -7,17 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UAReachability.h"
 #import "UAGithubEngineDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubEngineConstants.h"
 #import "UAGithubParserDelegate.h"
-#import "Reachability.h"
 
 @interface UAGithubEngine : NSObject <UAGithubParserDelegate> {
 	id <UAGithubEngineDelegate> delegate;
 	NSString *username;
 	NSString *password;
 	NSMutableDictionary *connections;
+	UAReachability *reachability;
 	BOOL isReachable;
 }
 
@@ -25,7 +26,8 @@
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;
 @property (nonatomic, retain) NSMutableDictionary *connections;
-@property (nonatomic, assign) BOOL isReachable;
+@property (nonatomic, retain) UAReachability *reachability;
+@property (nonatomic, assign, readonly) BOOL isReachable;
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate;
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params;
