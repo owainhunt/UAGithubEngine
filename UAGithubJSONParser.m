@@ -49,6 +49,7 @@
 		{
 			error = [NSError errorWithDomain:@"UAGithubEngineGithubError" code:0 userInfo:[NSDictionary dictionaryWithObject:[dictionary objectForKey:@"error"] forKey:@"errorMessage"]];
 			[delegate parsingFailedForConnection:connectionIdentifier ofResponseType:responseType withError:error];
+			[dictionary release];
 			return;
 		}
 		
