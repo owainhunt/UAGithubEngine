@@ -29,7 +29,7 @@
 @property (nonatomic, retain) UAReachability *reachability;
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
-- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate;
+- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate withReachability:(BOOL)withReach;
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params;
 
 /*
