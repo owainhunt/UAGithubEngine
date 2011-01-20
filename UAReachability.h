@@ -21,7 +21,7 @@ typedef enum {
 
 
 - (NetworkStatus)networkStatusForFlags:(SCNetworkReachabilityFlags)flags;
-- (NetworkStatus) currentReachabilityStatus;
+- (NetworkStatus)currentReachabilityStatus;
 
 
 @end
