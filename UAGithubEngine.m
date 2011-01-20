@@ -52,9 +52,7 @@
 		password = [aPassword retain];
 		delegate = theDelegate;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
-		UAReachability *_reachability = [[UAReachability alloc] init];
-		reachability = [_reachability retain];
-		[_reachability release];
+		reachability = [[UAReachability alloc] init];
 	}
 	
 	
@@ -73,6 +71,17 @@
 	
 	[super dealloc];
 	
+}
+
+
+- (UAReachability *)reachability
+{
+	if (!reachability)
+	{
+		reachability = [[UAReachability alloc] init];
+	}
+	
+	return reachability;
 }
 
 

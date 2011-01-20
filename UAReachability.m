@@ -11,9 +11,11 @@
 
 @implementation UAReachability
 
+// http://www.cocoabuilder.com/archive/cocoa/166350-detecting-internet-code-part-1.html#166364
+
 static void reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* info)
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:UAGithubReachabilityStatusDidChangeNotification object:(UAReachability *)info];
+	[[NSNotificationCenter defaultCenter] postNotificationName:UAGithubReachabilityStatusDidChangeNotification object:info];
 }
 
 
@@ -22,7 +24,7 @@ static void reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	if (self = [super init])
 	{
 		reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, [@"www.github.com" UTF8String]);
-		SCNetworkReachabilityContext context = {0, self, NULL, NULL, NULL};
+		SCNetworkReachabilityContext context = {0, self, CFRetain, CFRelease, NULL};
 		SCNetworkReachabilitySetCallback(reachabilityRef, reachabilityCallback, &context);
 		SCNetworkReachabilityScheduleWithRunLoop(reachabilityRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);		
 	}
