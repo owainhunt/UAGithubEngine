@@ -44,7 +44,7 @@
 
 #pragma mark Initializer
 
-- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate
+- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate withReachability:(BOOL)withReach
 {
 	if (self = [super init]) 
 	{
@@ -52,7 +52,10 @@
 		password = [aPassword retain];
 		delegate = theDelegate;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
-		reachability = [[UAReachability alloc] init];
+		if (withReach)
+		{
+			reachability = [[UAReachability alloc] init];
+		}
 	}
 	
 	
