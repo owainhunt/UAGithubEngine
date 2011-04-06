@@ -46,7 +46,7 @@
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate withReachability:(BOOL)withReach
 {
-	if (self = [super init]) 
+	if ((self = [super init])) 
 	{
 		username = [aUsername retain];
 		password = [aPassword retain];

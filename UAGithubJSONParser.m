@@ -15,7 +15,7 @@
 
 - (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
 {
-    if (self = [super init]) 
+    if ((self = [super init])) 
 	{
         json = [theJSON retain];
         delegate = theDelegate;

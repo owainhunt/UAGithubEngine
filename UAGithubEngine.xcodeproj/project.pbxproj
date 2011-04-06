@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* AppController.m */; };
+		681F4112134C911A002DD87D /* UAGithubEngineConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F4111134C911A002DD87D /* UAGithubEngineConstants.m */; };
+		681F4114134C9310002DD87D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681F4113134C9310002DD87D /* SystemConfiguration.framework */; };
 		6839D05711FE2AED009AB715 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839D03F11FE2AED009AB715 /* CDataScanner.m */; };
 		6839D05911FE2AED009AB715 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839D04511FE2AED009AB715 /* CDataScanner_Extensions.m */; };
 		6839D05A11FE2AED009AB715 /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839D04711FE2AED009AB715 /* NSCharacterSet_Extensions.m */; };
@@ -48,6 +50,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		681F4110134C911A002DD87D /* UAGithubEngineConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineConstants.h; sourceTree = "<group>"; };
+		681F4111134C911A002DD87D /* UAGithubEngineConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubEngineConstants.m; sourceTree = "<group>"; };
+		681F4113134C9310002DD87D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6839D03E11FE2AED009AB715 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		6839D03F11FE2AED009AB715 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		6839D04411FE2AED009AB715 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				681F4114134C9310002DD87D /* SystemConfiguration.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +141,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				681F4113134C9310002DD87D /* SystemConfiguration.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
@@ -290,6 +297,8 @@
 				6852614E116A51A8003AE003 /* UAGithubEngineRequestTypes.h */,
 				685261E1116A774C003AE003 /* UAGithubParserDelegate.h */,
 				68D35B111186049900C6E37E /* UAGithubURLConnection.m */,
+				681F4110134C911A002DD87D /* UAGithubEngineConstants.h */,
+				681F4111134C911A002DD87D /* UAGithubEngineConstants.m */,
 				68D35B1A1186071500C6E37E /* Categories */,
 				6879AB6311FF0F6800F29BDE /* JSON Parsers */,
 			);
@@ -381,6 +390,7 @@
 				68DEB62B1207334800A9C0C2 /* UAGithubSimpleJSONParser.m in Sources */,
 				68971F9E12105743002E7C47 /* NSData+Base64.m in Sources */,
 				68C9408312DBBB6500BF1151 /* UAReachability.m in Sources */,
+				681F4112134C911A002DD87D /* UAGithubEngineConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +420,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -417,12 +428,14 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = UAGithubEngine_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UAGithubEngine-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = UAGithubEngine;
-				VALID_ARCHS = "i386 x86_64";
+				SDKROOT = macosx;
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Debug;
 		};
@@ -430,16 +443,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = UAGithubEngine_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UAGithubEngine-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = UAGithubEngine;
-				VALID_ARCHS = "i386 x86_64";
+				SDKROOT = macosx;
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Release;
 		};
@@ -455,7 +471,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -470,7 +486,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
