@@ -21,7 +21,7 @@ static void reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 - (id)init
 {
-	if (self = [super init])
+	if ((self = [super init]))
 	{
 		reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, [@"www.github.com" UTF8String]);
 		SCNetworkReachabilityContext context = {0, self, CFRetain, CFRelease, NULL};

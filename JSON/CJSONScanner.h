@@ -37,7 +37,7 @@
 @property (readonly, nonatomic, assign) BOOL strictEscapeCodes;
 
 - (BOOL)scanJSONObject:(id *)outObject error:(NSError **)outError;
-- (BOOL)scanJSONDictionary:(NSDictionary **)outDictionary error:(NSError **)outError;
+- (BOOL)scanJSONDictionary:(NSMutableDictionary **)outDictionary error:(NSError **)outError;
 - (BOOL)scanJSONArray:(NSArray **)outArray error:(NSError **)outError;
 - (BOOL)scanJSONStringConstant:(NSString **)outStringConstant error:(NSError **)outError;
 - (BOOL)scanJSONNumberConstant:(NSNumber **)outNumberConstant error:(NSError **)outError;
