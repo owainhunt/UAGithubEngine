@@ -7,6 +7,7 @@
 //
 
 #import "UAReachability.h"
+#import "UAGithubEngineConstants.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
 @implementation UAReachability
