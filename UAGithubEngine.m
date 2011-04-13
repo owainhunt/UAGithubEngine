@@ -288,7 +288,12 @@
 
 - (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@", (watched ? @"watched" : @"show"), aUser] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
+	return [self repositoriesForUser:aUser includeWatched:watched page:1];	
+}
+
+- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/%@?page=%d", (watched ? @"watched" : @"show"), aUser, page] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse withParameters:nil];	
 }
 
 
