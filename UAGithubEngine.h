@@ -51,6 +51,7 @@
 #pragma mark Repositories
 
 - (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
+- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page;
 - (NSString *)repository:(NSString *)repositoryPath;
 - (NSString *)searchRepositories:(NSString *)query;
 - (NSString *)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
