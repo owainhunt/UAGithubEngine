@@ -6,7 +6,7 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import "UAReachability.h"
 #import "UAGithubEngineDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
