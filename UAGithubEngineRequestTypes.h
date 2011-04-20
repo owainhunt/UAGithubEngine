@@ -53,6 +53,8 @@ typedef enum UAGithubRequestType
 	UAGithubBlobsRequest,							// Get the names and SHAs of all blobs for a specific tree SHA
 	UAGithubBlobRequest,							// Get data about a single blob by tree SHA and path
 	UAGithubRawBlobRequest,							// Get the raw data for a blob
+    UAGithubFollowingRequest,                       // Following 
+    UAGithubFollowersRequest,                       // Followers
 
 } UAGithubRequestType;
 
@@ -82,5 +84,7 @@ typedef enum UAGithubResponseType
 	UAGithubBlobsResponse,							// Name and SHA for all files in given tree SHA
 	UAGithubBlobResponse,							// Metadata and file data for given tree SHA and path 
 	UAGithubRawBlobResponse,						// Raw file
+    UAGithubFollowingResponse,                      // Following
+    UAGithubFollowersResponse,                      // Followers   
 	
 } UAGithubResponseType;
