@@ -48,6 +48,9 @@
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email;
 - (NSString *)following:(NSString *)user;
 - (NSString *)followers:(NSString *)user;
+- (NSString *)follow:(NSString *)user;
+- (NSString *)unfollow:(NSString *)user;
+
 
 #pragma mark Repositories
 

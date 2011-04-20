@@ -55,6 +55,7 @@ typedef enum UAGithubRequestType
 	UAGithubRawBlobRequest,							// Get the raw data for a blob
     UAGithubFollowingRequest,                       // Following 
     UAGithubFollowersRequest,                       // Followers
+    UAGithubFollowRequest,                          // Follow or UnFollow a User
 
 } UAGithubRequestType;
 
@@ -85,6 +86,7 @@ typedef enum UAGithubResponseType
 	UAGithubBlobResponse,							// Metadata and file data for given tree SHA and path 
 	UAGithubRawBlobResponse,						// Raw file
     UAGithubFollowingResponse,                      // Following
-    UAGithubFollowersResponse,                      // Followers   
+    UAGithubFollowersResponse,                      // Followers  
+    UAGithubFollowResponse,                         // Follow or UnFollow a User
 	
 } UAGithubResponseType;
