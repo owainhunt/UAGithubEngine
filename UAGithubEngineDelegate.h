@@ -26,6 +26,8 @@
 #pragma mark Users
 
 - (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier;
+- (void)followingReceived:(NSArray *)following forConnection:(NSString *)connectionIdentifier;
+- (void)followersReceived:(NSArray *)followers forConnection:(NSString *)connectionIdentifier;
 
 
 #pragma mark Repositories
