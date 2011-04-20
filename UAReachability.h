@@ -6,7 +6,7 @@
 //  Copyright 2011 Owain R Hunt. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
 typedef enum {
