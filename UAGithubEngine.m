@@ -145,6 +145,7 @@
 		case UAGithubCollaboratorAddRequest:
 		case UAGithubCollaboratorRemoveRequest:
 		case UAGithubIssueCommentAddRequest:
+        case UAGithubFollowRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -573,6 +574,17 @@
 {
 	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse withParameters:nil];	    
     
+}
+
+- (NSString *)follow:(NSString *)user 
+{
+ 	return [self sendRequest:[NSString stringWithFormat:@"user/follow/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubFollowResponse withParameters:nil];	    
+   
+}
+
+- (NSString *)unfollow:(NSString *)user
+{
+ 	return [self sendRequest:[NSString stringWithFormat:@"user/unfollow/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubFollowResponse withParameters:nil];	        
 }
 
 
