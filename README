@@ -2,7 +2,7 @@ UAGithubEngine
 by Owain R Hunt, http://owainrhunt.com
 =================
 
-UAGithubEngine is a practically-complete wrapper around the Github API (the exceptions being the network graph and Gist APIs, which are not currently implemented). Check out the API documentation (http://develop.github.com/) for full details of what the API can do. 
+UAGithubEngine is a practically-complete wrapper around version 2 of the Github API (the exceptions being the network graph and Gist APIs, which are not currently implemented). Check out the API documentation (http://develop.github.com/) for full details of what the API can do. 
 
 UAGithubEngine is compatible with Mac OS X 10.5 and above, and iOS 4.0.
 
@@ -38,10 +38,10 @@ How do I use it?
     - (void)blobReceived:(NSArray *)blob forConnection:(NSString *)connectionIdentifier;
     - (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier;
 
-* Instantiate an engine, passing a username and API key, then call some methods. For example:
+* Instantiate an engine, passing a username and password, then call some methods. If you want to receive notifications when reachability status changes (UAGithubReachabilityStatusDidChangeNotification), pass YES as the final argument. For example:
 
-    UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"aUser" apiKey:@"aKey" delegate:self];
-    [engine getUser:@"owainhunt"];
+	UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"aUser" password:@"aPassword" delegate:self withReachability:YES];
+    [engine user:@"owainhunt"];
 
 * Enjoy. The included AppController class will log the received data from any API calls the engine makes, so have a play around and see what happens - and happy app building!
 
