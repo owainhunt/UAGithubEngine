@@ -6,7 +6,7 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import "UAReachability.h"
 #import "UAGithubEngineDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
@@ -46,6 +46,10 @@
 
 - (NSString *)user:(NSString *)user;
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email;
+- (NSString *)following:(NSString *)user;
+- (NSString *)followers:(NSString *)user;
+- (NSString *)follow:(NSString *)user;
+- (NSString *)unfollow:(NSString *)user;
 
 
 #pragma mark Repositories

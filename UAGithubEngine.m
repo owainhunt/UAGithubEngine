@@ -145,6 +145,7 @@
 		case UAGithubCollaboratorAddRequest:
 		case UAGithubCollaboratorRemoveRequest:
 		case UAGithubIssueCommentAddRequest:
+        case UAGithubFollowRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -206,6 +207,8 @@
 		case UAGithubRepositoryLanguageBreakdownResponse:
 		case UAGithubTagsResponse:
 		case UAGithubBranchesResponse:
+        case UAGithubFollowingResponse:
+        case UAGithubFollowersResponse:
 		case UAGithubTreeResponse:
 			[[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
@@ -271,6 +274,13 @@
 		case UAGithubTreeResponse:
 			[delegate treeReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+        case UAGithubFollowingResponse:
+			[delegate followingReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+        case UAGithubFollowersResponse:
+			[delegate followersReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+
 		default:
 			break;
 	}
@@ -552,6 +562,29 @@
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email
 {
 	return [self sendRequest:[NSString stringWithFormat:@"user/%@/%@", email ? @"email" : @"search", query] requestType:UAGithubUserRequest responseType:UAGithubUsersResponse withParameters:nil];	
+}
+
+
+- (NSString *)following:(NSString *)user
+{
+	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@/following", user] requestType:UAGithubUserRequest responseType:UAGithubFollowingResponse withParameters:nil];	    
+}
+
+- (NSString *)followers:(NSString *)user
+{
+	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse withParameters:nil];	    
+    
+}
+
+- (NSString *)follow:(NSString *)user 
+{
+ 	return [self sendRequest:[NSString stringWithFormat:@"user/follow/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubFollowResponse withParameters:nil];	    
+   
+}
+
+- (NSString *)unfollow:(NSString *)user
+{
+ 	return [self sendRequest:[NSString stringWithFormat:@"user/unfollow/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubFollowResponse withParameters:nil];	        
 }
 
 

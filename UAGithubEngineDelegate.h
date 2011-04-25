@@ -6,7 +6,7 @@
 //  Copyright 2010 Owain R Hunt. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
 @protocol UAGithubEngineDelegate <NSObject>
@@ -26,6 +26,8 @@
 #pragma mark Users
 
 - (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier;
+- (void)followingReceived:(NSArray *)following forConnection:(NSString *)connectionIdentifier;
+- (void)followersReceived:(NSArray *)followers forConnection:(NSString *)connectionIdentifier;
 
 
 #pragma mark Repositories
