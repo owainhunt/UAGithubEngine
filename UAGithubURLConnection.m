@@ -38,5 +38,13 @@
     [data appendData:newData];
 }
 
+- (void)dealloc
+{
+    [data release];
+    [identifier release];
+    
+    [super dealloc];
+}
+
 
 @end
