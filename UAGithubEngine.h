@@ -88,12 +88,13 @@
 
 #pragma mark Issues 
 
-- (NSString *)issuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType;
-- (NSString *)issue:(NSString *)issuePath;
-- (NSString *)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary;
+- (NSString *)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType;
+- (NSString *)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+- (NSString *)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
 - (NSString *)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
 - (NSString *)closeIssue:(NSString *)issuePath;
 - (NSString *)reopenIssue:(NSString *)issuePath;
+- (NSString *)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Labels
