@@ -41,6 +41,7 @@ typedef enum UAGithubRequestType
 	UAGithubIssueEditRequest,						// Edit an issue
 	UAGithubIssueCloseRequest,						// Close an issue
 	UAGithubIssueReopenRequest,						// Reopen a closed issue
+    UAGithubIssueDeleteRequest,                     // Delete an issue
 	UAGithubRepositoryLabelsRequest,				// Get repository-wide issue labels
 	UAGithubRepositoryLabelAddRequest,				// Add a repository-wide issue label
 	UAGithubRepositoryLabelRemoveRequest,			// Remove a repository-wide issue label
