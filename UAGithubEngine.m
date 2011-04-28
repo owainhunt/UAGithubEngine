@@ -113,14 +113,36 @@
 	NSMutableString *querystring = nil;
 	if ([params count] > 0) 
 	{
-		querystring = [NSMutableString stringWithString:@"?"];
+        // API v3 means we're passing more parameters in the querystring than previously.
+        // Is the querystring already present (ie a question mark is present in the path)? Create it if not.        
+        if ([path rangeOfString:@"?"].location == NSNotFound)
+        {
+            querystring = [NSMutableString stringWithString:@"?"];
+        }
+        
 		for (NSString *key in [params allKeys]) 
 		{
-			[querystring appendFormat:@"%@%@=%@", [querystring length] == 1 ? @"" : @"&", key, [[params valueForKey:key] encodedString]];
+			[querystring appendFormat:@"%@%@=%@", [querystring length] <= 1 ? @"" : @"&", key, [[params valueForKey:key] encodedString]];
 		}
 	}
-	
-	NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
+    
+    NSMutableString *urlString;
+    
+    switch (requestType) 
+    {
+        // NOT YET IN V3 case UAGithubIssuesClosedRequest:
+        // NOT YET IN V3 case UAGithubIssuesOpenRequest:
+        case UAGithubIssueRequest:
+        case UAGithubIssueAddRequest:
+        case UAGithubIssueEditRequest:
+        case UAGithubIssueDeleteRequest:
+            urlString = [NSMutableString stringWithFormat:@"%@api.github.com/%@", API_PROTOCOL, path];
+            break;
+        
+        default:
+            urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
+            break;
+    }
 	
 	if ([querystring length] > 0)
 	{
@@ -136,7 +158,8 @@
 		[urlRequest setValue:[NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];	
 	}
 	
-	switch (requestType) {
+	switch (requestType) 
+    {
 		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
 		case UAGithubRepositoryDeleteConfirmationRequest:
@@ -150,6 +173,16 @@
 			[urlRequest setHTTPMethod:@"POST"];
 		}
 			break;
+        case UAGithubIssueEditRequest:
+        {
+            [urlRequest setHTTPMethod:@"PATCH"];
+        }
+            break;
+        case UAGithubIssueDeleteRequest:
+        {
+            [urlRequest setHTTPMethod:@"DELETE"];
+        }
+            break;
 		default:
 			break;
 	}
