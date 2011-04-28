@@ -488,16 +488,16 @@
 
 #pragma mark Issues 
 
-- (NSString *)issuesForRepository:(NSString *)repositoryPath withRequestType:(UAGithubRequestType)requestType
+- (NSString *)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType
 {
 	// Use UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues
 
 	switch (requestType) {
 		case UAGithubIssuesOpenRequest:
-			return [self sendRequest:[NSString stringWithFormat:@"issues/list/%@/open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:nil];
+			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:parameters];
 			break;
 		case UAGithubIssuesClosedRequest:
-			return [self sendRequest:[NSString stringWithFormat:@"issues/list/%@/closed", repositoryPath] requestType:UAGithubIssuesClosedRequest responseType:UAGithubIssuesResponse withParameters:nil];
+			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=closed", repositoryPath] requestType:UAGithubIssuesClosedRequest responseType:UAGithubIssuesResponse withParameters:parameters];
 			break;
 		default:
 			break;
@@ -506,21 +506,21 @@
 }
 
 
-- (NSString *)issue:(NSString *)issuePath
+- (NSString *)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/show/%@", issuePath] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%@", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse withParameters:nil];	
 }
 
 
-- (NSString *)editIssue:(NSString *)issuePath withDictionary:(NSDictionary *)issueDictionary
+- (NSString *)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/edit/%@", issuePath] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%@", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
 }
 
 
 - (NSString *)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/open/%@", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
 }
 
 
@@ -535,6 +535,11 @@
 	return [self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] requestType:UAGithubIssueReopenRequest responseType:UAGithubIssueResponse withParameters:nil];	
 }
 
+
+- (NSString *)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%@", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse withParameters:nil];	
+}
 
 #pragma mark Labels
 
