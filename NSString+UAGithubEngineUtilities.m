@@ -14,7 +14,7 @@
 - (NSDate *)dateFromGithubDateString {
 	
 	NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
-	NSString *dateString = self;
+	NSString *dateString = [self retain];
 
 	// Because Github returns three different date string formats throughout the API, 
 	// we need to check how to process the string based on the format used
@@ -46,7 +46,6 @@
 	}
 	
     return [df dateFromString:[dateString autorelease]];
-
 }
 
 
