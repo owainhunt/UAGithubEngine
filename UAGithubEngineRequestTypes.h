@@ -56,6 +56,7 @@ typedef enum UAGithubRequestType
     UAGithubFollowingRequest,                       // Following 
     UAGithubFollowersRequest,                       // Followers
     UAGithubFollowRequest,                          // Follow or UnFollow a User
+    UAGithubOrganizationsRequest,                   // Get more than one organizations
 
 } UAGithubRequestType;
 
@@ -88,5 +89,6 @@ typedef enum UAGithubResponseType
     UAGithubFollowingResponse,                      // Following
     UAGithubFollowersResponse,                      // Followers  
     UAGithubFollowResponse,                         // Follow or UnFollow a User
+    UAGithubOrganizationsResponse,                  // Organizations
 	
 } UAGithubResponseType;

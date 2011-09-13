@@ -78,6 +78,7 @@
 - (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath;
 - (NSString *)tagsForRepository:(NSString *)repositoryPath;
 - (NSString *)branchesForRepository:(NSString *)repositoryPath;
+- (NSString *)organizationsForUser:(NSString *)aUser;
 
 
 #pragma mark Commits

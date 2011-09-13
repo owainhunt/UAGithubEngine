@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* AppController.m */; };
+		5510B967141F4D70005FD2CA /* UAGithubOrganizationsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5510B966141F4D70005FD2CA /* UAGithubOrganizationsJSONParser.m */; };
 		681F4112134C911A002DD87D /* UAGithubEngineConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F4111134C911A002DD87D /* UAGithubEngineConstants.m */; };
 		681F4114134C9310002DD87D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681F4113134C9310002DD87D /* SystemConfiguration.framework */; };
 		6839D05711FE2AED009AB715 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839D03F11FE2AED009AB715 /* CDataScanner.m */; };
@@ -50,6 +51,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		5510B965141F4D70005FD2CA /* UAGithubOrganizationsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubOrganizationsJSONParser.h; sourceTree = "<group>"; };
+		5510B966141F4D70005FD2CA /* UAGithubOrganizationsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubOrganizationsJSONParser.m; sourceTree = "<group>"; };
 		681F4110134C911A002DD87D /* UAGithubEngineConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineConstants.h; sourceTree = "<group>"; };
 		681F4111134C911A002DD87D /* UAGithubEngineConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubEngineConstants.m; sourceTree = "<group>"; };
 		681F4113134C9310002DD87D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -257,6 +260,8 @@
 				688ECC8E1200A9240087ADB3 /* UAGithubIssuesJSONParser.m */,
 				688ECC901200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.h */,
 				688ECC911200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m */,
+				5510B965141F4D70005FD2CA /* UAGithubOrganizationsJSONParser.h */,
+				5510B966141F4D70005FD2CA /* UAGithubOrganizationsJSONParser.m */,
 			);
 			name = "JSON Parsers";
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 				68971F9E12105743002E7C47 /* NSData+Base64.m in Sources */,
 				68C9408312DBBB6500BF1151 /* UAReachability.m in Sources */,
 				681F4112134C911A002DD87D /* UAGithubEngineConstants.m in Sources */,
+				5510B967141F4D70005FD2CA /* UAGithubOrganizationsJSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
