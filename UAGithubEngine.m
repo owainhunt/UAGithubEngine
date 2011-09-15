@@ -109,9 +109,46 @@
 
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params
 {
-	
-	NSMutableString *querystring = nil;
-	if ([params count] > 0) 
+    
+    NSMutableString *urlString;
+    
+    switch (requestType) 
+    {
+        // V3 Requests
+        
+        // NOT YET IN V3 case UAGithubIssuesClosedRequest:
+        // NOT YET IN V3 case UAGithubIssuesOpenRequest:
+        case UAGithubIssuesRequest:
+        case UAGithubIssueRequest:
+        case UAGithubIssueAddRequest:
+        case UAGithubIssueEditRequest:
+        case UAGithubIssueDeleteRequest:
+            
+        case UAGithubMilestoneRequest:
+        case UAGithubMilestoneCreateRequest:
+        case UAGithubMilestoneUpdateRequest:
+        case UAGithubMilestoneDeleteRequest:
+        case UAGithubMilestonesRequest:
+            urlString = [NSMutableString stringWithFormat:@"%@api.github.com/%@", API_PROTOCOL, path];
+            break;
+        
+        // v2 Requests
+        default:
+            urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
+            break;
+    }
+    
+    NSData *jsonData = nil;
+    NSError *error = nil;
+    
+    if ([params count] > 0)
+    {
+        jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+    }
+
+    NSMutableString *querystring = nil;
+
+    if (!jsonData && [params count] > 0) 
 	{
         // API v3 means we're passing more parameters in the querystring than previously.
         // Is the querystring already present (ie a question mark is present in the path)? Create it if not.        
@@ -125,31 +162,12 @@
 			[querystring appendFormat:@"%@%@=%@", [querystring length] <= 1 ? @"" : @"&", key, [[params valueForKey:key] encodedString]];
 		}
 	}
-    
-    NSMutableString *urlString;
-    
-    switch (requestType) 
-    {
-        // NOT YET IN V3 case UAGithubIssuesClosedRequest:
-        // NOT YET IN V3 case UAGithubIssuesOpenRequest:
-        case UAGithubIssueRequest:
-        case UAGithubIssueAddRequest:
-        case UAGithubIssueEditRequest:
-        case UAGithubIssueDeleteRequest:
-            urlString = [NSMutableString stringWithFormat:@"%@api.github.com/%@", API_PROTOCOL, path];
-            break;
-        
-        default:
-            urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
-            break;
-    }
-	
-	if ([querystring length] > 0)
+
+    if ([querystring length] > 0)
 	{
 		[urlString appendString:querystring];
 	}
-	 
-	
+
 	NSURL *theURL = [NSURL URLWithString:urlString];
 	
 	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
@@ -157,7 +175,13 @@
 	{
 		[urlRequest setValue:[NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];	
 	}
-	
+
+	if (jsonData)
+    {
+        [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [urlRequest setHTTPBody:jsonData];
+    }
+
 	switch (requestType) 
     {
 		case UAGithubRepositoryUpdateRequest:
