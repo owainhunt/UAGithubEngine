@@ -7,7 +7,6 @@
 //
 
 #import "UAGithubJSONParser.h"
-#import "CJSONDeserializer.h"
 #import "NSArray+Utilities.h"
 #import "NSString+UAGithubEngineUtilities.h"
 
@@ -41,37 +40,21 @@
 - (void)parse
 {
 	NSError *error = nil;
-	NSMutableDictionary *dictionary = [[[CJSONDeserializer deserializer] deserializeAsDictionary:json error:&error] mutableCopy];	
+    NSMutableArray *jsonArray = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableLeaves|NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
 	
 	if (!error)
 	{
-		if ([[dictionary allKeys] containsObject:@"error"])
+		if ([[[jsonArray firstObject] allKeys] containsObject:@"error"])
 		{
+            NSDictionary *dictionary = [jsonArray firstObject];
 			error = [NSError errorWithDomain:@"UAGithubEngineGithubError" code:0 userInfo:[NSDictionary dictionaryWithObject:[dictionary objectForKey:@"error"] forKey:@"errorMessage"]];
 			[delegate parsingFailedForConnection:connectionIdentifier ofResponseType:responseType withError:error];
-			[dictionary release];
 			return;
 		}
 		
-		NSArray *parsedObjects = nil;
-
-		// parsedObjects is expected to be an NSArray, so we have to check if the parser has returned an array or a dictionary.
-		// This would be the case if there is only one result for our API call, such as for a single user.
-		// If we're dealing with a single object, we have to wrap it in an array before we return it.
-		if ([[[dictionary allValues] firstObject] isKindOfClass:[NSDictionary class]]) 
-		{
-			parsedObjects = [NSArray arrayWithObject:[[dictionary allValues] firstObject]];
-		}
-		else
-		{
-			parsedObjects = [[dictionary allValues] firstObject];
-		}
-		
-
-		
 		// Numbers and 'TRUE'/'FALSE' boolean are handled by the parser
 		// We need to handle date elements and 0/1 boolean values 
-		for (NSMutableDictionary *theDictionary in parsedObjects)
+		for (NSMutableDictionary *theDictionary in jsonArray)
 		{
 			for (NSString *keyString in dateElements)
 			{
@@ -96,15 +79,12 @@
 					 
 		}
 
-		[delegate parsingSucceededForConnection:connectionIdentifier ofResponseType:responseType withParsedObjects:parsedObjects];
+		[delegate parsingSucceededForConnection:connectionIdentifier ofResponseType:responseType withParsedObjects:jsonArray];
 	}
 	else 
 	{
 		[delegate parsingFailedForConnection:connectionIdentifier ofResponseType:responseType withError:error];
 	}
-	
-	[dictionary release];
-	
 }	
 
 
