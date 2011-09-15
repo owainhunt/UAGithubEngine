@@ -40,7 +40,18 @@
 - (void)parse
 {
 	NSError *error = nil;
-    NSMutableArray *jsonArray = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableLeaves|NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableLeaves|NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
+    
+    NSMutableArray *jsonArray;
+    
+    if ([jsonObj isKindOfClass:[NSDictionary class]])
+    {
+        jsonArray = [NSMutableArray arrayWithObject:jsonObj]; 
+    }
+    else
+    {
+        jsonArray = [jsonObj mutableCopy];
+    }
 	
 	if (!error)
 	{
