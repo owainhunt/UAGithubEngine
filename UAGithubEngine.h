@@ -86,6 +86,15 @@
 - (NSString *)commit:(NSString *)commitPath;
 
 
+#pragma mark Milestones
+
+- (NSString *)milestonesForRepository:(NSString *)repositoryPath;
+- (NSString *)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath;
+- (NSString *)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
+- (NSString *)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath;
+
+
 #pragma mark Issues 
 
 - (NSString *)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType;
