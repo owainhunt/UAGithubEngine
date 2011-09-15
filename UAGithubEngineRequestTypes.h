@@ -36,6 +36,7 @@ typedef enum UAGithubRequestType
 	UAGithubCommitRequest,							// Get exactly one specific commit
 	UAGithubIssuesOpenRequest,						// Get open issues
 	UAGithubIssuesClosedRequest,					// Get closed issues
+    UAGithubIssuesRequest,                          // Get all issues
 	UAGithubIssueRequest,							// Get exactly one specific issue
 	UAGithubIssueAddRequest,						// Add an issue
 	UAGithubIssueEditRequest,						// Edit an issue
@@ -57,6 +58,11 @@ typedef enum UAGithubRequestType
     UAGithubFollowingRequest,                       // Following 
     UAGithubFollowersRequest,                       // Followers
     UAGithubFollowRequest,                          // Follow or UnFollow a User
+    UAGithubMilestonesRequest,                      // Get one or more milestones
+    UAGithubMilestoneRequest,                       // Get exactly one specific milestone
+    UAGithubMilestoneCreateRequest,                 // Create a new milestone
+    UAGithubMilestoneUpdateRequest,                   // Edit an existing milestone
+    UAGithubMilestoneDeleteRequest,                 // Delete a milestone
 
 } UAGithubRequestType;
 
@@ -89,5 +95,7 @@ typedef enum UAGithubResponseType
     UAGithubFollowingResponse,                      // Following
     UAGithubFollowersResponse,                      // Followers  
     UAGithubFollowResponse,                         // Follow or UnFollow a User
+    UAGithubMilestonesResponse,                     // One or more milestones
+    UAGithubMilestoneResponse,                      // Exactly one milestone
 	
 } UAGithubResponseType;

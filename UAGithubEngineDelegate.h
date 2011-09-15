@@ -40,6 +40,11 @@
 - (void)branchesReceived:(NSArray *)branches forConnection:(NSString *)connectionIdentifier;
 
 
+#pragma mark Milestones
+
+- (void)milestonesReceived:(NSArray *)milestones forConnection:(NSString *)connectionIdentifier;
+
+
 #pragma mark Commits
 
 - (void)commitsReceived:(NSArray *)commits forConnection:(NSString *)connectionIdentifier;
