@@ -15,7 +15,6 @@
 #import "UAGithubCommitsJSONParser.h"
 #import "UAGithubIssuesJSONParser.h"
 #import "UAGithubIssueCommentsJSONParser.h"
-#import "CJSONDeserializer.h"
 
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubURLConnection.h"

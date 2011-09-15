@@ -7,7 +7,6 @@
 //
 
 #import "UAGithubUsersJSONParser.h"
-#import "CJSONDeserializer.h"
 
 @implementation UAGithubUsersJSONParser
 
