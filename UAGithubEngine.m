@@ -12,6 +12,7 @@
 #import "UAGithubSimpleJSONParser.h"
 #import "UAGithubUsersJSONParser.h"
 #import "UAGithubRepositoriesJSONParser.h"
+#import "UAGithubMilestonesJSONParser.h"
 #import "UAGithubCommitsJSONParser.h"
 #import "UAGithubIssuesJSONParser.h"
 #import "UAGithubIssueCommentsJSONParser.h"
@@ -162,6 +163,7 @@
 		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
 		case UAGithubRepositoryDeleteConfirmationRequest:
+        case UAGithubMilestoneCreateRequest:
 		case UAGithubDeployKeyAddRequest:
 		case UAGithubDeployKeyDeleteRequest:
 		case UAGithubCollaboratorAddRequest:
@@ -172,11 +174,13 @@
 			[urlRequest setHTTPMethod:@"POST"];
 		}
 			break;
+        case UAGithubMilestoneUpdateRequest:
         case UAGithubIssueEditRequest:
         {
             [urlRequest setHTTPMethod:@"PATCH"];
         }
             break;
+        case UAGithubMilestoneDeleteRequest:
         case UAGithubIssueDeleteRequest:
         {
             [urlRequest setHTTPMethod:@"DELETE"];
@@ -211,6 +215,10 @@
 		case UAGithubRepositoryResponse:
 			[[[UAGithubRepositoriesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
+        case UAGithubMilestonesResponse:
+        case UAGithubMilestoneResponse:
+            [[[UAGithubMilestonesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
+            break;
 		case UAGithubIssuesResponse:
 		case UAGithubIssueResponse:
 			[[[UAGithubIssuesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
@@ -262,6 +270,10 @@
 		case UAGithubRepositoryResponse:
 			[delegate repositoriesReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+        case UAGithubMilestonesResponse:
+        case UAGithubMilestoneResponse:
+            [delegate milestonesReceived:parsedObjects forConnection:connectionIdentifier];
+            break;
 		case UAGithubIssuesResponse:
 		case UAGithubIssueResponse:
 			[delegate issuesReceived:parsedObjects forConnection:connectionIdentifier];
@@ -482,6 +494,38 @@
 - (NSString *)branchesForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/show/%@/branches", repositoryPath] requestType:UAGithubBranchesRequest responseType:UAGithubBranchesResponse withParameters:nil];	
+}
+
+
+#pragma mark Milestones
+
+- (NSString *)milestonesForRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestonesRequest responseType:UAGithubMilestonesResponse withParameters:nil];
+}
+
+
+- (NSString *)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneRequest responseType:UAGithubMilestoneResponse withParameters:nil];
+}
+
+
+- (NSString *)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestoneCreateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary];
+}
+
+
+- (NSString *)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneUpdateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary]; 
+}
+
+
+- (NSString *)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneDeleteRequest responseType:UAGithubMilestoneResponse withParameters:nil];
 }
 
 
