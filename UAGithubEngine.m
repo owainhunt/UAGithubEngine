@@ -15,6 +15,7 @@
 #import "UAGithubCommitsJSONParser.h"
 #import "UAGithubIssuesJSONParser.h"
 #import "UAGithubIssueCommentsJSONParser.h"
+#import "UAGithubOrganizationsJSONParser.h"
 #import "CJSONDeserializer.h"
 
 #import "UAGithubEngineRequestTypes.h"
@@ -212,6 +213,9 @@
 		case UAGithubTreeResponse:
 			[[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
+        case UAGithubOrganizationsResponse:
+            [[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
+            break;
 		default:
 			break;
 	}
@@ -279,6 +283,9 @@
 			break;
         case UAGithubFollowersResponse:
 			[delegate followersReceived:parsedObjects forConnection:connectionIdentifier];
+			break;
+        case UAGithubOrganizationsResponse:
+            [delegate organizationsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 
 		default:
@@ -629,6 +636,12 @@
 	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubRawBlobRequest responseType:UAGithubRawBlobResponse withParameters:nil];	
 }
 
+#pragma mark Organizations
+
+- (NSString *)organizationsForUser:(NSString *)aUser
+{
+	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@/organizations", aUser] requestType:UAGithubOrganizationsRequest responseType:UAGithubOrganizationsResponse withParameters:nil];	
+}
 
 #pragma mark NSURLConnection Delegate Methods
 
