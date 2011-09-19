@@ -214,7 +214,8 @@
 			[[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
         case UAGithubOrganizationsResponse:
-            [[[UAGithubOrganizationsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
+            [[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
+            break;
 		default:
 			break;
 	}
