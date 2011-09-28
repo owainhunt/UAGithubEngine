@@ -51,6 +51,8 @@ typedef enum UAGithubRequestType
 	UAGithubIssueCommentsRequest,					// Get more than one non-specific issue comment
 	UAGithubIssueCommentRequest,					// Get exactly one specific issue comment
 	UAGithubIssueCommentAddRequest,					// Add a comment to an issue
+    UAGithubIssueCommentEditRequest,                // Edit an issue comment
+    UAGithubIssueCommentDeleteRequest,              // Delete an issue comment
 	UAGithubTreeRequest,							// Get the listing of a tree by SHA
 	UAGithubBlobsRequest,							// Get the names and SHAs of all blobs for a specific tree SHA
 	UAGithubBlobRequest,							// Get data about a single blob by tree SHA and path

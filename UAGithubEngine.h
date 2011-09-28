@@ -117,8 +117,11 @@
 
 #pragma mark Comments
 
-- (NSString *)commentsForIssue:(NSString *)issuePath;
-- (NSString *)addComment:(NSString *)comment toIssue:(NSString *)issuePath;
+- (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody;
+- (NSString *)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Trees
