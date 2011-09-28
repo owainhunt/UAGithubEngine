@@ -712,6 +712,12 @@
 }
 
 
+- (NSString *)editUser:(NSDictionary *)userDictionary
+{
+    return [self sendRequest:@"user" requestType:UAGithubUserEditRequest responseType:UAGithubUserResponse withParameters:userDictionary];
+}
+
+
 #pragma mark TODO is in v3?
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email
 {

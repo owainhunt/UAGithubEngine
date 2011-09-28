@@ -12,6 +12,7 @@ typedef enum UAGithubRequestType
 {
 	UAGithubUsersRequest = 0,						// Get more than one non-specific user
 	UAGithubUserRequest,							// Get exactly one specific user
+    UAGithubUserEditRequest,                        // Edit the authenticated user
 	UAGithubRepositoriesRequest,					// Get more than one non-specific repository
 	UAGithubRepositoryRequest,						// Get exactly one specific repository
 	UAGithubRepositoryUpdateRequest,				// Update repository metadata
