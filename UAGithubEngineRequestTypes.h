@@ -59,11 +59,12 @@ typedef enum UAGithubRequestType
 	UAGithubRawBlobRequest,							// Get the raw data for a blob
     UAGithubFollowingRequest,                       // Following 
     UAGithubFollowersRequest,                       // Followers
-    UAGithubFollowRequest,                          // Follow or UnFollow a User
+    UAGithubFollowRequest,                          // Follow a User
+    UAGithubUnfollowRequest,                        // Unfollow a user
     UAGithubMilestonesRequest,                      // Get one or more milestones
     UAGithubMilestoneRequest,                       // Get exactly one specific milestone
     UAGithubMilestoneCreateRequest,                 // Create a new milestone
-    UAGithubMilestoneUpdateRequest,                   // Edit an existing milestone
+    UAGithubMilestoneUpdateRequest,                 // Edit an existing milestone
     UAGithubMilestoneDeleteRequest,                 // Delete a milestone
 
 } UAGithubRequestType;
@@ -71,7 +72,8 @@ typedef enum UAGithubRequestType
 
 typedef enum UAGithubResponseType 
 {
-	UAGithubUsersResponse = 0,						// One or more users
+    UAGithubNoContentResponse = 0,                  // No content expected
+	UAGithubUsersResponse,                          // One or more users
 	UAGithubUserResponse,							// Exactly one user
 	UAGithubRepositoriesResponse,					// One or more repositories 
 	UAGithubRepositoryResponse,						// Exactly one repository
