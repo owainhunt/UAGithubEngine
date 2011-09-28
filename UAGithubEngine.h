@@ -94,6 +94,16 @@
 - (NSString *)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath;
 
 
+#pragma mark Commit Comments
+
+- (NSString *)commitCommentsForRepository:(NSString *)repositoryPath;
+- (NSString *)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath;
+- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath;
+- (NSString *)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath;
+- (NSString *)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary;
+- (NSString *)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath;
+
+
 #pragma mark Milestones 
 
 - (NSString *)milestonesForRepository:(NSString *)repositoryPath;

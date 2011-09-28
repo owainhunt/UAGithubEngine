@@ -795,6 +795,45 @@
 }
 	
 
+#pragma mark Commit Comments
+
+- (NSString *)commitCommentsForRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments", repositoryPath] requestType:UAGithubCommitCommentsRequest responseType:UAGithubCommitCommentsResponse withParameters:nil];
+}
+
+
+- (NSString *)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentsResponse withParameters:nil];
+}
+
+
+- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentAddRequest responseType:UAGithubCommitCommentResponse withParameters:commentDictionary];
+}
+
+
+- (NSString *)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentResponse withParameters:nil];
+}
+
+
+- (NSString *)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentEditRequest responseType:UAGithubCommitCommentResponse withParameters:infoDictionary];
+}
+
+
+- (NSString *)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentDeleteRequest responseType:UAGithubNoContentResponse withParameters:nil];
+}
+
+
+
 #pragma mark Trees
 
 - (NSString *)tree:(NSString *)treePath

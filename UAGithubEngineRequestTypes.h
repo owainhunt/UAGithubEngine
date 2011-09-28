@@ -35,6 +35,11 @@ typedef enum UAGithubRequestType
 	UAGithubCollaboratorRemoveRequest,				// Remove a collaborator
 	UAGithubCommitsRequest,							// Get more than one non-specific commit
 	UAGithubCommitRequest,							// Get exactly one specific commit
+    UAGithubCommitCommentsRequest,                  // Get one or more commit comments
+    UAGithubCommitCommentRequest,                   // Get exactly one commit comment
+    UAGithubCommitCommentAddRequest,                // Add a commit comment
+    UAGithubCommitCommentEditRequest,               // Edit a commit comment
+    UAGithubCommitCommentDeleteRequest,             // Delete a commit comment
 	UAGithubIssuesOpenRequest,						// Get open issues
 	UAGithubIssuesClosedRequest,					// Get closed issues
     UAGithubIssuesRequest,                          // Get all issues
@@ -92,6 +97,8 @@ typedef enum UAGithubResponseType
 	UAGithubCollaboratorsResponse,					// One or more usernames
 	UAGithubCommitsResponse,						// One or more commits
 	UAGithubCommitResponse,							// Exactly one commit
+    UAGithubCommitCommentsResponse,                 // One or more commit comments
+    UAGithubCommitCommentResponse,                   // Exactly one commit comment
 	UAGithubIssuesResponse,							// One or more issues
 	UAGithubIssueResponse,							// Exactly one issue
 	UAGithubIssueCommentsResponse,					// One or more issue comments
