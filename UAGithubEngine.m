@@ -783,15 +783,15 @@
 
 #pragma mark Commits
 
-- (NSString *)commitsForBranch:(NSString *)branchPath
+- (NSString *)commitsForRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"commits/list/%@", branchPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits", repositoryPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse withParameters:nil];	
 }
 
 
-- (NSString *)commit:(NSString *)commitPath
+- (NSString *)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"commits/show/%@", commitPath] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@", repositoryPath, commitSha] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse withParameters:nil];	
 }
 	
 

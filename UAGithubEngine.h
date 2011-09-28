@@ -43,7 +43,7 @@
 */
 
 #pragma mark Users
-#pragma mark TODO Move to v3
+
 - (NSString *)user:(NSString *)user;
 - (NSString *)user;
 - (NSString *)editUser:(NSDictionary *)userDictionary;
@@ -89,10 +89,9 @@
 
 
 #pragma mark Commits
-#pragma mark TODO Move to v3
 
-- (NSString *)commitsForBranch:(NSString *)branchPath;
-- (NSString *)commit:(NSString *)commitPath;
+- (NSString *)commitsForRepository:(NSString *)repositoryPath;
+- (NSString *)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Milestones 
@@ -125,7 +124,7 @@
 - (NSString *)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 
 
-#pragma mark Comments 
+#pragma mark Issue Comments 
 
 - (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
 - (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
