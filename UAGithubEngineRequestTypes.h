@@ -51,9 +51,13 @@ typedef enum UAGithubRequestType
     UAGithubIssueDeleteRequest,                     // Delete an issue
 	UAGithubRepositoryLabelsRequest,				// Get repository-wide issue labels
 	UAGithubRepositoryLabelAddRequest,				// Add a repository-wide issue label
+    UAGithubRepositoryLabelEditRequest,             // Edit a repository-wide issue label
 	UAGithubRepositoryLabelRemoveRequest,			// Remove a repository-wide issue label
+    UAGithubIssueLabelsRequest,                     // Get one or more issue labels
+    UAGithubIssueLabelRequest,                      // Get exactly one specific issue label
 	UAGithubIssueLabelAddRequest,					// Add a label to a specific issue
 	UAGithubIssueLabelRemoveRequest,				// Remove a label from a specific issue
+    UAGithubIssueLabelReplaceRequest,               // Replace all labels on a specific issue
 	UAGithubIssueCommentsRequest,					// Get more than one non-specific issue comment
 	UAGithubIssueCommentRequest,					// Get exactly one specific issue comment
 	UAGithubIssueCommentAddRequest,					// Add a comment to an issue
@@ -104,7 +108,9 @@ typedef enum UAGithubResponseType
 	UAGithubIssueCommentsResponse,					// One or more issue comments
 	UAGithubIssueCommentResponse,					// Exactly one issue comment
 	UAGithubIssueLabelsResponse,					// One or more issue labels
+    UAGithubIssueLabelResponse,                     // Exactly one issue label
 	UAGithubRepositoryLabelsResponse,				// One or more repository-wide issue labels
+    UAGithubRepositoryLabelResponse,                // Exactly one repository-wide issue label
 	UAGithubTreeResponse,							// Metadata for all files in given commit
 	UAGithubBlobsResponse,							// Name and SHA for all files in given tree SHA
 	UAGithubBlobResponse,							// Metadata and file data for given tree SHA and path 

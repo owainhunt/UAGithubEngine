@@ -126,12 +126,17 @@
 
 #pragma mark Labels
 #pragma mark TODO Move to v3
-
+// NOTE using label IDs rather than strings to identify now we're on v3
 - (NSString *)labelsForRepository:(NSString *)repositoryPath;
-- (NSString *)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath;
-- (NSString *)removeLabel:(NSString *)label fromRepository:(NSString *)repositoryPath;
-- (NSString *)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
-- (NSString *)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+- (NSString *)label:(NSInteger)labelId inRepository:(NSString *)repositoryPath;
+- (NSString *)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
+- (NSString *)editLabel:(NSInteger)labelId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
+- (NSString *)removeLabel:(NSInteger)labelId fromRepository:(NSString *)repositoryPath;
+- (NSString *)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath;
+- (NSString *)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath;
+- (NSString *)removeLabel:(NSInteger)labelId fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+- (NSString *)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels;
+- (NSString *)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Issue Comments 
