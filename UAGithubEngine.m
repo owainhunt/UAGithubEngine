@@ -124,6 +124,12 @@
         case UAGithubIssueEditRequest:
         case UAGithubIssueDeleteRequest:
             
+        case UAGithubIssueCommentsRequest:
+        case UAGithubIssueCommentRequest:
+        case UAGithubIssueCommentAddRequest:
+        case UAGithubIssueCommentEditRequest:
+        case UAGithubIssueCommentDeleteRequest:
+            
         case UAGithubMilestoneRequest:
         case UAGithubMilestoneCreateRequest:
         case UAGithubMilestoneUpdateRequest:
@@ -200,12 +206,14 @@
 			break;
         case UAGithubMilestoneUpdateRequest:
         case UAGithubIssueEditRequest:
+        case UAGithubIssueCommentEditRequest:
         {
             [urlRequest setHTTPMethod:@"PATCH"];
         }
             break;
         case UAGithubMilestoneDeleteRequest:
         case UAGithubIssueDeleteRequest:
+        case UAGithubIssueCommentDeleteRequest:
         {
             [urlRequest setHTTPMethod:@"DELETE"];
         }
@@ -646,17 +654,36 @@
 
 #pragma mark Comments
 
-- (NSString *)commentsForIssue:(NSString *)issuePath
+- (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"issues/comments/%@", issuePath] requestType:UAGithubIssueCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];	
+ 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentsRequest responseType:UAGithubIssueCommentsResponse withParameters:nil];	
 }
 
 
-- (NSString *)addComment:(NSString *)comment toIssue:(NSString *)issuePath
+- (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath
 {
-	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"comment"];
-	return [self sendRequest:[NSString stringWithFormat:@"issues/comment/%@", issuePath] requestType:UAGithubIssueCommentAddRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentRequest responseType:UAGithubIssueCommentResponse withParameters:nil];
+}
+
+
+- (NSString *)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
+{
+	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"body"];
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentAddRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
 	
+}
+
+
+- (NSString *)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody
+{
+    NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:commentBody forKey:@"body"];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/:user/:repo/issues/comments/:id", repositoryPath, commentNumber] requestType:UAGithubIssueCommentEditRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
+}
+
+
+- (NSString *)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentDeleteRequest responseType:UAGithubIssueCommentResponse withParameters:nil];
 }
 
 
