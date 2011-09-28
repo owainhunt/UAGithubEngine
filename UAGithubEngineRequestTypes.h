@@ -66,6 +66,11 @@ typedef enum UAGithubRequestType
     UAGithubMilestoneCreateRequest,                 // Create a new milestone
     UAGithubMilestoneUpdateRequest,                 // Edit an existing milestone
     UAGithubMilestoneDeleteRequest,                 // Delete a milestone
+    UAGithubPublicKeysRequest,                      // Get one or more public keys
+    UAGithubPublicKeyRequest,                       // Get exactly one public key
+    UAGithubPublicKeyAddRequest,                    // Add a public key
+    UAGithubPublicKeyEditRequest,                   // Edit a public key
+    UAGithubPublicKeyDeleteRequest,                 // Delete a public key
 
 } UAGithubRequestType;
 
@@ -101,5 +106,7 @@ typedef enum UAGithubResponseType
     UAGithubFollowResponse,                         // Follow or UnFollow a User
     UAGithubMilestonesResponse,                     // One or more milestones
     UAGithubMilestoneResponse,                      // Exactly one milestone
+    UAGithubPublicKeysResponse,                     // One or more public keys
+    UAGithubPublicKeyResponse,                      // Exactly one public key
 	
 } UAGithubResponseType;

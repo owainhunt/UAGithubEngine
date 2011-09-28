@@ -206,7 +206,7 @@
 		case UAGithubCollaboratorAddRequest:
 		case UAGithubCollaboratorRemoveRequest:
 		case UAGithubIssueCommentAddRequest:
-        case UAGithubFollowRequest:
+        case UAGithubPublicKeyAddRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -214,6 +214,8 @@
         case UAGithubMilestoneUpdateRequest:
         case UAGithubIssueEditRequest:
         case UAGithubIssueCommentEditRequest:
+        case UAGithubPublicKeyEditRequest:
+        case UAGithubUserEditRequest:
         {
             [urlRequest setHTTPMethod:@"PATCH"];
         }
@@ -222,6 +224,7 @@
         case UAGithubIssueDeleteRequest:
         case UAGithubIssueCommentDeleteRequest:
         case UAGithubUnfollowRequest:
+        case UAGithubPublicKeyDeleteRequest:
         {
             [urlRequest setHTTPMethod:@"DELETE"];
         }
@@ -739,6 +742,36 @@
 - (NSString *)unfollow:(NSString *)user
 {
  	return [self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubUnfollowRequest responseType:UAGithubNoContentResponse withParameters:nil];	        
+}
+
+
+- (NSString *)publicKeys
+{
+    return [self sendRequest:@"user/keys" requestType:UAGithubPublicKeysRequest responseType:UAGithubPublicKeysResponse withParameters:nil];
+}
+
+
+- (NSString *)publicKey:(NSInteger)keyId
+{
+    return [self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyRequest responseType:UAGithubPublicKeyResponse withParameters:nil];
+}
+
+
+- (NSString *)addPublicKey:(NSDictionary *)keyDictionary
+{
+    return [self sendRequest:@"user/keys" requestType:UAGithubPublicKeyAddRequest responseType:UAGithubPublicKeyResponse withParameters:keyDictionary];
+}
+
+
+- (NSString *)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyEditRequest responseType:UAGithubPublicKeyResponse withParameters:keyDictionary];
+}
+
+
+- (NSString *)deletePublicKey:(NSInteger)keyId
+{
+    return [self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyDeleteRequest responseType:UAGithubNoContentResponse withParameters:nil];
 }
 
 

@@ -51,6 +51,11 @@
 - (NSString *)followers:(NSString *)user;
 - (NSString *)follow:(NSString *)user;
 - (NSString *)unfollow:(NSString *)user;
+- (NSString *)publicKeys;
+- (NSString *)publicKey:(NSInteger)keyId;
+- (NSString *)addPublicKey:(NSDictionary *)keyDictionary;
+- (NSString *)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary;
+- (NSString *)deletePublicKey:(NSInteger)keyId;
 
 
 #pragma mark Repositories
