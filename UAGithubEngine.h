@@ -46,6 +46,7 @@
 #pragma mark TODO Move to v3
 - (NSString *)user:(NSString *)user;
 - (NSString *)user;
+- (NSString *)editUser:(NSDictionary *)userDictionary;
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email;
 - (NSString *)following:(NSString *)user;
 - (NSString *)followers:(NSString *)user;
