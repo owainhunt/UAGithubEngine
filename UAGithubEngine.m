@@ -135,6 +135,8 @@
         case UAGithubMilestoneUpdateRequest:
         case UAGithubMilestoneDeleteRequest:
         case UAGithubMilestonesRequest:
+            
+        case UAGithubUserRequest:
             urlString = [NSMutableString stringWithFormat:@"%@api.github.com/%@", API_PROTOCOL, path];
             break;
         
@@ -190,6 +192,11 @@
 
 	switch (requestType) 
     {
+        case UAGithubFollowRequest:
+        {
+            [urlRequest setHTTPMethod:@"PUT"];
+        }
+            break;
 		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
 		case UAGithubRepositoryDeleteConfirmationRequest:
@@ -214,6 +221,7 @@
         case UAGithubMilestoneDeleteRequest:
         case UAGithubIssueDeleteRequest:
         case UAGithubIssueCommentDeleteRequest:
+        case UAGithubUnfollowRequest:
         {
             [urlRequest setHTTPMethod:@"DELETE"];
         }
@@ -691,10 +699,17 @@
 
 - (NSString *)user:(NSString *)user
 {
-	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@", user] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"users/%@", user] requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];	
 }
 
 
+- (NSString *)user
+{
+	return [self sendRequest:@"user" requestType:UAGithubUserRequest responseType:UAGithubUserResponse withParameters:nil];	
+}
+
+
+#pragma mark TODO is in v3?
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email
 {
 	return [self sendRequest:[NSString stringWithFormat:@"user/%@/%@", email ? @"email" : @"search", query] requestType:UAGithubUserRequest responseType:UAGithubUsersResponse withParameters:nil];	
@@ -703,24 +718,27 @@
 
 - (NSString *)following:(NSString *)user
 {
-	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@/following", user] requestType:UAGithubUserRequest responseType:UAGithubFollowingResponse withParameters:nil];	    
+	return [self sendRequest:[NSString stringWithFormat:@"users/%@/following", user] requestType:UAGithubUserRequest responseType:UAGithubFollowingResponse withParameters:nil];	    
 }
+
 
 - (NSString *)followers:(NSString *)user
 {
-	return [self sendRequest:[NSString stringWithFormat:@"user/show/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse withParameters:nil];	    
+	return [self sendRequest:[NSString stringWithFormat:@"users/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse withParameters:nil];	    
     
 }
 
+
 - (NSString *)follow:(NSString *)user 
 {
- 	return [self sendRequest:[NSString stringWithFormat:@"user/follow/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubFollowResponse withParameters:nil];	    
+ 	return [self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubNoContentResponse withParameters:nil];	    
    
 }
 
+
 - (NSString *)unfollow:(NSString *)user
 {
- 	return [self sendRequest:[NSString stringWithFormat:@"user/unfollow/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubFollowResponse withParameters:nil];	        
+ 	return [self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubUnfollowRequest responseType:UAGithubNoContentResponse withParameters:nil];	        
 }
 
 

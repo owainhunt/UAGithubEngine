@@ -43,8 +43,9 @@
 */
 
 #pragma mark Users
-
+#pragma mark TODO Move to v3
 - (NSString *)user:(NSString *)user;
+- (NSString *)user;
 - (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email;
 - (NSString *)following:(NSString *)user;
 - (NSString *)followers:(NSString *)user;
@@ -53,6 +54,7 @@
 
 
 #pragma mark Repositories
+#pragma mark TODO Move to v3
 
 - (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
 - (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page;
@@ -81,12 +83,13 @@
 
 
 #pragma mark Commits
+#pragma mark TODO Move to v3
 
 - (NSString *)commitsForBranch:(NSString *)branchPath;
 - (NSString *)commit:(NSString *)commitPath;
 
 
-#pragma mark Milestones
+#pragma mark Milestones 
 
 - (NSString *)milestonesForRepository:(NSString *)repositoryPath;
 - (NSString *)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath;
@@ -107,6 +110,7 @@
 
 
 #pragma mark Labels
+#pragma mark TODO Move to v3
 
 - (NSString *)labelsForRepository:(NSString *)repositoryPath;
 - (NSString *)addLabel:(NSString *)label toRepository:(NSString *)repositoryPath;
@@ -115,7 +119,7 @@
 - (NSString *)removeLabel:(NSString *)label fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 
 
-#pragma mark Comments
+#pragma mark Comments 
 
 - (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
 - (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
@@ -125,11 +129,13 @@
 
 
 #pragma mark Trees
+#pragma mark TODO Move to v3
 
 - (NSString *)tree:(NSString *)treePath;
 
 
 #pragma mark Blobs
+#pragma mark TODO Move to v3
 
 - (NSString *)blobsForSHA:(NSString *)shaPath;
 - (NSString *)blob:(NSString *)blobPath;
