@@ -130,6 +130,16 @@
         case UAGithubIssueCommentEditRequest:
         case UAGithubIssueCommentDeleteRequest:
             
+        case UAGithubRepositoryLabelsRequest:
+        case UAGithubRepositoryLabelAddRequest:   
+        case UAGithubRepositoryLabelRemoveRequest:
+            
+        case UAGithubIssueLabelsRequest:
+        case UAGithubIssueLabelRequest:
+        case UAGithubIssueLabelAddRequest:
+        case UAGithubIssueLabelRemoveRequest:
+        case UAGithubIssueLabelReplaceRequest:
+            
         case UAGithubMilestoneRequest:
         case UAGithubMilestoneCreateRequest:
         case UAGithubMilestoneUpdateRequest:
@@ -207,6 +217,10 @@
 		case UAGithubCollaboratorRemoveRequest:
 		case UAGithubIssueCommentAddRequest:
         case UAGithubPublicKeyAddRequest:
+            
+        case UAGithubRepositoryLabelAddRequest:
+
+        case UAGithubIssueLabelAddRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -216,6 +230,7 @@
         case UAGithubIssueCommentEditRequest:
         case UAGithubPublicKeyEditRequest:
         case UAGithubUserEditRequest:
+        case UAGithubRepositoryLabelEditRequest:
         {
             [urlRequest setHTTPMethod:@"PATCH"];
         }
@@ -225,8 +240,16 @@
         case UAGithubIssueCommentDeleteRequest:
         case UAGithubUnfollowRequest:
         case UAGithubPublicKeyDeleteRequest:
+            
+        case UAGithubRepositoryLabelRemoveRequest:
+        case UAGithubIssueLabelRemoveRequest:
         {
             [urlRequest setHTTPMethod:@"DELETE"];
+        }
+            break;
+        case UAGithubIssueLabelReplaceRequest:
+        {
+            [urlRequest setHTTPMethod:@"PUT"];
         }
             break;
 		default:
@@ -650,15 +673,15 @@
 }
 
 
-- (NSString *)editLabel:(NSInteger)labelId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary
+- (NSString *)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary
 {
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%d", repositoryPath, labelId] requestType:UAGithubRepositoryLabelEditRequest responseType:UAGithubRepositoryLabelResponse withParameters:labelDictionary];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelEditRequest responseType:UAGithubRepositoryLabelResponse withParameters:labelDictionary];
 }
 
 
-- (NSString *)removeLabel:(NSInteger)labelId fromRepository:(NSString *)repositoryPath;
+- (NSString *)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath;
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%d", repositoryPath, labelId] requestType:UAGithubRepositoryLabelRemoveRequest responseType:UAGithubNoContentResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelRemoveRequest responseType:UAGithubNoContentResponse withParameters:nil];	
 }
 
 
@@ -668,24 +691,24 @@
 }*/
 
 
-/*- (NSString *)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath
+- (NSString *)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath
 {
     return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:labels];
-}*/
+}
 
 
-- (NSString *)removeLabel:(NSInteger)labelId fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
+- (NSString *)removeLabel:(NSString *)labelName fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels/%d", repositoryPath, issueNumber, labelId] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels/%@", repositoryPath, issueNumber, labelName] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse withParameters:nil];	
 }
 
 
 // modify sendRequest... to take an id as final parameter. If passed an array, send through as is.
 
-/*- (NSString *)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels
+- (NSString *)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels
 {
     return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelReplaceRequest responseType:UAGithubIssueLabelsResponse withParameters:labels];
-}*/
+}
 
 
 - (NSString *)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath

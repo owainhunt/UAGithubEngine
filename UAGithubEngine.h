@@ -126,15 +126,16 @@
 
 #pragma mark Labels
 #pragma mark TODO Move to v3
-// NOTE using label IDs rather than strings to identify now we're on v3
+// NOTE where it says ':id' in the documentation for a label, it actually should say ':name'
 - (NSString *)labelsForRepository:(NSString *)repositoryPath;
-- (NSString *)label:(NSInteger)labelId inRepository:(NSString *)repositoryPath;
+- (NSString *)label:(NSString *)labelName inRepository:(NSString *)repositoryPath;
 - (NSString *)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
-- (NSString *)editLabel:(NSInteger)labelId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
-- (NSString *)removeLabel:(NSInteger)labelId fromRepository:(NSString *)repositoryPath;
+- (NSString *)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
+- (NSString *)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath;
 - (NSString *)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath;
+// Note labels supplied to the following method must already exist within the repository
 - (NSString *)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath;
-- (NSString *)removeLabel:(NSInteger)labelId fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+- (NSString *)removeLabel:(NSString *)labelNamed fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 - (NSString *)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels;
 - (NSString *)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath;
 
