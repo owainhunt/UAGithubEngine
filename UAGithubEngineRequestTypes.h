@@ -16,8 +16,10 @@ typedef enum UAGithubRequestType
 	UAGithubRepositoriesRequest,					// Get more than one non-specific repository
 	UAGithubRepositoryRequest,						// Get exactly one specific repository
 	UAGithubRepositoryUpdateRequest,				// Update repository metadata
+    UAGithubRepositoryWatchingRequest,              // Auth'd user watching a specific repository?
 	UAGithubRepositoryWatchRequest,					// Watch a repository
 	UAGithubRepositoryUnwatchRequest,				// Unwatch a repository
+    UAGithubRepositoryForksRequest,                 // Get one or more forks
 	UAGithubRepositoryForkRequest,					// Fork a repository
 	UAGithubRepositoryCreateRequest,				// Create a repository
 	UAGithubRepositoryPrivatiseRequest,				// Make a repository private
@@ -25,14 +27,28 @@ typedef enum UAGithubRequestType
 	UAGithubRepositoryDeleteRequest,				// Delete a repository
 	UAGithubRepositoryDeleteConfirmationRequest,	// Confirm deletion of a repository
 	UAGithubDeployKeysRequest,						// Get repository-specific deploy keys
+    UAGithubDeployKeyRequest,                       // Get exactly one specific deploy key
 	UAGithubDeployKeyAddRequest,					// Add a repository-specific deploy key
+    UAGithubDeployKeyEditRequest,                   // Edit a deploy key
 	UAGithubDeployKeyDeleteRequest,					// Delete a repository-specific deploy key
 	UAGithubRepositoryLanguageBreakdownRequest,		// Get the language breakdown for a repository
+    UAGithubRepositoryContributorsRequest,          // Get one or more contributors
+    UAGithubRepositoryTeamsRequest,                 // Get one or more teams
 	UAGithubTagsRequest,							// Tags for a repository
 	UAGithubBranchesRequest,						// Branches for a repository
 	UAGithubCollaboratorsRequest,					// Collaborators for a repository
 	UAGithubCollaboratorAddRequest,					// Add a collaborator
 	UAGithubCollaboratorRemoveRequest,				// Remove a collaborator
+    UAGithubDownloadsRequest,                       // Get one or more downloads
+    UAGithubDownloadRequest,                        // Get exactly one specific download
+    UAGithubDownloadAddRequest,                     // Add a download
+    UAGithubDownloadDeleteRequest,                  // Delete a download
+    UAGithubRepositoryHooksRequest,                 // Get one or more repository hooks
+    UAGithubRepositoryHookRequest,                  // Get one specific repository hook
+    UAGithubRepositoryHookAddRequest,               // Add a repository hook
+    UAGithubRepositoryHookEditRequest,              // Edit a repository hook
+    UAGithubRepositoryHookTestRequest,              // Test a repository hook
+    UAGithubRepositoryHookDeleteRequest,            // Delete a repository hook
 	UAGithubCommitsRequest,							// Get more than one non-specific commit
 	UAGithubCommitRequest,							// Get exactly one specific commit
     UAGithubCommitCommentsRequest,                  // Get one or more commit comments
@@ -92,17 +108,23 @@ typedef enum UAGithubResponseType
 	UAGithubUserResponse,							// Exactly one user
 	UAGithubRepositoriesResponse,					// One or more repositories 
 	UAGithubRepositoryResponse,						// Exactly one repository
+    UAGithubRepositoryTeamsResponse,                // One or more teams
 	UAGithubDeleteRepositoryResponse,				// Token to send in delete confirmation request
 	UAGithubDeleteRepositoryConfirmationResponse,	// Confirmation of deletion
+    UAGithubDownloadsResponse,                      // One or more downloads
+    UAGithubDownloadResponse,                       // Exactly one download
 	UAGithubDeployKeysResponse,						// One or more deploy keys
+    UAGithubDeployKeyResponse,                      // Exactly one deploy key
 	UAGithubRepositoryLanguageBreakdownResponse,	// Breakdown in language-bytes pairs
 	UAGithubTagsResponse,							// Tags in name-SHA pairs
 	UAGithubBranchesResponse,						// Branches in name-SHA pairs
 	UAGithubCollaboratorsResponse,					// One or more usernames
+    UAGithubRepositoryHooksResponse,                // One or more repository hooks
+    UAGithubRepositoryHookResponse,                 // Exactly one repository hook
 	UAGithubCommitsResponse,						// One or more commits
 	UAGithubCommitResponse,							// Exactly one commit
     UAGithubCommitCommentsResponse,                 // One or more commit comments
-    UAGithubCommitCommentResponse,                   // Exactly one commit comment
+    UAGithubCommitCommentResponse,                  // Exactly one commit comment
 	UAGithubIssuesResponse,							// One or more issues
 	UAGithubIssueResponse,							// Exactly one issue
 	UAGithubIssueCommentsResponse,					// One or more issue comments
