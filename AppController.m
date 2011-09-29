@@ -49,17 +49,18 @@
 //  [githubEngine deleteMilestone:1 forRepository:@"owainhunt/uagithubengine"];
 //
 //	[githubEngine issuesForRepository:@"owainhunt/uagithubengine" withParameters:nil requestType:UAGithubIssuesRequest];
-//	[githubEngine issue:1 inRepository:@"owainhunt/uagithubengine"];
+//	[githubEngine issue:8 inRepository:@"owainhunt/uagithubengine"];
 //	[githubEngine editIssue:@"owainhunt/uagithubengine/1" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Test Issue [edited]", @"title", @"Test body [edited again]", @"body", nil]];
 //	[githubEngine addIssueForRepository:@"owainhunt/UAGithubEngine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"Testing basic auth", @"title", @"Test body", @"body", nil]];
 //	[githubEngine closeIssue:@"owainhunt/uagithubengine/1"];
 //	[githubEngine reopenIssue:@"owainhunt/uagithubengine/1"];
 //
-//	[githubEngine labelsForRepository:@"owainhunt/uagithubengine"];
+	[githubEngine labelsForRepository:@"owainhunt/uagithubengine"];
 //	[githubEngine addLabel:@"Super_Hyper_Mega_Bug" toIssue:1 inRepository:@"owainhunt/uagithubengine"];
-//	[githubEngine removeLabel:@"Mega Bug" fromIssue:1 inRepository:@"owainhunt/uagithubengine"];
-//	[githubEngine addLabel:@"Major_Bug_No_Really" toRepository:@"owainhunt/uagithubengine"];
-//	[githubEngine removeLabel:@"Feature Request" fromRepository:@"owainhunt/uagithubengine"];
+//	[githubEngine removeLabel:@"TODO" fromIssue:8 inRepository:@"owainhunt/uagithubengine"];
+//	[githubEngine addLabelToRepository:@"owainhunt/uagithubengine" withDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"test_label", @"name", @"000000", @"color", nil]];
+//	[githubEngine removeLabel:@"test_label" fromRepository:@"owainhunt/uagithubengine"];
+//  [githubEngine addLabels:[NSArray arrayWithObjects:@"TODO", nil] toIssue:8 inRepository:@"owainhunt/uagithubengine"];
 //	
 //	[githubEngine commentsForIssue:@"owainhunt/uagithubengine/1"];
 //	[githubEngine addComment:@"This thing is still awesome." toIssue:@"owainhunt/uagithubengine/1"];
