@@ -114,45 +114,16 @@
     
     switch (requestType) 
     {
-        // V3 Requests
-        
-        // NOT YET IN V3 case UAGithubIssuesClosedRequest:
-        // NOT YET IN V3 case UAGithubIssuesOpenRequest:
-        case UAGithubIssuesRequest:
-        case UAGithubIssueRequest:
-        case UAGithubIssueAddRequest:
-        case UAGithubIssueEditRequest:
-        case UAGithubIssueDeleteRequest:
-            
-        case UAGithubIssueCommentsRequest:
-        case UAGithubIssueCommentRequest:
-        case UAGithubIssueCommentAddRequest:
-        case UAGithubIssueCommentEditRequest:
-        case UAGithubIssueCommentDeleteRequest:
-            
-        case UAGithubRepositoryLabelsRequest:
-        case UAGithubRepositoryLabelAddRequest:   
-        case UAGithubRepositoryLabelRemoveRequest:
-            
-        case UAGithubIssueLabelsRequest:
-        case UAGithubIssueLabelRequest:
-        case UAGithubIssueLabelAddRequest:
-        case UAGithubIssueLabelRemoveRequest:
-        case UAGithubIssueLabelReplaceRequest:
-            
-        case UAGithubMilestoneRequest:
-        case UAGithubMilestoneCreateRequest:
-        case UAGithubMilestoneUpdateRequest:
-        case UAGithubMilestoneDeleteRequest:
-        case UAGithubMilestonesRequest:
-            
-        case UAGithubUserRequest:
-            urlString = [NSMutableString stringWithFormat:@"%@api.github.com/%@", API_PROTOCOL, path];
+        // V2 requests
+        case 0:
+
+            urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
+
             break;
         
-        // v2 Requests
+        // V3 Requests
         default:
-            urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
+            urlString = [NSMutableString stringWithFormat:@"%@api.github.com/%@", API_PROTOCOL, path];
             break;
     }
     
