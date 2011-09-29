@@ -31,7 +31,8 @@
 
 @interface UAGithubEngine (Private)
 
-- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(NSDictionary *)params;
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType;
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params;
 - (BOOL)isValidSelectorForDelegate:(SEL)selector;
 
 @end
@@ -242,6 +243,12 @@
 	
 	return connection.identifier;
 	
+}
+
+
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType
+{
+    return [self sendRequest:path requestType:requestType responseType:responseType];
 }
 
 
