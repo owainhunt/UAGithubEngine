@@ -30,7 +30,6 @@
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate withReachability:(BOOL)withReach;
-- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params;
 
 /*
  Where methods take a 'whateverPath' argument, supply the full path to 'whatever'.
@@ -64,28 +63,60 @@
 
 - (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
 - (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page;
+- (NSString *)repositories;
+- (NSString *)createRepositoryWithInfo:(NSDictionary *)infoDictionary;
 - (NSString *)repository:(NSString *)repositoryPath;
-- (NSString *)searchRepositories:(NSString *)query;
 - (NSString *)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
+- (NSString *)contributorsForRepository:(NSString *)repositoryPath;
+- (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath;
+- (NSString *)teamsForRepository:(NSString *)repositoryPath;
+- (NSString *)tagsForRepository:(NSString *)repositoryPath;
+- (NSString *)branchesForRepository:(NSString *)repositoryPath;
+
+- (NSString *)collaboratorsForRepository:(NSString *)repositoryName;
+- (NSString *)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath;
+- (NSString *)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath;
+- (NSString *)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
+
+- (NSString *)downloadsForRepository:(NSString *)repositoryPath;
+- (NSString *)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath;
+// NOTE see http://developer.github.com/v3/repos/downloads for more information: this is a two-part process!
+- (NSString *)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary;
+- (NSString *)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath;
+
+- (NSString *)forksForRepository:(NSString *)repositoryPath;
+- (NSString *)forkRepository:(NSString *)repositoryPath inOrganization:(NSString *)org;
+- (NSString *)forkRepository:(NSString *)repositoryPath;
+
+- (NSString *)deployKeysForRepository:(NSString *)repositoryName;
+- (NSString *)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath;
+- (NSString *)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
+- (NSString *)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary;
+- (NSString *)removeDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName;
+
+- (NSString *)watchersForRepository:(NSString *)repositoryPath;
+- (NSString *)watchedRepositoriesForUser:(NSString *)user;
+- (NSString *)watchedRepositories;
+- (NSString *)repositoryIsWatched:(NSString *)repositoryPath;
 - (NSString *)watchRepository:(NSString *)repositoryPath;
 - (NSString *)unwatchRepository:(NSString *)repositoryPath;
-- (NSString *)forkRepository:(NSString *)repositoryPath;
-- (NSString *)createRepositoryWithInfo:(NSDictionary *)infoDictionary;
+
+- (NSString *)hooksForRepository:(NSString *)repositoryPath;
+- (NSString *)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath;
+- (NSString *)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath;
+- (NSString *)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary;
+- (NSString *)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath;
+- (NSString *)removeHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath;
+
+/* NOT YET IMPLEMENTED
+- (NSString *)searchRepositories:(NSString *)query;
 - (NSString *)deleteRepository:(NSString *)repositoryName;
 - (NSString *)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken;
 - (NSString *)privatiseRepository:(NSString *)repositoryName;
 - (NSString *)publiciseRepository:(NSString *)repositoryName;
-- (NSString *)deployKeysForRepository:(NSString *)repositoryName;
-- (NSString *)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
-- (NSString *)removeDeployKey:(NSString *)keyID fromRepository:(NSString *)repositoryName;
-- (NSString *)collaboratorsForRepository:(NSString *)repositoryName;
-- (NSString *)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryName;
-- (NSString *)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
 - (NSString *)pushableRepositories;
 - (NSString *)networkForRepository:(NSString *)repositoryPath;
-- (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath;
-- (NSString *)tagsForRepository:(NSString *)repositoryPath;
-- (NSString *)branchesForRepository:(NSString *)repositoryPath;
+ */
 
 
 #pragma mark Commits
@@ -125,7 +156,7 @@
 
 
 #pragma mark Labels
-#pragma mark TODO Move to v3
+
 // NOTE where it says ':id' in the documentation for a label, it actually should say ':name'
 - (NSString *)labelsForRepository:(NSString *)repositoryPath;
 - (NSString *)label:(NSString *)labelName inRepository:(NSString *)repositoryPath;
@@ -133,7 +164,7 @@
 - (NSString *)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
 - (NSString *)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath;
 - (NSString *)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath;
-// Note labels supplied to the following method must already exist within the repository
+// Note labels supplied to the following method must already exist within the repository (-addLabelToRepository:...)
 - (NSString *)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath;
 - (NSString *)removeLabel:(NSString *)labelNamed fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
 - (NSString *)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels;
