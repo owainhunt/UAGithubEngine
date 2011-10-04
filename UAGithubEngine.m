@@ -388,7 +388,418 @@
 }
 
 
+#pragma mark 
+#pragma mark Gists
+#pragma mark
+
+- (NSString *)gistsForUser:(NSString *)user
+{
+    return nil;
+}
+
+
+- (NSString *)gists
+{
+    return nil;
+
+}
+
+- (NSString *)publicGists
+{
+    return nil;
+}
+
+
+- (NSString *)starredGists
+{
+    return nil;
+}
+
+
+- (NSString *)gist:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+- (NSString *)createGist:(NSDictionary *)gistDictionary
+{
+    return nil;
+}
+
+
+- (NSString *)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary
+{
+    return nil;
+}
+
+
+- (NSString *)starGist:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+- (NSString *)unstarGist:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+- (NSString *)gistIsStarred:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+- (NSString *)forkGist:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+- (NSString *)deleteGist:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+#pragma mark Comments
+
+- (NSString *)commentsForGist:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+- (NSString *)gistComment:(NSString *)commentId
+{
+    return nil;
+}
+
+
+- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId
+{
+    return nil;
+}
+
+
+- (NSString *)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary
+{
+    return nil;
+}
+
+
+- (NSString *)deleteGistComment:(NSString *)commentId
+{
+    return nil;
+}
+
+
+#pragma mark
+#pragma mark Issues 
+#pragma mark
+
+- (NSString *)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType
+{
+	// Use UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues, UAGithubIssuesRequest for all issues.
+    
+	switch (requestType) {
+		case UAGithubIssuesOpenRequest:
+			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:parameters];
+			break;
+            
+		case UAGithubIssuesClosedRequest:
+			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=closed", repositoryPath] requestType:UAGithubIssuesClosedRequest responseType:UAGithubIssuesResponse withParameters:parameters];
+			break;
+            
+        case UAGithubIssuesRequest:
+		default:
+            return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssueResponse withParameters:parameters];
+			break;
+	}
+	return nil;
+}
+
+
+- (NSString *)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse];	
+}
+
+
+- (NSString *)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
+}
+
+
+- (NSString *)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
+}
+
+
+- (NSString *)closeIssue:(NSString *)issuePath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] requestType:UAGithubIssueCloseRequest responseType:UAGithubIssueResponse];	
+}
+
+
+- (NSString *)reopenIssue:(NSString *)issuePath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] requestType:UAGithubIssueReopenRequest responseType:UAGithubIssueResponse];	
+}
+
+
+- (NSString *)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse];	
+}
+
+#pragma mark Comments
+
+- (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath
+{
+ 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentsRequest responseType:UAGithubIssueCommentsResponse];	
+}
+
+
+- (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentRequest responseType:UAGithubIssueCommentResponse];
+}
+
+
+- (NSString *)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
+{
+	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"body"];
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentAddRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
+	
+}
+
+
+- (NSString *)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody
+{
+    NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:commentBody forKey:@"body"];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/:user/:repo/issues/comments/:id", repositoryPath, commentNumber] requestType:UAGithubIssueCommentEditRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
+}
+
+
+- (NSString *)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentDeleteRequest responseType:UAGithubIssueCommentResponse];
+}
+
+
+#pragma mark Events
+
+- (NSString *)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)eventsForRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)event:(NSInteger)eventId forRepository:(NSString*)repositoryPath
+{
+    return nil;
+}
+
+
+#pragma mark Labels
+
+- (NSString *)labelsForRepository:(NSString *)repositoryPath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels", repositoryPath] requestType:UAGithubRepositoryLabelsRequest responseType:UAGithubRepositoryLabelsResponse];	
+}
+
+
+- (NSString *)label:(NSString *)labelName inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubIssueLabelRequest responseType:UAGithubIssueLabelResponse];
+}
+
+- (NSString *)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels", repositoryPath] requestType:UAGithubRepositoryLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:labelDictionary];	
+}
+
+
+- (NSString *)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelEditRequest responseType:UAGithubRepositoryLabelResponse withParameters:labelDictionary];
+}
+
+
+- (NSString *)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath;
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelRemoveRequest responseType:UAGithubNoContentResponse];	
+}
+
+
+/*- (NSString *)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
+ {
+ return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse];	
+ }*/
+
+
+- (NSString *)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:labels];
+}
+
+
+- (NSString *)removeLabel:(NSString *)labelName fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels/%@", repositoryPath, issueNumber, labelName] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse];	
+}
+
+
+// modify sendRequest... to take an id as final parameter. If passed an array, send through as is.
+
+- (NSString *)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelReplaceRequest responseType:UAGithubIssueLabelsResponse withParameters:labels];
+}
+
+
+- (NSString *)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelsRequest responseType:UAGithubIssueLabelsResponse];
+}
+
+
+- (NSString *)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d/labels", repositoryPath, milestoneId] requestType:UAGithubIssueLabelsRequest responseType:UAGithubIssueLabelsResponse];
+}
+
+
+#pragma mark Milestones
+
+- (NSString *)milestonesForRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestonesRequest responseType:UAGithubMilestonesResponse];
+}
+
+
+- (NSString *)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneRequest responseType:UAGithubMilestoneResponse];
+}
+
+
+- (NSString *)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestoneCreateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary];
+}
+
+
+- (NSString *)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneUpdateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary]; 
+}
+
+
+- (NSString *)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneDeleteRequest responseType:UAGithubMilestoneResponse];
+}
+
+
+#pragma mark
+#pragma mark Pull Requests
+#pragma mark
+
+- (NSString *)pullRequestsForRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)pullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary
+{
+    return nil;
+}
+
+
+- (NSString *)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)filesInPullRequest:(NSInteger)pullRequestID forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+#pragma mark Comments
+
+- (NSString *)commentsForPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+- (NSString *)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary
+{
+    return nil;
+}
+
+
+- (NSString *)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath
+{
+    return nil;
+}
+
+
+#pragma mark
 #pragma mark Repositories
+#pragma mark
 
 - (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched
 {
@@ -462,6 +873,8 @@
 }
 
 
+#pragma mark Collaborators
+
 - (NSString *)collaboratorsForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators", repositoryPath] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse];	
@@ -485,6 +898,60 @@
 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators/%@", repositoryPath, collaborator] requestType:UAGithubCollaboratorRemoveRequest responseType:UAGithubCollaboratorsResponse];
 }
 
+
+#pragma mark Commits
+
+- (NSString *)commitsForRepository:(NSString *)repositoryPath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits", repositoryPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse];	
+}
+
+
+- (NSString *)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath
+{
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@", repositoryPath, commitSha] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse];	
+}
+
+
+#pragma mark Commit Comments
+
+- (NSString *)commitCommentsForRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments", repositoryPath] requestType:UAGithubCommitCommentsRequest responseType:UAGithubCommitCommentsResponse];
+}
+
+
+- (NSString *)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentsResponse];
+}
+
+
+- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentAddRequest responseType:UAGithubCommitCommentResponse withParameters:commentDictionary];
+}
+
+
+- (NSString *)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentResponse];
+}
+
+
+- (NSString *)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentEditRequest responseType:UAGithubCommitCommentResponse withParameters:infoDictionary];
+}
+
+
+- (NSString *)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentDeleteRequest responseType:UAGithubNoContentResponse];
+}
+
+
+#pragma mark Downloads
 
 - (NSString *)downloadsForRepository:(NSString *)repositoryPath
 {
@@ -510,6 +977,8 @@
 }
 
 
+#pragma mark Forks
+
 - (NSString *)forksForRepository:(NSString *)repositoryPath
 {
     return [self sendRequest:[NSString stringWithFormat:@"repos/%@/forks", repositoryPath] requestType:UAGithubRepositoryForksRequest responseType:UAGithubRepositoriesResponse];
@@ -531,6 +1000,8 @@
     return [self forkRepository:repositoryPath inOrganization:nil];
 }
 
+
+#pragma mark Keys
 
 - (NSString *)deployKeysForRepository:(NSString *)repositoryName
 {
@@ -565,6 +1036,7 @@
 }
 
 
+#pragma mark Watching
 
 - (NSString *)watchersForRepository:(NSString *)repositoryPath
 {
@@ -602,6 +1074,8 @@
 	return [self sendRequest:[NSString stringWithFormat:@"user/watched/%@", repositoryPath] requestType:UAGithubRepositoryUnwatchRequest responseType:UAGithubNoContentResponse];
 }
 
+
+#pragma mark Hooks
 
 - (NSString *)hooksForRepository:(NSString *)repositoryPath
 {
@@ -678,202 +1152,10 @@
 }
 */
 
-#pragma mark Milestones
 
-- (NSString *)milestonesForRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestonesRequest responseType:UAGithubMilestonesResponse];
-}
-
-
-- (NSString *)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneRequest responseType:UAGithubMilestoneResponse];
-}
-
-
-- (NSString *)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestoneCreateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary];
-}
-
-
-- (NSString *)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneUpdateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary]; 
-}
-
-
-- (NSString *)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneDeleteRequest responseType:UAGithubMilestoneResponse];
-}
-
-
-#pragma mark Issues 
-
-- (NSString *)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType
-{
-	// Use UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues, UAGithubIssuesRequest for all issues.
-
-	switch (requestType) {
-		case UAGithubIssuesOpenRequest:
-			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:parameters];
-			break;
-            
-		case UAGithubIssuesClosedRequest:
-			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=closed", repositoryPath] requestType:UAGithubIssuesClosedRequest responseType:UAGithubIssuesResponse withParameters:parameters];
-			break;
-            
-        case UAGithubIssuesRequest:
-		default:
-            return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssueResponse withParameters:parameters];
-			break;
-	}
-	return nil;
-}
-
-
-- (NSString *)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse];	
-}
-
-
-- (NSString *)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary;
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
-}
-
-
-- (NSString *)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary];	
-}
-
-
-- (NSString *)closeIssue:(NSString *)issuePath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] requestType:UAGithubIssueCloseRequest responseType:UAGithubIssueResponse];	
-}
-
-
-- (NSString *)reopenIssue:(NSString *)issuePath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] requestType:UAGithubIssueReopenRequest responseType:UAGithubIssueResponse];	
-}
-
-
-- (NSString *)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse];	
-}
-
-#pragma mark Labels
-
-- (NSString *)labelsForRepository:(NSString *)repositoryPath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels", repositoryPath] requestType:UAGithubRepositoryLabelsRequest responseType:UAGithubRepositoryLabelsResponse];	
-}
-
-
-- (NSString *)label:(NSString *)labelName inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubIssueLabelRequest responseType:UAGithubIssueLabelResponse];
-}
-
-- (NSString *)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary;
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels", repositoryPath] requestType:UAGithubRepositoryLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:labelDictionary];	
-}
-
-
-- (NSString *)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelEditRequest responseType:UAGithubRepositoryLabelResponse withParameters:labelDictionary];
-}
-
-
-- (NSString *)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath;
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelRemoveRequest responseType:UAGithubNoContentResponse];	
-}
-
-
-/*- (NSString *)addLabel:(NSString *)label toIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"issues/label/add/%@/%@/%d", repositoryPath, [label encodedString], issueNumber] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse];	
-}*/
-
-
-- (NSString *)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:labels];
-}
-
-
-- (NSString *)removeLabel:(NSString *)labelName fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels/%@", repositoryPath, issueNumber, labelName] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse];	
-}
-
-
-// modify sendRequest... to take an id as final parameter. If passed an array, send through as is.
-
-- (NSString *)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelReplaceRequest responseType:UAGithubIssueLabelsResponse withParameters:labels];
-}
-
-
-- (NSString *)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelsRequest responseType:UAGithubIssueLabelsResponse];
-}
-
-
-- (NSString *)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d/labels", repositoryPath, milestoneId] requestType:UAGithubIssueLabelsRequest responseType:UAGithubIssueLabelsResponse];
-}
-
-
-#pragma mark Comments
-
-- (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath
-{
- 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentsRequest responseType:UAGithubIssueCommentsResponse];	
-}
-
-
-- (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentRequest responseType:UAGithubIssueCommentResponse];
-}
-
-
-- (NSString *)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
-{
-	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"body"];
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentAddRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
-	
-}
-
-
-- (NSString *)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody
-{
-    NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:commentBody forKey:@"body"];
-    return [self sendRequest:[NSString stringWithFormat:@"repos/:user/:repo/issues/comments/:id", repositoryPath, commentNumber] requestType:UAGithubIssueCommentEditRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary];
-}
-
-
-- (NSString *)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentDeleteRequest responseType:UAGithubIssueCommentResponse];
-}
-
-
+#pragma mark
 #pragma mark Users
+#pragma mark 
 
 - (NSString *)user:(NSString *)user
 {
@@ -893,10 +1175,38 @@
 }
 
 
-#pragma mark TODO is in v3?
-- (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email
+#pragma mark Emails
+
+- (NSString *)emailAddresses
 {
-	return [self sendRequest:[NSString stringWithFormat:@"user/%@/%@", email ? @"email" : @"search", query] requestType:UAGithubUserRequest responseType:UAGithubUsersResponse];	
+    return nil;
+}
+
+
+- (NSString *)addEmailAddresses:(NSArray *)emails
+{
+    return nil;
+}
+
+
+- (NSString *)deleteEmailAddresses:(NSArray *)emails
+{
+    return nil;
+}
+
+
+#pragma mark Followers
+
+- (NSString *)followers:(NSString *)user
+{
+	return [self sendRequest:[NSString stringWithFormat:@"users/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse];	    
+    
+}
+
+
+- (NSString *)followers
+{
+    return [self sendRequest:@"user/followers" requestType:UAGithubUsersRequest responseType:UAGithubFollowersResponse];
 }
 
 
@@ -906,10 +1216,15 @@
 }
 
 
-- (NSString *)followers:(NSString *)user
+- (NSString *)followedBy:(NSString *)user
 {
-	return [self sendRequest:[NSString stringWithFormat:@"users/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse];	    
-    
+    return nil;
+}
+
+
+- (NSString *)follows:(NSString *)user
+{
+    return nil;
 }
 
 
@@ -925,6 +1240,8 @@
  	return [self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubUnfollowRequest responseType:UAGithubNoContentResponse];	        
 }
 
+
+#pragma mark Keys
 
 - (NSString *)publicKeys
 {
@@ -962,61 +1279,10 @@
 }
 
 
-#pragma mark Commits
-
-- (NSString *)commitsForRepository:(NSString *)repositoryPath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits", repositoryPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse];	
-}
-
-
-- (NSString *)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@", repositoryPath, commitSha] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse];	
-}
-	
-
-#pragma mark Commit Comments
-
-- (NSString *)commitCommentsForRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments", repositoryPath] requestType:UAGithubCommitCommentsRequest responseType:UAGithubCommitCommentsResponse];
-}
-
-
-- (NSString *)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentsResponse];
-}
-
-
-- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentAddRequest responseType:UAGithubCommitCommentResponse withParameters:commentDictionary];
-}
-
-
-- (NSString *)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentResponse];
-}
-
-
-- (NSString *)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentEditRequest responseType:UAGithubCommitCommentResponse withParameters:infoDictionary];
-}
-
-
-- (NSString *)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentDeleteRequest responseType:UAGithubNoContentResponse];
-}
-
-
 #pragma mark -
 #pragma mark Git Database API
 #pragma mark -
+
 #pragma mark Trees
 
 - (NSString *)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive;
