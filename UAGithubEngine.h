@@ -80,7 +80,7 @@
 
 - (NSString *)downloadsForRepository:(NSString *)repositoryPath;
 - (NSString *)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath;
-// NOTE see http://developer.github.com/v3/repos/downloads for more information: this is a two-part process!
+// See http://developer.github.com/v3/repos/downloads for more information: this is a two-part process.
 - (NSString *)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary;
 - (NSString *)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath;
 
@@ -117,15 +117,6 @@
 - (NSString *)pushableRepositories;
 - (NSString *)networkForRepository:(NSString *)repositoryPath;
  */
-
-
-#pragma mark References
-
-- (NSString *)reference:(NSString *)reference inRepository:(NSString *)repositoryPath;
-- (NSString *)referencesInRepository:(NSString *)repositoryPath;
-- (NSString *)tagsForRepository:(NSString *)repositoryPath;
-- (NSString *)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath;
-- (NSString *)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary;
 
 
 #pragma mark Commits
@@ -189,6 +180,13 @@
 - (NSString *)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
 
 
+#pragma mark -
+#pragma mark Git Database API
+#pragma mark -
+
+// The following methods access the Git Database API.
+// See http://developer.github.com/v3/git/ for more information.
+
 #pragma mark Trees
 
 - (NSString *)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive;
@@ -204,5 +202,26 @@
 - (NSString *)rawBlob:(NSString *)blobPath;
  */
  
+
+#pragma mark References
+
+- (NSString *)reference:(NSString *)reference inRepository:(NSString *)repositoryPath;
+- (NSString *)referencesInRepository:(NSString *)repositoryPath;
+- (NSString *)tagsForRepository:(NSString *)repositoryPath;
+- (NSString *)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath;
+- (NSString *)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary;
+
+
+#pragma mark Tags
+
+- (NSString *)tag:(NSString *)sha inRepository:(NSString *)repositoryPath;
+- (NSString *)createTagObject:(NSDictionary *)tagDictionary inRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Raw Commits
+
+- (NSString *)rawCommit:(NSString *)commit inRepository:(NSString *)repositoryPath;
+- (NSString *)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath;
+
 
 @end
