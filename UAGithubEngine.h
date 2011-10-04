@@ -181,9 +181,9 @@
 
 
 #pragma mark Trees
-#pragma mark TODO Move to v3
 
-- (NSString *)tree:(NSString *)treePath;
+- (NSString *)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive;
+- (NSString *)createTree:(NSDictionary *)treeDictionary inRepository:(NSString *)repositoryPath;
 
 
 #pragma mark Blobs

@@ -193,6 +193,8 @@
         case UAGithubRepositoryLabelAddRequest:
 
         case UAGithubIssueLabelAddRequest:
+            
+        case UAGithubTreeCreateRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -1005,9 +1007,15 @@
 
 #pragma mark Trees
 
-- (NSString *)tree:(NSString *)treePath
+- (NSString *)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive;
 {
-	return [self sendRequest:[NSString stringWithFormat:@"tree/show/%@", treePath] requestType:UAGithubTreeRequest responseType:UAGithubTreeResponse];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/trees/%@%@", repositoryPath, sha, recursive ? @"?recursive=1" : @""] requestType:UAGithubTreeRequest responseType:UAGithubTreeResponse];	
+}
+
+
+- (NSString *)createTree:(NSDictionary *)treeDictionary inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/trees", repositoryPath] requestType:UAGithubTreeCreateRequest responseType:UAGithubTreeResponse withParameters:treeDictionary];
 }
 
 
