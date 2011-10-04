@@ -79,12 +79,6 @@ typedef enum UAGithubRequestType
 	UAGithubIssueCommentAddRequest,					// Add a comment to an issue
     UAGithubIssueCommentEditRequest,                // Edit an issue comment
     UAGithubIssueCommentDeleteRequest,              // Delete an issue comment
-	UAGithubTreeRequest,							// Get the listing of a tree by SHA
-    UAGithubTreeCreateRequest,                      // Create a new tree
-	UAGithubBlobsRequest,							// Get the names and SHAs of all blobs for a specific tree SHA
-	UAGithubBlobRequest,							// Get data about a single blob by tree SHA and path
-    UAGithubBlobCreateRequest,                      // Create a new blob
-	UAGithubRawBlobRequest,							// Get the raw data for a blob
     UAGithubFollowingRequest,                       // Following 
     UAGithubFollowersRequest,                       // Followers
     UAGithubFollowRequest,                          // Follow a User
@@ -99,10 +93,20 @@ typedef enum UAGithubRequestType
     UAGithubPublicKeyAddRequest,                    // Add a public key
     UAGithubPublicKeyEditRequest,                   // Edit a public key
     UAGithubPublicKeyDeleteRequest,                 // Delete a public key
+	UAGithubTreeRequest,							// Get the listing of a tree by SHA
+    UAGithubTreeCreateRequest,                      // Create a new tree
+	UAGithubBlobsRequest,							// Get the names and SHAs of all blobs for a specific tree SHA
+	UAGithubBlobRequest,							// Get data about a single blob by tree SHA and path
+    UAGithubBlobCreateRequest,                      // Create a new blob
+	UAGithubRawBlobRequest,							// Get the raw data for a blob
     UAGithubReferencesRequest,                      // Get one or more references
     UAGithubReferenceRequest,                       // Get exactly one reference
     UAGithubReferenceCreateRequest,                 // Create a new reference
     UAGithubReferenceUpdateRequest,                 // Edit an existing reference
+    UAGithubTagObjectRequest,                       // Get eactly one annotated tag object
+    UAGithubTagObjectCreateRequest,                 // Create a new annotated tag object
+    UAGithubRawCommitRequest,                       // Get exactly one raw commit
+    UAGithubRawCommitCreateRequest,                 // Create a new raw commit
 
 } UAGithubRequestType;
 
@@ -139,7 +143,6 @@ typedef enum UAGithubResponseType
     UAGithubIssueLabelResponse,                     // Exactly one issue label
 	UAGithubRepositoryLabelsResponse,				// One or more repository-wide issue labels
     UAGithubRepositoryLabelResponse,                // Exactly one repository-wide issue label
-	UAGithubTreeResponse,							// Metadata for all files in given commit
 	UAGithubBlobsResponse,							// Name and SHA for all files in given tree SHA
 	UAGithubBlobResponse,							// Metadata and file data for given tree SHA and path 
 	UAGithubRawBlobResponse,						// Raw file
@@ -151,7 +154,10 @@ typedef enum UAGithubResponseType
     UAGithubPublicKeysResponse,                     // One or more public keys
     UAGithubPublicKeyResponse,                      // Exactly one public key
     UAGithubSHAResponse,                            // SHA
+	UAGithubTreeResponse,							// Metadata for all files in given commit
     UAGithubReferencesResponse,                     // One or more references
     UAGithubReferenceResponse,                      // Exactly one reference
+    UAGithubTagObjectResponse,                      // Exactly one annotated tag object
+    UAGithubRawCommitResponse,                      // Exactly one raw commit
 	
 } UAGithubResponseType;

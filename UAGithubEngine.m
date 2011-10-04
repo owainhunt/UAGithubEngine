@@ -186,6 +186,7 @@
         case UAGithubTreeCreateRequest:            
         case UAGithubBlobCreateRequest:            
         case UAGithubReferenceCreateRequest:
+        case UAGithubRawCommitCreateRequest:
             
 		{
 			[urlRequest setHTTPMethod:@"POST"];
@@ -955,35 +956,9 @@
 }
 
 
-#pragma mark References
-
-- (NSString *)reference:(NSString *)reference inRepository:(NSString *)repositoryPath
+- (NSString *)createTagObject:(NSDictionary *)tagDictionary inRepository:(NSString *)repositoryPath
 {
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceRequest responseType:UAGithubReferenceResponse];
-}
-
-
-- (NSString *)referencesInRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse];
-}
-
-
-- (NSString *)tagsForRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/tags", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse];
-}
-
-
-- (NSString *)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferenceCreateRequest responseType:UAGithubReferenceResponse withParameters:refDictionary];
-}
-
-
-- (NSString *)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary
-{
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceUpdateRequest responseType:UAGithubReferenceResponse withParameters:referenceDictionary];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags", repositoryPath] requestType:UAGithubTagObjectCreateRequest responseType:UAGithubTagObjectResponse withParameters:tagDictionary];
 }
 
 
@@ -1039,7 +1014,9 @@
 }
 
 
-
+#pragma mark -
+#pragma mark Git Database API
+#pragma mark -
 #pragma mark Trees
 
 - (NSString *)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive;
@@ -1068,7 +1045,63 @@
 }
 
 
+#pragma mark References
+
+- (NSString *)reference:(NSString *)reference inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceRequest responseType:UAGithubReferenceResponse];
+}
+
+
+- (NSString *)referencesInRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse];
+}
+
+
+- (NSString *)tagsForRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/tags", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse];
+}
+
+
+- (NSString *)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferenceCreateRequest responseType:UAGithubReferenceResponse withParameters:refDictionary];
+}
+
+
+- (NSString *)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceUpdateRequest responseType:UAGithubReferenceResponse withParameters:referenceDictionary];
+}
+
+
+#pragma mark Tags
+
+- (NSString *)tag:(NSString *)sha inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags/%@", repositoryPath, sha] requestType:UAGithubTagObjectRequest responseType:UAGithubTagObjectResponse];
+}
+
+
+#pragma mark Raw Commits
+
+- (NSString *)rawCommit:(NSString *)commit inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/commits/%@", repositoryPath, commit] requestType:UAGithubRawCommitRequest responseType:UAGithubRawCommitResponse];
+}
+
+
+- (NSString *)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/commits", repositoryPath] requestType:UAGithubRawCommitCreateRequest responseType:UAGithubRawCommitResponse withParameters:commitDictionary];
+}
+
+
+#pragma mark -
 #pragma mark NSURLConnection Delegate Methods
+#pragma mark -
 
 - (void)connection:(UAGithubURLConnection *)connection didFailWithError:(NSError *)error
 {
