@@ -83,6 +83,7 @@ typedef enum UAGithubRequestType
     UAGithubTreeCreateRequest,                      // Create a new tree
 	UAGithubBlobsRequest,							// Get the names and SHAs of all blobs for a specific tree SHA
 	UAGithubBlobRequest,							// Get data about a single blob by tree SHA and path
+    UAGithubBlobCreateRequest,                      // Create a new blob
 	UAGithubRawBlobRequest,							// Get the raw data for a blob
     UAGithubFollowingRequest,                       // Following 
     UAGithubFollowersRequest,                       // Followers
@@ -145,5 +146,6 @@ typedef enum UAGithubResponseType
     UAGithubMilestoneResponse,                      // Exactly one milestone
     UAGithubPublicKeysResponse,                     // One or more public keys
     UAGithubPublicKeyResponse,                      // Exactly one public key
+    UAGithubSHAResponse,                            // SHA
 	
 } UAGithubResponseType;

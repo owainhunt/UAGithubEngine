@@ -187,11 +187,13 @@
 
 
 #pragma mark Blobs
-#pragma mark TODO Move to v3
 
-- (NSString *)blobsForSHA:(NSString *)shaPath;
+- (NSString *)blobForSHA:(NSString *)sha inRepository:(NSString *)repositoryPath;
+- (NSString *)createBlob:(NSDictionary *)blobDictionary inRepository:(NSString *)repositoryPath;
+/*
 - (NSString *)blob:(NSString *)blobPath;
 - (NSString *)rawBlob:(NSString *)blobPath;
+ */
  
 
 @end
