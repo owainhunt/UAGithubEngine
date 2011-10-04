@@ -41,110 +41,36 @@
  See the documentation for more details on updating repositories, and adding and editing issues.
 */
 
-#pragma mark Users
+#pragma mark
+#pragma mark Gists
+#pragma mark
 
-- (NSString *)user:(NSString *)user;
-- (NSString *)user;
-- (NSString *)editUser:(NSDictionary *)userDictionary;
-- (NSString *)searchUsers:(NSString *)query byEmail:(BOOL)email;
-- (NSString *)following:(NSString *)user;
-- (NSString *)followers:(NSString *)user;
-- (NSString *)follow:(NSString *)user;
-- (NSString *)unfollow:(NSString *)user;
-- (NSString *)publicKeys;
-- (NSString *)publicKey:(NSInteger)keyId;
-- (NSString *)addPublicKey:(NSDictionary *)keyDictionary;
-- (NSString *)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary;
-- (NSString *)deletePublicKey:(NSInteger)keyId;
-
-
-#pragma mark Repositories
-#pragma mark TODO Move to v3
-
-- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
-- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page;
-- (NSString *)repositories;
-- (NSString *)createRepositoryWithInfo:(NSDictionary *)infoDictionary;
-- (NSString *)repository:(NSString *)repositoryPath;
-- (NSString *)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
-- (NSString *)contributorsForRepository:(NSString *)repositoryPath;
-- (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath;
-- (NSString *)teamsForRepository:(NSString *)repositoryPath;
-- (NSString *)annotatedTagsForRepository:(NSString *)repositoryPath;
-- (NSString *)branchesForRepository:(NSString *)repositoryPath;
-
-- (NSString *)collaboratorsForRepository:(NSString *)repositoryName;
-- (NSString *)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath;
-- (NSString *)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath;
-- (NSString *)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
-
-- (NSString *)downloadsForRepository:(NSString *)repositoryPath;
-- (NSString *)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath;
-// See http://developer.github.com/v3/repos/downloads for more information: this is a two-part process.
-- (NSString *)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary;
-- (NSString *)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath;
-
-- (NSString *)forksForRepository:(NSString *)repositoryPath;
-- (NSString *)forkRepository:(NSString *)repositoryPath inOrganization:(NSString *)org;
-- (NSString *)forkRepository:(NSString *)repositoryPath;
-
-- (NSString *)deployKeysForRepository:(NSString *)repositoryName;
-- (NSString *)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath;
-- (NSString *)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
-- (NSString *)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary;
-- (NSString *)removeDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName;
-
-- (NSString *)watchersForRepository:(NSString *)repositoryPath;
-- (NSString *)watchedRepositoriesForUser:(NSString *)user;
-- (NSString *)watchedRepositories;
-- (NSString *)repositoryIsWatched:(NSString *)repositoryPath;
-- (NSString *)watchRepository:(NSString *)repositoryPath;
-- (NSString *)unwatchRepository:(NSString *)repositoryPath;
-
-- (NSString *)hooksForRepository:(NSString *)repositoryPath;
-- (NSString *)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath;
-- (NSString *)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath;
-- (NSString *)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary;
-- (NSString *)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath;
-- (NSString *)removeHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath;
-
-/* NOT YET IMPLEMENTED
-- (NSString *)searchRepositories:(NSString *)query;
-- (NSString *)deleteRepository:(NSString *)repositoryName;
-- (NSString *)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken;
-- (NSString *)privatiseRepository:(NSString *)repositoryName;
-- (NSString *)publiciseRepository:(NSString *)repositoryName;
-- (NSString *)pushableRepositories;
-- (NSString *)networkForRepository:(NSString *)repositoryPath;
- */
+- (NSString *)gistsForUser:(NSString *)user;
+- (NSString *)gists;
+- (NSString *)publicGists;
+- (NSString *)starredGists;
+- (NSString *)gist:(NSInteger)gistId;
+- (NSString *)createGist:(NSDictionary *)gistDictionary;
+- (NSString *)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary;
+- (NSString *)starGist:(NSInteger)gistId;
+- (NSString *)unstarGist:(NSInteger)gistId;
+- (NSString *)gistIsStarred:(NSInteger)gistId;
+- (NSString *)forkGist:(NSInteger)gistId;
+- (NSString *)deleteGist:(NSInteger)gistId;
 
 
-#pragma mark Commits
+#pragma mark Comments
 
-- (NSString *)commitsForRepository:(NSString *)repositoryPath;
-- (NSString *)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath;
-
-
-#pragma mark Commit Comments
-
-- (NSString *)commitCommentsForRepository:(NSString *)repositoryPath;
-- (NSString *)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath;
-- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath;
-- (NSString *)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath;
-- (NSString *)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary;
-- (NSString *)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath;
+- (NSString *)commentsForGist:(NSInteger)gistId;
+- (NSString *)gistComment:(NSString *)commentId;
+- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId;
+- (NSString *)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary;
+- (NSString *)deleteGistComment:(NSString *)commentId;
 
 
-#pragma mark Milestones 
-
-- (NSString *)milestonesForRepository:(NSString *)repositoryPath;
-- (NSString *)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath;
-- (NSString *)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath;
-- (NSString *)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
-- (NSString *)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath;
-
-
+#pragma mark
 #pragma mark Issues 
+#pragma mark
 
 - (NSString *)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType;
 - (NSString *)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
@@ -153,6 +79,22 @@
 - (NSString *)closeIssue:(NSString *)issuePath;
 - (NSString *)reopenIssue:(NSString *)issuePath;
 - (NSString *)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Comments 
+
+- (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody;
+- (NSString *)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Events
+
+- (NSString *)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath;
+- (NSString *)eventsForRepository:(NSString *)repositoryPath;
+- (NSString *)event:(NSInteger)eventId forRepository:(NSString*)repositoryPath;
 
 
 #pragma mark Labels
@@ -171,13 +113,168 @@
 - (NSString *)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath;
 
 
-#pragma mark Issue Comments 
+#pragma mark Milestones 
 
-- (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
-- (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
-- (NSString *)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
-- (NSString *)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody;
-- (NSString *)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)milestonesForRepository:(NSString *)repositoryPath;
+- (NSString *)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath;
+- (NSString *)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath;
+- (NSString *)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
+- (NSString *)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath;
+
+
+#pragma mark
+#pragma mark Pull Requests
+#pragma mark
+
+- (NSString *)pullRequestsForRepository:(NSString *)repositoryPath;
+- (NSString *)pullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
+- (NSString *)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath;
+- (NSString *)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary;
+- (NSString *)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
+- (NSString *)filesInPullRequest:(NSInteger)pullRequestID forRepository:(NSString *)repositoryPath;
+- (NSString *)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath;
+- (NSString *)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Comments
+
+- (NSString *)commentsForPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
+- (NSString *)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath;
+- (NSString *)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
+- (NSString *)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary;
+- (NSString *)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath;
+
+
+#pragma mark
+#pragma mark Repositories
+#pragma mark
+
+- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched;
+- (NSString *)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page;
+- (NSString *)repositories;
+- (NSString *)createRepositoryWithInfo:(NSDictionary *)infoDictionary;
+- (NSString *)repository:(NSString *)repositoryPath;
+- (NSString *)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary;
+- (NSString *)contributorsForRepository:(NSString *)repositoryPath;
+- (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath;
+- (NSString *)teamsForRepository:(NSString *)repositoryPath;
+- (NSString *)annotatedTagsForRepository:(NSString *)repositoryPath;
+- (NSString *)branchesForRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Collaborators
+
+- (NSString *)collaboratorsForRepository:(NSString *)repositoryName;
+- (NSString *)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath;
+- (NSString *)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath;
+- (NSString *)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Commits
+
+- (NSString *)commitsForRepository:(NSString *)repositoryPath;
+- (NSString *)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Commit Comments
+
+- (NSString *)commitCommentsForRepository:(NSString *)repositoryPath;
+- (NSString *)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath;
+- (NSString *)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath;
+- (NSString *)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath;
+- (NSString *)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary;
+- (NSString *)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Downloads
+
+- (NSString *)downloadsForRepository:(NSString *)repositoryPath;
+- (NSString *)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath;
+// See http://developer.github.com/v3/repos/downloads for more information: this is a two-part process.
+- (NSString *)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary;
+- (NSString *)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Forks
+
+- (NSString *)forksForRepository:(NSString *)repositoryPath;
+- (NSString *)forkRepository:(NSString *)repositoryPath inOrganization:(NSString *)org;
+- (NSString *)forkRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Keys
+
+- (NSString *)deployKeysForRepository:(NSString *)repositoryName;
+- (NSString *)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath;
+- (NSString *)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName;
+- (NSString *)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary;
+- (NSString *)removeDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName;
+
+
+#pragma mark Watching
+
+- (NSString *)watchersForRepository:(NSString *)repositoryPath;
+- (NSString *)watchedRepositoriesForUser:(NSString *)user;
+- (NSString *)watchedRepositories;
+- (NSString *)repositoryIsWatched:(NSString *)repositoryPath;
+- (NSString *)watchRepository:(NSString *)repositoryPath;
+- (NSString *)unwatchRepository:(NSString *)repositoryPath;
+
+
+#pragma mark Hooks
+
+- (NSString *)hooksForRepository:(NSString *)repositoryPath;
+- (NSString *)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath;
+- (NSString *)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath;
+- (NSString *)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary;
+- (NSString *)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath;
+- (NSString *)removeHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath;
+
+/* NOT YET IMPLEMENTED
+ - (NSString *)searchRepositories:(NSString *)query;
+ - (NSString *)deleteRepository:(NSString *)repositoryName;
+ - (NSString *)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken;
+ - (NSString *)privatiseRepository:(NSString *)repositoryName;
+ - (NSString *)publiciseRepository:(NSString *)repositoryName;
+ - (NSString *)pushableRepositories;
+ - (NSString *)networkForRepository:(NSString *)repositoryPath;
+ */
+
+
+#pragma mark
+#pragma mark Users
+#pragma mark
+
+- (NSString *)user:(NSString *)user;
+- (NSString *)user;
+- (NSString *)editUser:(NSDictionary *)userDictionary;
+
+
+#pragma mark Emails
+
+- (NSString *)emailAddresses;
+- (NSString *)addEmailAddresses:(NSArray *)emails;
+- (NSString *)deleteEmailAddresses:(NSArray *)emails;
+
+
+#pragma mark Followers
+
+- (NSString *)followers:(NSString *)user;
+- (NSString *)followers;
+- (NSString *)following:(NSString *)user;
+- (NSString *)followedBy:(NSString *)user;
+- (NSString *)follows:(NSString *)user;
+- (NSString *)follow:(NSString *)user;
+- (NSString *)unfollow:(NSString *)user;
+
+
+#pragma mark Keys
+
+- (NSString *)publicKeys;
+- (NSString *)publicKey:(NSInteger)keyId;
+- (NSString *)addPublicKey:(NSDictionary *)keyDictionary;
+- (NSString *)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary;
+- (NSString *)deletePublicKey:(NSInteger)keyId;
 
 
 #pragma mark -
