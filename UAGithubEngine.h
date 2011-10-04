@@ -70,7 +70,7 @@
 - (NSString *)contributorsForRepository:(NSString *)repositoryPath;
 - (NSString *)languageBreakdownForRepository:(NSString *)repositoryPath;
 - (NSString *)teamsForRepository:(NSString *)repositoryPath;
-- (NSString *)tagsForRepository:(NSString *)repositoryPath;
+- (NSString *)annotatedTagsForRepository:(NSString *)repositoryPath;
 - (NSString *)branchesForRepository:(NSString *)repositoryPath;
 
 - (NSString *)collaboratorsForRepository:(NSString *)repositoryName;
@@ -117,6 +117,15 @@
 - (NSString *)pushableRepositories;
 - (NSString *)networkForRepository:(NSString *)repositoryPath;
  */
+
+
+#pragma mark References
+
+- (NSString *)reference:(NSString *)reference inRepository:(NSString *)repositoryPath;
+- (NSString *)referencesInRepository:(NSString *)repositoryPath;
+- (NSString *)tagsForRepository:(NSString *)repositoryPath;
+- (NSString *)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath;
+- (NSString *)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary;
 
 
 #pragma mark Commits
