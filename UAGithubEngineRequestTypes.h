@@ -99,6 +99,10 @@ typedef enum UAGithubRequestType
     UAGithubPublicKeyAddRequest,                    // Add a public key
     UAGithubPublicKeyEditRequest,                   // Edit a public key
     UAGithubPublicKeyDeleteRequest,                 // Delete a public key
+    UAGithubReferencesRequest,                      // Get one or more references
+    UAGithubReferenceRequest,                       // Get exactly one reference
+    UAGithubReferenceCreateRequest,                 // Create a new reference
+    UAGithubReferenceUpdateRequest,                 // Edit an existing reference
 
 } UAGithubRequestType;
 
@@ -147,5 +151,7 @@ typedef enum UAGithubResponseType
     UAGithubPublicKeysResponse,                     // One or more public keys
     UAGithubPublicKeyResponse,                      // Exactly one public key
     UAGithubSHAResponse,                            // SHA
+    UAGithubReferencesResponse,                     // One or more references
+    UAGithubReferenceResponse,                      // Exactly one reference
 	
 } UAGithubResponseType;

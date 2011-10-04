@@ -180,15 +180,12 @@
 		case UAGithubDeployKeyAddRequest:
 		case UAGithubDeployKeyDeleteRequest:
 		case UAGithubIssueCommentAddRequest:
-        case UAGithubPublicKeyAddRequest:
-            
+        case UAGithubPublicKeyAddRequest:            
         case UAGithubRepositoryLabelAddRequest:
-
-        case UAGithubIssueLabelAddRequest:
-            
-        case UAGithubTreeCreateRequest:
-            
-        case UAGithubBlobCreateRequest:
+        case UAGithubIssueLabelAddRequest:            
+        case UAGithubTreeCreateRequest:            
+        case UAGithubBlobCreateRequest:            
+        case UAGithubReferenceCreateRequest:
             
 		{
 			[urlRequest setHTTPMethod:@"POST"];
@@ -211,6 +208,7 @@
         case UAGithubPublicKeyEditRequest:
         case UAGithubUserEditRequest:
         case UAGithubRepositoryLabelEditRequest:
+        case UAGithubReferenceUpdateRequest:
             
         {
             [urlRequest setHTTPMethod:@"PATCH"];
@@ -222,8 +220,7 @@
         case UAGithubIssueCommentDeleteRequest:
         case UAGithubUnfollowRequest:
         case UAGithubPublicKeyDeleteRequest:
-		case UAGithubCollaboratorRemoveRequest:
-            
+		case UAGithubCollaboratorRemoveRequest:            
         case UAGithubRepositoryLabelRemoveRequest:
         case UAGithubIssueLabelRemoveRequest:
             
@@ -452,7 +449,7 @@
 }
 
 
-- (NSString *)tagsForRepository:(NSString *)repositoryPath
+- (NSString *)annotatedTagsForRepository:(NSString *)repositoryPath
 {
 	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/tags", repositoryPath] requestType:UAGithubTagsRequest responseType:UAGithubTagsResponse];	
 }
@@ -955,6 +952,38 @@
 - (NSString *)deletePublicKey:(NSInteger)keyId
 {
     return [self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyDeleteRequest responseType:UAGithubNoContentResponse];
+}
+
+
+#pragma mark References
+
+- (NSString *)reference:(NSString *)reference inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceRequest responseType:UAGithubReferenceResponse];
+}
+
+
+- (NSString *)referencesInRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse];
+}
+
+
+- (NSString *)tagsForRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/tags", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse];
+}
+
+
+- (NSString *)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferenceCreateRequest responseType:UAGithubReferenceResponse withParameters:refDictionary];
+}
+
+
+- (NSString *)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary
+{
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceUpdateRequest responseType:UAGithubReferenceResponse withParameters:referenceDictionary];
 }
 
 
