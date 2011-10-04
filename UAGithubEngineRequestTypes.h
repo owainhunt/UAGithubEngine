@@ -80,6 +80,7 @@ typedef enum UAGithubRequestType
     UAGithubIssueCommentEditRequest,                // Edit an issue comment
     UAGithubIssueCommentDeleteRequest,              // Delete an issue comment
 	UAGithubTreeRequest,							// Get the listing of a tree by SHA
+    UAGithubTreeCreateRequest,                      // Create a new tree
 	UAGithubBlobsRequest,							// Get the names and SHAs of all blobs for a specific tree SHA
 	UAGithubBlobRequest,							// Get data about a single blob by tree SHA and path
 	UAGithubRawBlobRequest,							// Get the raw data for a blob
