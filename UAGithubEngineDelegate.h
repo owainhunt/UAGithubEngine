@@ -72,4 +72,8 @@
 - (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier;
 
 
+#pragma mark Organizations
+
+- (void)organizationsReceived:(NSArray *)organizations forConnection:(NSString *)connectionIdentifier;
+
 @end

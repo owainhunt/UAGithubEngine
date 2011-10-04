@@ -63,6 +63,8 @@
 	//[githubEngine blobsForSHA:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88"];
 	//[githubEngine blob:@"owainhunt/uagithubengine/f4667fc9a965b8f9438b8776ad61f0d5c5074e88/main.m"];
 	//[githubEngine rawBlob:@"owainhunt/uagithubengine/14d56058704dd3e046edaec20e93597867ef761e"];
+    
+    //[githubEngine organizationsForUser:aUser];
 	
 }
 
@@ -189,6 +191,12 @@
 - (void)rawBlobReceived:(NSData *)blob forConnection:(NSString *)connectionIdentifier
 {
 	NSLog(@"Received blob for connection: %@, %@", connectionIdentifier, [[[NSString alloc] initWithData:blob encoding:NSASCIIStringEncoding] autorelease]);
+}
+
+
+- (void)organizationsReceived:(NSArray *)organizations forConnection:(NSString *)connectionIdentifier
+{
+    NSLog(@"Received organizations for connection: %@, %@", connectionIdentifier, organizations);
 }
 
 
