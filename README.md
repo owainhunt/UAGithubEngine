@@ -2,6 +2,10 @@ UAGithubEngine
 by Owain R Hunt, http://owainrhunt.com
 =================
 
+Note
+=
+`master` is the stable branch. `api3` is currently *very* incomplete, unstable, unfinished, non-worky, half-missing, not-fit-for-human-or-animal-consumption. 
+
 UAGithubEngine is a practically-complete wrapper around version 2 of the Github API (the exceptions being the network graph and Gist APIs, which are not currently implemented). Check out the API documentation (http://develop.github.com/) for full details of what the API can do. 
 
 UAGithubEngine is compatible with Mac OS X 10.5 and above, and iOS 4.0.
