@@ -174,19 +174,11 @@
 
 	switch (requestType) 
     {
-        case UAGithubFollowRequest:
-        {
-            [urlRequest setHTTPMethod:@"PUT"];
-        }
-            break;
-		case UAGithubRepositoryUpdateRequest:
 		case UAGithubRepositoryCreateRequest:
 		case UAGithubRepositoryDeleteConfirmationRequest:
         case UAGithubMilestoneCreateRequest:
 		case UAGithubDeployKeyAddRequest:
 		case UAGithubDeployKeyDeleteRequest:
-		case UAGithubCollaboratorAddRequest:
-		case UAGithubCollaboratorRemoveRequest:
 		case UAGithubIssueCommentAddRequest:
         case UAGithubPublicKeyAddRequest:
             
@@ -197,37 +189,49 @@
         case UAGithubTreeCreateRequest:
             
         case UAGithubBlobCreateRequest:
+            
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
 			break;
+
+		case UAGithubCollaboratorAddRequest:
+        case UAGithubIssueLabelReplaceRequest:
+        case UAGithubFollowRequest:
+            
+        {
+            [urlRequest setHTTPMethod:@"PUT"];
+        }
+            break;
+            
+		case UAGithubRepositoryUpdateRequest:
         case UAGithubMilestoneUpdateRequest:
         case UAGithubIssueEditRequest:
         case UAGithubIssueCommentEditRequest:
         case UAGithubPublicKeyEditRequest:
         case UAGithubUserEditRequest:
         case UAGithubRepositoryLabelEditRequest:
+            
         {
             [urlRequest setHTTPMethod:@"PATCH"];
         }
             break;
+            
         case UAGithubMilestoneDeleteRequest:
         case UAGithubIssueDeleteRequest:
         case UAGithubIssueCommentDeleteRequest:
         case UAGithubUnfollowRequest:
         case UAGithubPublicKeyDeleteRequest:
+		case UAGithubCollaboratorRemoveRequest:
             
         case UAGithubRepositoryLabelRemoveRequest:
         case UAGithubIssueLabelRemoveRequest:
+            
         {
             [urlRequest setHTTPMethod:@"DELETE"];
         }
             break;
-        case UAGithubIssueLabelReplaceRequest:
-        {
-            [urlRequest setHTTPMethod:@"PUT"];
-        }
-            break;
+            
 		default:
 			break;
 	}
