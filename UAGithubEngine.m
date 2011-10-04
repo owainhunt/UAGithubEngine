@@ -195,6 +195,8 @@
         case UAGithubIssueLabelAddRequest:
             
         case UAGithubTreeCreateRequest:
+            
+        case UAGithubBlobCreateRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -1021,21 +1023,15 @@
 
 #pragma mark Blobs
 
-- (NSString *)blobsForSHA:(NSString *)shaPath
+- (NSString *)blobForSHA:(NSString *)sha inRepository:(NSString *)repositoryPath;
 {
-	return [self sendRequest:[NSString stringWithFormat:@"blob/all/%@", shaPath] requestType:UAGithubBlobsRequest responseType:UAGithubBlobsResponse];	
+	return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/blobs/%@", repositoryPath, sha] requestType:UAGithubBlobRequest responseType:UAGithubBlobResponse];	
 }
 
 
-- (NSString *)blob:(NSString *)blobPath
+- (NSString *)createBlob:(NSDictionary *)blobDictionary inRepository:(NSString *)repositoryPath
 {
-	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubBlobRequest responseType:UAGithubBlobResponse];	
-}
-
-
-- (NSString *)rawBlob:(NSString *)blobPath
-{
-	return [self sendRequest:[NSString stringWithFormat:@"blob/show/%@", blobPath] requestType:UAGithubRawBlobRequest responseType:UAGithubRawBlobResponse];	
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/blobs", repositoryPath] requestType:UAGithubBlobCreateRequest responseType:UAGithubSHAResponse withParameters:blobDictionary];
 }
 
 
