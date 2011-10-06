@@ -187,6 +187,9 @@
         case UAGithubBlobCreateRequest:            
         case UAGithubReferenceCreateRequest:
         case UAGithubRawCommitCreateRequest:
+        case UAGithubGistCreateRequest:
+        case UAGithubGistCommentCreateRequest:
+        case UAGithubGistForkRequest:
             
 		{
 			[urlRequest setHTTPMethod:@"POST"];
@@ -196,6 +199,7 @@
 		case UAGithubCollaboratorAddRequest:
         case UAGithubIssueLabelReplaceRequest:
         case UAGithubFollowRequest:
+        case UAGithubGistStarRequest:
             
         {
             [urlRequest setHTTPMethod:@"PUT"];
@@ -210,6 +214,8 @@
         case UAGithubUserEditRequest:
         case UAGithubRepositoryLabelEditRequest:
         case UAGithubReferenceUpdateRequest:
+        case UAGithubGistUpdateRequest:
+        case UAGithubGistCommentUpdateRequest:
             
         {
             [urlRequest setHTTPMethod:@"PATCH"];
@@ -224,6 +230,9 @@
 		case UAGithubCollaboratorRemoveRequest:            
         case UAGithubRepositoryLabelRemoveRequest:
         case UAGithubIssueLabelRemoveRequest:
+        case UAGithubGistUnstarRequest:
+        case UAGithubGistDeleteRequest:
+        case UAGithubGistCommentDeleteRequest:
             
         {
             [urlRequest setHTTPMethod:@"DELETE"];
@@ -394,73 +403,73 @@
 
 - (NSString *)gistsForUser:(NSString *)user
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"users/%@/gists", user] requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse];
 }
 
 
 - (NSString *)gists
 {
-    return nil;
+    return [self sendRequest:@"gists" requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse];
 
 }
 
 - (NSString *)publicGists
 {
-    return nil;
+    return [self sendRequest:@"gists/public" requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse];
 }
 
 
 - (NSString *)starredGists
 {
-    return nil;
+    return [self sendRequest:@"gists/starred" requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse];
 }
 
 
 - (NSString *)gist:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistRequest responseType:UAGithubGistResponse];
 }
 
 
 - (NSString *)createGist:(NSDictionary *)gistDictionary
 {
-    return nil;
+    return [self sendRequest:@"gists" requestType:UAGithubGistCreateRequest responseType:UAGithubGistResponse withParameters:gistDictionary];
 }
 
 
 - (NSString *)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistUpdateRequest responseType:UAGithubGistResponse withParameters:gistDictionary];
 }
 
 
 - (NSString *)starGist:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarRequest responseType:UAGithubNoContentResponse];
 }
 
 
 - (NSString *)unstarGist:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistUnstarRequest responseType:UAGithubNoContentResponse];
 }
 
 
 - (NSString *)gistIsStarred:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarStatusRequest responseType:UAGithubNoContentResponse];
 }
 
 
 - (NSString *)forkGist:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d/fork", gistId] requestType:UAGithubGistForkRequest responseType:UAGithubGistResponse];
 }
 
 
 - (NSString *)deleteGist:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistDeleteRequest responseType:UAGithubNoContentResponse];
 }
 
 
@@ -468,31 +477,31 @@
 
 - (NSString *)commentsForGist:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d/comments", gistId] requestType:UAGithubGistCommentsRequest responseType:UAGithubGistCommentsResponse];
 }
 
 
 - (NSString *)gistComment:(NSString *)commentId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentRequest responseType:UAGithubGistCommentResponse];
 }
 
 
 - (NSString *)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/%d/comments", gistId] requestType:UAGithubGistCommentCreateRequest responseType:UAGithubGistCommentResponse withParameters:commentDictionary];
 }
 
 
 - (NSString *)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentUpdateRequest responseType:UAGithubGistCommentResponse withParameters:commentDictionary];
 }
 
 
 - (NSString *)deleteGistComment:(NSString *)commentId
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentDeleteRequest responseType:UAGithubNoContentResponse];
 }
 
 
