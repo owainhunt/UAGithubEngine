@@ -18,14 +18,13 @@
 	UAGithubResponseType responseType;
     NSData *json;
 	
-	NSArray *boolElements;
 	NSArray *dateElements;
 
 }
 
 
 - (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType;
-- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType boolElements:(NSArray *)boolElements dateElements:(NSArray *)dateFields;
+- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType dateElements:(NSArray *)dates;
 - (void)parse;
 
 

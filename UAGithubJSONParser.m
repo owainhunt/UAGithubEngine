@@ -14,6 +14,15 @@
 
 - (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
 {
+    return [self initWithJSON:theJSON delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType dateElements:nil];	
+}
+
+
+- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType dateElements:(NSArray *)dates
+{
+    
+    NSArray *standardDateElements = [NSMutableArray arrayWithObjects:@"created_at", @"updated_at", @"closed_at", @"due_on", @"pushed_at", @"committed_at", @"merged_at", @"date", @"expirationdate", nil];
+    
     if ((self = [super init])) 
 	{
         json = [theJSON retain];
@@ -21,26 +30,9 @@
 		connectionIdentifier = [theIdentifier retain];
         requestType = reqType;
 		responseType = respType;
+        dateElements = [[standardDateElements arrayByAddingObjectsFromArray:dates] retain];
     }
 	
-    return self;
-	
-}
-
-
-- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType boolElements:(NSArray *)boolElements dateElements:(NSArray *)dateElements
-{
-    if ((self = [super init]))
-    {
-        json = [theJSON retain];
-        delegate = theDelegate;
-		connectionIdentifier = [theIdentifier retain];
-        requestType = reqType;
-		responseType = respType;
-        //boolElements = [boolElements retain];
-        //dateElements = [dateElements retain];
-    }
-    
     [self parse];
     
     return self;
@@ -52,7 +44,6 @@
 {
 	[json release];
 	[connectionIdentifier release];
-    [boolElements release];
     [dateElements release];
 	[super dealloc];
 	
@@ -86,12 +77,13 @@
 		}
 		
 		// Numbers and 'TRUE'/'FALSE' boolean are handled by the parser
-		// We need to handle date elements and 0/1 boolean values 
+		// We just need to handle date elements 
 		for (NSMutableDictionary *theDictionary in jsonArray)
 		{
+            NSArray *keys = [theDictionary allKeys];
 			for (NSString *keyString in dateElements)
 			{
-				if ([theDictionary objectForKey:keyString] && ![[theDictionary objectForKey:keyString] isEqual:nil]) {
+				if ([keys containsObject:keyString]) {
 					if ([[theDictionary objectForKey:keyString] respondsToSelector:@selector(dateFromGithubDateString)])
 					{
 						NSDate *date = [[theDictionary objectForKey:keyString] dateFromGithubDateString];
@@ -102,14 +94,6 @@
 					}
 				}
 			}
-			
-			for (NSString *keyString in boolElements)
-			{
-				if ([theDictionary objectForKey:keyString] && ![[theDictionary objectForKey:keyString] isEqual:nil]) {
-					[theDictionary setObject:[NSNumber numberWithBool:[[theDictionary objectForKey:keyString] intValue]] forKey:keyString];
-				}
-			}
-					 
 		}
 
 		[delegate parsingSucceededForConnection:connectionIdentifier ofResponseType:responseType withParsedObjects:jsonArray];

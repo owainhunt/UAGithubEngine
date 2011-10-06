@@ -12,23 +12,16 @@
 		681F4112134C911A002DD87D /* UAGithubEngineConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 681F4111134C911A002DD87D /* UAGithubEngineConstants.m */; };
 		681F4114134C9310002DD87D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681F4113134C9310002DD87D /* SystemConfiguration.framework */; };
 		6879AB6611FF0FAA00F29BDE /* UAGithubJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6879AB6511FF0FAA00F29BDE /* UAGithubJSONParser.m */; };
-		6879AB6D11FF145200F29BDE /* UAGithubUsersJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6879AB6C11FF145200F29BDE /* UAGithubUsersJSONParser.m */; };
-		6879ABB011FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6879ABAF11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m */; };
 		6879AC0111FF43DA00F29BDE /* NSArray+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6879AC0011FF43DA00F29BDE /* NSArray+Utilities.m */; };
-		688ECC8F1200A9240087ADB3 /* UAGithubIssuesJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC8E1200A9240087ADB3 /* UAGithubIssuesJSONParser.m */; };
-		688ECC921200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC911200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m */; };
-		688ECC9B1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ECC9A1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m */; };
 		68971F9E12105743002E7C47 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 68971F9D12105743002E7C47 /* NSData+Base64.m */; };
 		68AEDF28116E46B20018E490 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AEDF27116E46B20018E490 /* NSString+UAGithubEngineUtilities.m */; };
 		68C9408312DBBB6500BF1151 /* UAReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C9408212DBBB6500BF1151 /* UAReachability.m */; };
 		68D35B121186049900C6E37E /* UAGithubURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D35B111186049900C6E37E /* UAGithubURLConnection.m */; };
 		68D35B191186070300C6E37E /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D35B181186070300C6E37E /* NSString+UUID.m */; };
-		68DEB62B1207334800A9C0C2 /* UAGithubSimpleJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DEB62A1207334800A9C0C2 /* UAGithubSimpleJSONParser.m */; };
 		68E72AE2116653770069B287 /* UAGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E72AE1116653770069B287 /* UAGithubEngine.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		CC75D5371422581F0098F00D /* UAGithubMilestonesJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CC75D5361422581F0098F00D /* UAGithubMilestonesJSONParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,18 +41,8 @@
 		685261E1116A774C003AE003 /* UAGithubParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubParserDelegate.h; sourceTree = "<group>"; };
 		6879AB6411FF0FAA00F29BDE /* UAGithubJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubJSONParser.h; sourceTree = "<group>"; };
 		6879AB6511FF0FAA00F29BDE /* UAGithubJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubJSONParser.m; sourceTree = "<group>"; };
-		6879AB6B11FF145200F29BDE /* UAGithubUsersJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubUsersJSONParser.h; sourceTree = "<group>"; };
-		6879AB6C11FF145200F29BDE /* UAGithubUsersJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubUsersJSONParser.m; sourceTree = "<group>"; };
-		6879ABAE11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubRepositoriesJSONParser.h; sourceTree = "<group>"; };
-		6879ABAF11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubRepositoriesJSONParser.m; sourceTree = "<group>"; };
 		6879ABFF11FF43DA00F29BDE /* NSArray+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Utilities.h"; sourceTree = "<group>"; };
 		6879AC0011FF43DA00F29BDE /* NSArray+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Utilities.m"; sourceTree = "<group>"; };
-		688ECC8D1200A9240087ADB3 /* UAGithubIssuesJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssuesJSONParser.h; sourceTree = "<group>"; };
-		688ECC8E1200A9240087ADB3 /* UAGithubIssuesJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssuesJSONParser.m; sourceTree = "<group>"; };
-		688ECC901200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubIssueCommentsJSONParser.h; sourceTree = "<group>"; };
-		688ECC911200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubIssueCommentsJSONParser.m; sourceTree = "<group>"; };
-		688ECC991200A96D0087ADB3 /* UAGithubCommitsJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubCommitsJSONParser.h; sourceTree = "<group>"; };
-		688ECC9A1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubCommitsJSONParser.m; sourceTree = "<group>"; };
 		68971F9C12105743002E7C47 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		68971F9D12105743002E7C47 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		68AEDF26116E46B20018E490 /* NSString+UAGithubEngineUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UAGithubEngineUtilities.h"; sourceTree = "<group>"; };
@@ -70,15 +53,11 @@
 		68D35B111186049900C6E37E /* UAGithubURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubURLConnection.m; sourceTree = "<group>"; };
 		68D35B171186070300C6E37E /* NSString+UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUID.h"; sourceTree = "<group>"; };
 		68D35B181186070300C6E37E /* NSString+UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUID.m"; sourceTree = "<group>"; };
-		68DEB6291207334800A9C0C2 /* UAGithubSimpleJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubSimpleJSONParser.h; sourceTree = "<group>"; };
-		68DEB62A1207334800A9C0C2 /* UAGithubSimpleJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubSimpleJSONParser.m; sourceTree = "<group>"; };
 		68E72ADC116652450069B287 /* UAGithubEngineDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineDelegate.h; sourceTree = "<group>"; };
 		68E72AE0116653770069B287 /* UAGithubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngine.h; sourceTree = "<group>"; };
 		68E72AE1116653770069B287 /* UAGithubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubEngine.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* UAGithubEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UAGithubEngine-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* UAGithubEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UAGithubEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC75D5351422581F0098F00D /* UAGithubMilestonesJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubMilestonesJSONParser.h; sourceTree = "<group>"; };
-		CC75D5361422581F0098F00D /* UAGithubMilestonesJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubMilestonesJSONParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,20 +153,6 @@
 			children = (
 				6879AB6411FF0FAA00F29BDE /* UAGithubJSONParser.h */,
 				6879AB6511FF0FAA00F29BDE /* UAGithubJSONParser.m */,
-				68DEB6291207334800A9C0C2 /* UAGithubSimpleJSONParser.h */,
-				68DEB62A1207334800A9C0C2 /* UAGithubSimpleJSONParser.m */,
-				6879AB6B11FF145200F29BDE /* UAGithubUsersJSONParser.h */,
-				6879AB6C11FF145200F29BDE /* UAGithubUsersJSONParser.m */,
-				6879ABAE11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.h */,
-				6879ABAF11FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m */,
-				688ECC991200A96D0087ADB3 /* UAGithubCommitsJSONParser.h */,
-				688ECC9A1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m */,
-				688ECC8D1200A9240087ADB3 /* UAGithubIssuesJSONParser.h */,
-				688ECC8E1200A9240087ADB3 /* UAGithubIssuesJSONParser.m */,
-				688ECC901200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.h */,
-				688ECC911200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m */,
-				CC75D5351422581F0098F00D /* UAGithubMilestonesJSONParser.h */,
-				CC75D5361422581F0098F00D /* UAGithubMilestonesJSONParser.m */,
 			);
 			name = "JSON Parsers";
 			sourceTree = "<group>";
@@ -305,17 +270,10 @@
 				68D35B121186049900C6E37E /* UAGithubURLConnection.m in Sources */,
 				68D35B191186070300C6E37E /* NSString+UUID.m in Sources */,
 				6879AB6611FF0FAA00F29BDE /* UAGithubJSONParser.m in Sources */,
-				6879AB6D11FF145200F29BDE /* UAGithubUsersJSONParser.m in Sources */,
-				6879ABB011FF40E800F29BDE /* UAGithubRepositoriesJSONParser.m in Sources */,
 				6879AC0111FF43DA00F29BDE /* NSArray+Utilities.m in Sources */,
-				688ECC8F1200A9240087ADB3 /* UAGithubIssuesJSONParser.m in Sources */,
-				688ECC921200A9350087ADB3 /* UAGithubIssueCommentsJSONParser.m in Sources */,
-				688ECC9B1200A96D0087ADB3 /* UAGithubCommitsJSONParser.m in Sources */,
-				68DEB62B1207334800A9C0C2 /* UAGithubSimpleJSONParser.m in Sources */,
 				68971F9E12105743002E7C47 /* NSData+Base64.m in Sources */,
 				68C9408312DBBB6500BF1151 /* UAReachability.m in Sources */,
 				681F4112134C911A002DD87D /* UAGithubEngineConstants.m in Sources */,
-				CC75D5371422581F0098F00D /* UAGithubMilestonesJSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
