@@ -103,10 +103,24 @@ typedef enum UAGithubRequestType
     UAGithubReferenceRequest,                       // Get exactly one reference
     UAGithubReferenceCreateRequest,                 // Create a new reference
     UAGithubReferenceUpdateRequest,                 // Edit an existing reference
-    UAGithubTagObjectRequest,                       // Get eactly one annotated tag object
+    UAGithubTagObjectRequest,                       // Get exactly one annotated tag object
     UAGithubTagObjectCreateRequest,                 // Create a new annotated tag object
     UAGithubRawCommitRequest,                       // Get exactly one raw commit
     UAGithubRawCommitCreateRequest,                 // Create a new raw commit
+    UAGithubGistsRequest,                           // Get one or more gists
+    UAGithubGistRequest,                            // Get exactly one gist
+    UAGithubGistCreateRequest,                      // Create a new gist
+    UAGithubGistUpdateRequest,                      // Edit a gist
+    UAGithubGistStarRequest,                        // Star a gist
+    UAGithubGistUnstarRequest,                      // Unstar a gist
+    UAGithubGistStarStatusRequest,                  // Get star status of a gist
+    UAGithubGistForkRequest,                        // Fork a gist
+    UAGithubGistDeleteRequest,                      // Delete a gist
+    UAGithubGistCommentsRequest,                    // Get one or more gist comments
+    UAGithubGistCommentRequest,                     // Get exactly one gist comment
+    UAGithubGistCommentCreateRequest,               // Create a new gist comment
+    UAGithubGistCommentUpdateRequest,               // Edit a gist comment
+    UAGithubGistCommentDeleteRequest,               // Delete a gist comment
 
 } UAGithubRequestType;
 
@@ -159,5 +173,9 @@ typedef enum UAGithubResponseType
     UAGithubReferenceResponse,                      // Exactly one reference
     UAGithubTagObjectResponse,                      // Exactly one annotated tag object
     UAGithubRawCommitResponse,                      // Exactly one raw commit
+    UAGithubGistsResponse,                          // One or more gists
+    UAGithubGistResponse,                           // Exactly one gist
+    UAGithubGistCommentsResponse,                   // One or more gist comments
+    UAGithubGistCommentResponse,                    // Exactly one gist comment
 	
 } UAGithubResponseType;
