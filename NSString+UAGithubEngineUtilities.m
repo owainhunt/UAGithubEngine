@@ -15,7 +15,20 @@
 	
 	NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
 	NSString *dateString = self;
-	[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+    
+    if (![[self substringWithRange:NSMakeRange([self length] - 1, 1)] isEqualToString:@"Z"])
+    {
+        NSMutableString *newDate = [self mutableCopy];
+        [newDate deleteCharactersInRange:NSMakeRange(19, 1)];
+        [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+        [dateString release];
+        dateString = newDate;
+        [newDate release];
+    }
+    else
+    {    
+        [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+    }
 				
     return [df dateFromString:dateString];
 
