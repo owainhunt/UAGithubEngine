@@ -121,6 +121,8 @@ typedef enum UAGithubRequestType
     UAGithubGistCommentCreateRequest,               // Create a new gist comment
     UAGithubGistCommentUpdateRequest,               // Edit a gist comment
     UAGithubGistCommentDeleteRequest,               // Delete a gist comment
+    UAGithubEventsRequest,                          // Get one or more issue events
+    UAGithubEventRequest,                           // Get exactly one issue event
 
 } UAGithubRequestType;
 
@@ -177,5 +179,7 @@ typedef enum UAGithubResponseType
     UAGithubGistResponse,                           // Exactly one gist
     UAGithubGistCommentsResponse,                   // One or more gist comments
     UAGithubGistCommentResponse,                    // Exactly one gist comment
+    UAGithubEventsResponse,                         // One or more issue events
+    UAGithubEventResponse,                          // Exactly one issue event
 	
 } UAGithubResponseType;
