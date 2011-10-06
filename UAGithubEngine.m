@@ -9,6 +9,7 @@
 #import "UAGithubEngine.h"
 #import "UAReachability.h"
 
+#import "UAGithubJSONParser.h"
 #import "UAGithubSimpleJSONParser.h"
 #import "UAGithubUsersJSONParser.h"
 #import "UAGithubRepositoriesJSONParser.h"
@@ -302,46 +303,45 @@
 	switch (connection.responseType) {
 		case UAGithubRepositoriesResponse:
 		case UAGithubRepositoryResponse:
-			[[[UAGithubRepositoriesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
+			[[[UAGithubJSONParser alloc] 
+              initWithJSON:connection.data 
+              delegate:self 
+              connectionIdentifier:connection.identifier 
+              requestType:connection.requestType 
+              responseType:connection.responseType] 
+             autorelease];
 			break;
+            
         case UAGithubMilestonesResponse:
         case UAGithubMilestoneResponse:
             [[[UAGithubMilestonesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
             break;
+            
 		case UAGithubIssuesResponse:
 		case UAGithubIssueResponse:
 			[[[UAGithubIssuesJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
+            
 		case UAGithubIssueCommentsResponse:
 		case UAGithubIssueCommentResponse:
 			[[[UAGithubIssueCommentsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
+            
 		case UAGithubUsersResponse:
 		case UAGithubUserResponse:
 			[[[UAGithubUsersJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
+            
 		case UAGithubCommitsResponse:
 		case UAGithubCommitResponse:
 			[[[UAGithubCommitsJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
+            
 		case UAGithubRawBlobResponse:
 			[delegate rawBlobReceived:connection.data forConnection:connection.identifier];
 			break;
-		case UAGithubCollaboratorsResponse:
-		case UAGithubBlobsResponse:
-		case UAGithubBlobResponse:
-		case UAGithubIssueLabelsResponse:
-		case UAGithubRepositoryLabelsResponse:
-		case UAGithubDeployKeysResponse:
-		case UAGithubRepositoryLanguageBreakdownResponse:
-		case UAGithubTagsResponse:
-		case UAGithubBranchesResponse:
-        case UAGithubFollowingResponse:
-        case UAGithubFollowersResponse:
-		case UAGithubTreeResponse:
+        default:
 			[[[UAGithubSimpleJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
-			break;
-		default:
 			break;
 	}
 

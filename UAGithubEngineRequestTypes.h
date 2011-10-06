@@ -148,8 +148,8 @@ typedef enum UAGithubResponseType
 	UAGithubRepositoriesResponse,					// One or more repositories 
 	UAGithubRepositoryResponse,						// Exactly one repository
     UAGithubRepositoryTeamsResponse,                // One or more teams
-	UAGithubDeleteRepositoryResponse,				// Token to send in delete confirmation request
-	UAGithubDeleteRepositoryConfirmationResponse,	// Confirmation of deletion
+//	UAGithubDeleteRepositoryResponse,				// Token to send in delete confirmation request
+//	UAGithubDeleteRepositoryConfirmationResponse,	// Confirmation of deletion
     UAGithubDownloadsResponse,                      // One or more downloads
     UAGithubDownloadResponse,                       // Exactly one download
 	UAGithubDeployKeysResponse,						// One or more deploy keys

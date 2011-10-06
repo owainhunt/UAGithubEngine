@@ -28,10 +28,32 @@
 }
 
 
+- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType boolElements:(NSArray *)boolElements dateElements:(NSArray *)dateElements
+{
+    if ((self = [super init]))
+    {
+        json = [theJSON retain];
+        delegate = theDelegate;
+		connectionIdentifier = [theIdentifier retain];
+        requestType = reqType;
+		responseType = respType;
+        //boolElements = [boolElements retain];
+        //dateElements = [dateElements retain];
+    }
+    
+    [self parse];
+    
+    return self;
+    
+}
+
+
 - (void)dealloc
 {
 	[json release];
 	[connectionIdentifier release];
+    [boolElements release];
+    [dateElements release];
 	[super dealloc];
 	
 }
