@@ -190,6 +190,8 @@
         case UAGithubGistCreateRequest:
         case UAGithubGistCommentCreateRequest:
         case UAGithubGistForkRequest:
+        case UAGithubPullRequestCreateRequest:
+        case UAGithubPullRequestCommentCreateRequest:
             
 		{
 			[urlRequest setHTTPMethod:@"POST"];
@@ -200,6 +202,7 @@
         case UAGithubIssueLabelReplaceRequest:
         case UAGithubFollowRequest:
         case UAGithubGistStarRequest:
+        case UAGithubPullRequestMergeRequest:
             
         {
             [urlRequest setHTTPMethod:@"PUT"];
@@ -216,6 +219,8 @@
         case UAGithubReferenceUpdateRequest:
         case UAGithubGistUpdateRequest:
         case UAGithubGistCommentUpdateRequest:
+        case UAGithubPullRequestUpdateRequest:
+        case UAGithubPullRequestCommentUpdateRequest:
             
         {
             [urlRequest setHTTPMethod:@"PATCH"];
@@ -233,6 +238,7 @@
         case UAGithubGistUnstarRequest:
         case UAGithubGistDeleteRequest:
         case UAGithubGistCommentDeleteRequest:
+        case UAGithubPullRequestCommentDeleteRequest:
             
         {
             [urlRequest setHTTPMethod:@"DELETE"];
@@ -728,49 +734,49 @@
 
 - (NSString *)pullRequestsForRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls", repositoryPath] requestType:UAGithubPullRequestsRequest responseType:UAGithubPullRequestsResponse];
 }
 
 
 - (NSString *)pullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d", repositoryPath, pullRequestId] requestType:UAGithubPullRequestRequest responseType:UAGithubPullRequestResponse];
 }
 
 
 - (NSString *)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls", repositoryPath] requestType:UAGithubPullRequestCreateRequest responseType:UAGithubPullRequestResponse withParameters:pullRequestDictionary];
 }
 
 
 - (NSString *)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d", repositoryPath, pullRequestId] requestType:UAGithubPullRequestUpdateRequest responseType:UAGithubPullRequestResponse withParameters:pullRequestDictionary];
 }
 
 
 - (NSString *)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/commits", repositoryPath, pullRequestId] requestType:UAGithubPullRequestCommitsRequest responseType:UAGithubPullRequestCommitsResponse];
 }
 
 
-- (NSString *)filesInPullRequest:(NSInteger)pullRequestID forRepository:(NSString *)repositoryPath
+- (NSString *)filesInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/files", repositoryPath, pullRequestId] requestType:UAGithubPullRequestFilesRequest responseType:UAGithubPullRequestFilesResponse];
 }
 
 
 - (NSString *)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/merge", repositoryPath, pullRequestId] requestType:UAGithubPullRequestMergeStatusRequest responseType:UAGithubNoContentResponse];
 }
 
 
 - (NSString *)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/merge", repositoryPath, pullRequestId] requestType:UAGithubPullRequestMergeRequest responseType:UAGithubPullRequestMergeSuccessStatusResponse];
 }
 
 
@@ -778,31 +784,31 @@
 
 - (NSString *)commentsForPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/comments", repositoryPath, pullRequestId] requestType:UAGithubPullRequestCommentsRequest responseType:UAGithubPullRequestCommentsResponse];
 }
 
 
 - (NSString *)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/comments/%d", repositoryPath, commentId] requestType:UAGithubPullRequestCommentRequest responseType:UAGithubPullRequestCommentResponse];
 }
 
 
 - (NSString *)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/comments", repositoryPath, pullRequestId] requestType:UAGithubPullRequestCommentCreateRequest responseType:UAGithubPullRequestCommentResponse withParameters:commentDictionary];
 }
 
 
 - (NSString *)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/comments/%d", repositoryPath, commentId] requestType:UAGithubPullRequestCommentUpdateRequest responseType:UAGithubPullRequestCommentResponse withParameters:commentDictionary];
 }
 
 
 - (NSString *)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/comments/%d", repositoryPath, commentId] requestType:UAGithubPullRequestCommentDeleteRequest responseType:UAGithubPullRequestCommentResponse];
 }
 
 
