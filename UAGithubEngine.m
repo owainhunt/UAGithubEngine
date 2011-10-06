@@ -32,7 +32,10 @@
 @interface UAGithubEngine (Private)
 
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType;
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType page:(NSInteger)page;
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params;
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page;
+
 - (BOOL)isValidSelectorForDelegate:(SEL)selector;
 
 @end
@@ -108,7 +111,7 @@
 
 #pragma mark Request Management
 
-- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page
 {
     
     NSMutableString *urlString;
@@ -140,7 +143,6 @@
 
     if (!jsonData && [params count] > 0) 
 	{
-        // API v3 means we're passing more parameters in the querystring than previously.
         // Is the querystring already present (ie a question mark is present in the path)? Create it if not.        
         if ([path rangeOfString:@"?"].location == NSNotFound)
         {
@@ -152,6 +154,18 @@
 			[querystring appendFormat:@"%@%@=%@", [querystring length] <= 1 ? @"" : @"&", key, [[params valueForKey:key] encodedString]];
 		}
 	}
+    
+    if (page > 0)
+    {
+        if (querystring) 
+        {
+            [querystring appendFormat:@"&page=%d", page];
+        }
+        else
+        {
+            querystring = [NSString stringWithFormat:@"?page=%d", page];
+        }
+    }
 
     if ([querystring length] > 0)
 	{
@@ -267,9 +281,21 @@
 }
 
 
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params
+{
+    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:params page:0];
+}
+
+
+- (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType page:(NSInteger)page
+{
+    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:page];
+}
+
+
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType
 {
-    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil];
+    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:0];
 }
 
 
