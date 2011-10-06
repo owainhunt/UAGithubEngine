@@ -123,6 +123,19 @@ typedef enum UAGithubRequestType
     UAGithubGistCommentDeleteRequest,               // Delete a gist comment
     UAGithubEventsRequest,                          // Get one or more issue events
     UAGithubEventRequest,                           // Get exactly one issue event
+    UAGithubPullRequestsRequest,                    // Get one or more pull requests
+    UAGithubPullRequestRequest,                     // Get exactly one pull request
+    UAGithubPullRequestCreateRequest,               // Create a pull request
+    UAGithubPullRequestUpdateRequest,               // Edit a pull request
+    UAGithubPullRequestCommitsRequest,              // Get commits in a pull request
+    UAGithubPullRequestFilesRequest,                // Get files in a pull request
+    UAGithubPullRequestMergeStatusRequest,          // Get the merge status of a pull request
+    UAGithubPullRequestMergeRequest,                // Merge a pull request
+    UAGithubPullRequestCommentsRequest,             // Get one or more pull request comments
+    UAGithubPullRequestCommentRequest,              // Get exactly one pull request comments
+    UAGithubPullRequestCommentCreateRequest,        // Create a pull request comment
+    UAGithubPullRequestCommentUpdateRequest,        // Update a pull request comment
+    UAGithubPullRequestCommentDeleteRequest,         // Delete a pull request comment
 
 } UAGithubRequestType;
 
@@ -181,5 +194,12 @@ typedef enum UAGithubResponseType
     UAGithubGistCommentResponse,                    // Exactly one gist comment
     UAGithubEventsResponse,                         // One or more issue events
     UAGithubEventResponse,                          // Exactly one issue event
+    UAGithubPullRequestsResponse,                   // One or more pull requests
+    UAGithubPullRequestResponse,                    // Exactly one pull request
+    UAGithubPullRequestMergeSuccessStatusResponse,  // Success or failure of merge attempt
+    UAGithubPullRequestCommitsResponse,             // One or more pull request commits
+    UAGithubPullRequestFilesResponse,               // One or more pull request files
+    UAGithubPullRequestCommentsResponse,            // One or more pull request comments
+    UAGithubPullRequestCommentResponse,             // Exactly one pull request comment
 	
 } UAGithubResponseType;

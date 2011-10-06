@@ -131,7 +131,7 @@
 - (NSString *)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath;
 - (NSString *)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary;
 - (NSString *)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
-- (NSString *)filesInPullRequest:(NSInteger)pullRequestID forRepository:(NSString *)repositoryPath;
+- (NSString *)filesInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
 - (NSString *)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath;
 - (NSString *)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath;
 
