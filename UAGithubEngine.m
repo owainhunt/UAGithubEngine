@@ -605,19 +605,19 @@
 
 - (NSString *)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/events", repositoryPath, issueId] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse];
 }
 
 
 - (NSString *)eventsForRepository:(NSString *)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events", repositoryPath] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse];
 }
 
 
 - (NSString *)event:(NSInteger)eventId forRepository:(NSString*)repositoryPath
 {
-    return nil;
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events/%d", repositoryPath, eventId] requestType:UAGithubEventRequest responseType:UAGithubEventResponse];
 }
 
 
