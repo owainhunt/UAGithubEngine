@@ -269,7 +269,7 @@
 
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType
 {
-    return [self sendRequest:path requestType:requestType responseType:responseType];
+    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil];
 }
 
 
