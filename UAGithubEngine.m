@@ -24,9 +24,7 @@
 #import "NSData+Base64.h"
 
 #define API_PROTOCOL @"https://"
-#define API_DOMAIN @"github.com/api"
-#define API_VERSION @"v2"
-#define API_FORMAT @"json"
+#define API_DOMAIN @"api.github.com"
 
 
 @interface UAGithubEngine (Private)
@@ -121,13 +119,13 @@
         // V2 requests
         case 0:
 
-            urlString = [NSMutableString stringWithFormat:@"%@%@/%@/%@/%@", API_PROTOCOL, API_DOMAIN, API_VERSION, API_FORMAT, path];
+            urlString = [NSMutableString stringWithFormat:@"https://github/com/api/v2/json/", path];
 
             break;
         
         // V3 Requests
         default:
-            urlString = [NSMutableString stringWithFormat:@"%@api.github.com/%@", API_PROTOCOL, path];
+            urlString = [NSMutableString stringWithFormat:@"%@%@/%@", API_PROTOCOL, API_DOMAIN, path];
             break;
     }
     
