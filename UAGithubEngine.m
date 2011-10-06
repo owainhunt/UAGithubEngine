@@ -316,61 +316,143 @@
 		case UAGithubRepositoryResponse:
 			[delegate repositoriesReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
+        case UAGithubRepositoryTeamsResponse:
+            break;
+            
         case UAGithubMilestonesResponse:
         case UAGithubMilestoneResponse:
             [delegate milestonesReceived:parsedObjects forConnection:connectionIdentifier];
             break;
+            
 		case UAGithubIssuesResponse:
 		case UAGithubIssueResponse:
 			[delegate issuesReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubIssueCommentsResponse:
 		case UAGithubIssueCommentResponse:
 			[delegate issueCommentsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubUsersResponse:
 		case UAGithubUserResponse:
 			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubIssueLabelsResponse:
+        case UAGithubIssueLabelResponse:
 		case UAGithubRepositoryLabelsResponse:
+        case UAGithubRepositoryLabelResponse:
 			[delegate labelsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubCommitsResponse:
 		case UAGithubCommitResponse:
 			[delegate commitsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
+        case UAGithubCommitCommentsResponse:
+        case UAGithubCommitCommentResponse:
+            break;
+            
+#pragma mark TODO Two separate methods?
 		case UAGithubBlobsResponse:
 			[delegate blobsReceieved:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubBlobResponse:
 			[delegate blobReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubCollaboratorsResponse:
 			[delegate collaboratorsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubDeployKeysResponse:
+        case UAGithubDeployKeyResponse:
 			[delegate deployKeysReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubRepositoryLanguageBreakdownResponse:
 			[delegate languagesReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
+#pragma mark TODO What's the deal with tags?
 		case UAGithubTagsResponse:
 			[delegate tagsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
 		case UAGithubBranchesResponse:
 			[delegate branchesReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
+#pragma mark TODO Does this belong here?
 		case UAGithubTreeResponse:
 			[delegate treeReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
         case UAGithubFollowingResponse:
 			[delegate followingReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
+            
         case UAGithubFollowersResponse:
 			[delegate followersReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 
+        case UAGithubFollowResponse:
+            break;
+
+        case UAGithubRepositoryHooksResponse:
+        case UAGithubRepositoryHookResponse:
+            break;
+
+        case UAGithubPublicKeysResponse:
+        case UAGithubPublicKeyResponse:
+            break;
+            
+        case UAGithubGistsResponse:
+        case UAGithubGistResponse:
+            break;
+            
+        case UAGithubGistCommentsResponse:
+        case UAGithubGistCommentResponse:
+            break;
+            
+        case UAGithubEventsResponse:
+        case UAGithubEventResponse:
+            break;
+            
+        case UAGithubPullRequestsResponse:
+        case UAGithubPullRequestResponse:
+            break;
+            
+        case UAGithubPullRequestMergeSuccessStatusResponse:
+            break;
+            
+        case UAGithubPullRequestFilesResponse:
+            break;
+            
+        case UAGithubPullRequestCommitsResponse:
+            break;
+            
+        case UAGithubPullRequestCommentsResponse:
+        case UAGithubPullRequestCommentResponse:
+            break;
+            
+        case UAGithubSHAResponse:
+            break;
+            
+        case UAGithubReferencesResponse:
+        case UAGithubReferenceResponse:
+            break;
+            
+        case UAGithubTagObjectResponse:
+            break;
+            
+        case UAGithubRawCommitResponse:
+            break;
+            
 		default:
 			break;
 	}

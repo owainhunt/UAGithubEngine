@@ -148,8 +148,6 @@ typedef enum UAGithubResponseType
 	UAGithubRepositoriesResponse,					// One or more repositories 
 	UAGithubRepositoryResponse,						// Exactly one repository
     UAGithubRepositoryTeamsResponse,                // One or more teams
-//	UAGithubDeleteRepositoryResponse,				// Token to send in delete confirmation request
-//	UAGithubDeleteRepositoryConfirmationResponse,	// Confirmation of deletion
     UAGithubDownloadsResponse,                      // One or more downloads
     UAGithubDownloadResponse,                       // Exactly one download
 	UAGithubDeployKeysResponse,						// One or more deploy keys
@@ -174,7 +172,6 @@ typedef enum UAGithubResponseType
     UAGithubRepositoryLabelResponse,                // Exactly one repository-wide issue label
 	UAGithubBlobsResponse,							// Name and SHA for all files in given tree SHA
 	UAGithubBlobResponse,							// Metadata and file data for given tree SHA and path 
-	UAGithubRawBlobResponse,						// Raw file
     UAGithubFollowingResponse,                      // Following
     UAGithubFollowersResponse,                      // Followers  
     UAGithubFollowResponse,                         // Follow or UnFollow a User

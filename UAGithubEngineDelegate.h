@@ -23,6 +23,11 @@
 - (void)connectionFinished:(NSString *)connectionIdentifier;
 
 
+#pragma mark No Content
+
+- (void)noContentResponseReceivedForConnection:(NSString *)connectionIdentifer;
+
+
 #pragma mark Users
 
 - (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier;
