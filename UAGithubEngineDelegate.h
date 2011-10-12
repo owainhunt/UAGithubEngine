@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UAGithubURLConnection.h"
 #import "UAGithubEngineRequestTypes.h"
 
 @protocol UAGithubEngineDelegate <NSObject>
@@ -25,7 +26,7 @@
 
 #pragma mark No Content
 
-- (void)noContentResponseReceivedForConnection:(NSString *)connectionIdentifer ofResponseType:(UAGithubResponseType)responseType;
+- (void)noContentResponseReceivedForConnection:(UAGithubURLConnection *)connection;
 
 
 #pragma mark Gists

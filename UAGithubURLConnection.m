@@ -16,7 +16,8 @@
 
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
 {
-    if ((self = [super initWithRequest:request delegate:delegate])) {
+    if ((self = [super initWithRequest:request delegate:delegate])) 
+    {
         data = [[NSMutableData alloc] initWithCapacity:0];
         identifier = [[NSString stringWithNewUUID] retain];
         requestType = reqType;

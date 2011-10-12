@@ -29,6 +29,7 @@
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page;
 
 - (BOOL)isValidSelectorForDelegate:(SEL)selector;
+- (void)parseDataForConnection:(UAGithubURLConnection *)connection;
 
 @end
 
@@ -301,23 +302,107 @@
 }
 
 
+#pragma mark -
+#pragma mark NSURLConnection Delegate Methods
+#pragma mark -
+
+- (void)connection:(UAGithubURLConnection *)connection didFailWithError:(NSError *)error
+{
+	[self.connections removeObjectForKey:connection.identifier];
+	
+	if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
+	{
+		[delegate requestFailed:connection.identifier withError:error];
+	}
+    
+	if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
+	{
+		[delegate connectionFinished:connection.identifier];
+	}
+    
+}
+
+
+- (void)connection:(UAGithubURLConnection *)connection didReceiveData:(NSData *)data
+{
+	[connection appendData:data];	
+}
+
+
+- (void)connection:(UAGithubURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+	[connection resetDataLength];
+    
+    // Get response code.
+    NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+    int statusCode = resp.statusCode;
+	
+	
+	if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
+	{
+		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
+		[self.connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+		 {
+			 [(UAGithubURLConnection *)obj cancel];
+		 }];
+	}
+    
+	//If X-Ratelimit-Remaining == 0:
+	//Add connection to list to retry
+	//Get all remaining connections from self.connections and add to retry list
+	//Post notification in 60s to allow new connections
+    
+    if (statusCode >= 400) 
+    {
+        NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
+		if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
+		{
+			[delegate requestFailed:connection.identifier withError:error];
+		}
+        
+        [connection cancel];
+		NSString *connectionIdentifier = connection.identifier;
+		[connections removeObjectForKey:connectionIdentifier];
+		if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
+		{
+			[delegate connectionFinished:connectionIdentifier];
+		}
+		
+    } 
+	
+}
+
+
+- (void)connectionDidFinishLoading:(UAGithubURLConnection *)connection
+{
+	[self parseDataForConnection:connection];
+	[self.connections removeObjectForKey:connection.identifier];
+	if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
+	{
+		[delegate connectionFinished:connection.identifier];
+	}
+	
+}
+
+
+#pragma mark 
+#pragma mark Parsing Methods
+#pragma mark 
+
+
 - (void)parseDataForConnection:(UAGithubURLConnection *)connection
 {
 	switch (connection.responseType) {
         case UAGithubNoContentResponse:
-            [delegate noContentResponseReceivedForConnection:connection.identifier ofResponseType:connection.responseType];
+            [delegate noContentResponseReceivedForConnection:connection];
             break;
         default:
 			[[[UAGithubJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
 			break;
 	}
-
+    
 }
-	
 
-#pragma mark 
-#pragma mark Parser Delegate Methods
-#pragma mark 
 
 - (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
 {
@@ -1468,88 +1553,6 @@
 - (NSString *)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath
 {
     return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/commits", repositoryPath] requestType:UAGithubRawCommitCreateRequest responseType:UAGithubRawCommitResponse withParameters:commitDictionary];
-}
-
-
-#pragma mark -
-#pragma mark NSURLConnection Delegate Methods
-#pragma mark -
-
-- (void)connection:(UAGithubURLConnection *)connection didFailWithError:(NSError *)error
-{
-	[self.connections removeObjectForKey:connection.identifier];
-	
-	if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
-	{
-		[delegate requestFailed:connection.identifier withError:error];
-	}
-			
-	if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-	{
-		[delegate connectionFinished:connection.identifier];
-	}
-
-}
-
-
-- (void)connection:(UAGithubURLConnection *)connection didReceiveData:(NSData *)data
-{
-	[connection appendData:data];	
-}
-
-
-- (void)connection:(UAGithubURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-	[connection resetDataLength];
-    
-    // Get response code.
-    NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
-    int statusCode = resp.statusCode;
-	
-	
-	if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
-	{
-		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
-		[self.connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-		 {
-			 [(UAGithubURLConnection *)obj cancel];
-		 }];
-	}
-		
-	//If X-Ratelimit-Remaining == 0:
-	//Add connection to list to retry
-	//Get all remaining connections from self.connections and add to retry list
-	//Post notification in 60s to allow new connections
-    
-    if (statusCode >= 400) {
-        NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
-		if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
-		{
-			[delegate requestFailed:connection.identifier withError:error];
-		}
-        
-        [connection cancel];
-		NSString *connectionIdentifier = connection.identifier;
-		[connections removeObjectForKey:connectionIdentifier];
-		if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-		{
-			[delegate connectionFinished:connectionIdentifier];
-		}
-		
-    } 
-	
-}
-
-
-- (void)connectionDidFinishLoading:(UAGithubURLConnection *)connection
-{
-	[self parseDataForConnection:connection];
-	[self.connections removeObjectForKey:connection.identifier];
-	if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-	{
-		[delegate connectionFinished:connection.identifier];
-	}
-	
 }
 
 
