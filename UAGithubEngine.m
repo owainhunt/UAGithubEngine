@@ -206,6 +206,7 @@
         case UAGithubGistForkRequest:
         case UAGithubPullRequestCreateRequest:
         case UAGithubPullRequestCommentCreateRequest:
+        case UAGithubEmailAddRequest:
             
 		{
 			[urlRequest setHTTPMethod:@"POST"];
@@ -253,6 +254,7 @@
         case UAGithubGistDeleteRequest:
         case UAGithubGistCommentDeleteRequest:
         case UAGithubPullRequestCommentDeleteRequest:
+        case UAGithubEmailDeleteRequest:
             
         {
             [urlRequest setHTTPMethod:@"DELETE"];
@@ -1283,19 +1285,19 @@
 
 - (NSString *)emailAddresses
 {
-    return nil;
+    return [self sendRequest:@"user/emails" requestType:UAGithubEmailsRequest responseType:UAGithubEmailsResponse];
 }
 
 
 - (NSString *)addEmailAddresses:(NSArray *)emails
 {
-    return nil;
+    return [self sendRequest:@"user/emails" requestType:UAGithubEmailAddRequest responseType:UAGithubEmailsResponse withParameters:emails];
 }
 
 
 - (NSString *)deleteEmailAddresses:(NSArray *)emails
 {
-    return nil;
+    return [self sendRequest:@"user/emails" requestType:UAGithubEmailDeleteRequest responseType:UAGithubNoContentResponse withParameters:emails];
 }
 
 

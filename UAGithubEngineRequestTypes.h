@@ -13,6 +13,9 @@ typedef enum UAGithubRequestType
 	UAGithubUsersRequest = 0,						// Get more than one non-specific user
 	UAGithubUserRequest,							// Get exactly one specific user
     UAGithubUserEditRequest,                        // Edit the authenticated user
+    UAGithubEmailsRequest,                          // Get one or more email addresses
+    UAGithubEmailAddRequest,                        // Add one or more email addresses
+    UAGithubEmailDeleteRequest,                     // Delete one or more email addresses
 	UAGithubRepositoriesRequest,					// Get more than one non-specific repository
 	UAGithubRepositoryRequest,						// Get exactly one specific repository
 	UAGithubRepositoryUpdateRequest,				// Update repository metadata
@@ -145,6 +148,7 @@ typedef enum UAGithubResponseType
     UAGithubNoContentResponse = 0,                  // No content expected
 	UAGithubUsersResponse,                          // One or more users
 	UAGithubUserResponse,							// Exactly one user
+    UAGithubEmailsResponse,                         // One or more email addresses
 	UAGithubRepositoriesResponse,					// One or more repositories 
 	UAGithubRepositoryResponse,						// Exactly one repository
     UAGithubRepositoryTeamsResponse,                // One or more teams
