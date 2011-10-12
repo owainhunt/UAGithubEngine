@@ -369,6 +369,12 @@
 		}
 		
     } 
+    
+    else if (statusCode == 204)
+    {
+        [connection cancel];
+        [delegate noContentResponseReceivedForConnection:connection];
+    }
 	
 }
 
