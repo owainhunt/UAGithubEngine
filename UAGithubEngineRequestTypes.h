@@ -121,8 +121,8 @@ typedef enum UAGithubRequestType
     UAGithubGistCommentCreateRequest,               // Create a new gist comment
     UAGithubGistCommentUpdateRequest,               // Edit a gist comment
     UAGithubGistCommentDeleteRequest,               // Delete a gist comment
-    UAGithubEventsRequest,                          // Get one or more issue events
-    UAGithubEventRequest,                           // Get exactly one issue event
+    UAGithubIssueEventsRequest,                     // Get one or more issue events
+    UAGithubIssueEventRequest,                           // Get exactly one issue event
     UAGithubPullRequestsRequest,                    // Get one or more pull requests
     UAGithubPullRequestRequest,                     // Get exactly one pull request
     UAGithubPullRequestCreateRequest,               // Create a pull request
@@ -148,14 +148,13 @@ typedef enum UAGithubResponseType
 	UAGithubRepositoriesResponse,					// One or more repositories 
 	UAGithubRepositoryResponse,						// Exactly one repository
     UAGithubRepositoryTeamsResponse,                // One or more teams
+    UAGithubDeployKeysResponse,                     // One or more deploy keys
+    UAGithubDeployKeyResponse,                      // Exactly one deploy key
     UAGithubDownloadsResponse,                      // One or more downloads
     UAGithubDownloadResponse,                       // Exactly one download
-	UAGithubDeployKeysResponse,						// One or more deploy keys
-    UAGithubDeployKeyResponse,                      // Exactly one deploy key
 	UAGithubRepositoryLanguageBreakdownResponse,	// Breakdown in language-bytes pairs
-	UAGithubTagsResponse,							// Tags in name-SHA pairs
-	UAGithubBranchesResponse,						// Branches in name-SHA pairs
-	UAGithubCollaboratorsResponse,					// One or more usernames
+	UAGithubBranchesResponse,						// One or more branches
+	UAGithubCollaboratorsResponse,					// One or more users
     UAGithubRepositoryHooksResponse,                // One or more repository hooks
     UAGithubRepositoryHookResponse,                 // Exactly one repository hook
 	UAGithubCommitsResponse,						// One or more commits
@@ -174,7 +173,8 @@ typedef enum UAGithubResponseType
 	UAGithubBlobResponse,							// Metadata and file data for given tree SHA and path 
     UAGithubFollowingResponse,                      // Following
     UAGithubFollowersResponse,                      // Followers  
-    UAGithubFollowResponse,                         // Follow or UnFollow a User
+    UAGithubFollowedResponse,                       // User was followed
+    UAGithubUnfollowedResponse,                     // User was unfollowed
     UAGithubMilestonesResponse,                     // One or more milestones
     UAGithubMilestoneResponse,                      // Exactly one milestone
     UAGithubPublicKeysResponse,                     // One or more public keys
@@ -183,14 +183,15 @@ typedef enum UAGithubResponseType
 	UAGithubTreeResponse,							// Metadata for all files in given commit
     UAGithubReferencesResponse,                     // One or more references
     UAGithubReferenceResponse,                      // Exactly one reference
-    UAGithubTagObjectResponse,                      // Exactly one annotated tag object
+    UAGithubAnnotatedTagsResponse,                  // One or more annotated tag objects
+    UAGithubAnnotatedTagResponse,                   // Exactly one annotated tag object
     UAGithubRawCommitResponse,                      // Exactly one raw commit
     UAGithubGistsResponse,                          // One or more gists
     UAGithubGistResponse,                           // Exactly one gist
     UAGithubGistCommentsResponse,                   // One or more gist comments
     UAGithubGistCommentResponse,                    // Exactly one gist comment
-    UAGithubEventsResponse,                         // One or more issue events
-    UAGithubEventResponse,                          // Exactly one issue event
+    UAGithubIssueEventsResponse,                    // One or more issue events
+    UAGithubIssueEventResponse,                     // Exactly one issue event
     UAGithubPullRequestsResponse,                   // One or more pull requests
     UAGithubPullRequestResponse,                    // Exactly one pull request
     UAGithubPullRequestMergeSuccessStatusResponse,  // Success or failure of merge attempt
@@ -198,5 +199,6 @@ typedef enum UAGithubResponseType
     UAGithubPullRequestFilesResponse,               // One or more pull request files
     UAGithubPullRequestCommentsResponse,            // One or more pull request comments
     UAGithubPullRequestCommentResponse,             // Exactly one pull request comment
+    UAGithubTagsResponse,							// Tags in name-SHA pairs
 	
 } UAGithubResponseType;

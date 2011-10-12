@@ -419,8 +419,9 @@
         case UAGithubGistCommentResponse:
             break;
             
-        case UAGithubEventsResponse:
-        case UAGithubEventResponse:
+        case UAGithubIssueEventsResponse:
+        case UAGithubIssueEventResponse:
+            [delegate issueEventsReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubPullRequestsResponse:
