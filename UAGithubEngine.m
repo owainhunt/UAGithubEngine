@@ -37,8 +37,9 @@
 
 @synthesize delegate, username, password, connections, reachability, isReachable;
 
-
-#pragma mark Initializer
+#pragma mark
+#pragma mark Setup & Teardown
+#pragma mark
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate withReachability:(BOOL)withReach
 {
@@ -73,6 +74,26 @@
 }
 
 
+#pragma mark 
+#pragma mark Delegate Check
+#pragma mark 
+
+- (BOOL)isValidSelectorForDelegate:(SEL)selector
+{
+	return ((delegate != nil) && [delegate respondsToSelector:selector]);
+}
+
+
+#pragma mark 
+#pragma mark Reachability 
+#pragma mark 
+
+- (BOOL)isReachable
+{
+	return [self.reachability currentReachabilityStatus];
+}	
+
+
 - (UAReachability *)reachability
 {
 	if (!reachability)
@@ -84,24 +105,9 @@
 }
 
 
-#pragma mark Delegate Check
-
-- (BOOL)isValidSelectorForDelegate:(SEL)selector
-{
-	return ((delegate != nil) && [delegate respondsToSelector:selector]);
-}
-
-
-#pragma mark -
-#pragma mark Reachability Check
-
-- (BOOL)isReachable
-{
-	return [self.reachability currentReachabilityStatus];
-}	
-
-
+#pragma mark 
 #pragma mark Request Management
+#pragma mark 
 
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page
 {
@@ -110,13 +116,15 @@
     
     switch (requestType) 
     {
+        /*
         // V2 requests
-        case 0:
+            
+        case -1:
 
             urlString = [NSMutableString stringWithFormat:@"https://github/com/api/v2/json/", path];
 
             break;
-        
+        */
         // V3 Requests
         default:
             urlString = [NSMutableString stringWithFormat:@"%@%@/%@", API_PROTOCOL, API_DOMAIN, path];
@@ -295,7 +303,7 @@
 {
 	switch (connection.responseType) {
         case UAGithubNoContentResponse:
-            [delegate noContentResponseReceivedForConnection:connection.identifier];
+            [delegate noContentResponseReceivedForConnection:connection.identifier ofResponseType:connection.responseType];
             break;
         default:
 			[[[UAGithubJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
@@ -305,7 +313,9 @@
 }
 	
 
+#pragma mark 
 #pragma mark Parser Delegate Methods
+#pragma mark 
 
 - (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
 {
@@ -337,6 +347,7 @@
             
 		case UAGithubUsersResponse:
 		case UAGithubUserResponse:
+        case UAGithubCollaboratorsResponse:
 			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
             
@@ -349,11 +360,13 @@
             
 		case UAGithubCommitsResponse:
 		case UAGithubCommitResponse:
+        case UAGithubPullRequestCommitsResponse:
 			[delegate commitsReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
             
         case UAGithubCommitCommentsResponse:
         case UAGithubCommitCommentResponse:
+            [delegate commitCommentsReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
 #pragma mark TODO Two separate methods?
@@ -363,15 +376,6 @@
             
 		case UAGithubBlobResponse:
 			[delegate blobReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubCollaboratorsResponse:
-			[delegate collaboratorsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubDeployKeysResponse:
-        case UAGithubDeployKeyResponse:
-			[delegate deployKeysReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
             
 		case UAGithubRepositoryLanguageBreakdownResponse:
@@ -400,23 +404,37 @@
 			[delegate followersReceived:parsedObjects forConnection:connectionIdentifier];
 			break;
 
-        case UAGithubFollowResponse:
+        case UAGithubFollowedResponse:
+            // Returns 204 no content.
+            break;
+            
+        case UAGithubUnfollowedResponse:
+            // Returns 204 no content.
+            break;
+            
+        case UAGithubDeployKeysResponse:
+        case UAGithubDeployKeyResponse:
+            [delegate deployKeysReceived:parsedObjects forConnection:connectionIdentifier];
             break;
 
         case UAGithubRepositoryHooksResponse:
         case UAGithubRepositoryHookResponse:
+            [delegate repositoryHooksReceived:parsedObjects forConnection:connectionIdentifier];
             break;
 
         case UAGithubPublicKeysResponse:
         case UAGithubPublicKeyResponse:
+            [delegate publicKeysReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubGistsResponse:
         case UAGithubGistResponse:
+            [delegate gistsReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubGistCommentsResponse:
         case UAGithubGistCommentResponse:
+            [delegate gistCommentsReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubIssueEventsResponse:
@@ -426,32 +444,37 @@
             
         case UAGithubPullRequestsResponse:
         case UAGithubPullRequestResponse:
+            [delegate pullRequestsReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubPullRequestMergeSuccessStatusResponse:
+            [delegate pullRequestMergeSuccessStatusReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubPullRequestFilesResponse:
-            break;
-            
-        case UAGithubPullRequestCommitsResponse:
+            [delegate pullRequestFilesReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubPullRequestCommentsResponse:
         case UAGithubPullRequestCommentResponse:
+            [delegate pullRequestCommentsReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubSHAResponse:
+            [delegate SHAReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubReferencesResponse:
         case UAGithubReferenceResponse:
+            [delegate referencesReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
-        case UAGithubTagObjectResponse:
+        case UAGithubAnnotatedTagResponse:
+            [delegate annotatedTagsReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
         case UAGithubRawCommitResponse:
+            [delegate rawCommitReceived:parsedObjects forConnection:connectionIdentifier];
             break;
             
 		default:
@@ -459,6 +482,15 @@
 	}
 	
 }
+
+
+/*
+ Should we just pass everything to the delegate in a single method and let the devs play wth the case statements as they please?
+- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
+{
+    [delegate parsingSucceededForConnection:connectionIdentifier ofResponseType:responseType withParsedObjects:parsedObjects];
+}
+*/
 
 
 - (void)parsingFailedForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withError:(NSError *)parseError
@@ -675,19 +707,19 @@
 
 - (NSString *)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath
 {
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/events", repositoryPath, issueId] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/events", repositoryPath, issueId] requestType:UAGithubIssueEventsRequest responseType:UAGithubIssueEventsResponse];
 }
 
 
 - (NSString *)eventsForRepository:(NSString *)repositoryPath
 {
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events", repositoryPath] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events", repositoryPath] requestType:UAGithubIssueEventsRequest responseType:UAGithubIssueEventsResponse];
 }
 
 
 - (NSString *)event:(NSInteger)eventId forRepository:(NSString*)repositoryPath
 {
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events/%d", repositoryPath, eventId] requestType:UAGithubEventRequest responseType:UAGithubEventResponse];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events/%d", repositoryPath, eventId] requestType:UAGithubIssueEventRequest responseType:UAGithubIssueEventResponse];
 }
 
 
@@ -1354,7 +1386,7 @@
 
 - (NSString *)createTagObject:(NSDictionary *)tagDictionary inRepository:(NSString *)repositoryPath
 {
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags", repositoryPath] requestType:UAGithubTagObjectCreateRequest responseType:UAGithubTagObjectResponse withParameters:tagDictionary];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags", repositoryPath] requestType:UAGithubTagObjectCreateRequest responseType:UAGithubAnnotatedTagResponse withParameters:tagDictionary];
 }
 
 
@@ -1426,7 +1458,7 @@
 
 - (NSString *)tag:(NSString *)sha inRepository:(NSString *)repositoryPath
 {
-    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags/%@", repositoryPath, sha] requestType:UAGithubTagObjectRequest responseType:UAGithubTagObjectResponse];
+    return [self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags/%@", repositoryPath, sha] requestType:UAGithubTagObjectRequest responseType:UAGithubAnnotatedTagResponse];
 }
 
 

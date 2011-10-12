@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "UAGithubEngineRequestTypes.h"
 
 @protocol UAGithubEngineDelegate <NSObject>
 
@@ -25,14 +25,20 @@
 
 #pragma mark No Content
 
-- (void)noContentResponseReceivedForConnection:(NSString *)connectionIdentifer;
+- (void)noContentResponseReceivedForConnection:(NSString *)connectionIdentifer ofResponseType:(UAGithubResponseType)responseType;
 
+
+#pragma mark Gists
+
+- (void)gistsReceived:(NSArray *)gists forConnection:(NSString *)connectionIdentifier;
+- (void)gistCommentsReceived:(NSArray *)gistComments forConnection:(NSString *)connectionIdentifier;
 
 #pragma mark Users
 
 - (void)usersReceived:(NSArray *)users forConnection:(NSString *)connectionIdentifier;
 - (void)followingReceived:(NSArray *)following forConnection:(NSString *)connectionIdentifier;
 - (void)followersReceived:(NSArray *)followers forConnection:(NSString *)connectionIdentifier;
+- (void)publicKeysReceived:(NSArray *)publicKeys forConnection:(NSString *)connectionIdentifier;
 
 
 #pragma mark Repositories
@@ -41,8 +47,9 @@
 - (void)deployKeysReceived:(NSArray *)deployKeys forConnection:(NSString *)connectionIdentifier;
 - (void)collaboratorsReceived:(NSArray *)collaborators forConnection:(NSString *)connectionIdentifier;
 - (void)languagesReceived:(NSArray *)languages forConnection:(NSString *)connectionIdentifier;
-- (void)tagsReceived:(NSArray *)tags forConnection:(NSString *)connectionIdentifier;
 - (void)branchesReceived:(NSArray *)branches forConnection:(NSString *)connectionIdentifier;
+- (void)annotatedTagsReceived:(NSArray *)tagObjects forConnection:(NSString *)connectionIdentifier;
+- (void)repositoryHooksReceived:(NSArray *)hooks forConnection:(NSString *)connectionIdentifier;
 
 
 #pragma mark Milestones
@@ -53,22 +60,34 @@
 #pragma mark Commits
 
 - (void)commitsReceived:(NSArray *)commits forConnection:(NSString *)connectionIdentifier;
+- (void)commitCommentsReceived:(NSArray *)commitComments forConnection:(NSString *)connectionIdentifier;
 
 
 #pragma mark Issues
 
 - (void)issuesReceived:(NSArray *)issues forConnection:(NSString *)connectionIdentifier;
+- (void)issueEventsReceived:(NSArray *)issueEvents forConnection:(NSString *)connectionIdentifier;
+- (void)issueCommentsReceived:(NSArray *)issueComments forConnection:(NSString *)connectionIdentifier;
 
+
+#pragma mark Pull Requests
+
+- (void)pullRequestsReceived:(NSArray *)pullRequests forConnection:(NSString *)connectionIdentifier;
+- (void)pullRequestMergeSuccessStatusReceived:(NSArray *)mergeStatuses forConnection:(NSString *)connectionIdentifier;
+- (void)pullRequestFilesReceived:(NSArray *)pullRequestFiles forConnection:(NSString *)connectionIdentifier;
+- (void)pullRequestCommentsReceived:(NSArray *)pullRequestComments forConnection:(NSString *)connectionIdentifier;
 
 #pragma mark Labels
 
 - (void)labelsReceived:(NSArray *)labels forConnection:(NSString *)connectionIdentifier;
 
 
-#pragma mark Comments
+#pragma mark Raw
 
-- (void)issueCommentsReceived:(NSArray *)issueComments forConnection:(NSString *)connectionIdentifier;
-
+- (void)SHAReceived:(NSArray *)SHA forConnection:(NSString *)connectionIdentifier;
+- (void)referencesReceived:(NSArray *)refs forConnection:(NSString *)connectionIdentifier;
+- (void)rawCommitReceived:(NSArray *)rawCommit forConnection:(NSString *)connectionIdentifier;
+- (void)tagsReceived:(NSArray *)tags forConnection:(NSString *)connectionIdentifier;
 
 #pragma mark Trees
 
