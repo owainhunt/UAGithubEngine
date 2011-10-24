@@ -347,6 +347,7 @@
 		 }];
 	}
     
+    
 	//If X-Ratelimit-Remaining == 0:
 	//Add connection to list to retry
 	//Get all remaining connections from self.connections and add to retry list
@@ -706,20 +707,18 @@
 
 - (NSString *)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType
 {
-	// Use UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues, UAGithubIssuesRequest for all issues.
+	// Use UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues.
     
 	switch (requestType) {
 		case UAGithubIssuesOpenRequest:
-			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=open", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:parameters];
+			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:parameters];
 			break;
             
 		case UAGithubIssuesClosedRequest:
 			return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues?state=closed", repositoryPath] requestType:UAGithubIssuesClosedRequest responseType:UAGithubIssuesResponse withParameters:parameters];
 			break;
-            
-        case UAGithubIssuesRequest:
-		default:
-            return [self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssuesRequest responseType:UAGithubIssueResponse withParameters:parameters];
+        default:
+            return nil;
 			break;
 	}
 	return nil;
