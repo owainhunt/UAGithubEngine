@@ -40,6 +40,43 @@
 }
 
 
++ (void)parseJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType success:(void(^)(id))successBlock_ failure:(void(^)(id, NSError *))failureBlock_;
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSError *error = nil;
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:theJSON options:NSJSONReadingMutableLeaves|NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
+        
+        NSMutableArray *jsonArray;
+        
+        if ([jsonObj isKindOfClass:[NSDictionary class]])
+        {
+            jsonArray = [NSMutableArray arrayWithObject:jsonObj]; 
+        }
+        else
+        {
+            jsonArray = [jsonObj mutableCopy];
+        }
+        
+        if (!error)
+        {
+            if ([[[jsonArray firstObject] allKeys] containsObject:@"error"])
+            {
+                NSDictionary *dictionary = [jsonArray firstObject];
+                error = [NSError errorWithDomain:@"UAGithubEngineGithubError" code:0 userInfo:[NSDictionary dictionaryWithObject:[dictionary objectForKey:@"error"] forKey:@"errorMessage"]];
+                return;
+            }
+            
+            successBlock_(jsonArray);
+        }
+        else 
+        {
+            failureBlock_(jsonArray, error);
+        }
+    });
+}
+
+
 - (void)dealloc
 {
 	[json release];
