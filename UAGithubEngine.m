@@ -16,6 +16,7 @@
 
 #import "NSString+UAGithubEngineUtilities.h"
 #import "NSData+Base64.h"
+#import "NSString+UUID.h"
 
 #define API_PROTOCOL @"https://"
 #define API_DOMAIN @"api.github.com"
@@ -29,7 +30,6 @@
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page;
 
 - (BOOL)isValidSelectorForDelegate:(SEL)selector;
-- (void)parseDataForConnection:(UAGithubURLConnection *)connection;
 
 @end
 
@@ -113,25 +113,7 @@
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page
 {
     
-    NSMutableString *urlString;
-    
-    switch (requestType) 
-    {
-        /*
-        // V2 requests
-            
-        case -1:
-
-            urlString = [NSMutableString stringWithFormat:@"https://github/com/api/v2/json/", path];
-
-            break;
-        */
-        // V3 Requests
-        default:
-            urlString = [NSMutableString stringWithFormat:@"%@%@/%@", API_PROTOCOL, API_DOMAIN, path];
-            break;
-    }
-    
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@/%@", API_PROTOCOL, API_DOMAIN, path];
     NSData *jsonData = nil;
     NSError *error = nil;
     
@@ -266,21 +248,223 @@
 			break;
 	}
 	
-	UAGithubURLConnection *connection;
-	connection = [[UAGithubURLConnection alloc] initWithRequest:urlRequest delegate:self requestType:requestType responseType:responseType];
-	
-	if (!connection) 
-	{
-		return nil;
-	}
-	else
-	{ 
-		[connections setObject:connection forKey:connection.identifier];
-		[connection release];
-	}
-	
-	return connection.identifier;
-	
+    __block NSString *uuid = [[NSString stringWithNewUUID] retain];    
+    
+    [UAGithubURLConnection asyncRequest:urlRequest requestType:requestType responseType:responseType 
+                                success:^(NSData *data, NSURLResponse *response)
+                                {
+                                    NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+                                    int statusCode = resp.statusCode;
+                                    
+                                    
+                                    if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
+                                    {
+                                        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
+                                        [self.connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+                                         {
+                                             [(UAGithubURLConnection *)obj cancel];
+                                         }];
+                                    }
+                                    
+                                    
+                                    if (statusCode >= 400) 
+                                    {
+                                        NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
+                                        if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
+                                        {
+                                            [delegate requestFailed:uuid withError:error];
+                                        }
+                                        
+                                        [connections removeObjectForKey:uuid];
+                                        if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
+                                        {
+                                            [delegate connectionFinished:uuid];
+                                        }
+                                        
+                                    } 
+                                    
+                                    else if (statusCode == 204)
+                                    {
+                                        [delegate noContentResponseReceivedForConnection:nil];
+                                    }
+
+                                    [UAGithubJSONParser parseJSON:data delegate:self connectionIdentifier:uuid requestType:requestType responseType:responseType 
+                                                          success:^(id parsedObjects)
+                                     {
+                                         [delegate requestSucceeded:uuid];
+                                         
+                                         switch (responseType) {
+                                             case UAGithubRepositoriesResponse:
+                                             case UAGithubRepositoryResponse:
+                                                 [delegate repositoriesReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubRepositoryTeamsResponse:
+                                                 break;
+                                                 
+                                             case UAGithubMilestonesResponse:
+                                             case UAGithubMilestoneResponse:
+                                                 [delegate milestonesReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubIssuesResponse:
+                                             case UAGithubIssueResponse:
+                                                 [delegate issuesReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubIssueCommentsResponse:
+                                             case UAGithubIssueCommentResponse:
+                                                 [delegate issueCommentsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubUsersResponse:
+                                             case UAGithubUserResponse:
+                                             case UAGithubCollaboratorsResponse:
+                                                 [delegate usersReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubIssueLabelsResponse:
+                                             case UAGithubIssueLabelResponse:
+                                             case UAGithubRepositoryLabelsResponse:
+                                             case UAGithubRepositoryLabelResponse:
+                                                 [delegate labelsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubCommitsResponse:
+                                             case UAGithubCommitResponse:
+                                             case UAGithubPullRequestCommitsResponse:
+                                                 [delegate commitsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubCommitCommentsResponse:
+                                             case UAGithubCommitCommentResponse:
+                                                 [delegate commitCommentsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+#pragma mark TODO Two separate methods?
+                                             case UAGithubBlobsResponse:
+                                                 [delegate blobsReceieved:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubBlobResponse:
+                                                 [delegate blobReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubRepositoryLanguageBreakdownResponse:
+                                                 [delegate languagesReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+#pragma mark TODO What's the deal with tags?
+                                             case UAGithubTagsResponse:
+                                                 [delegate tagsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubBranchesResponse:
+                                                 [delegate branchesReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+#pragma mark TODO Does this belong here?
+                                             case UAGithubTreeResponse:
+                                                 [delegate treeReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubFollowingResponse:
+                                                 [delegate followingReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubFollowersResponse:
+                                                 [delegate followersReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubFollowedResponse:
+                                                 // Returns 204 no content.
+                                                 break;
+                                                 
+                                             case UAGithubUnfollowedResponse:
+                                                 // Returns 204 no content.
+                                                 break;
+                                                 
+                                             case UAGithubDeployKeysResponse:
+                                             case UAGithubDeployKeyResponse:
+                                                 [delegate deployKeysReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubRepositoryHooksResponse:
+                                             case UAGithubRepositoryHookResponse:
+                                                 [delegate repositoryHooksReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubPublicKeysResponse:
+                                             case UAGithubPublicKeyResponse:
+                                                 [delegate publicKeysReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubGistsResponse:
+                                             case UAGithubGistResponse:
+                                                 [delegate gistsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubGistCommentsResponse:
+                                             case UAGithubGistCommentResponse:
+                                                 [delegate gistCommentsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubIssueEventsResponse:
+                                             case UAGithubIssueEventResponse:
+                                                 [delegate issueEventsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubPullRequestsResponse:
+                                             case UAGithubPullRequestResponse:
+                                                 [delegate pullRequestsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubPullRequestMergeSuccessStatusResponse:
+                                                 [delegate pullRequestMergeSuccessStatusReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubPullRequestFilesResponse:
+                                                 [delegate pullRequestFilesReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubPullRequestCommentsResponse:
+                                             case UAGithubPullRequestCommentResponse:
+                                                 [delegate pullRequestCommentsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubSHAResponse:
+                                                 [delegate SHAReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubReferencesResponse:
+                                             case UAGithubReferenceResponse:
+                                                 [delegate referencesReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubAnnotatedTagResponse:
+                                                 [delegate annotatedTagsReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             case UAGithubRawCommitResponse:
+                                                 [delegate rawCommitReceived:parsedObjects forConnection:uuid];
+                                                 break;
+                                                 
+                                             default:
+                                                 break;
+                                         }
+                                     }
+                                                          failure:^(id parsedObjects, NSError *error)
+                                     {
+                                         [delegate requestFailed:uuid withError:error];
+                                     }
+                                     ];
+                                }
+                                failure:^(NSData *data, NSError *error){
+                                    [delegate requestFailed:uuid withError:error];	
+                                    [delegate connectionFinished:uuid];                                  
+                                }
+     ];
+    return uuid;
 }
 
 
@@ -299,297 +483,6 @@
 - (NSString *)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType
 {
     return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:0];
-}
-
-
-#pragma mark -
-#pragma mark NSURLConnection Delegate Methods
-#pragma mark -
-
-- (void)connection:(UAGithubURLConnection *)connection didFailWithError:(NSError *)error
-{
-	[self.connections removeObjectForKey:connection.identifier];
-	
-	if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
-	{
-		[delegate requestFailed:connection.identifier withError:error];
-	}
-    
-	if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-	{
-		[delegate connectionFinished:connection.identifier];
-	}
-    
-}
-
-
-- (void)connection:(UAGithubURLConnection *)connection didReceiveData:(NSData *)data
-{
-	[connection appendData:data];	
-}
-
-
-- (void)connection:(UAGithubURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-	[connection resetDataLength];
-    
-    // Get response code.
-    NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
-    int statusCode = resp.statusCode;
-	
-	
-	if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
-	{
-		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
-		[self.connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-		 {
-			 [(UAGithubURLConnection *)obj cancel];
-		 }];
-	}
-    
-    
-	//If X-Ratelimit-Remaining == 0:
-	//Add connection to list to retry
-	//Get all remaining connections from self.connections and add to retry list
-	//Post notification in 60s to allow new connections
-    
-    if (statusCode >= 400) 
-    {
-        NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
-		if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
-		{
-			[delegate requestFailed:connection.identifier withError:error];
-		}
-        
-        [connection cancel];
-		NSString *connectionIdentifier = connection.identifier;
-		[connections removeObjectForKey:connectionIdentifier];
-		if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-		{
-			[delegate connectionFinished:connectionIdentifier];
-		}
-		
-    } 
-    
-    else if (statusCode == 204)
-    {
-        [connection cancel];
-        [delegate noContentResponseReceivedForConnection:connection];
-    }
-	
-}
-
-
-- (void)connectionDidFinishLoading:(UAGithubURLConnection *)connection
-{
-	[self parseDataForConnection:connection];
-	[self.connections removeObjectForKey:connection.identifier];
-	if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-	{
-		[delegate connectionFinished:connection.identifier];
-	}
-	
-}
-
-
-#pragma mark 
-#pragma mark Parsing Methods
-#pragma mark 
-
-
-- (void)parseDataForConnection:(UAGithubURLConnection *)connection
-{
-	switch (connection.responseType) {
-        case UAGithubNoContentResponse:
-            [delegate noContentResponseReceivedForConnection:connection];
-            break;
-        default:
-			[[[UAGithubJSONParser alloc] initWithJSON:connection.data delegate:self connectionIdentifier:connection.identifier requestType:connection.requestType responseType:connection.responseType] autorelease];
-			break;
-	}
-    
-}
-
-
-- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
-{
-	[delegate requestSucceeded:connectionIdentifier];
-	
-	switch (responseType) {
-		case UAGithubRepositoriesResponse:
-		case UAGithubRepositoryResponse:
-			[delegate repositoriesReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-        case UAGithubRepositoryTeamsResponse:
-            break;
-            
-        case UAGithubMilestonesResponse:
-        case UAGithubMilestoneResponse:
-            [delegate milestonesReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-		case UAGithubIssuesResponse:
-		case UAGithubIssueResponse:
-			[delegate issuesReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubIssueCommentsResponse:
-		case UAGithubIssueCommentResponse:
-			[delegate issueCommentsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubUsersResponse:
-		case UAGithubUserResponse:
-        case UAGithubCollaboratorsResponse:
-			[delegate usersReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubIssueLabelsResponse:
-        case UAGithubIssueLabelResponse:
-		case UAGithubRepositoryLabelsResponse:
-        case UAGithubRepositoryLabelResponse:
-			[delegate labelsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubCommitsResponse:
-		case UAGithubCommitResponse:
-        case UAGithubPullRequestCommitsResponse:
-			[delegate commitsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-        case UAGithubCommitCommentsResponse:
-        case UAGithubCommitCommentResponse:
-            [delegate commitCommentsReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-#pragma mark TODO Two separate methods?
-		case UAGithubBlobsResponse:
-			[delegate blobsReceieved:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubBlobResponse:
-			[delegate blobReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubRepositoryLanguageBreakdownResponse:
-			[delegate languagesReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-#pragma mark TODO What's the deal with tags?
-		case UAGithubTagsResponse:
-			[delegate tagsReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-		case UAGithubBranchesResponse:
-			[delegate branchesReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-#pragma mark TODO Does this belong here?
-		case UAGithubTreeResponse:
-			[delegate treeReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-        case UAGithubFollowingResponse:
-			[delegate followingReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-            
-        case UAGithubFollowersResponse:
-			[delegate followersReceived:parsedObjects forConnection:connectionIdentifier];
-			break;
-
-        case UAGithubFollowedResponse:
-            // Returns 204 no content.
-            break;
-            
-        case UAGithubUnfollowedResponse:
-            // Returns 204 no content.
-            break;
-            
-        case UAGithubDeployKeysResponse:
-        case UAGithubDeployKeyResponse:
-            [delegate deployKeysReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-
-        case UAGithubRepositoryHooksResponse:
-        case UAGithubRepositoryHookResponse:
-            [delegate repositoryHooksReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-
-        case UAGithubPublicKeysResponse:
-        case UAGithubPublicKeyResponse:
-            [delegate publicKeysReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubGistsResponse:
-        case UAGithubGistResponse:
-            [delegate gistsReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubGistCommentsResponse:
-        case UAGithubGistCommentResponse:
-            [delegate gistCommentsReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubIssueEventsResponse:
-        case UAGithubIssueEventResponse:
-            [delegate issueEventsReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubPullRequestsResponse:
-        case UAGithubPullRequestResponse:
-            [delegate pullRequestsReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubPullRequestMergeSuccessStatusResponse:
-            [delegate pullRequestMergeSuccessStatusReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubPullRequestFilesResponse:
-            [delegate pullRequestFilesReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubPullRequestCommentsResponse:
-        case UAGithubPullRequestCommentResponse:
-            [delegate pullRequestCommentsReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubSHAResponse:
-            [delegate SHAReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubReferencesResponse:
-        case UAGithubReferenceResponse:
-            [delegate referencesReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubAnnotatedTagResponse:
-            [delegate annotatedTagsReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-        case UAGithubRawCommitResponse:
-            [delegate rawCommitReceived:parsedObjects forConnection:connectionIdentifier];
-            break;
-            
-		default:
-			break;
-	}
-	
-}
-
-
-/*
- Should we just pass everything to the delegate in a single method and let the devs play wth the case statements as they please?
-- (void)parsingSucceededForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withParsedObjects:(NSArray *)parsedObjects
-{
-    [delegate parsingSucceededForConnection:connectionIdentifier ofResponseType:responseType withParsedObjects:parsedObjects];
-}
-*/
-
-
-- (void)parsingFailedForConnection:(NSString *)connectionIdentifier ofResponseType:(UAGithubResponseType)responseType withError:(NSError *)parseError
-{
-	[delegate requestFailed:connectionIdentifier withError:parseError];	
 }
 
 

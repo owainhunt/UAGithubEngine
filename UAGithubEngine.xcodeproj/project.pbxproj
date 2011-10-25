@@ -184,7 +184,6 @@
 		68E72ADD116652530069B287 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				68D35B101186049900C6E37E /* UAGithubURLConnection.h */,
 				68E72AE0116653770069B287 /* UAGithubEngine.h */,
 				68E72AE1116653770069B287 /* UAGithubEngine.m */,
 				68C9408112DBBB6500BF1151 /* UAReachability.h */,
@@ -192,9 +191,10 @@
 				68E72ADC116652450069B287 /* UAGithubEngineDelegate.h */,
 				6852614E116A51A8003AE003 /* UAGithubEngineRequestTypes.h */,
 				685261E1116A774C003AE003 /* UAGithubParserDelegate.h */,
-				68D35B111186049900C6E37E /* UAGithubURLConnection.m */,
 				681F4110134C911A002DD87D /* UAGithubEngineConstants.h */,
 				681F4111134C911A002DD87D /* UAGithubEngineConstants.m */,
+				68D35B101186049900C6E37E /* UAGithubURLConnection.h */,
+				68D35B111186049900C6E37E /* UAGithubURLConnection.m */,
 				68D35B1A1186071500C6E37E /* Categories */,
 				6879AB6311FF0F6800F29BDE /* JSON Parsers */,
 			);
@@ -228,7 +228,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "UAGithubEngine" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -352,7 +352,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -366,7 +366,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

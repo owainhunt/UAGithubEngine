@@ -13,7 +13,7 @@
 #import "UAGithubEngineConstants.h"
 #import "UAGithubParserDelegate.h"
 
-@interface UAGithubEngine : NSObject <UAGithubParserDelegate> {
+@interface UAGithubEngine : NSObject {
 	id <UAGithubEngineDelegate> delegate;
 	NSString *username;
 	NSString *password;
