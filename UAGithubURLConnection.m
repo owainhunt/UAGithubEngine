@@ -33,18 +33,19 @@
 {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		NSURLResponse *response = nil;
-		NSError *error = nil;
-		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        @autoreleasepool 
+        {    
+            NSURLResponse *response = nil;
+            NSError *error = nil;
+            NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            if (error) {
+                failureBlock_(data,error);
+            } else {
+                successBlock_(data,response);
+            }
+        }
         
-		if (error) {
-			failureBlock_(data,error);
-		} else {
-			successBlock_(data,response);
-		}
-        
-		[pool release];
 	});
 }
 
