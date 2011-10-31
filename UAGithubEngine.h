@@ -83,7 +83,7 @@
 
 #pragma mark Comments 
 
-- (NSString *)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
+- (id)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_;
 - (NSString *)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath;
 - (NSString *)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath;
 - (NSString *)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody;
