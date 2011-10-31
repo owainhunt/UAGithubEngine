@@ -45,7 +45,7 @@ return([[self string] characterAtIndex:[self scanLocation]]);
 
 - (unichar)scanCharacter
 {
-unsigned theScanLocation = [self scanLocation];
+NSUInteger theScanLocation = [self scanLocation];
 unichar theCharacter = [[self string] characterAtIndex:theScanLocation];
 [self setScanLocation:theScanLocation + 1];
 return(theCharacter);
@@ -53,7 +53,7 @@ return(theCharacter);
 
 - (BOOL)scanCharacter:(unichar)inCharacter
 {
-unsigned theScanLocation = [self scanLocation];
+NSUInteger theScanLocation = [self scanLocation];
 if ([[self string] characterAtIndex:theScanLocation] == inCharacter)
 	{
 	[self setScanLocation:theScanLocation + 1];
@@ -65,7 +65,7 @@ else
 
 - (void)backtrack:(unsigned)inCount
 {
-unsigned theScanLocation = [self scanLocation];
+NSUInteger theScanLocation = [self scanLocation];
 if (inCount > theScanLocation)
 	[NSException raise:NSGenericException format:@"Backtracked too far."];
 [self setScanLocation:theScanLocation - inCount];

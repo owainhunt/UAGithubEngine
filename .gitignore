@@ -4,12 +4,10 @@
 
 build/
 
-*.pbxuser
-*.perspective
-*.perspectivev3
-
-*.mode1v3
-*.mode2v3
-/UAGithubEngine.xcodeproj/xcuserdata/owainhunt.xcuserdatad/xcschemes/UAGithubEngine.xcscheme
-/UAGithubEngine.xcodeproj/project.xcworkspace/xcuserdata/owainhunt.xcuserdatad/UserInterfaceState.xcuserstate
-/UAGithubEngine.xcodeproj/xcuserdata/mlussier.xcuserdatad/
+*.xcodeproj/*.pbxuser
+*.xcodeproj/*.perspective
+*.xcodeproj/*.perspectivev3
+*.xcodeproj/*.mode1v3
+*.xcodeproj/*.mode2v3
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/

@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'UAGitHubAPITests' target in the 'UAGitHubAPITests' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

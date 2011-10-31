@@ -88,18 +88,19 @@ void *NewBase64Decode(
 		//
 		// Accumulate 4 valid characters (ignore everything else)
 		//
-		unsigned char accumulated[BASE64_UNIT_SIZE];
+		NSUInteger accumulated = 0;
 		size_t accumulateIndex = 0;
 		while (i < length)
 		{
 			unsigned char decode = base64DecodeLookup[inputBuffer[i++]];
 			if (decode != xx)
 			{
-				accumulated[accumulateIndex] = decode;
-				accumulateIndex++;
+				accumulated |= decode;
+				accumulated <<= 6;
 				
 				if (accumulateIndex == BASE64_UNIT_SIZE)
 				{
+                    accumulated >>= 6;
 					break;
 				}
 			}
@@ -108,9 +109,10 @@ void *NewBase64Decode(
 		//
 		// Store the 6 bits from each of the 4 characters as 3 bytes
 		//
-		outputBuffer[j] = (accumulated[0] << 2) | (accumulated[1] >> 4);
-		outputBuffer[j + 1] = (accumulated[1] << 4) | (accumulated[2] >> 2);
-		outputBuffer[j + 2] = (accumulated[2] << 6) | accumulated[3];
+		outputBuffer[j + 2] = accumulated & 0xff;
+		outputBuffer[j + 1] = (accumulated >>= 8) & 0xff;
+		outputBuffer[j] = (accumulated >>= 8) & 0xff;
+        NSCAssert (accumulated == 0, @"Did not drain entire accumulated value");
 		j += accumulateIndex - 1;
 	}
 	
