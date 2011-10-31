@@ -14,7 +14,7 @@
 - (NSDate *)dateFromGithubDateString {
 	
 	NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
-	NSString *dateString = self;
+	NSString *dateString = [self retain];
 
 	// Because Github returns three different date string formats throughout the API, 
 	// we need to check how to process the string based on the format used
@@ -37,7 +37,7 @@
 			[newDate deleteCharactersInRange:NSMakeRange(22, 1)];
 			[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
 			[dateString release];
-			dateString = newDate;
+			dateString = [newDate retain];
 			[newDate release];
 		}
 	} else {
@@ -45,15 +45,19 @@
 		[df setDateFormat:@"yyyy/MM/dd HH:mm:ss ZZZ"];
 	}
 	
-    return [df dateFromString:dateString];
-
+    return [df dateFromString:[dateString autorelease]];
 }
 
 
 - (NSString *)encodedString
 {
-    return (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, (CFStringRef)@";/?:@&=$+{}<>,", kCFStringEncodingUTF8);
-
+	CFStringRef string = CFURLCreateStringByAddingPercentEscapes(NULL,
+																 (CFStringRef)self,
+																 NULL,
+																 (CFStringRef)@";/?:@&=$+{}<>,",
+																 kCFStringEncodingUTF8);
+	
+	return [(NSString *)string autorelease];
 }
 
 
