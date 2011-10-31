@@ -29,26 +29,23 @@
 - (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params;
 - (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page;
 
-- (BOOL)isValidSelectorForDelegate:(SEL)selector;
-
 @end
 
 
 @implementation UAGithubEngine
 
-@synthesize delegate, username, password, connections, reachability, isReachable;
+@synthesize username, password, connections, reachability, isReachable;
 
 #pragma mark
 #pragma mark Setup & Teardown
 #pragma mark
 
-- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate withReachability:(BOOL)withReach
+- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword withReachability:(BOOL)withReach
 {
 	if ((self = [super init])) 
 	{
 		username = [aUsername retain];
 		password = [aPassword retain];
-		delegate = theDelegate;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		if (withReach)
 		{
@@ -68,20 +65,9 @@
 	[password release];
 	[connections release];
 	[reachability release];
-	delegate = nil;
 	
 	[super dealloc];
 	
-}
-
-
-#pragma mark 
-#pragma mark Delegate Check
-#pragma mark 
-
-- (BOOL)isValidSelectorForDelegate:(SEL)selector
-{
-	return ((delegate != nil) && [delegate respondsToSelector:selector]);
 }
 
 
@@ -251,7 +237,7 @@
     __block NSString *uuid = [[NSString stringWithNewUUID] retain];    
     __block id jsonObj = nil;
     
-    [UAGithubURLConnection asyncRequest:urlRequest requestType:requestType responseType:responseType 
+    [UAGithubURLConnection asyncRequest:urlRequest 
                                 success:^(NSData *data, NSURLResponse *response)
                                 {
                                     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
@@ -271,30 +257,21 @@
                                     if (statusCode >= 400) 
                                     {
                                         NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
-                                        if ([self isValidSelectorForDelegate:@selector(requestFailed:withError:)])
-                                        {
-                                            [delegate requestFailed:uuid withError:error];
-                                        }
-                                        
                                         [connections removeObjectForKey:uuid];
-                                        if ([self isValidSelectorForDelegate:@selector(connectionFinished:)])
-                                        {
-                                            [delegate connectionFinished:uuid];
-                                        }
-                                        
+#pragma mark TODO Handle error
+                                                                                
                                     } 
                                     
                                     else if (statusCode == 204)
                                     {
-                                        [delegate noContentResponseReceivedForConnection:nil];
+#pragma mark TODO Handle NoContentResponse
                                     }
 
-                                    jsonObj = [UAGithubJSONParser parseJSON:data delegate:self connectionIdentifier:uuid requestType:requestType responseType:responseType];
+                                    jsonObj = [UAGithubJSONParser parseJSON:data];
                                 }
                                 failure:^(NSData *data, NSError *parserError)
                                 {
-                                    [delegate requestFailed:uuid withError:parserError];	
-                                    [delegate connectionFinished:uuid]; 
+#pragma mark TODO Handle failure
                                 }
      ];
     

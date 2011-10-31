@@ -26,7 +26,6 @@
     if ((self = [super init])) 
 	{
         json = [theJSON retain];
-        delegate = theDelegate;
 		connectionIdentifier = [theIdentifier retain];
         requestType = reqType;
 		responseType = respType;
@@ -79,8 +78,10 @@
 */
 
 
-+ (id)parseJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
++ (id)parseJSON:(NSData *)theJSON
 {
+#pragma mark TODO Handle date elements
+    NSArray *dateElements = [NSArray arrayWithObjects:@"created_at", @"updated_at", @"closed_at", @"due_on", @"pushed_at", @"committed_at", @"merged_at", @"date", @"expirationdate", nil];
     NSMutableArray *jsonArray;
     NSError *error = nil;
     id jsonObj = [NSJSONSerialization JSONObjectWithData:theJSON options:NSJSONReadingMutableLeaves|NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];

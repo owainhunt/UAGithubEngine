@@ -29,7 +29,7 @@
 }
 
 // Can probably remove reqtype and resptype from here
-+ (void)asyncRequest:(NSURLRequest *)request requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType success:(void(^)(NSData *, NSURLResponse *))successBlock_ failure:(void(^)(NSData *, NSError *))failureBlock_ 
++ (void)asyncRequest:(NSURLRequest *)request success:(void(^)(NSData *, NSURLResponse *))successBlock_ failure:(void(^)(NSData *, NSError *))failureBlock_ 
 {
     // This has to be dispatch_sync rather than _async, otherwise our successBlock executes before the request is done and we're all bass-ackwards.
 	dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

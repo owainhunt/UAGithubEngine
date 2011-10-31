@@ -8,13 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "UAReachability.h"
-#import "UAGithubEngineDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubEngineConstants.h"
-#import "UAGithubParserDelegate.h"
 
 @interface UAGithubEngine : NSObject {
-	id <UAGithubEngineDelegate> delegate;
 	NSString *username;
 	NSString *password;
 	NSMutableDictionary *connections;
@@ -22,14 +19,13 @@
 	BOOL isReachable;
 }
 
-@property (assign) id <UAGithubEngineDelegate> delegate;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;
 @property (nonatomic, retain) NSMutableDictionary *connections;
 @property (nonatomic, retain) UAReachability *reachability;
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
-- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword delegate:(id)theDelegate withReachability:(BOOL)withReach;
+- (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword withReachability:(BOOL)withReach;
 
 /*
  Where methods take a 'whateverPath' argument, supply the full path to 'whatever'.

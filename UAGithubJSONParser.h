@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "UAGithubParserDelegate.h"
 #import "UAGithubEngineRequestTypes.h"
 
 @interface UAGithubJSONParser : NSObject {
-	id <UAGithubParserDelegate> delegate;
     NSString *connectionIdentifier;
     UAGithubRequestType requestType;
 	UAGithubResponseType responseType;
@@ -23,9 +21,8 @@
 }
 
 
-- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType;
 - (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType dateElements:(NSArray *)dates;
-+ (id)parseJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType;
++ (id)parseJSON:(NSData *)theJSON;
 
 
 
