@@ -139,6 +139,7 @@ typedef enum UAGithubRequestType
     UAGithubPullRequestCommentCreateRequest,        // Create a pull request comment
     UAGithubPullRequestCommentUpdateRequest,        // Update a pull request comment
     UAGithubPullRequestCommentDeleteRequest,         // Delete a pull request comment
+    UAGithubEventsRequest,                          // Get one or more events of unspecified type
 
 } UAGithubRequestType;
 
@@ -204,5 +205,6 @@ typedef enum UAGithubResponseType
     UAGithubPullRequestCommentsResponse,            // One or more pull request comments
     UAGithubPullRequestCommentResponse,             // Exactly one pull request comment
     UAGithubTagsResponse,							// Tags in name-SHA pairs
+    UAGithubEventsResponse,                         // One or more events of unspecified type
 	
 } UAGithubResponseType;

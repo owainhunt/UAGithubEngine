@@ -89,8 +89,8 @@
 #pragma mark Events
 
 - (id)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_;
-- (id)eventsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_;
-- (id)event:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(id(^)(id obj))successBlock_;
+- (id)issueEventsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_;
+- (id)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(id(^)(id obj))successBlock_;
 
 
 #pragma mark Labels
@@ -271,6 +271,20 @@
 - (id)addPublicKey:(NSDictionary *)keyDictionary success:(id(^)(id obj))successBlock_;
 - (id)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary success:(id(^)(id obj))successBlock_;
 - (id)deletePublicKey:(NSInteger)keyId success:(id(^)(id obj))successBlock_;
+
+
+#pragma mark
+#pragma mark Events
+#pragma mark
+
+- (id)eventsWithCompletion:(id(^)(id obj))successBlock_;
+- (id)eventsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (id)eventsForNetwork:(NSString *)networkPath completion:(id(^)(id obj))successBlock;
+- (id)eventsReceivedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
+- (id)eventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
+- (id)publicEventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
+- (id)eventsForOrganization:(NSString *)organization completion:(id(^)(id obj))successBlock;
+- (id)publicEventsForOrganization:(NSString *)organization completion:(id(^)(id obj))successBlock;
 
 
 #pragma mark -

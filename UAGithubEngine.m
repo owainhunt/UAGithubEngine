@@ -508,13 +508,13 @@
 }
 
 
-- (id)eventsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)issueEventsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events", repositoryPath] requestType:UAGithubIssueEventsRequest responseType:UAGithubIssueEventsResponse]);
 }
 
 
-- (id)event:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events/%d", repositoryPath, eventId] requestType:UAGithubIssueEventRequest responseType:UAGithubIssueEventResponse]);
 }
@@ -1178,6 +1178,30 @@
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags", repositoryPath] requestType:UAGithubTagObjectCreateRequest responseType:UAGithubAnnotatedTagResponse withParameters:tagDictionary]);
 }
 
+
+#pragma mark
+#pragma mark Events
+#pragma mark
+
+- (id)eventsWithCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:@"events" requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+
+
+- (id)eventsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/events", repositoryPath] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+
+/*
+- (id)eventsForNetwork:(NSString *)networkPath completion:(id(^)(id obj))successBlock;
+- (id)eventsReceivedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
+- (id)eventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
+- (id)publicEventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
+- (id)eventsForOrganization:(NSString *)organization completion:(id(^)(id obj))successBlock;
+- (id)publicEventsForOrganization:(NSString *)organization completion:(id(^)(id obj))successBlock;
+*/
 
 #pragma mark -
 #pragma mark Git Database API
