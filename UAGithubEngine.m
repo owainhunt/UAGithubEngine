@@ -1069,44 +1069,45 @@
 
 
 #pragma mark Followers
-
+// List a user's followers
 - (id)followers:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse]);	    
     
 }
 
-
+// List the authenticated user's followers
 - (id)followersWithCompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/followers" requestType:UAGithubUsersRequest responseType:UAGithubFollowersResponse]);
 }
 
-
+// List who a user is following
 - (id)following:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/following", user] requestType:UAGithubUserRequest responseType:UAGithubFollowingResponse]);	    
 }
 
-
+// List who the authenticated user is following
+- (id)followingWithCompletion:(id(^)(id obj))successBlock_
 {
-    return nil;
+    return successBlock_([self sendRequest:@"user/following" requestType:UAGithubUsersRequest responseType:UAGithubUsersResponse]);
 }
 
-
+// Check if the authenticated user follows another user
 - (id)follows:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
-    return nil;
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubFollowingRequest responseType:UAGithubNoContentResponse]);
 }
 
-
+// Follow a user
 - (id)follow:(NSString *)user  completion:(id(^)(id obj))successBlock_
 {
  	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubNoContentResponse]);	    
    
 }
 
-
+// Unfollow a user
 - (id)unfollow:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
  	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubUnfollowRequest responseType:UAGithubNoContentResponse]);	        
