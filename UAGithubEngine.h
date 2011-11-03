@@ -258,7 +258,6 @@
 - (id)followers:(NSString *)user completion:(id(^)(id obj))successBlock_;
 - (id)followersWithCompletion:(id(^)(id obj))successBlock_;
 - (id)following:(NSString *)user completion:(id(^)(id obj))successBlock_;
-- (id)followedBy:(NSString *)user completion:(id(^)(id obj))successBlock_;
 - (id)follows:(NSString *)user completion:(id(^)(id obj))successBlock_;
 - (id)follow:(NSString *)user completion:(id(^)(id obj))successBlock_;
 - (id)unfollow:(NSString *)user completion:(id(^)(id obj))successBlock_;

@@ -1116,7 +1116,6 @@
 }
 
 
-- (id)followedBy:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
     return nil;
 }
