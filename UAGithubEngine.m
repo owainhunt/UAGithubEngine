@@ -240,16 +240,15 @@
 			break;
 	}
 	
-    __block NSString *uuid = [[NSString stringWithNewUUID] retain];    
-    __block id jsonObj = nil;
+    __block NSError *error = nil;
     
-    [UAGithubURLConnection asyncRequest:urlRequest 
+    id returnValue = [UAGithubURLConnection asyncRequest:urlRequest 
                                 success:^(NSData *data, NSURLResponse *response)
                                 {
                                     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
                                     int statusCode = resp.statusCode;
                                     
-                                    
+                                    /*
                                     if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
                                     {
                                         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
@@ -257,31 +256,49 @@
                                          {
                                              [(UAGithubURLConnection *)obj cancel];
                                          }];
-                                    }
-                                    
+                                    }*/
                                     
                                     if (statusCode >= 400) 
                                     {
-                                        //NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
-                                        [connections removeObjectForKey:uuid];
-#pragma mark TODO Handle error
+                                        if (statusCode == 404)
+                                        {
+                                            switch (requestType)
+                                            {
+                                                case UAGithubFollowingRequest:
+                                                    return [NSNumber numberWithBool:NO];
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                        
+                                        return [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
                                                                                 
                                     } 
                                     
                                     else if (statusCode == 204)
                                     {
-#pragma mark TODO Handle NoContentResponse
+                                        return [NSNumber numberWithBool:YES]; 
+                                    }
+                                    
+                                    else
+                                    {
+                                        return [UAGithubJSONParser parseJSON:data error:&error];
                                     }
 
-                                    jsonObj = [UAGithubJSONParser parseJSON:data];
                                 }
                                 failure:^(NSData *data, NSError *parserError)
                                 {
-#pragma mark TODO Handle failure
+                                    return parserError;
                                 }
      ];
+
+    // If returnValue is of class NSArray, everything's fine.
+    // If it's an NSNumber YES, then we're looking at a successful call that expects a No Content response.
+    // If it's an NSNumber NO then that's a successful call to a method that returns an expected 404 response.
+    // If it's an NSError, then it's either a connection error, an HTTP error (eg 404), or a parser error. Inspect the NSError instance to determine which.
     
-    return jsonObj;
+    return (error) ? error : returnValue;
 }
 
 
@@ -1101,7 +1118,7 @@
 }
 
 // Check if the authenticated user follows another user
-- (id)follows:(NSString *)user completion:(id(^)(id obj))successBlock_
+- (BOOL)follows:(NSString *)user completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubFollowingRequest responseType:UAGithubNoContentResponse]);
 }
