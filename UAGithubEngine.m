@@ -1012,34 +1012,7 @@
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookDeleteRequest responseType:UAGithubNoContentResponse]);
 }
 
-
 /*
-- (id)deleteRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
-{
-	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/delete/%@", repositoryName] requestType:UAGithubRepositoryDeleteRequest responseType:UAGithubDeleteRepositoryResponse]);
-}
-
-
-- (id)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken completion:(id(^)(id obj))successBlock_
-{
-	NSDictionary *params = [NSDictionary dictionaryWithObject:deleteToken forKey:@"delete_token"]);
-	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/delete/%@", repositoryName] requestType:UAGithubRepositoryDeleteConfirmationRequest responseType:UAGithubDeleteRepositoryConfirmationResponse withParameters:params]);
-	
-}
-
-
-- (id)privatiseRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
-{
-	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/set/private/%@", repositoryName] requestType:UAGithubRepositoryPrivatiseRequest responseType:UAGithubRepositoryResponse]);	
-}
-
-
-- (id)publiciseRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
-{
-	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/set/public/%@", repositoryName] requestType:UAGithubRepositoryPubliciseRequest responseType:UAGithubRepositoryResponse]);
-}
-
-
 - (id)pushableRepositories completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:@"repos/pushable" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	
