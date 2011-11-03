@@ -256,7 +256,7 @@
                                     
                                     if (statusCode >= 400) 
                                     {
-                                        NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
+                                        //NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
                                         [connections removeObjectForKey:uuid];
 #pragma mark TODO Handle error
                                                                                 

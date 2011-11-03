@@ -81,7 +81,7 @@
 + (id)parseJSON:(NSData *)theJSON
 {
 #pragma mark TODO Handle date elements
-    NSArray *dateElements = [NSArray arrayWithObjects:@"created_at", @"updated_at", @"closed_at", @"due_on", @"pushed_at", @"committed_at", @"merged_at", @"date", @"expirationdate", nil];
+    //NSArray *dateElements = [NSArray arrayWithObjects:@"created_at", @"updated_at", @"closed_at", @"due_on", @"pushed_at", @"committed_at", @"merged_at", @"date", @"expirationdate", nil];
     NSMutableArray *jsonArray;
     NSError *error = nil;
     id jsonObj = [NSJSONSerialization JSONObjectWithData:theJSON options:NSJSONReadingMutableLeaves|NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:&error];
