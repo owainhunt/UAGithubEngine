@@ -22,7 +22,7 @@
 
 
 - (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType dateElements:(NSArray *)dates;
-+ (id)parseJSON:(NSData *)theJSON;
++ (id)parseJSON:(NSData *)theJSON error:(NSError **)error;
 
 
 
