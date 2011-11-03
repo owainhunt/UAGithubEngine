@@ -301,73 +301,73 @@
 #pragma mark Gists
 #pragma mark
 
-- (id)gistsForUser:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)gistsForUser:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/gists", user] requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse]);
 }
 
 
-- (id)gistsSuccess:(id(^)(id obj))successBlock_
+- (id)gistsWithCompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"gists" requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse]);
 
 }
 
-- (id)publicGistsSuccess:(id(^)(id obj))successBlock_
+- (id)publicGistsWithCompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"gists/public" requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse]);
 }
 
 
-- (id)starredGistsSuccess:(id(^)(id obj))successBlock_
+- (id)starredGistsWithCompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"gists/starred" requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse]);
 }
 
 
-- (id)gist:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)gist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistRequest responseType:UAGithubGistResponse]);
 }
 
 
-- (id)createGist:(NSDictionary *)gistDictionary success:(id(^)(id obj))successBlock_
+- (id)createGist:(NSDictionary *)gistDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"gists" requestType:UAGithubGistCreateRequest responseType:UAGithubGistResponse withParameters:gistDictionary]);
 }
 
 
-- (id)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary success:(id(^)(id obj))successBlock_
+- (id)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistUpdateRequest responseType:UAGithubGistResponse withParameters:gistDictionary]);
 }
 
 
-- (id)starGist:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)starGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)unstarGist:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)unstarGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistUnstarRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)gistIsStarred:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)gistIsStarred:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarStatusRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)forkGist:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)forkGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/fork", gistId] requestType:UAGithubGistForkRequest responseType:UAGithubGistResponse]);
 }
 
 
-- (id)deleteGist:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)deleteGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -375,31 +375,31 @@
 
 #pragma mark Comments
 
-- (id)commentsForGist:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)commentsForGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/comments", gistId] requestType:UAGithubGistCommentsRequest responseType:UAGithubGistCommentsResponse]);
 }
 
 
-- (id)gistComment:(NSString *)commentId success:(id(^)(id obj))successBlock_
+- (id)gistComment:(NSString *)commentId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentRequest responseType:UAGithubGistCommentResponse]);
 }
 
 
-- (id)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId success:(id(^)(id obj))successBlock_
+- (id)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/comments", gistId] requestType:UAGithubGistCommentCreateRequest responseType:UAGithubGistCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (id)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary success:(id(^)(id obj))successBlock_
+- (id)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentUpdateRequest responseType:UAGithubGistCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (id)deleteGistComment:(NSString *)commentId success:(id(^)(id obj))successBlock_
+- (id)deleteGistComment:(NSString *)commentId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -409,7 +409,7 @@
 #pragma mark Issues 
 #pragma mark
 
-- (id)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType success:(id(^)(id obj))successBlock_
+- (id)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType completion:(id(^)(id obj))successBlock_
 {
 	// Use UAGithubIssuesOpenRequest for open issues, UAGithubIssuesClosedRequest for closed issues.
     
@@ -429,37 +429,37 @@
 }
 
 
-- (id)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse]);	
 }
 
 
-- (id)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(id(^)(id obj))successBlock_
+- (id)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary]);	
 }
 
 
-- (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(id(^)(id obj))successBlock_
+- (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary]);	
 }
 
 
-- (id)closeIssue:(NSString *)issuePath success:(id(^)(id obj))successBlock_
+- (id)closeIssue:(NSString *)issuePath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] requestType:UAGithubIssueCloseRequest responseType:UAGithubIssueResponse]);	
 }
 
 
-- (id)reopenIssue:(NSString *)issuePath success:(id(^)(id obj))successBlock_
+- (id)reopenIssue:(NSString *)issuePath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] requestType:UAGithubIssueReopenRequest responseType:UAGithubIssueResponse]);	
 }
 
 
-- (id)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse]);	
 }
@@ -467,19 +467,19 @@
 
 #pragma mark Comments
 
-- (id)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
  	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentsRequest responseType:UAGithubIssueCommentsResponse]);	
 }
 
 
-- (id)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentRequest responseType:UAGithubIssueCommentResponse]);
 }
 
 
-- (id)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:comment forKey:@"body"];
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/comments", repositoryPath, issueNumber] requestType:UAGithubIssueCommentAddRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary]);
@@ -487,14 +487,14 @@
 }
 
 
-- (id)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody success:(id(^)(id obj))successBlock_
+- (id)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody completion:(id(^)(id obj))successBlock_
 {
     NSDictionary *commentDictionary = [NSDictionary dictionaryWithObject:commentBody forKey:@"body"];
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentEditRequest responseType:UAGithubIssueCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (id)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentDeleteRequest responseType:UAGithubIssueCommentResponse]);
 }
@@ -502,19 +502,19 @@
 
 #pragma mark Events
 
-- (id)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/events", repositoryPath, issueId] requestType:UAGithubIssueEventsRequest responseType:UAGithubIssueEventsResponse]);
 }
 
 
-- (id)issueEventsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)issueEventsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events", repositoryPath] requestType:UAGithubIssueEventsRequest responseType:UAGithubIssueEventsResponse]);
 }
 
 
-- (id)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/events/%d", repositoryPath, eventId] requestType:UAGithubIssueEventRequest responseType:UAGithubIssueEventResponse]);
 }
@@ -522,60 +522,60 @@
 
 #pragma mark Labels
 
-- (id)labelsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)labelsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/labels", repositoryPath] requestType:UAGithubRepositoryLabelsRequest responseType:UAGithubRepositoryLabelsResponse]);	
 }
 
 
-- (id)label:(NSString *)labelName inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)label:(NSString *)labelName inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubIssueLabelRequest responseType:UAGithubIssueLabelResponse]);
 }
 
-- (id)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary success:(id(^)(id obj))successBlock_
+- (id)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/labels", repositoryPath] requestType:UAGithubRepositoryLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:labelDictionary]);	
 }
 
 
-- (id)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary success:(id(^)(id obj))successBlock_
+- (id)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelEditRequest responseType:UAGithubRepositoryLabelResponse withParameters:labelDictionary]);
 }
 
 
-- (id)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelRemoveRequest responseType:UAGithubNoContentResponse]);	
 }
 
 
-- (id)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelAddRequest responseType:UAGithubIssueLabelsResponse withParameters:labels]);
 }
 
 
-- (id)removeLabel:(NSString *)labelName fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)removeLabel:(NSString *)labelName fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels/%@", repositoryPath, issueNumber, labelName] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse]);	
 }
 
 
-- (id)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels success:(id(^)(id obj))successBlock_
+- (id)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelReplaceRequest responseType:UAGithubIssueLabelsResponse withParameters:labels]);
 }
 
 
-- (id)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueId] requestType:UAGithubIssueLabelsRequest responseType:UAGithubIssueLabelsResponse]);
 }
 
 
-- (id)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d/labels", repositoryPath, milestoneId] requestType:UAGithubIssueLabelsRequest responseType:UAGithubIssueLabelsResponse]);
 }
@@ -583,31 +583,31 @@
 
 #pragma mark Milestones
 
-- (id)milestonesForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)milestonesForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestonesRequest responseType:UAGithubMilestonesResponse]);
 }
 
 
-- (id)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneRequest responseType:UAGithubMilestoneResponse]);
 }
 
 
-- (id)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones", repositoryPath] requestType:UAGithubMilestoneCreateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary]);
 }
 
 
-- (id)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary success:(id(^)(id obj))successBlock_
+- (id)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneUpdateRequest responseType:UAGithubMilestoneResponse withParameters:infoDictionary]); 
 }
 
 
-- (id)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneDeleteRequest responseType:UAGithubMilestoneResponse]);
 }
@@ -617,49 +617,49 @@
 #pragma mark Pull Requests
 #pragma mark
 
-- (id)pullRequestsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)pullRequestsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls", repositoryPath] requestType:UAGithubPullRequestsRequest responseType:UAGithubPullRequestsResponse]);
 }
 
 
-- (id)pullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)pullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d", repositoryPath, pullRequestId] requestType:UAGithubPullRequestRequest responseType:UAGithubPullRequestResponse]);
 }
 
 
-- (id)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls", repositoryPath] requestType:UAGithubPullRequestCreateRequest responseType:UAGithubPullRequestResponse withParameters:pullRequestDictionary]);
 }
 
 
-- (id)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary success:(id(^)(id obj))successBlock_
+- (id)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d", repositoryPath, pullRequestId] requestType:UAGithubPullRequestUpdateRequest responseType:UAGithubPullRequestResponse withParameters:pullRequestDictionary]);
 }
 
 
-- (id)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/commits", repositoryPath, pullRequestId] requestType:UAGithubPullRequestCommitsRequest responseType:UAGithubPullRequestCommitsResponse]);
 }
 
 
-- (id)filesInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)filesInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/files", repositoryPath, pullRequestId] requestType:UAGithubPullRequestFilesRequest responseType:UAGithubPullRequestFilesResponse]);
 }
 
 
-- (id)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/merge", repositoryPath, pullRequestId] requestType:UAGithubPullRequestMergeStatusRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/merge", repositoryPath, pullRequestId] requestType:UAGithubPullRequestMergeRequest responseType:UAGithubPullRequestMergeSuccessStatusResponse]);
 }
@@ -667,31 +667,31 @@
 
 #pragma mark Comments
 
-- (id)commentsForPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commentsForPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/comments", repositoryPath, pullRequestId] requestType:UAGithubPullRequestCommentsRequest responseType:UAGithubPullRequestCommentsResponse]);
 }
 
 
-- (id)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/comments/%d", repositoryPath, commentId] requestType:UAGithubPullRequestCommentRequest responseType:UAGithubPullRequestCommentResponse]);
 }
 
 
-- (id)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/comments", repositoryPath, pullRequestId] requestType:UAGithubPullRequestCommentCreateRequest responseType:UAGithubPullRequestCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (id)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary success:(id(^)(id obj))successBlock_
+- (id)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/comments/%d", repositoryPath, commentId] requestType:UAGithubPullRequestCommentUpdateRequest responseType:UAGithubPullRequestCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (id)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/comments/%d", repositoryPath, commentId] requestType:UAGithubPullRequestCommentDeleteRequest responseType:UAGithubPullRequestCommentResponse]);
 }
@@ -701,73 +701,73 @@
 #pragma mark Repositories
 #pragma mark
 
-- (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched success:(id(^)(id obj))successBlock_
+- (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched completion:(id(^)(id obj))successBlock_
 {
-	return successBlock_([self repositoriesForUser:aUser includeWatched:watched page:1 success:successBlock_(nil)]);	
+	return successBlock_([self repositoriesForUser:aUser includeWatched:watched page:1 completion:successBlock_(nil)]);	
 }
 
 #pragma mark TODO watched repos?
-- (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page success:(id(^)(id obj))successBlock_
+- (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/repos", aUser] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	
 }
 
 
-- (id)repositoriesSuccess:(id(^)(id obj))successBlock_
+- (id)repositoriescompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/repos" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);
 }
 
 #pragma mark TODO check orgs is implemented elsewhere
-- (id)createRepositoryWithInfo:(NSDictionary *)infoDictionary success:(id(^)(id obj))successBlock_
+- (id)createRepositoryWithInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:@"user/repos" requestType:UAGithubRepositoryCreateRequest responseType:UAGithubRepositoryResponse withParameters:infoDictionary]);	
 }
 
 
-- (id)repository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)repository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse]);	
 }
 
 /*
-- (id)searchRepositories:(NSString *)query success:(id(^)(id obj))successBlock_
+- (id)searchRepositories:(NSString *)query completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/search/%@", [query encodedString]] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	 
 }*/
 
 
-- (id)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary success:(id(^)(id obj))successBlock_
+- (id)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@", repositoryPath] requestType:UAGithubRepositoryUpdateRequest responseType:UAGithubRepositoryResponse withParameters:infoDictionary]);
 }
 
 
-- (id)contributorsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)contributorsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
    	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/contributitors", repositoryPath] requestType:UAGithubRepositoryContributorsRequest responseType:UAGithubUsersResponse]);
 }
 
 
-- (id)languageBreakdownForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)languageBreakdownForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/languages", repositoryPath] requestType:UAGithubRepositoryLanguageBreakdownRequest responseType:UAGithubRepositoryLanguageBreakdownResponse]);	
 }
 
 
-- (id)teamsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)teamsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/teams", repositoryPath] requestType:UAGithubRepositoryTeamsRequest responseType:UAGithubRepositoryTeamsResponse]);
 }
 
 
-- (id)annotatedTagsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)annotatedTagsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/tags", repositoryPath] requestType:UAGithubTagsRequest responseType:UAGithubTagsResponse]);	
 }
 
 
-- (id)branchesForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)branchesForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/branches", repositoryPath] requestType:UAGithubBranchesRequest responseType:UAGithubBranchesResponse]);	
 }
@@ -775,25 +775,25 @@
 
 #pragma mark Collaborators
 
-- (id)collaboratorsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)collaboratorsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators", repositoryPath] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse]);	
 }
 
 #pragma mark TODO Vomit. Returns 204 No Content if true, 404 if false.
-- (id)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators/%@", repositoryPath, user] requestType:UAGithubCollaboratorsRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators/%@", repositoryPath, collaborator] requestType:UAGithubCollaboratorAddRequest responseType:UAGithubCollaboratorsResponse]);
 }
 
 
-- (id)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators/%@", repositoryPath, collaborator] requestType:UAGithubCollaboratorRemoveRequest responseType:UAGithubCollaboratorsResponse]);
 }
@@ -801,13 +801,13 @@
 
 #pragma mark Commits
 
-- (id)commitsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commitsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/commits", repositoryPath] requestType:UAGithubCommitsRequest responseType:UAGithubCommitsResponse]);	
 }
 
 
-- (id)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@", repositoryPath, commitSha] requestType:UAGithubCommitRequest responseType:UAGithubCommitResponse]);	
 }
@@ -815,37 +815,37 @@
 
 #pragma mark Commit Comments
 
-- (id)commitCommentsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commitCommentsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/comments", repositoryPath] requestType:UAGithubCommitCommentsRequest responseType:UAGithubCommitCommentsResponse]);
 }
 
 
-- (id)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentsResponse]);
 }
 
 
-- (id)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/commits/%@/comments", repositoryPath, sha] requestType:UAGithubCommitCommentAddRequest responseType:UAGithubCommitCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (id)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentRequest responseType:UAGithubCommitCommentResponse]);
 }
 
 
-- (id)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary success:(id(^)(id obj))successBlock_
+- (id)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentEditRequest responseType:UAGithubCommitCommentResponse withParameters:infoDictionary]);
 }
 
 
-- (id)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -853,25 +853,25 @@
 
 #pragma mark Downloads
 
-- (id)downloadsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)downloadsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/downloads", repositoryPath] requestType:UAGithubDownloadsRequest responseType:UAGithubDownloadsResponse]);
 }
 
 
-- (id)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/downloads/%d", repositoryPath, downloadId] requestType:UAGithubDownloadRequest responseType:UAGithubDownloadResponse]);
 }
 
 
-- (id)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary success:(id(^)(id obj))successBlock_
+- (id)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/downloads", repositoryPath] requestType:UAGithubDownloadAddRequest responseType:UAGithubDownloadResponse withParameters:downloadDictionary]);
 }
 
 
-- (id)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/downloads/%d", repositoryPath, downloadId] requestType:UAGithubDownloadDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -879,13 +879,13 @@
 
 #pragma mark Forks
 
-- (id)forksForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)forksForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/forks", repositoryPath] requestType:UAGithubRepositoryForksRequest responseType:UAGithubRepositoriesResponse]);
 }
 
 
-- (id)forkRepository:(NSString *)repositoryPath inOrganization:(NSString *)org success:(id(^)(id obj))successBlock_
+- (id)forkRepository:(NSString *)repositoryPath inOrganization:(NSString *)org completion:(id(^)(id obj))successBlock_
 {
     if (org)
     {
@@ -895,27 +895,27 @@
 }
 
 
-- (id)forkRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)forkRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
-    return successBlock_([self forkRepository:repositoryPath inOrganization:nil success:successBlock_(nil)]);
+    return successBlock_([self forkRepository:repositoryPath inOrganization:nil completion:successBlock_(nil)]);
 }
 
 
 #pragma mark Keys
 
-- (id)deployKeysForRepository:(NSString *)repositoryName success:(id(^)(id obj))successBlock_
+- (id)deployKeysForRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/keys", repositoryName] requestType:UAGithubDeployKeysRequest responseType:UAGithubDeployKeysResponse]);
 }
 
 
-- (id)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/keys/%d", repositoryPath, keyId] requestType:UAGithubDeployKeyRequest responseType:UAGithubDeployKeyResponse]);
 }
 
 
-- (id)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName success:(id(^)(id obj))successBlock_
+- (id)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
 {
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:keyData, @"key", keyTitle, @"title", nil];
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/keys", repositoryName] requestType:UAGithubDeployKeyAddRequest responseType:UAGithubDeployKeysResponse withParameters:params]);
@@ -923,13 +923,13 @@
 }
 
 
-- (id)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary success:(id(^)(id obj))successBlock_
+- (id)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/keys/%d", repositoryPath, keyId] requestType:UAGithubDeployKeyEditRequest responseType:UAGithubDeployKeyResponse withParameters:keyDictionary]);
 }
 
 
-- (id)removeDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName success:(id(^)(id obj))successBlock_
+- (id)removeDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/keys/%d", repositoryName, keyId] requestType:UAGithubDeployKeyDeleteRequest responseType:UAGithubNoContentResponse]);
     
@@ -938,38 +938,38 @@
 
 #pragma mark Watching
 
-- (id)watchersForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)watchersForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/watchers", repositoryPath] requestType:UAGithubUsersRequest responseType:UAGithubUsersResponse]);
 }
 
 
-- (id)watchedRepositoriesForUser:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)watchedRepositoriesForUser:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/watched", user] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);
 }
 
 
-- (id)watchedRepositoriesSuccess:(id(^)(id obj))successBlock_
+- (id)watchedRepositoriescompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/watched" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);
 }
 
 
 #pragma mark TODO Vomit again (204/404)
-- (id)repositoryIsWatched:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)repositoryIsWatched:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/watched/%@", repositoryPath] requestType:UAGithubRepositoryWatchingRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)watchRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)watchRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/watched/%@", repositoryPath] requestType:UAGithubRepositoryWatchRequest responseType:UAGithubNoContentResponse]);	 
 }
 
 
-- (id)unwatchRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)unwatchRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/watched/%@", repositoryPath] requestType:UAGithubRepositoryUnwatchRequest responseType:UAGithubNoContentResponse]);
 }
@@ -977,50 +977,50 @@
 
 #pragma mark Hooks
 
-- (id)hooksForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)hooksForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks", repositoryPath] requestType:UAGithubRepositoryHooksRequest responseType:UAGithubRepositoryHooksResponse]);
 }
 
 
-- (id)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookRequest responseType:UAGithubRepositoryHookResponse]);
 }
 
 
-- (id)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks", repositoryPath] requestType:UAGithubRepositoryHookAddRequest responseType:UAGithubRepositoryHookResponse]);
 }
 
 
-- (id)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary success:(id(^)(id obj))successBlock_
+- (id)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookEditRequest responseType:UAGithubRepositoryHookResponse withParameters:hookDictionary]);
 }
 
 
-- (id)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookTestRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)removeHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)removeHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookDeleteRequest responseType:UAGithubNoContentResponse]);
 }
 
 
 /*
-- (id)deleteRepository:(NSString *)repositoryName success:(id(^)(id obj))successBlock_
+- (id)deleteRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/delete/%@", repositoryName] requestType:UAGithubRepositoryDeleteRequest responseType:UAGithubDeleteRepositoryResponse]);
 }
 
 
-- (id)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken success:(id(^)(id obj))successBlock_
+- (id)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken completion:(id(^)(id obj))successBlock_
 {
 	NSDictionary *params = [NSDictionary dictionaryWithObject:deleteToken forKey:@"delete_token"]);
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/delete/%@", repositoryName] requestType:UAGithubRepositoryDeleteConfirmationRequest responseType:UAGithubDeleteRepositoryConfirmationResponse withParameters:params]);
@@ -1028,25 +1028,25 @@
 }
 
 
-- (id)privatiseRepository:(NSString *)repositoryName success:(id(^)(id obj))successBlock_
+- (id)privatiseRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/set/private/%@", repositoryName] requestType:UAGithubRepositoryPrivatiseRequest responseType:UAGithubRepositoryResponse]);	
 }
 
 
-- (id)publiciseRepository:(NSString *)repositoryName success:(id(^)(id obj))successBlock_
+- (id)publiciseRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/set/public/%@", repositoryName] requestType:UAGithubRepositoryPubliciseRequest responseType:UAGithubRepositoryResponse]);
 }
 
 
-- (id)pushableRepositories success:(id(^)(id obj))successBlock_
+- (id)pushableRepositories completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:@"repos/pushable" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	
 }
 
 
-- (id)networkForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)networkForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/show/%@/network", repositoryPath] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	
 }
@@ -1057,19 +1057,19 @@
 #pragma mark Users
 #pragma mark 
 
-- (id)user:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)user:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@", user] requestType:UAGithubUserRequest responseType:UAGithubUserResponse]);	
 }
 
 
-- (id)userSuccess:(id(^)(id obj))successBlock_
+- (id)userWithCompletion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:@"user" requestType:UAGithubUserRequest responseType:UAGithubUserResponse]);	
 }
 
 
-- (id)editUser:(NSDictionary *)userDictionary success:(id(^)(id obj))successBlock_
+- (id)editUser:(NSDictionary *)userDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user" requestType:UAGithubUserEditRequest responseType:UAGithubUserResponse withParameters:userDictionary]);
 }
@@ -1077,19 +1077,19 @@
 
 #pragma mark Emails
 
-- (id)emailAddressesSuccess:(id(^)(id obj))successBlock_
+- (id)emailAddressescompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/emails" requestType:UAGithubEmailsRequest responseType:UAGithubEmailsResponse]);
 }
 
 
-- (id)addEmailAddresses:(NSArray *)emails success:(id(^)(id obj))successBlock_
+- (id)addEmailAddresses:(NSArray *)emails completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/emails" requestType:UAGithubEmailAddRequest responseType:UAGithubEmailsResponse withParameters:emails]);
 }
 
 
-- (id)deleteEmailAddresses:(NSArray *)emails success:(id(^)(id obj))successBlock_
+- (id)deleteEmailAddresses:(NSArray *)emails completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/emails" requestType:UAGithubEmailDeleteRequest responseType:UAGithubNoContentResponse withParameters:emails]);
 }
@@ -1097,45 +1097,45 @@
 
 #pragma mark Followers
 
-- (id)followers:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)followers:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/followers", user] requestType:UAGithubUserRequest responseType:UAGithubFollowersResponse]);	    
     
 }
 
 
-- (id)followersSuccess:(id(^)(id obj))successBlock_
+- (id)followersWithCompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/followers" requestType:UAGithubUsersRequest responseType:UAGithubFollowersResponse]);
 }
 
 
-- (id)following:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)following:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/following", user] requestType:UAGithubUserRequest responseType:UAGithubFollowingResponse]);	    
 }
 
 
-- (id)followedBy:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)followedBy:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
     return nil;
 }
 
 
-- (id)follows:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)follows:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
     return nil;
 }
 
 
-- (id)follow:(NSString *)user  success:(id(^)(id obj))successBlock_
+- (id)follow:(NSString *)user  completion:(id(^)(id obj))successBlock_
 {
  	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubNoContentResponse]);	    
    
 }
 
 
-- (id)unfollow:(NSString *)user success:(id(^)(id obj))successBlock_
+- (id)unfollow:(NSString *)user completion:(id(^)(id obj))successBlock_
 {
  	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubUnfollowRequest responseType:UAGithubNoContentResponse]);	        
 }
@@ -1143,37 +1143,37 @@
 
 #pragma mark Keys
 
-- (id)publicKeysSuccess:(id(^)(id obj))successBlock_
+- (id)publicKeysWithCompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/keys" requestType:UAGithubPublicKeysRequest responseType:UAGithubPublicKeysResponse]);
 }
 
 
-- (id)publicKey:(NSInteger)keyId success:(id(^)(id obj))successBlock_
+- (id)publicKey:(NSInteger)keyId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyRequest responseType:UAGithubPublicKeyResponse]);
 }
 
 
-- (id)addPublicKey:(NSDictionary *)keyDictionary success:(id(^)(id obj))successBlock_
+- (id)addPublicKey:(NSDictionary *)keyDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/keys" requestType:UAGithubPublicKeyAddRequest responseType:UAGithubPublicKeyResponse withParameters:keyDictionary]);
 }
 
 
-- (id)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary success:(id(^)(id obj))successBlock_
+- (id)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyEditRequest responseType:UAGithubPublicKeyResponse withParameters:keyDictionary]);
 }
 
 
-- (id)deletePublicKey:(NSInteger)keyId success:(id(^)(id obj))successBlock_
+- (id)deletePublicKey:(NSInteger)keyId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyDeleteRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)createTagObject:(NSDictionary *)tagDictionary inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createTagObject:(NSDictionary *)tagDictionary inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags", repositoryPath] requestType:UAGithubTagObjectCreateRequest responseType:UAGithubAnnotatedTagResponse withParameters:tagDictionary]);
 }
@@ -1237,13 +1237,13 @@
 
 #pragma mark Trees
 
-- (id)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive success:(id(^)(id obj))successBlock_
+- (id)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/trees/%@%@", repositoryPath, sha, recursive ? @"?recursive=1" : @""] requestType:UAGithubTreeRequest responseType:UAGithubTreeResponse]);	
 }
 
 
-- (id)createTree:(NSDictionary *)treeDictionary inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createTree:(NSDictionary *)treeDictionary inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/trees", repositoryPath] requestType:UAGithubTreeCreateRequest responseType:UAGithubTreeResponse withParameters:treeDictionary]);
 }
@@ -1251,13 +1251,13 @@
 
 #pragma mark Blobs
 
-- (id)blobForSHA:(NSString *)sha inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)blobForSHA:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/blobs/%@", repositoryPath, sha] requestType:UAGithubBlobRequest responseType:UAGithubBlobResponse]);	
 }
 
 
-- (id)createBlob:(NSDictionary *)blobDictionary inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createBlob:(NSDictionary *)blobDictionary inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/blobs", repositoryPath] requestType:UAGithubBlobCreateRequest responseType:UAGithubSHAResponse withParameters:blobDictionary]);
 }
@@ -1265,31 +1265,31 @@
 
 #pragma mark References
 
-- (id)reference:(NSString *)reference inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)reference:(NSString *)reference inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceRequest responseType:UAGithubReferenceResponse]);
 }
 
 
-- (id)referencesInRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)referencesInRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse]);
 }
 
 
-- (id)tagsForRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)tagsForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/tags", repositoryPath] requestType:UAGithubReferencesRequest responseType:UAGithubReferencesResponse]);
 }
 
 
-- (id)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs", repositoryPath] requestType:UAGithubReferenceCreateRequest responseType:UAGithubReferenceResponse withParameters:refDictionary]);
 }
 
 
-- (id)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary success:(id(^)(id obj))successBlock_
+- (id)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/refs/%@", repositoryPath, reference] requestType:UAGithubReferenceUpdateRequest responseType:UAGithubReferenceResponse withParameters:referenceDictionary]);
 }
@@ -1297,7 +1297,7 @@
 
 #pragma mark Tags
 
-- (id)tag:(NSString *)sha inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)tag:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/tags/%@", repositoryPath, sha] requestType:UAGithubTagObjectRequest responseType:UAGithubAnnotatedTagResponse]);
 }
@@ -1305,13 +1305,13 @@
 
 #pragma mark Raw Commits
 
-- (id)rawCommit:(NSString *)commit inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)rawCommit:(NSString *)commit inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/commits/%@", repositoryPath, commit] requestType:UAGithubRawCommitRequest responseType:UAGithubRawCommitResponse]);
 }
 
 
-- (id)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath success:(id(^)(id obj))successBlock_
+- (id)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/git/commits", repositoryPath] requestType:UAGithubRawCommitCreateRequest responseType:UAGithubRawCommitResponse withParameters:commitDictionary]);
 }
