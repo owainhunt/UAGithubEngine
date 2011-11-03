@@ -719,7 +719,7 @@
 }
 
 
-- (id)repositoriescompletion:(id(^)(id obj))successBlock_
+- (id)repositoriesWithCompletion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/repos" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);
 }

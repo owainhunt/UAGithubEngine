@@ -147,7 +147,7 @@
 
 - (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched completion:(id(^)(id obj))successBlock_;
 - (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page completion:(id(^)(id obj))successBlock_;
-- (id)repositoriescompletion:(id(^)(id obj))successBlock_;
+- (id)repositoriesWithCompletion:(id(^)(id obj))successBlock_;
 - (id)createRepositoryWithInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_;
 - (id)repository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_;
