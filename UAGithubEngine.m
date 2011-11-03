@@ -101,12 +101,18 @@
     
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@/%@", API_PROTOCOL, API_DOMAIN, path];
     NSData *jsonData = nil;
-    NSError *error = nil;
+    NSError *serializationError = nil;
     
     if ([params count] > 0)
     {
-        jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+        jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&serializationError];
+        
+        if (serializationError)
+        {
+            return serializationError;
+        }
     }
+    
 
     NSMutableString *querystring = nil;
 
