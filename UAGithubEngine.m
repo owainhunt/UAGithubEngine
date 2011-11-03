@@ -1194,14 +1194,42 @@
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/events", repositoryPath] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
 }
 
-/*
-- (id)eventsForNetwork:(NSString *)networkPath completion:(id(^)(id obj))successBlock;
-- (id)eventsReceivedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
-- (id)eventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
-- (id)publicEventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock;
-- (id)eventsForOrganization:(NSString *)organization completion:(id(^)(id obj))successBlock;
-- (id)publicEventsForOrganization:(NSString *)organization completion:(id(^)(id obj))successBlock;
-*/
+
+- (id)eventsForNetwork:(NSString *)networkPath completion:(id(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"networks/%@/events", networkPath] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+                         
+
+- (id)eventsReceivedByUser:(NSString *)user completion:(id(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"users/%@/received_events", user] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+
+
+- (id)eventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"users/%@/events", user] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+
+
+- (id)publicEventsPerformedByUser:(NSString *)user completion:(id(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"users/%@/events/public", user] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+
+
+- (id)eventsForOrganization:(NSString *)organization user:(NSString *)user completion:(id(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"users/%@/events/orgs/%@", user, organization] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+
+
+- (id)publicEventsForOrganization:(NSString *)organization completion:(id(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"orgs/%@/events", organization] requestType:UAGithubEventsRequest responseType:UAGithubEventsResponse]);
+}
+
 
 #pragma mark -
 #pragma mark Git Database API
