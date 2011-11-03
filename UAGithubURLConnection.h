@@ -24,7 +24,7 @@
 @property (nonatomic, retain) NSString *identifier;
 
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType;
-+ (void)asyncRequest:(NSURLRequest *)request success:(void(^)(NSData *, NSURLResponse *))successBlock_ failure:(void(^)(NSData *, NSError *))failureBlock_;
++ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock_ failure:(id(^)(NSData *, NSError *))failureBlock_;
 
 - (void)resetDataLength;
 - (void)appendData:(NSData *)newData;

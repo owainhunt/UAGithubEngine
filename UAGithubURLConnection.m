@@ -29,10 +29,10 @@
 }
 
 // Can probably remove reqtype and resptype from here
-+ (void)asyncRequest:(NSURLRequest *)request success:(void(^)(NSData *, NSURLResponse *))successBlock_ failure:(void(^)(NSData *, NSError *))failureBlock_ 
++ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock_ failure:(id(^)(NSData *, NSError *))failureBlock_ 
 {
     // This has to be dispatch_sync rather than _async, otherwise our successBlock executes before the request is done and we're all bass-ackwards.
-	dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+	//dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         @autoreleasepool 
         {    
@@ -43,13 +43,13 @@
             NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
             if (error) {
-                failureBlock_(data,error);
+                return failureBlock_(data,error);
             } else {
-                successBlock_(data,response);
+                return successBlock_(data,response);
             }
         }
         
-	});
+	//});
 }
 
 
