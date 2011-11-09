@@ -265,6 +265,7 @@
                                             switch (requestType)
                                             {
                                                 case UAGithubFollowingRequest:
+                                                case UAGithubGistStarStatusRequest:
                                                     return [NSNumber numberWithBool:NO];
                                                     break;
                                                 default:
@@ -366,19 +367,19 @@
 }
 
 
-- (id)starGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (BOOL)starGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)unstarGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (BOOL)unstarGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistUnstarRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)gistIsStarred:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (BOOL)gistIsStarred:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarStatusRequest responseType:UAGithubNoContentResponse]);
 }
@@ -390,7 +391,7 @@
 }
 
 
-- (id)deleteGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -422,7 +423,7 @@
 }
 
 
-- (id)deleteGistComment:(NSString *)commentId completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteGistComment:(NSString *)commentId completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -482,7 +483,7 @@
 }
 
 
-- (id)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse]);	
 }
@@ -517,7 +518,7 @@
 }
 
 
-- (id)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%d", repositoryPath, commentNumber] requestType:UAGithubIssueCommentDeleteRequest responseType:UAGithubIssueCommentResponse]);
 }
@@ -568,7 +569,7 @@
 }
 
 
-- (id)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/labels/%@", repositoryPath, labelName] requestType:UAGithubRepositoryLabelRemoveRequest responseType:UAGithubNoContentResponse]);	
 }
@@ -580,9 +581,15 @@
 }
 
 
-- (id)removeLabel:(NSString *)labelName fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)removeLabel:(NSString *)labelName fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels/%@", repositoryPath, issueNumber, labelName] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubIssueLabelsResponse]);	
+}
+
+
+- (BOOL)removeLabelsFromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(BOOL (^)(id))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%d/labels", repositoryPath, issueNumber] requestType:UAGithubIssueLabelRemoveRequest responseType:UAGithubNoContentResponse]);
 }
 
 
@@ -630,7 +637,7 @@
 }
 
 
-- (id)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/milestones/%d", repositoryPath, milestoneNumber] requestType:UAGithubMilestoneDeleteRequest responseType:UAGithubMilestoneResponse]);
 }
@@ -676,7 +683,7 @@
 }
 
 
-- (id)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/%d/merge", repositoryPath, pullRequestId] requestType:UAGithubPullRequestMergeStatusRequest responseType:UAGithubNoContentResponse]);
 }
@@ -714,7 +721,7 @@
 }
 
 
-- (id)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/pulls/comments/%d", repositoryPath, commentId] requestType:UAGithubPullRequestCommentDeleteRequest responseType:UAGithubPullRequestCommentResponse]);
 }
@@ -803,20 +810,20 @@
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators", repositoryPath] requestType:UAGithubCollaboratorsRequest responseType:UAGithubCollaboratorsResponse]);	
 }
 
-#pragma mark TODO Vomit. Returns 204 No Content if true, 404 if false.
-- (id)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+
+- (BOOL)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators/%@", repositoryPath, user] requestType:UAGithubCollaboratorsRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators/%@", repositoryPath, collaborator] requestType:UAGithubCollaboratorAddRequest responseType:UAGithubCollaboratorsResponse]);
 }
 
 
-- (id)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/collaborators/%@", repositoryPath, collaborator] requestType:UAGithubCollaboratorRemoveRequest responseType:UAGithubCollaboratorsResponse]);
 }
@@ -868,7 +875,7 @@
 }
 
 
-- (id)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/comments/%d", repositoryPath, commentId] requestType:UAGithubCommitCommentDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -894,7 +901,7 @@
 }
 
 
-- (id)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/downloads/%d", repositoryPath, downloadId] requestType:UAGithubDownloadDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -952,7 +959,7 @@
 }
 
 
-- (id)removeDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName completion:(BOOL(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/keys/%d", repositoryName, keyId] requestType:UAGithubDeployKeyDeleteRequest responseType:UAGithubNoContentResponse]);
     
@@ -979,20 +986,20 @@
 }
 
 
-#pragma mark TODO Vomit again (204/404)
-- (id)repositoryIsWatched:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+
+- (BOOL)repositoryIsWatched:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/watched/%@", repositoryPath] requestType:UAGithubRepositoryWatchingRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)watchRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)watchRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/watched/%@", repositoryPath] requestType:UAGithubRepositoryWatchRequest responseType:UAGithubNoContentResponse]);	 
 }
 
 
-- (id)unwatchRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)unwatchRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/watched/%@", repositoryPath] requestType:UAGithubRepositoryUnwatchRequest responseType:UAGithubNoContentResponse]);
 }
@@ -1024,13 +1031,13 @@
 }
 
 
-- (id)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookTestRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)removeHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookDeleteRequest responseType:UAGithubNoContentResponse]);
 }
@@ -1085,7 +1092,7 @@
 }
 
 
-- (id)deleteEmailAddresses:(NSArray *)emails completion:(id(^)(id obj))successBlock_
+- (BOOL)deleteEmailAddresses:(NSArray *)emails completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:@"user/emails" requestType:UAGithubEmailDeleteRequest responseType:UAGithubNoContentResponse withParameters:emails]);
 }
@@ -1124,14 +1131,14 @@
 }
 
 // Follow a user
-- (id)follow:(NSString *)user  completion:(id(^)(id obj))successBlock_
+- (BOOL)follow:(NSString *)user  completion:(BOOL(^)(id obj))successBlock_
 {
  	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubFollowRequest responseType:UAGithubNoContentResponse]);	    
    
 }
 
 // Unfollow a user
-- (id)unfollow:(NSString *)user completion:(id(^)(id obj))successBlock_
+- (BOOL)unfollow:(NSString *)user completion:(BOOL(^)(id obj))successBlock_
 {
  	return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/following/%@", user] requestType:UAGithubUnfollowRequest responseType:UAGithubNoContentResponse]);	        
 }
@@ -1163,7 +1170,7 @@
 }
 
 
-- (id)deletePublicKey:(NSInteger)keyId completion:(id(^)(id obj))successBlock_
+- (BOOL)deletePublicKey:(NSInteger)keyId completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"user/keys/%d", keyId] requestType:UAGithubPublicKeyDeleteRequest responseType:UAGithubNoContentResponse]);
 }

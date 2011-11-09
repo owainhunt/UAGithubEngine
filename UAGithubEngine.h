@@ -48,11 +48,11 @@
 - (id)gist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_;
 - (id)createGist:(NSDictionary *)gistDictionary completion:(id(^)(id obj))successBlock_;
 - (id)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary completion:(id(^)(id obj))successBlock_;
-- (id)starGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_;
-- (id)unstarGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_;
-- (id)gistIsStarred:(NSInteger)gistId completion:(id(^)(id obj))successBlock_;
+- (BOOL)starGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)unstarGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)gistIsStarred:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_;
 - (id)forkGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_;
-- (id)deleteGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Comments
@@ -61,7 +61,7 @@
 - (id)gistComment:(NSString *)commentId completion:(id(^)(id obj))successBlock_;
 - (id)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_;
 - (id)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id obj))successBlock_;
-- (id)deleteGistComment:(NSString *)commentId completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteGistComment:(NSString *)commentId completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark
@@ -74,7 +74,7 @@
 - (id)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary completion:(id(^)(id obj))successBlock_;
 - (id)closeIssue:(NSString *)issuePath completion:(id(^)(id obj))successBlock_;
 - (id)reopenIssue:(NSString *)issuePath completion:(id(^)(id obj))successBlock_;
-- (id)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Comments 
@@ -83,7 +83,7 @@
 - (id)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody completion:(id(^)(id obj))successBlock_;
-- (id)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Events
@@ -100,11 +100,12 @@
 - (id)label:(NSString *)labelName inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary completion:(id(^)(id obj))successBlock_;
 - (id)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary completion:(id(^)(id obj))successBlock_;
-- (id)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 - (id)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 // Note labels supplied to the following method must already exist within the repository (-addLabelToRepository:...)
 - (id)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
-- (id)removeLabel:(NSString *)labelNamed fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)removeLabel:(NSString *)labelNamed fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)removeLabelsFromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock;
 - (id)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels completion:(id(^)(id obj))successBlock_;
 - (id)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 
@@ -115,7 +116,7 @@
 - (id)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_;
-- (id)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark
@@ -128,7 +129,7 @@
 - (id)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary completion:(id(^)(id obj))successBlock_;
 - (id)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)filesInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
-- (id)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 - (id)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 
 
@@ -138,7 +139,7 @@
 - (id)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id obj))successBlock_;
-- (id)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark
@@ -161,9 +162,9 @@
 #pragma mark Collaborators
 
 - (id)collaboratorsForRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_;
-- (id)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
-- (id)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
-- (id)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Commits
@@ -179,7 +180,7 @@
 - (id)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_;
-- (id)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Downloads
@@ -188,7 +189,7 @@
 - (id)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 // See http://developer.github.com/v3/repos/downloads for more information: this is a two-part process.
 - (id)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary completion:(id(^)(id obj))successBlock_;
-- (id)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Forks
@@ -204,7 +205,7 @@
 - (id)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_;
 - (id)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary completion:(id(^)(id obj))successBlock_;
-- (id)removeDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Watching
@@ -212,9 +213,9 @@
 - (id)watchersForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)watchedRepositoriesForUser:(NSString *)user completion:(id(^)(id obj))successBlock_;
 - (id)watchedRepositoriescompletion:(id(^)(id obj))successBlock_;
-- (id)repositoryIsWatched:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
-- (id)watchRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
-- (id)unwatchRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)repositoryIsWatched:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)watchRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)unwatchRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Hooks
@@ -223,8 +224,8 @@
 - (id)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
 - (id)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary completion:(id(^)(id obj))successBlock_;
-- (id)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
-- (id)removeHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_;
+- (BOOL)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)deleteHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath completion:(BOOL(^)(id obj))successBlock_;
 
 /* NOT YET IMPLEMENTED
  - (id)searchRepositories:(NSString *)query completion:(id(^)(id obj))successBlock_;
@@ -250,7 +251,7 @@
 
 - (id)emailAddressescompletion:(id(^)(id obj))successBlock_;
 - (id)addEmailAddresses:(NSArray *)emails completion:(id(^)(id obj))successBlock_;
-- (id)deleteEmailAddresses:(NSArray *)emails completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteEmailAddresses:(NSArray *)emails completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Followers
@@ -259,8 +260,8 @@
 - (id)followersWithCompletion:(id(^)(id obj))successBlock_;
 - (id)following:(NSString *)user completion:(id(^)(id obj))successBlock_;
 - (BOOL)follows:(NSString *)user completion:(BOOL(^)(id obj))successBlock_;
-- (id)follow:(NSString *)user completion:(id(^)(id obj))successBlock_;
-- (id)unfollow:(NSString *)user completion:(id(^)(id obj))successBlock_;
+- (BOOL)follow:(NSString *)user completion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)unfollow:(NSString *)user completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark Keys
@@ -269,7 +270,7 @@
 - (id)publicKey:(NSInteger)keyId completion:(id(^)(id obj))successBlock_;
 - (id)addPublicKey:(NSDictionary *)keyDictionary completion:(id(^)(id obj))successBlock_;
 - (id)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary completion:(id(^)(id obj))successBlock_;
-- (id)deletePublicKey:(NSInteger)keyId completion:(id(^)(id obj))successBlock_;
+- (BOOL)deletePublicKey:(NSInteger)keyId completion:(BOOL(^)(id obj))successBlock_;
 
 
 #pragma mark
