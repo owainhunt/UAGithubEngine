@@ -120,6 +120,44 @@
 
 
 #pragma mark
+#pragma mark Organisations
+#pragma mark
+
+- (id)organizationsForUser:(NSString *)user completion:(id(^)(id obj))successBlock_;
+- (id)organizationsWithCompletion:(id(^)(id obj))successBlock_;
+- (id)organization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_;
+- (id)updateOrganization:(NSString *)org withDictionary:(NSDictionary *)orgDictionary completion:(id(^)(id obj))successBlock_;
+
+
+#pragma mark Members
+
+- (id)membersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_;
+- (BOOL)user:(NSString *)user isMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)removeUser:(NSString *)user fromOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_;
+- (id)publicMembersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_;
+- (BOOL)user:(NSString *)user isPublicMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)publicizeMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)concealMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_;
+
+
+#pragma mark Teams
+
+- (id)teamsInOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_;
+- (id)team:(NSInteger)teamId inOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_;
+- (id)createTeam:(NSDictionary *)teamDictionary inOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_;
+- (id)editTeam:(NSInteger)teamId withDictionary:(NSDictionary *)teamDictionary completion:(id(^)(id obj))successBlock_;
+- (BOOL)deleteTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_;
+- (id)membersOfTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_;
+- (BOOL)user:(NSString *)user isMemberOfTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)addUser:(NSString *)user toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_;
+- (BOOL)removeUser:(NSString *)user fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_;
+- (id)repositoriesForTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_;
+- (BOOL)repository:(NSString *)repositoryPath isManagedByTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock;
+- (BOOL)addRepository:(NSString *)repositoryPath toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock;
+- (BOOL)removeRepository:(NSString *)repositoryPath fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock;
+                                                             
+
+#pragma mark
 #pragma mark Pull Requests
 #pragma mark
 

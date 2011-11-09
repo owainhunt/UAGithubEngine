@@ -644,6 +644,44 @@
 
 
 #pragma mark
+#pragma mark Organisations
+#pragma mark
+
+- (id)organizationsForUser:(NSString *)user completion:(id(^)(id obj))successBlock_{ return NO; }
+- (id)organizationsWithCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (id)organization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (id)updateOrganization:(NSString *)org withDictionary:(NSDictionary *)orgDictionary completion:(id(^)(id obj))successBlock_{ return NO; }
+
+
+#pragma mark Members
+
+- (id)membersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (BOOL)user:(NSString *)user isMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (BOOL)removeUser:(NSString *)user fromOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (id)publicMembersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (BOOL)user:(NSString *)user isPublicMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (BOOL)publicizeMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (BOOL)concealMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+
+
+#pragma mark Teams
+
+- (id)teamsInOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (id)team:(NSInteger)teamId inOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (id)createTeam:(NSDictionary *)teamDictionary inOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (id)editTeam:(NSInteger)teamId withDictionary:(NSDictionary *)teamDictionary completion:(id(^)(id obj))successBlock_{ return NO; }
+- (BOOL)deleteTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (id)membersOfTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (BOOL)user:(NSString *)user isMemberOfTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (BOOL)addUser:(NSString *)user toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (BOOL)removeUser:(NSString *)user fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (id)repositoriesForTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_{ return NO; }
+- (BOOL)repository:(NSString *)repositoryPath isManagedByTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock{ return NO; }
+- (BOOL)addRepository:(NSString *)repositoryPath toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock{ return NO; }
+- (BOOL)removeRepository:(NSString *)repositoryPath fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock{ return NO; }
+
+
+#pragma mark
 #pragma mark Pull Requests
 #pragma mark
 
