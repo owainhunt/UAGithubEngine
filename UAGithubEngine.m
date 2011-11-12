@@ -181,8 +181,8 @@
         case UAGithubGistForkRequest:
         case UAGithubPullRequestCreateRequest:
         case UAGithubPullRequestCommentCreateRequest:
-        case UAGithubEmailAddRequest:
-            
+        case UAGithubEmailAddRequest:    
+        case UAGithubTeamCreateRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -192,8 +192,10 @@
         case UAGithubIssueLabelReplaceRequest:
         case UAGithubFollowRequest:
         case UAGithubGistStarRequest:
-        case UAGithubPullRequestMergeRequest:
-            
+        case UAGithubPullRequestMergeRequest:            
+        case UAGithubOrganizationMembershipPublicizeRequest:
+        case UAGithubTeamMemberAddRequest:
+        case UAGithubTeamRepositoryManagershipAddRequest:
         {
             [urlRequest setHTTPMethod:@"PUT"];
         }
@@ -211,7 +213,8 @@
         case UAGithubGistCommentUpdateRequest:
         case UAGithubPullRequestUpdateRequest:
         case UAGithubPullRequestCommentUpdateRequest:
-            
+        case UAGithubOrganizationUpdateRequest: 
+        case UAGithubTeamUpdateRequest:
         {
             [urlRequest setHTTPMethod:@"PATCH"];
         }
@@ -230,7 +233,11 @@
         case UAGithubGistCommentDeleteRequest:
         case UAGithubPullRequestCommentDeleteRequest:
         case UAGithubEmailDeleteRequest:
-            
+        case UAGithubOrganizationMemberRemoveRequest:
+        case UAGithubOrganizationMembershipConcealRequest:
+        case UAGithubTeamDeleteRequest:
+        case UAGithubTeamMemberRemoveRequest:
+        case UAGithubTeamRepositoryManagershipRemoveRequest:
         {
             [urlRequest setHTTPMethod:@"DELETE"];
         }
@@ -266,7 +273,12 @@
                                             {
                                                 case UAGithubFollowingRequest:
                                                 case UAGithubGistStarStatusRequest:
+                                                case UAGithubOrganizationMembershipStatusRequest:
+                                                case UAGithubTeamMembershipStatusRequest:
+                                                case UAGithubTeamRepositoryManagershipStatusRequest:
+                                                {
                                                     return [NSNumber numberWithBool:NO];
+                                                }
                                                     break;
                                                 default:
                                                     break;
@@ -288,7 +300,7 @@
                                     }
 
                                 }
-                                failure:^(NSData *data, NSError *parserError)
+                                failure:^(NSError *parserError)
                                 {
                                     return parserError;
                                 }
@@ -644,41 +656,155 @@
 
 
 #pragma mark
-#pragma mark Organisations
+#pragma mark Organizations
 #pragma mark
 
-- (id)organizationsForUser:(NSString *)user completion:(id(^)(id obj))successBlock_{ return NO; }
-- (id)organizationsWithCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (id)organization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (id)updateOrganization:(NSString *)org withDictionary:(NSDictionary *)orgDictionary completion:(id(^)(id obj))successBlock_{ return NO; }
+- (id)organizationsForUser:(NSString *)user completion:(id(^)(id obj))successBlock_
+{ 
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/orgs", user] requestType:UAGithubOrganizationsRequest responseType:UAGithubOrganizationsResponse]);
+}
+
+
+- (id)organizationsWithCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:@"user/orgs" requestType:UAGithubOrganizationsRequest responseType:UAGithubOrganizationsResponse]);
+}
+
+
+- (id)organization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@", org] requestType:UAGithubOrganizationRequest responseType:UAGithubOrganizationResponse]);
+}
+
+
+- (id)updateOrganization:(NSString *)org withDictionary:(NSDictionary *)orgDictionary completion:(id(^)(id))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@", org] requestType:UAGithubOrganizationUpdateRequest responseType:UAGithubOrganizationResponse withParameters:orgDictionary]);
+}
 
 
 #pragma mark Members
 
-- (id)membersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (BOOL)user:(NSString *)user isMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (BOOL)removeUser:(NSString *)user fromOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (id)publicMembersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (BOOL)user:(NSString *)user isPublicMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (BOOL)publicizeMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (BOOL)concealMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
+- (id)membersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/members", org] requestType:UAGithubOrganizationMembersRequest responseType:UAGithubUsersResponse]);
+}
+
+
+- (BOOL)user:(NSString *)user isMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/members/%@", org, user] requestType:UAGithubOrganizationMembershipStatusRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (BOOL)removeUser:(NSString *)user fromOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/members/%@", org, user] requestType:UAGithubOrganizationMemberRemoveRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (id)publicMembersOfOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/public_members", org] requestType:UAGithubOrganizationMembersRequest responseType:UAGithubUsersResponse]);
+}
+
+
+- (BOOL)user:(NSString *)user isPublicMemberOfOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/public_members/%@", org, user] requestType:UAGithubOrganizationMembershipStatusRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (BOOL)publicizeMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/public_members/%@", org, user] requestType:UAGithubOrganizationMembershipPublicizeRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (BOOL)concealMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/public_members/%@", org, user] requestType:UAGithubOrganizationMembershipConcealRequest responseType:UAGithubNoContentResponse]);
+}
 
 
 #pragma mark Teams
 
-- (id)teamsInOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (id)team:(NSInteger)teamId inOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (id)createTeam:(NSDictionary *)teamDictionary inOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (id)editTeam:(NSInteger)teamId withDictionary:(NSDictionary *)teamDictionary completion:(id(^)(id obj))successBlock_{ return NO; }
-- (BOOL)deleteTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (id)membersOfTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (BOOL)user:(NSString *)user isMemberOfTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (BOOL)addUser:(NSString *)user toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (BOOL)removeUser:(NSString *)user fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_{ return NO; }
-- (id)repositoriesForTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_{ return NO; }
-- (BOOL)repository:(NSString *)repositoryPath isManagedByTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock{ return NO; }
-- (BOOL)addRepository:(NSString *)repositoryPath toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock{ return NO; }
-- (BOOL)removeRepository:(NSString *)repositoryPath fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock{ return NO; }
+- (id)teamsInOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/teams", org] requestType:UAGithubTeamsRequest responseType:UAGithubTeamsResponse]);    
+}
+
+
+- (id)team:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d", teamId] requestType:UAGithubTeamRequest responseType:UAGithubTeamResponse]);
+}
+
+
+- (id)createTeam:(NSDictionary *)teamDictionary inOrganization:(NSString *)org withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"orgs/%@/teams", org] requestType:UAGithubTeamCreateRequest responseType:UAGithubTeamResponse withParameters:teamDictionary]);
+}
+
+
+- (id)editTeam:(NSInteger)teamId withDictionary:(NSDictionary *)teamDictionary completion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d", teamId] requestType:UAGithubTeamUpdateRequest responseType:UAGithubTeamResponse withParameters:teamDictionary]);
+}
+
+
+- (BOOL)deleteTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d", teamId] requestType:UAGithubTeamDeleteRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (id)membersOfTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d/members", teamId] requestType:UAGithubTeamMembersRequest responseType:UAGithubUsersResponse]);
+}
+
+
+- (BOOL)user:(NSString *)user isMemberOfTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d/members/%@", teamId, user] requestType:UAGithubTeamMembershipStatusRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (BOOL)addUser:(NSString *)user toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d/members/%@", teamId, user] requestType:UAGithubTeamMemberAddRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (BOOL)removeUser:(NSString *)user fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d/members/%@", teamId, user] requestType:UAGithubTeamMemberRemoveRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (id)repositoriesForTeam:(NSInteger)teamId withCompletion:(id(^)(id obj))successBlock_
+{
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"teams/%d/repos", teamId] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);
+}
+
+
+- (BOOL)repository:(NSString *)repositoryPath isManagedByTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"teams/%d/repos/%@", teamId, repositoryPath] requestType:UAGithubTeamRepositoryManagershipStatusRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (BOOL)addRepository:(NSString *)repositoryPath toTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"teams/%d/repos/%@", teamId, repositoryPath] requestType:UAGithubTeamRepositoryManagershipAddRequest responseType:UAGithubNoContentResponse]);
+}
+
+
+- (BOOL)removeRepository:(NSString *)repositoryPath fromTeam:(NSInteger)teamId withCompletion:(BOOL(^)(id obj))successBlock
+{
+    return successBlock([self sendRequest:[NSString stringWithFormat:@"teams/%d/repos/%@", teamId, repositoryPath] requestType:UAGithubTeamRepositoryManagershipRemoveRequest responseType:UAGithubNoContentResponse]);
+}
 
 
 #pragma mark
@@ -786,7 +912,7 @@
     return successBlock_([self sendRequest:@"user/repos" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);
 }
 
-#pragma mark TODO check orgs is implemented elsewhere
+
 - (id)createRepositoryWithInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_
 {
 	return successBlock_([self sendRequest:@"user/repos" requestType:UAGithubRepositoryCreateRequest responseType:UAGithubRepositoryResponse withParameters:infoDictionary]);	
@@ -1059,7 +1185,7 @@
 
 - (id)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks", repositoryPath] requestType:UAGithubRepositoryHookAddRequest responseType:UAGithubRepositoryHookResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks", repositoryPath] requestType:UAGithubRepositoryHookAddRequest responseType:UAGithubRepositoryHookResponse withParameters:hookDictionary]);
 }
 
 
