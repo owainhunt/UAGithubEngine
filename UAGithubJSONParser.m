@@ -12,36 +12,8 @@
 
 @implementation UAGithubJSONParser
 
-- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
-{
-    return [self initWithJSON:theJSON delegate:theDelegate connectionIdentifier:theIdentifier requestType:reqType responseType:respType dateElements:nil];	
-}
-
-
-- (id)initWithJSON:(NSData *)theJSON delegate:(id)theDelegate connectionIdentifier:(NSString *)theIdentifier requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType dateElements:(NSArray *)dates
-{
-    
-    NSMutableArray *standardDateElements = [NSMutableArray arrayWithObjects:@"created_at", @"updated_at", @"closed_at", @"due_on", @"pushed_at", @"committed_at", @"merged_at", @"date", @"expirationdate", nil];
-    
-    if ((self = [super init])) 
-	{
-        json = [theJSON retain];
-		connectionIdentifier = [theIdentifier retain];
-        requestType = reqType;
-		responseType = respType;
-        dateElements = [[standardDateElements arrayByAddingObjectsFromArray:dates] retain];
-    }
-	
-    //[self parse];
-    
-    return self;
-    
-}
-
-
 + (id)parseJSON:(NSData *)theJSON error:(NSError **)error;
 {
-#pragma mark TODO Handle date elements
     NSArray *dateElements = [NSArray arrayWithObjects:@"created_at", @"updated_at", @"closed_at", @"due_on", @"pushed_at", @"committed_at", @"merged_at", @"date", @"expirationdate", nil];
     NSMutableArray *jsonArray;
     id jsonObj = [NSJSONSerialization JSONObjectWithData:theJSON options:NSJSONReadingMutableLeaves|NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:error];
@@ -75,16 +47,6 @@
     }
     
     return jsonArray;
-}
-
-
-- (void)dealloc
-{
-	[json release];
-	[connectionIdentifier release];
-    [dateElements release];
-	[super dealloc];
-	
 }
 
 
