@@ -19,7 +19,7 @@
     if ((self = [super initWithRequest:request delegate:delegate])) 
     {
         data = [[NSMutableData alloc] initWithCapacity:0];
-        identifier = [[NSString stringWithNewUUID] retain];
+        identifier = [NSString stringWithNewUUID];
         requestType = reqType;
 		responseType = respType;
     }
@@ -64,13 +64,6 @@
     [data appendData:newData];
 }
 
-- (void)dealloc
-{
-    [data release];
-    [identifier release];
-    
-    [super dealloc];
-}
 
 
 @end

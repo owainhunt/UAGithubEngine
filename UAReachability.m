@@ -16,7 +16,7 @@
 
 static void reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void* info)
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:UAGithubReachabilityStatusDidChangeNotification object:info];
+	[[NSNotificationCenter defaultCenter] postNotificationName:UAGithubReachabilityStatusDidChangeNotification object:(__bridge NSDictionary *)info];
 }
 
 
@@ -25,7 +25,7 @@ static void reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	if ((self = [super init]))
 	{
 		reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, [@"www.github.com" UTF8String]);
-		SCNetworkReachabilityContext context = {0, self, CFRetain, CFRelease, NULL};
+		SCNetworkReachabilityContext context = {0, (__bridge void *)(self), CFRetain, CFRelease, NULL};
 		SCNetworkReachabilitySetCallback(reachabilityRef, reachabilityCallback, &context);
 		SCNetworkReachabilityScheduleWithRunLoop(reachabilityRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);		
 	}

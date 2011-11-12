@@ -19,10 +19,10 @@
 	BOOL isReachable;
 }
 
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *password;
-@property (nonatomic, retain) NSMutableDictionary *connections;
-@property (nonatomic, retain) UAReachability *reachability;
+@property (strong) NSString *username;
+@property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSMutableDictionary *connections;
+@property (nonatomic, strong) UAReachability *reachability;
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword withReachability:(BOOL)withReach;

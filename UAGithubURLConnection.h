@@ -18,10 +18,10 @@
 }
 
 
-@property (nonatomic, retain) NSMutableData *data;
+@property (nonatomic, strong) NSMutableData *data;
 @property (nonatomic, assign) UAGithubRequestType requestType;
 @property (nonatomic, assign) UAGithubResponseType responseType;
-@property (nonatomic, retain) NSString *identifier;
+@property (nonatomic, strong) NSString *identifier;
 
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType;
 + (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock_ failure:(id(^)(NSError *))failureBlock_;

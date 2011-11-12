@@ -42,10 +42,11 @@
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword withReachability:(BOOL)withReach
 {
-	if ((self = [super init])) 
+    self = [super init];
+	if (self) 
 	{
-		username = [aUsername retain];
-		password = [aPassword retain];
+		username = aUsername;
+		password = aPassword;
 		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		if (withReach)
 		{
@@ -56,18 +57,6 @@
 	
 	return self;
 		
-}
-
-
-- (void)dealloc
-{
-	[username release];
-	[password release];
-	[connections release];
-	[reachability release];
-	
-	[super dealloc];
-	
 }
 
 
