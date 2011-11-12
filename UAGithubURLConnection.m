@@ -28,25 +28,28 @@
     return self;
 }
 
-
-+ (void)asyncRequest:(NSURLRequest *)request requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType success:(void(^)(NSData *, NSURLResponse *))successBlock_ failure:(void(^)(NSData *, NSError *))failureBlock_ 
+// Can probably remove reqtype and resptype from here
++ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock_ failure:(id(^)(NSError *))failureBlock_ 
 {
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // This has to be dispatch_sync rather than _async, otherwise our successBlock executes before the request is done and we're all bass-ackwards.
+	//dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         @autoreleasepool 
         {    
+            NSLog(@"New %@ connection: %@", request.HTTPMethod, request);
+
             NSURLResponse *response = nil;
             NSError *error = nil;
             NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
             if (error) {
-                failureBlock_(data,error);
+                return failureBlock_(error);
             } else {
-                successBlock_(data,response);
+                return successBlock_(data,response);
             }
         }
         
-	});
+	//});
 }
 
 

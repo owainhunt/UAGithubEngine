@@ -138,8 +138,28 @@ typedef enum UAGithubRequestType
     UAGithubPullRequestCommentRequest,              // Get exactly one pull request comments
     UAGithubPullRequestCommentCreateRequest,        // Create a pull request comment
     UAGithubPullRequestCommentUpdateRequest,        // Update a pull request comment
-    UAGithubPullRequestCommentDeleteRequest,         // Delete a pull request comment
-
+    UAGithubPullRequestCommentDeleteRequest,        // Delete a pull request comment
+    UAGithubEventsRequest,                          // Get one or more events of unspecified type
+    UAGithubOrganizationsRequest,                   // Get one or more organizations
+    UAGithubOrganizationRequest,                    // Get exactly one organization
+    UAGithubOrganizationUpdateRequest,              // Update an existing organization
+    UAGithubOrganizationMembersRequest,             // Get one or more organization members
+    UAGithubOrganizationMembershipStatusRequest,    // Get whether user is member of a specified organization
+    UAGithubOrganizationMemberRemoveRequest,        // Remove a user from am organization
+    UAGithubOrganizationMembershipPublicizeRequest, // Publicize user's membership of organization
+    UAGithubOrganizationMembershipConcealRequest,   // Concel user's membership of organization
+    UAGithubTeamsRequest,                           // Get one or more organization teams
+    UAGithubTeamRequest,                            // Get exactly one organization team
+    UAGithubTeamCreateRequest,                      // Create a new team
+    UAGithubTeamUpdateRequest,                      // Update an existing team
+    UAGithubTeamDeleteRequest,                      // Delete an existing team
+    UAGithubTeamMembersRequest,                     // Get one or more team members
+    UAGithubTeamMembershipStatusRequest,
+    UAGithubTeamMemberAddRequest,
+    UAGithubTeamMemberRemoveRequest,                // Remove a user from a team
+    UAGithubTeamRepositoryManagershipStatusRequest, // Get whether a team manages a specific repository
+    UAGithubTeamRepositoryManagershipAddRequest,    // Add a specific repository to a team
+    UAGithubTeamRepositoryManagershipRemoveRequest, // Remove a specific repository from a team
 } UAGithubRequestType;
 
 
@@ -204,5 +224,9 @@ typedef enum UAGithubResponseType
     UAGithubPullRequestCommentsResponse,            // One or more pull request comments
     UAGithubPullRequestCommentResponse,             // Exactly one pull request comment
     UAGithubTagsResponse,							// Tags in name-SHA pairs
-	
+    UAGithubEventsResponse,                         // One or more events of unspecified type
+    UAGithubOrganizationsResponse,                  // One or more organizations
+    UAGithubOrganizationResponse,                   // Exactly one organization
+    UAGithubTeamsResponse,                          // One or more organization teams
+    UAGithubTeamResponse,                           // Exactly one team	
 } UAGithubResponseType;
