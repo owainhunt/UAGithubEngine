@@ -10,13 +10,8 @@
 
 #import "UAGithubEngineRequestTypes.h"
 
-@interface UAGithubJSONParser : NSObject {
-    NSString *connectionIdentifier;
-    UAGithubRequestType requestType;
-	UAGithubResponseType responseType;
-    NSData *json;
-	
-	NSArray *dateElements;
+@interface UAGithubJSONParser : NSObject 
+{
 
 }
 
