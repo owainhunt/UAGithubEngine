@@ -10,7 +10,8 @@
 #import "UAGithubEngine.h"
 
 
-@interface AppController : NSObject <UAGithubEngineDelegate> {
+@interface AppController : NSObject 
+{
     UAGithubEngine *githubEngine;	
 }
 

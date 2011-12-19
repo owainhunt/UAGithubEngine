@@ -7,9 +7,7 @@ UAGithubEngine is compatible with Mac OS X 10.5 and above, and iOS 4.0.
 
 ## Note
 
-While development is continuing to bring support for v3 of the API, it should be noted that the v2-supporting `master` is currently the stable branch. The v3-ified `api3` branch is currently *exceedingly* incomplete, unstable, unfinished, non-worky, half-missing, and not-fit-for-human-or-animal-consumption.
-
-(And for the love of God, don't try and base an app on any other branch. \*shudder\*)
+While development is continuing to bring support for v3 of the API, it should be noted that the v2-supporting `master` is currently the stable branch. The v3ified `api3` branch is currently *exceedingly* incomplete, unstable, unfinished, non-worky, half-missing, and not-fit-for-human-or-animal-consumption.
 
 Enter at your peril.
 
