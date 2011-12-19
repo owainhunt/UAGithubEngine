@@ -20,6 +20,15 @@ static void reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 }
 
 
+- (void)dealloc
+{
+    if (reachabilityRef != NULL)
+    {
+        CFRelease(reachabilityRef);
+    }
+}
+
+
 - (id)init
 {
 	if ((self = [super init]))
