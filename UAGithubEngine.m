@@ -245,6 +245,9 @@
                                     
                                     
                                     if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
+                                    {                                     
+                                        return [NSError errorWithDomain:UAGithubAPILimitReached code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
+                                    }
                                     
                                     if (statusCode >= 400) 
                                     {
