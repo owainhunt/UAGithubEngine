@@ -34,7 +34,7 @@
 
 @implementation UAGithubEngine
 
-@synthesize username, password, connections, reachability, isReachable;
+@synthesize username, password, reachability, isReachable;
 
 #pragma mark
 #pragma mark Setup & Teardown
@@ -47,7 +47,6 @@
 	{
 		username = aUsername;
 		password = aPassword;
-		connections = [[NSMutableDictionary alloc] initWithCapacity:0];
 		if (withReach)
 		{
 			reachability = [[UAReachability alloc] init];
@@ -244,15 +243,8 @@
                                     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
                                     int statusCode = resp.statusCode;
                                     
-                                    /*
+                                    
                                     if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
-                                    {
-                                        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:UAGithubAPILimitReached object:nil]];
-                                        [self.connections enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-                                         {
-                                             [(UAGithubURLConnection *)obj cancel];
-                                         }];
-                                    }*/
                                     
                                     if (statusCode >= 400) 
                                     {

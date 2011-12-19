@@ -14,14 +14,12 @@
 @interface UAGithubEngine : NSObject {
 	NSString *username;
 	NSString *password;
-	NSMutableDictionary *connections;
 	UAReachability *reachability;
 	BOOL isReachable;
 }
 
 @property (strong) NSString *username;
 @property (nonatomic, strong) NSString *password;
-@property (nonatomic, strong) NSMutableDictionary *connections;
 @property (nonatomic, strong) UAReachability *reachability;
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
