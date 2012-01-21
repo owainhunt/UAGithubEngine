@@ -908,12 +908,6 @@
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@", repositoryPath] requestType:UAGithubRepositoryRequest responseType:UAGithubRepositoryResponse]);	
 }
 
-/*
-- (id)searchRepositories:(NSString *)query completion:(id(^)(id obj))successBlock_
-{
-	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/search/%@", [query encodedString]] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	 
-}*/
-
 
 - (id)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(id(^)(id obj))successBlock_
 {
@@ -1189,19 +1183,6 @@
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%d", repositoryPath, hookId] requestType:UAGithubRepositoryHookDeleteRequest responseType:UAGithubNoContentResponse]);
 }
-
-/*
-- (id)pushableRepositories completion:(id(^)(id obj))successBlock_
-{
-	return successBlock_([self sendRequest:@"repos/pushable" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	
-}
-
-
-- (id)networkForRepository:(NSString *)repositoryPath completion:(id(^)(id obj))successBlock_
-{
-	return successBlock_([self sendRequest:[NSString stringWithFormat:@"repos/show/%@/network", repositoryPath] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	
-}
-*/
 
 
 #pragma mark
