@@ -881,7 +881,7 @@
 
 - (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched completion:(id(^)(id obj))successBlock_
 {
-	return successBlock_([self repositoriesForUser:aUser includeWatched:watched page:1 completion:successBlock_(nil)]);	
+	return successBlock_([self repositoriesForUser:aUser includeWatched:watched page:1 completion:successBlock_]);	
 }
 
 #pragma mark TODO watched repos?
