@@ -14,21 +14,6 @@
 
 @synthesize data, requestType, responseType, identifier;
 
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate requestType:(UAGithubRequestType)reqType responseType:(UAGithubResponseType)respType
-{
-    if ((self = [super initWithRequest:request delegate:delegate])) 
-    {
-        data = [[NSMutableData alloc] initWithCapacity:0];
-        identifier = [NSString stringWithNewUUID];
-        requestType = reqType;
-		responseType = respType;
-    }
-	NSLog(@"New %@ connection: %@, %@", request.HTTPMethod, request, identifier);
-    
-    return self;
-}
-
-// Can probably remove reqtype and resptype from here
 + (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock_ failure:(id(^)(NSError *))failureBlock_ 
 {
     // This has to be dispatch_sync rather than _async, otherwise our successBlock executes before the request is done and we're all bass-ackwards.
@@ -51,19 +36,5 @@
         
 	//});
 }
-
-
-- (void)resetDataLength
-{
-    [data setLength:0];	
-}
-
-
-- (void)appendData:(NSData *)newData
-{
-    [data appendData:newData];
-}
-
-
 
 @end
