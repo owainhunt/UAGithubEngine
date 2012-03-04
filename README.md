@@ -37,7 +37,7 @@ The `master` branch is built on version 3 of the API, and uses up-to-date techno
 
 * Example:
 
-	NSArray *array = [engine repositoriesWithCompletion:^(id obj){ NSLog(@"%@", obj) }];
+	`NSArray *array = [engine repositoriesWithCompletion:^(id obj){ NSLog(@"%@", obj) }];`
 	
 
 Any questions, comments, improvements and so on, you can find me on Twitter (@orhunt) or send me an email (owain@underscoreapps.com).
