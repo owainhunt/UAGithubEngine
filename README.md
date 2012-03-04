@@ -11,7 +11,13 @@ The `master` branch is built on version 3 of the API, and uses up-to-date techno
 
 ## How do I use it?
 
-* Copy across all the files in the 'Engine' group from the UAGithubEngine project into your app's project.
+* UAGithubEngine is available from [CocoaPods](http://cocoapods.org). Just add the following to your Podfile:
+
+	`dependency 'UAGithubEngine'`
+	
+	Then run `pod install`.
+
+* Alternatively, copy across all the files in the 'Engine' group from the UAGithubEngine project into your app's project.
 
 * `#import "UAGithubEngine.h"` where you want to use the engine.
 
