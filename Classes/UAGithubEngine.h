@@ -43,23 +43,23 @@
 - (id)gistsWithCompletion:(id(^)(id))successBlock_;
 - (id)publicGistsWithCompletion:(id(^)(id))successBlock_;
 - (id)starredGistsWithCompletion:(id(^)(id))successBlock_;
-- (id)gist:(NSInteger)gistId completion:(id(^)(id))successBlock_;
+- (id)gist:(NSString *)gistId completion:(id(^)(id))successBlock_;
 - (id)createGist:(NSDictionary *)gistDictionary completion:(id(^)(id))successBlock_;
-- (id)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary completion:(id(^)(id))successBlock_;
-- (BOOL)starGist:(NSInteger)gistId completion:(BOOL(^)(id))successBlock_;
-- (BOOL)unstarGist:(NSInteger)gistId completion:(BOOL(^)(id))successBlock_;
-- (BOOL)gistIsStarred:(NSInteger)gistId completion:(BOOL(^)(id))successBlock_;
-- (id)forkGist:(NSInteger)gistId completion:(id(^)(id))successBlock_;
-- (BOOL)deleteGist:(NSInteger)gistId completion:(BOOL(^)(id))successBlock_;
+- (id)editGist:(NSString *)gistId withDictionary:(NSDictionary *)gistDictionary completion:(id(^)(id))successBlock_;
+- (BOOL)starGist:(NSString *)gistId completion:(BOOL(^)(id))successBlock_;
+- (BOOL)unstarGist:(NSString *)gistId completion:(BOOL(^)(id))successBlock_;
+- (BOOL)gistIsStarred:(NSString *)gistId completion:(BOOL(^)(id))successBlock_;
+- (id)forkGist:(NSString *)gistId completion:(id(^)(id))successBlock_;
+- (BOOL)deleteGist:(NSString *)gistId completion:(BOOL(^)(id))successBlock_;
 
 
 #pragma mark Comments
 
-- (id)commentsForGist:(NSInteger)gistId completion:(id(^)(id))successBlock_;
-- (id)gistComment:(NSString *)commentId completion:(id(^)(id))successBlock_;
-- (id)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId completion:(id(^)(id))successBlock_;
-- (id)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id))successBlock_;
-- (BOOL)deleteGistComment:(NSString *)commentId completion:(BOOL(^)(id))successBlock_;
+- (id)commentsForGist:(NSString *)gistId completion:(id(^)(id))successBlock_;
+- (id)gistComment:(NSInteger)commentId completion:(id(^)(id))successBlock_;
+- (id)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSString *)gistId completion:(id(^)(id))successBlock_;
+- (id)editGistComment:(NSInteger)commentId withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id))successBlock_;
+- (BOOL)deleteGistComment:(NSInteger)commentId completion:(BOOL(^)(id))successBlock_;
 
 
 #pragma mark

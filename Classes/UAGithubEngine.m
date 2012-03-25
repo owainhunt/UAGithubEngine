@@ -345,9 +345,9 @@
 }
 
 
-- (id)gist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (id)gist:(NSString *)gistId completion:(id(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistRequest responseType:UAGithubGistResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@", gistId] requestType:UAGithubGistRequest responseType:UAGithubGistResponse]);
 }
 
 
@@ -357,69 +357,69 @@
 }
 
 
-- (id)editGist:(NSInteger)gistId withDictionary:(NSDictionary *)gistDictionary completion:(id(^)(id obj))successBlock_
+- (id)editGist:(NSString *)gistId withDictionary:(NSDictionary *)gistDictionary completion:(id(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistUpdateRequest responseType:UAGithubGistResponse withParameters:gistDictionary]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@", gistId] requestType:UAGithubGistUpdateRequest responseType:UAGithubGistResponse withParameters:gistDictionary]);
 }
 
 
-- (BOOL)starGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
+- (BOOL)starGist:(NSString *)gistId completion:(BOOL(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarRequest responseType:UAGithubNoContentResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@/star", gistId] requestType:UAGithubGistStarRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (BOOL)unstarGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
+- (BOOL)unstarGist:(NSString *)gistId completion:(BOOL(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistUnstarRequest responseType:UAGithubNoContentResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@/star", gistId] requestType:UAGithubGistUnstarRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (BOOL)gistIsStarred:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
+- (BOOL)gistIsStarred:(NSString *)gistId completion:(BOOL(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/star", gistId] requestType:UAGithubGistStarStatusRequest responseType:UAGithubNoContentResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@/star", gistId] requestType:UAGithubGistStarStatusRequest responseType:UAGithubNoContentResponse]);
 }
 
 
-- (id)forkGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (id)forkGist:(NSString *)gistId completion:(id(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/fork", gistId] requestType:UAGithubGistForkRequest responseType:UAGithubGistResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@/fork", gistId] requestType:UAGithubGistForkRequest responseType:UAGithubGistResponse]);
 }
 
 
-- (BOOL)deleteGist:(NSInteger)gistId completion:(BOOL(^)(id obj))successBlock_
+- (BOOL)deleteGist:(NSString *)gistId completion:(BOOL(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d", gistId] requestType:UAGithubGistDeleteRequest responseType:UAGithubNoContentResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@", gistId] requestType:UAGithubGistDeleteRequest responseType:UAGithubNoContentResponse]);
 }
 
 
 #pragma mark Comments
 
-- (id)commentsForGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (id)commentsForGist:(NSString *)gistId completion:(id(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/comments", gistId] requestType:UAGithubGistCommentsRequest responseType:UAGithubGistCommentsResponse]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@/comments", gistId] requestType:UAGithubGistCommentsRequest responseType:UAGithubGistCommentsResponse]);
 }
 
 
-- (id)gistComment:(NSString *)commentId completion:(id(^)(id obj))successBlock_
+- (id)gistComment:(NSInteger)commentId completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentRequest responseType:UAGithubGistCommentResponse]);
 }
 
 
-- (id)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSInteger)gistId completion:(id(^)(id obj))successBlock_
+- (id)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSString *)gistId completion:(id(^)(id obj))successBlock_
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%d/comments", gistId] requestType:UAGithubGistCommentCreateRequest responseType:UAGithubGistCommentResponse withParameters:commentDictionary]);
+    return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/%@/comments", gistId] requestType:UAGithubGistCommentCreateRequest responseType:UAGithubGistCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (id)editGistComment:(NSString *)commentId withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id obj))successBlock_
+- (id)editGistComment:(NSInteger)commentId withDictionary:(NSDictionary *)commentDictionary completion:(id(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentUpdateRequest responseType:UAGithubGistCommentResponse withParameters:commentDictionary]);
 }
 
 
-- (BOOL)deleteGistComment:(NSString *)commentId completion:(BOOL(^)(id obj))successBlock_
+- (BOOL)deleteGistComment:(NSInteger)commentId completion:(BOOL(^)(id obj))successBlock_
 {
     return successBlock_([self sendRequest:[NSString stringWithFormat:@"gists/comments/%d", commentId] requestType:UAGithubGistCommentDeleteRequest responseType:UAGithubNoContentResponse]);
 }
