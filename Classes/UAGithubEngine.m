@@ -26,10 +26,10 @@
 
 @interface UAGithubEngine (Private)
 
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType;
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType page:(NSInteger)page;
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params;
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page;
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType error:(NSError **)error;
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType page:(NSInteger)page error:(NSError **)error;
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params error:(NSError **)error;
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page error:(NSError **)error;
 
 @end
 
@@ -86,7 +86,7 @@
 #pragma mark Request Management
 #pragma mark 
 
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page error:(NSError **)error
 {
     
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@/%@", API_PROTOCOL, API_DOMAIN, path];
@@ -99,7 +99,8 @@
         
         if (serializationError)
         {
-            return serializationError;
+            *error = serializationError;
+            return nil;
         }
     }
     
@@ -237,7 +238,7 @@
 			break;
 	}
 	
-    __block NSError *error = nil;
+    __block NSError *blockError = nil;
     
     id returnValue = [UAGithubURLConnection asyncRequest:urlRequest 
                                 success:^(NSData *data, NSURLResponse *response)
@@ -282,7 +283,7 @@
                                     
                                     else
                                     {
-                                        return [UAGithubJSONParser parseJSON:data error:&error];
+                                        return [UAGithubJSONParser parseJSON:data error:&blockError];
                                     }
 
                                 }
@@ -297,25 +298,32 @@
     // If it's an NSNumber NO then that's a successful call to a method that returns an expected 404 response.
     // If it's an NSError, then it's either a connection error, an HTTP error (eg 404), or a parser error. Inspect the NSError instance to determine which.
     
-    return (error) ? error : returnValue;
+    if (blockError)
+    {
+        *error = blockError;
+        return nil;
+    }
+    
+    return returnValue;
 }
 
 
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params error:(NSError **)error
 {
-    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:params page:0];
+    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:params page:0 error:error];
 }
 
 
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType page:(NSInteger)page
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType page:(NSInteger)page error:(NSError **)error
 {
-    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:page];
+    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:page error:error];
 }
 
 
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType error:(NSError **)error
 {
-    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:0];
+    return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:0 error:error];
+}
 }
 
 
