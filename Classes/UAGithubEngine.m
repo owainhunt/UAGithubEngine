@@ -324,6 +324,27 @@
 {
     return [self sendRequest:path requestType:requestType responseType:responseType withParameters:nil page:0 error:error];
 }
+
+
+- (id)invoke:(NSInvocation *)invocation success:(id(^)(id obj))successBlock failure:(id(^)(NSError *error))failureBlock
+{
+    __unsafe_unretained NSError *error = nil;
+    __unsafe_unretained id result;
+    [invocation setArgument:&error atIndex:5];
+    [invocation invoke];
+    [invocation getReturnValue:&result];
+    if (error)
+    {
+        return failureBlock(error);
+    }
+    
+    return successBlock(result);
+}
+
+
+- (NSInvocation *)invocation:(void (^)(id obj))block
+{
+    return [NSInvocation jr_invocationWithTarget:self block:block];
 }
 
 
@@ -331,9 +352,12 @@
 #pragma mark Gists
 #pragma mark
 
-- (id)gistsForUser:(NSString *)user completion:(id(^)(id obj))successBlock_
+- (id)gistsForUser:(NSString *)user completion:(id(^)(id obj))successBlock failure:(NSError *(^)(NSError *error))failureBlock
 {
-    return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/gists", user] requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse]);
+    NSInvocation *theInvocation = [NSInvocation jr_invocationWithTarget:self block:^(id self){
+        [self sendRequest:[NSString stringWithFormat:@"users/%@/gists", user] requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse error:nil];    
+    }];
+    return [self invoke:theInvocation success:successBlock failure:failureBlock];
 }
 
 
@@ -900,10 +924,10 @@
 	return successBlock_([self sendRequest:[NSString stringWithFormat:@"users/%@/repos", aUser] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);	
 }
 
-
-- (id)repositoriesWithCompletion:(id(^)(id obj))successBlock_
+*/
+- (id)repositoriesWithCompletion:(id(^)(id obj))successBlock failure:(NSError *(^)(NSError *))failureBlock
 {
-    return successBlock_([self sendRequest:@"user/repos" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse]);
+    return [self invoke:[self invocation:^(id self){[self sendRequest:@"user/repos" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse error:nil];}] success:successBlock failure:failureBlock];
 }
 
 
