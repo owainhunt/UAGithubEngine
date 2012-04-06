@@ -23,6 +23,6 @@
 @property (nonatomic, assign) UAGithubResponseType responseType;
 @property (nonatomic, strong) NSString *identifier;
 
-+ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock_ failure:(id(^)(NSError *))failureBlock_;
++ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock failure:(id(^)(NSError *))failureBlock_;
 
 @end
