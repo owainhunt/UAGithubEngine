@@ -2,7 +2,7 @@
 //      Copyright (c) 2010 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
 //      Some rights reserved: http://opensource.org/licenses/mit-license.php
 
-#import "NSInvocation+blocks.h"
+#import "NSInvocation+Blocks.h"
 
 @interface JRInvocationGrabber : NSProxy {
     id              target;
@@ -32,7 +32,6 @@
 - (void)dealloc {
     self.target = nil;
     self.invocation = nil;
-    [super dealloc];
 }
 @end
 
@@ -40,7 +39,7 @@
 @implementation NSInvocation (jr_block)
 
 + (id)jr_invocationWithTarget:(id)target_ block:(void (^)(id target))block_ {
-    JRInvocationGrabber *grabber = [[[JRInvocationGrabber alloc] initWithTarget:target_] autorelease];
+    JRInvocationGrabber *grabber = [[JRInvocationGrabber alloc] initWithTarget:target_];
     block_(grabber);
     return grabber.invocation;
 }

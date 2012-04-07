@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSInvocation (blocks)
+@interface NSInvocation (Blocks)
 
 /*
     Usage example:
