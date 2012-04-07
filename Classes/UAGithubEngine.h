@@ -37,238 +37,238 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 #pragma mark Gists
 #pragma mark
 
-- (void)gistsForUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
-- (void)gistsWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)publicGistsWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)starredGistsWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)gist:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createGist:(NSDictionary *)gistDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editGist:(NSString *)gistId withDictionary:(NSDictionary *)gistDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)starGist:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)unstarGist:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)gistIsStarred:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)forkGist:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteGist:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)gistsForUser:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)gistsWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)publicGistsWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)starredGistsWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)gist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createGist:(NSDictionary *)gistDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editGist:(NSString *)gistId withDictionary:(NSDictionary *)gistDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)starGist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)unstarGist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)gistIsStarred:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)forkGist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteGist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Comments
 
-- (void)commentsForGist:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)gistComment:(NSInteger)commentId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSString *)gistId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editGistComment:(NSInteger)commentId withDictionary:(NSDictionary *)commentDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteGistComment:(NSInteger)commentId completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)commentsForGist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)gistComment:(NSInteger)commentId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addCommitComment:(NSDictionary *)commentDictionary forGist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editGistComment:(NSInteger)commentId withDictionary:(NSDictionary *)commentDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteGistComment:(NSInteger)commentId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark
 #pragma mark Issues 
 #pragma mark
 
-- (void)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)closeIssue:(NSString *)issuePath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)reopenIssue:(NSString *)issuePath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)issuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters requestType:(UAGithubRequestType)requestType success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)closeIssue:(NSString *)issuePath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)reopenIssue:(NSString *)issuePath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Comments 
 
-- (void)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)issueComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addComment:(NSString *)comment toIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath withBody:(NSString *)commentBody success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Events
 
-- (void)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)issueEventsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)issueEventsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Labels
 
 // NOTE where it says ':id' in the documentation for a label, it actually should say ':name'
-- (void)labelsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)label:(NSString *)labelName inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)labelsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)label:(NSString *)labelName inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addLabelToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editLabel:(NSString *)labelName inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)labelDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)removeLabel:(NSString *)labelName fromRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)labelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 // Note labels supplied to the following method must already exist within the repository (-addLabelToRepository:...)
-- (void)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)removeLabel:(NSString *)labelNamed fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)removeLabelsFromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)addLabels:(NSArray *)labels toIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)removeLabel:(NSString *)labelNamed fromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)removeLabelsFromIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)replaceAllLabelsForIssue:(NSInteger)issueId inRepository:(NSString *)repositoryPath withLabels:(NSArray *)labels success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)labelsForIssueInMilestone:(NSInteger)milestoneId inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Milestones 
 
-- (void)milestonesForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)milestonesForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)milestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createMilestoneWithInfo:(NSDictionary *)infoDictionary forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)updateMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteMilestone:(NSInteger)milestoneNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark
 #pragma mark Organisations
 #pragma mark
 
-- (void)organizationsForUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)organizationsWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)organization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)updateOrganization:(NSString *)org withDictionary:(NSDictionary *)orgDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)organizationsForUser:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)organizationsWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)organization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)updateOrganization:(NSString *)org withDictionary:(NSDictionary *)orgDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Members
 
-- (void)membersOfOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)user:(NSString *)user isMemberOfOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)removeUser:(NSString *)user fromOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)publicMembersOfOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)user:(NSString *)user isPublicMemberOfOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)publicizeMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)concealMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)membersOfOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)user:(NSString *)user isMemberOfOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)removeUser:(NSString *)user fromOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)publicMembersOfOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)user:(NSString *)user isPublicMemberOfOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)publicizeMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)concealMembershipOfUser:(NSString *)user inOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Teams
 
-- (void)teamsInOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)team:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createTeam:(NSDictionary *)teamDictionary inOrganization:(NSString *)org withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editTeam:(NSInteger)teamId withDictionary:(NSDictionary *)teamDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)membersOfTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)user:(NSString *)user isMemberOfTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addUser:(NSString *)user toTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)removeUser:(NSString *)user fromTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)repositoriesForTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)repository:(NSString *)repositoryPath isManagedByTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addRepository:(NSString *)repositoryPath toTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)removeRepository:(NSString *)repositoryPath fromTeam:(NSInteger)teamId withCompletion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)teamsInOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)team:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createTeam:(NSDictionary *)teamDictionary inOrganization:(NSString *)org withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editTeam:(NSInteger)teamId withDictionary:(NSDictionary *)teamDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)membersOfTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)user:(NSString *)user isMemberOfTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addUser:(NSString *)user toTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)removeUser:(NSString *)user fromTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)repositoriesForTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)repository:(NSString *)repositoryPath isManagedByTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addRepository:(NSString *)repositoryPath toTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)removeRepository:(NSString *)repositoryPath fromTeam:(NSInteger)teamId withSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
                                                              
 
 #pragma mark
 #pragma mark Pull Requests
 #pragma mark
 
-- (void)pullRequestsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)pullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)filesInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)pullRequestsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)pullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createPullRequest:(NSDictionary *)pullRequestDictionary forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)updatePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)pullRequestDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)commitsInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)filesInPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)pullRequest:(NSInteger)pullRequestId isMergedForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)mergePullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Comments
 
-- (void)commentsForPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)commentsForPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)pullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createPullRequestComment:(NSDictionary *)commentDictionary forPullRequest:(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editPullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)commentDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deletePullRequestComment:(NSInteger)commentId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark
 #pragma mark Repositories
 #pragma mark
 
-- (void)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)repositoriesWithCompletion:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
-- (void)createRepositoryWithInfo:(NSDictionary *)infoDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)repository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)contributorsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)languageBreakdownForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)teamsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)annotatedTagsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)branchesForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)repositoriesWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createRepositoryWithInfo:(NSDictionary *)infoDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)repository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)contributorsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)languageBreakdownForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)teamsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)annotatedTagsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)branchesForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Collaborators
 
-- (void)collaboratorsForRepository:(NSString *)repositoryName completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)collaboratorsForRepository:(NSString *)repositoryName success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)user:(NSString *)user isCollaboratorForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addCollaborator:(NSString *)collaborator toRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)removeCollaborator:(NSString *)collaborator fromRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Commits
 
-- (void)commitsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)commitsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)commit:(NSString *)commitSha inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Commit Comments
 
-- (void)commitCommentsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)commitCommentsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)commitCommentsForCommit:(NSString *)sha inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addCommitComment:(NSDictionary *)commentDictionary forCommit:(NSString *)sha inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)commitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)infoDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteCommitComment:(NSInteger)commentId inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Downloads
 
-- (void)downloadsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)downloadsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)download:(NSInteger)downloadId inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 // See http://developer.github.com/v3/repos/downloads for more information: this is a two-part process.
-- (void)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)addDownloadToRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)downloadDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteDownload:(NSInteger)downloadId fromRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Forks
 
-- (void)forksForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)forkRepository:(NSString *)repositoryPath inOrganization:(NSString *)org completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)forkRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)forksForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)forkRepository:(NSString *)repositoryPath inOrganization:(NSString *)org success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)forkRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Keys
 
-- (void)deployKeysForRepository:(NSString *)repositoryName completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)deployKeysForRepository:(NSString *)repositoryName success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deployKey:(NSInteger)keyId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addDeployKey:(NSString *)keyData withTitle:(NSString *)keyTitle ToRepository:(NSString *)repositoryName success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editDeployKey:(NSInteger)keyId inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)keyDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteDeployKey:(NSInteger)keyId fromRepository:(NSString *)repositoryName success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Watching
 
-- (void)watchersForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)watchedRepositoriesForUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)watchedRepositoriescompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)repositoryIsWatched:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)watchRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)unwatchRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)watchersForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)watchedRepositoriesForUser:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)watchedRepositoriessuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)repositoryIsWatched:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)watchRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)unwatchRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Hooks
 
-- (void)hooksForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)hooksForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)hook:(NSInteger)hookId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addHook:(NSDictionary *)hookDictionary forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)hookDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)testHook:(NSInteger)hookId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 /* NOT YET IMPLEMENTED
- - (void)searchRepositories:(NSString *)query completion:(UAGithubEngineSuccessBlock)successBlock;
- - (void)deleteRepository:(NSString *)repositoryName completion:(UAGithubEngineSuccessBlock)successBlock;
- - (void)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken completion:(UAGithubEngineSuccessBlock)successBlock;
- - (void)privatiseRepository:(NSString *)repositoryName completion:(UAGithubEngineSuccessBlock)successBlock;
- - (void)publiciseRepository:(NSString *)repositoryName completion:(UAGithubEngineSuccessBlock)successBlock;
- - (void)pushableRepositories completion:(UAGithubEngineSuccessBlock)successBlock;
- - (void)networkForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+ - (void)searchRepositories:(NSString *)query success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+ - (void)deleteRepository:(NSString *)repositoryName success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+ - (void)confirmDeletionOfRepository:(NSString *)repositoryName withToken:(NSString *)deleteToken success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+ - (void)privatiseRepository:(NSString *)repositoryName success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+ - (void)publiciseRepository:(NSString *)repositoryName success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+ - (void)pushableRepositories success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+ - (void)networkForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
  */
 
 
@@ -276,49 +276,49 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 #pragma mark Users
 #pragma mark
 
-- (void)user:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)userWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)editUser:(NSDictionary *)userDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)user:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)userWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)editUser:(NSDictionary *)userDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Emails
 
-- (void)emailAddressescompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addEmailAddresses:(NSArray *)emails completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deleteEmailAddresses:(NSArray *)emails completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)emailAddressessuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addEmailAddresses:(NSArray *)emails success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deleteEmailAddresses:(NSArray *)emails success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Followers
 
-- (void)followers:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)followersWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)following:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)follows:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)follow:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)unfollow:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)followers:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)followersWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)following:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)follows:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)follow:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)unfollow:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Keys
 
-- (void)publicKeysWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)publicKey:(NSInteger)keyId completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)addPublicKey:(NSDictionary *)keyDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)deletePublicKey:(NSInteger)keyId completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)publicKeysWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)publicKey:(NSInteger)keyId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)addPublicKey:(NSDictionary *)keyDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)updatePublicKey:(NSInteger)keyId withInfo:(NSDictionary *)keyDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)deletePublicKey:(NSInteger)keyId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark
 #pragma mark Events
 #pragma mark
 
-- (void)eventsWithCompletion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)eventsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)eventsForNetwork:(NSString *)networkPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)eventsReceivedByUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)eventsPerformedByUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)publicEventsPerformedByUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)eventsForOrganization:(NSString *)organization user:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)publicEventsForOrganization:(NSString *)organization completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)eventsWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)eventsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)eventsForNetwork:(NSString *)networkPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)eventsReceivedByUser:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)eventsPerformedByUser:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)publicEventsPerformedByUser:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)eventsForOrganization:(NSString *)organization user:(NSString *)user success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)publicEventsForOrganization:(NSString *)organization success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark -
@@ -330,39 +330,39 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 
 #pragma mark Trees
 
-- (void)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createTree:(NSDictionary *)treeDictionary inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)tree:(NSString *)sha inRepository:(NSString *)repositoryPath recursive:(BOOL)recursive success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createTree:(NSDictionary *)treeDictionary inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Blobs
 
-- (void)blobForSHA:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createBlob:(NSDictionary *)blobDictionary inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)blobForSHA:(NSString *)sha inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createBlob:(NSDictionary *)blobDictionary inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 /*
-- (void)blob:(NSString *)blobPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)rawBlob:(NSString *)blobPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)blob:(NSString *)blobPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)rawBlob:(NSString *)blobPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
  */
  
 
 #pragma mark References
 
-- (void)reference:(NSString *)reference inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)referencesInRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)tagsForRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)reference:(NSString *)reference inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)referencesInRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)tagsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createReference:(NSDictionary *)refDictionary inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)updateReference:(NSString *)reference inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)referenceDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Tags
 
-- (void)tag:(NSString *)sha inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createTagObject:(NSDictionary *)tagDictionary inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)tag:(NSString *)sha inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createTagObject:(NSDictionary *)tagDictionary inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 #pragma mark Raw Commits
 
-- (void)rawCommit:(NSString *)commit inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
-- (void)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath completion:(UAGithubEngineSuccessBlock)successBlock;
+- (void)rawCommit:(NSString *)commit inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
 @end
