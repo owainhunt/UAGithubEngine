@@ -53,6 +53,8 @@
 		CC12924215029A5300904FA5 /* UAGithubURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubURLConnection.m; sourceTree = "<group>"; };
 		CC12924315029A5300904FA5 /* UAReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAReachability.h; sourceTree = "<group>"; };
 		CC12924415029A5300904FA5 /* UAReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAReachability.m; sourceTree = "<group>"; };
+		CC274113152F885C00E946AD /* NSInvocation+blocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+blocks.h"; sourceTree = "<group>"; };
+		CC274114152F885C00E946AD /* NSInvocation+blocks.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+blocks.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CC274113152F885C00E946AD /* NSInvocation+blocks.h */,
+				CC274114152F885C00E946AD /* NSInvocation+blocks.m */,
 				256AC3F00F4B6AF500CF3369 /* UAGithubEngine_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);

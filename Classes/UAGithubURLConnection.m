@@ -14,7 +14,7 @@
 
 @synthesize data, requestType, responseType, identifier;
 
-+ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock_ failure:(id(^)(NSError *))failureBlock_ 
++ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock failure:(id(^)(NSError *))failureBlock_ 
 {
     // This has to be dispatch_sync rather than _async, otherwise our successBlock executes before the request is done and we're all bass-ackwards.
 	//dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -30,7 +30,7 @@
             if (error) {
                 return failureBlock_(error);
             } else {
-                return successBlock_(data,response);
+                return successBlock(data,response);
             }
         }
         
