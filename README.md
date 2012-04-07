@@ -27,18 +27,11 @@ The `master` branch is built on version 3 of the API, and uses up-to-date techno
 
 	`UAGithubEngine *engine = [[UAGithubEngine alloc] initWithUsername:@"aUser" password:@"aPassword" withReachability:YES];`
 	
-* Call some methods. All methods in UAGE return one of three objects. This is dependent on the method in question: take a look the the Github API docs for more information on what to expect. 
+* Call some methods. 
 
-* Methods that return JSON will return an `NSArray` of `NSDictionary` objects.
-
-* Methods that return a `204 No Content` response from Github will return `BOOL YES`. 
-
-* Methods that return a `404 Not Found` response from Github will return `BOOL NO`.
-
-* Example:
-
-	`NSArray *array = [engine repositoriesWithCompletion:^(id obj){ NSLog(@"%@", obj) }];`
-	
+* Examples: 
+	`[engine repositoriesWithSuccess:^(id response){ NSLog(@"Got an array of repos: %@", obj); } failure:^(NSError *error) { NSLog(@"Crapsticks: %@", error);}];`  
+	`[engine user:@"this_guy" isCollaboratorForRepository:@"UAGithubEngine" success:^(BOOL hotOrNot) { NSLog(@"%d", hotOrNot); } failure:^(NSError *error){ NSLog(@"Monkey balls: %@", error); }];`
 
 Any questions, comments, improvements and so on, you can find me on Twitter (@orhunt) or send me an email (owain@underscoreapps.com).
 
