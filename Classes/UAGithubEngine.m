@@ -326,7 +326,7 @@
 }
 
 
-- (id)invoke:(NSInvocation *)invocation success:(id(^)(id obj))successBlock failure:(id(^)(NSError *error))failureBlock
+- (void)invoke:(NSInvocation *)invocation success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
     __unsafe_unretained NSError *error = nil;
     __unsafe_unretained id result;
@@ -335,10 +335,10 @@
     [invocation getReturnValue:&result];
     if (error)
     {
-        return failureBlock(error);
+        failureBlock(error);
     }
     
-    return successBlock(result);
+    successBlock(result);
 }
 
 
@@ -352,12 +352,12 @@
 #pragma mark Gists
 #pragma mark
 
-- (id)gistsForUser:(NSString *)user completion:(id(^)(id obj))successBlock failure:(NSError *(^)(NSError *error))failureBlock
+- (void)gistsForUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
     NSInvocation *theInvocation = [NSInvocation jr_invocationWithTarget:self block:^(id self){
         [self sendRequest:[NSString stringWithFormat:@"users/%@/gists", user] requestType:UAGithubGistsRequest responseType:UAGithubGistsResponse error:nil];    
     }];
-    return [self invoke:theInvocation success:successBlock failure:failureBlock];
+    [self invoke:theInvocation success:successBlock failure:failureBlock];
 }
 
 /*
@@ -925,9 +925,9 @@
 }
 
 */
-- (id)repositoriesWithCompletion:(id(^)(id obj))successBlock failure:(NSError *(^)(NSError *))failureBlock
+- (void)repositoriesWithCompletion:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-    return [self invoke:[self invocation:^(id self){[self sendRequest:@"user/repos" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse error:nil];}] success:successBlock failure:failureBlock];
+    [self invoke:[self invocation:^(id self){[self sendRequest:@"user/repos" requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse error:nil];}] success:successBlock failure:failureBlock];
 }
 
 /*

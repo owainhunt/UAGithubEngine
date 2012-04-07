@@ -11,6 +11,9 @@
 #import "UAGithubEngineRequestTypes.h"
 #import "UAGithubEngineConstants.h"
 
+typedef void (^UAGithubEngineSuccessBlock)(id);
+typedef void (^UAGithubEngineFailureBlock)(NSError *);
+
 @interface UAGithubEngine : NSObject 
 
 @property (strong) NSString *username;
@@ -34,7 +37,7 @@
 #pragma mark Gists
 #pragma mark
 
-- (id)gistsForUser:(NSString *)user completion:(id(^)(id))successBlock failure:(NSError *(^)(NSError *))failureBlock;
+- (void)gistsForUser:(NSString *)user completion:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 - (id)gistsWithCompletion:(id(^)(id))successBlock;
 - (id)publicGistsWithCompletion:(id(^)(id))successBlock;
 - (id)starredGistsWithCompletion:(id(^)(id))successBlock;
@@ -179,7 +182,7 @@
 
 - (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched completion:(id(^)(id))successBlock;
 - (id)repositoriesForUser:(NSString *)aUser includeWatched:(BOOL)watched page:(int)page completion:(id(^)(id))successBlock;
-- (id)repositoriesWithCompletion:(id(^)(id))successBlock failure:(NSError *(^)(NSError *))failureBlock;
+- (void)repositoriesWithCompletion:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 - (id)createRepositoryWithInfo:(NSDictionary *)infoDictionary completion:(id(^)(id))successBlock;
 - (id)repository:(NSString *)repositoryPath completion:(id(^)(id))successBlock;
 - (id)updateRepository:(NSString *)repositoryPath withInfo:(NSDictionary *)infoDictionary completion:(id(^)(id))successBlock;
