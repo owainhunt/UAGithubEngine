@@ -29,9 +29,20 @@ The `master` branch is built on version 3 of the API, and uses up-to-date techno
 	
 * Call some methods. 
 
-* Examples: 
-	`[engine repositoriesWithSuccess:^(id response){ NSLog(@"Got an array of repos: %@", obj); } failure:^(NSError *error) { NSLog(@"Crapsticks: %@", error);}];`  
-	`[engine user:@"this_guy" isCollaboratorForRepository:@"UAGithubEngine" success:^(BOOL hotOrNot) { NSLog(@"%d", hotOrNot); } failure:^(NSError *error){ NSLog(@"Monkey balls: %@", error); }];`
+## Examples
+```
+[engine repositoriesWithSuccess:^(id response){ 
+		NSLog(@"Got an array of repos: %@", obj); 
+	} failure:^(NSError *error) { 
+		NSLog(@"Crapsticks: %@", error);
+	}];  
+
+[engine user:@"this_guy" isCollaboratorForRepository:@"UAGithubEngine" success:^(BOOL hotOrNot) { 
+		NSLog(@"%d", hotOrNot); 
+	} failure:^(NSError *error){ 
+		NSLog(@"Monkey balls: %@", error); 
+	}];
+```
 
 Any questions, comments, improvements and so on, you can find me on Twitter (@orhunt) or send me an email (owain@underscoreapps.com).
 
