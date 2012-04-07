@@ -343,6 +343,24 @@
 }
 
 
+- (void)invoke:(void (^)(id obj))invocationBlock booleanSuccess:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    __unsafe_unretained NSError *error = nil;
+    BOOL result;
+    
+    NSInvocation *invocation = [NSInvocation jr_invocationWithTarget:self block:invocationBlock];
+    [invocation setArgument:&error atIndex:5];
+    [invocation invoke];
+    [invocation getReturnValue:&result];
+    if (error)
+    {
+        failureBlock(error);
+    }
+    
+    successBlock(result);
+}
+
+
 #pragma mark 
 #pragma mark Gists
 #pragma mark
@@ -389,9 +407,9 @@
 }
 
 
-- (void)starGist:(NSString *)gistId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+- (void)starGist:(NSString *)gistId success:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"gists/%@/star", gistId] requestType:UAGithubGistStarRequest responseType:UAGithubNoContentResponse error:nil];} success:successBlock failure:failureBlock];
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"gists/%@/star", gistId] requestType:UAGithubGistStarRequest responseType:UAGithubNoContentResponse error:nil];} booleanSuccess:successBlock failure:failureBlock];
 }
 
 
