@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UAReachability.h"
-#import "UAGithubEngineRequestTypes.h"
-#import "UAGithubEngineConstants.h"
+@class UAReachability;
 
 typedef void (^UAGithubEngineSuccessBlock)(id);
 typedef void (^UAGithubEngineBooleanSuccessBlock)(BOOL);
