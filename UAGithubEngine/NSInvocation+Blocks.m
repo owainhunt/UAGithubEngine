@@ -1,4 +1,4 @@
-//  NSInvocation+blocks.m - http://github.com/rentzsch/NSInvocation-blocks
+//  NSInvocation+Blocks.m - http://github.com/rentzsch/NSInvocation-blocks
 //      Copyright (c) 2010 Jonathan 'Wolf' Rentzsch: http://rentzsch.com
 //      Some rights reserved: http://opensource.org/licenses/mit-license.php
 

@@ -18,7 +18,7 @@
 #import "NSData+Base64.h"
 #import "NSString+UUID.h"
 
-#import "NSInvocation+blocks.h"
+#import "NSInvocation+Blocks.h"
 
 #define API_PROTOCOL @"https://"
 #define API_DOMAIN @"api.github.com"
