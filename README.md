@@ -17,9 +17,9 @@ The `master` branch is built on version 3 of the API, and uses up-to-date techno
 	
 	Then run `pod install`.
 
-* Alternatively, copy across all the files in the 'Engine' group from the UAGithubEngine project into your app's project.
+* The easiest way to use the engine is with the framework - build and link against the `UAGithubEngine` framework, and `#import <UAGithubEngine/UAGithubEngine.h>` where you want to use the framework.
 
-* `#import "UAGithubEngine.h"` where you want to use the engine.
+* If you don't fancy using CocoaPods or the framework, copy across all the files in the 'UAGithubEngine' group from the UAGithubEngine project into your app's project and `#import "UAGithubEngine.h"` where you want to use the engine.
 
 * Note that UAGE has undergone a complete rewrite from version 1 to version 2. It now longer uses delegates, and instead relies on a block and callback structure.
 
