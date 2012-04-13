@@ -239,7 +239,7 @@
 	}
 	
     __block NSError *blockError = nil;
-    
+
     id returnValue = [UAGithubURLConnection asyncRequest:urlRequest 
                                 success:^(NSData *data, NSURLResponse *response)
                                 {
@@ -248,7 +248,8 @@
                                     
                                     
                                     if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
-                                    {                                     
+                                    {         
+                                        blockError = [NSError errorWithDomain:UAGithubAPILimitReached code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
                                         return [NSError errorWithDomain:UAGithubAPILimitReached code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
                                     }
                                     
@@ -287,11 +288,7 @@
                                     }
 
                                 }
-                                failure:^(NSError *parserError)
-                                {
-                                    return parserError;
-                                }
-     ];
+                                error:&blockError];
    
     if (blockError)
     {
