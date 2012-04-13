@@ -473,6 +473,30 @@
 #pragma mark Issues 
 #pragma mark
 
+- (void)assignedIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"issues?state=%@", state] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse error:nil];} success:successBlock failure:failureBlock];  
+}
+
+
+- (void)createdIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"issues?filter=created&state=%@", state] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse error:nil];} success:successBlock failure:failureBlock];  
+}
+
+
+- (void)subscribedIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"issues?filter=subscribed&state=%@", state] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse error:nil];} success:successBlock failure:failureBlock];  
+}
+
+
+- (void)mentionedIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"issues?filter=mentioned&state=%@", state] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse error:nil];} success:successBlock failure:failureBlock];      
+}
+
+
 - (void)openIssuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
     [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssuesOpenRequest responseType:UAGithubIssuesResponse withParameters:parameters error:nil];} success:successBlock failure:failureBlock];

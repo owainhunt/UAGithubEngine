@@ -63,6 +63,10 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 #pragma mark Issues 
 #pragma mark
 
+- (void)assignedIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)createdIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)subscribedIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)mentionedIssuesWithState:(NSString *)state success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 - (void)openIssuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 - (void)closedIssuesForRepository:(NSString *)repositoryPath withParameters:(NSDictionary *)parameters success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 - (void)issue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
