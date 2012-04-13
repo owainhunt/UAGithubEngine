@@ -37,4 +37,28 @@
 	//});
 }
 
++ (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock error:(NSError *__autoreleasing *)error
+{
+    // This has to be dispatch_sync rather than _async, otherwise our successBlock executes before the request is done and we're all bass-ackwards.
+	//dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+    @autoreleasepool 
+    {    
+        NSLog(@"New %@ connection: %@", request.HTTPMethod, request);
+        
+        NSURLResponse *response = nil;
+        NSError *connectionError = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&connectionError];
+        
+        if (connectionError) {
+            *error = connectionError;
+            return nil;
+        } else {
+            return successBlock(data,response);
+        }
+    }
+    
+	//});
+}
+
 @end
