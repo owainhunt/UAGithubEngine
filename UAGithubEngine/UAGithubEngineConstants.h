@@ -13,3 +13,6 @@ extern NSString * const UAGithubAPILimitReached;
 
 #define UAGithubReachabilityStatusDidChangeNotification @"UAGithubReachabilityStatusDidChangeNotification"
 
+#define UAGithubIssueClosedState @"closed"
+#define UAGithubIssueOpenState @"open"
+
