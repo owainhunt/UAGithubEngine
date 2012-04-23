@@ -26,7 +26,7 @@
         {
             NSDictionary *dictionary = [jsonArray firstObject];
             *error = [NSError errorWithDomain:@"UAGithubEngineGithubError" code:0 userInfo:[NSDictionary dictionaryWithObject:[dictionary objectForKey:@"error"] forKey:@"errorMessage"]];
-            NSLog(@"Error: %@", error);
+            NSLog(@"Error: %@", *error);
         }
         
         for (NSMutableDictionary *theDictionary in jsonArray)
