@@ -30,7 +30,7 @@ The `master` branch is built on version 3 of the API, and uses up-to-date techno
 * Call some methods. 
 
 ## Examples
-```
+```objective-c
 [engine repositoriesWithSuccess:^(id response){ 
 		NSLog(@"Got an array of repos: %@", obj); 
 	} failure:^(NSError *error) { 
