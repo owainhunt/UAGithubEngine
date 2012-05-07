@@ -130,27 +130,8 @@
 		CC52FFA115378566005A767A /* UAGithubEngine */ = {
 			isa = PBXGroup;
 			children = (
-				CC52FFAE153785F3005A767A /* NSArray+Utilities.h */,
-				CC52FFAF153785F3005A767A /* NSArray+Utilities.m */,
-				CC52FFB0153785F3005A767A /* NSData+Base64.h */,
-				CC52FFB1153785F3005A767A /* NSData+Base64.m */,
-				CC52FFB2153785F3005A767A /* NSInvocation+Blocks.h */,
-				CC52FFB3153785F3005A767A /* NSInvocation+Blocks.m */,
-				CC52FFB4153785F3005A767A /* NSString+UAGithubEngineUtilities.h */,
-				CC52FFB5153785F3005A767A /* NSString+UAGithubEngineUtilities.m */,
-				CC52FFB6153785F3005A767A /* NSString+UUID.h */,
-				CC52FFB7153785F3005A767A /* NSString+UUID.m */,
 				CC52FFB8153785F3005A767A /* UAGithubEngine.h */,
-				CC52FFB9153785F3005A767A /* UAGithubEngine.m */,
-				CC52FFBA153785F3005A767A /* UAGithubEngineConstants.h */,
-				CC52FFBB153785F3005A767A /* UAGithubEngineConstants.m */,
-				CC52FFBC153785F3005A767A /* UAGithubEngineRequestTypes.h */,
-				CC52FFBD153785F3005A767A /* UAGithubJSONParser.h */,
-				CC52FFBE153785F3005A767A /* UAGithubJSONParser.m */,
-				CC52FFBF153785F3005A767A /* UAGithubURLConnection.h */,
-				CC52FFC0153785F3005A767A /* UAGithubURLConnection.m */,
-				CC52FFC1153785F3005A767A /* UAReachability.h */,
-				CC52FFC2153785F3005A767A /* UAReachability.m */,
+				CC73E2151551DA590094AFE6 /* Engine */,
 				CC52FFA215378566005A767A /* Supporting Files */,
 			);
 			path = UAGithubEngine;
@@ -164,6 +145,33 @@
 				CC52FFA715378566005A767A /* UAGithubEngine-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CC73E2151551DA590094AFE6 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				CC52FFB9153785F3005A767A /* UAGithubEngine.m */,
+				CC52FFAE153785F3005A767A /* NSArray+Utilities.h */,
+				CC52FFAF153785F3005A767A /* NSArray+Utilities.m */,
+				CC52FFB0153785F3005A767A /* NSData+Base64.h */,
+				CC52FFB1153785F3005A767A /* NSData+Base64.m */,
+				CC52FFB2153785F3005A767A /* NSInvocation+Blocks.h */,
+				CC52FFB3153785F3005A767A /* NSInvocation+Blocks.m */,
+				CC52FFB4153785F3005A767A /* NSString+UAGithubEngineUtilities.h */,
+				CC52FFB5153785F3005A767A /* NSString+UAGithubEngineUtilities.m */,
+				CC52FFB6153785F3005A767A /* NSString+UUID.h */,
+				CC52FFB7153785F3005A767A /* NSString+UUID.m */,
+				CC52FFBA153785F3005A767A /* UAGithubEngineConstants.h */,
+				CC52FFBB153785F3005A767A /* UAGithubEngineConstants.m */,
+				CC52FFBC153785F3005A767A /* UAGithubEngineRequestTypes.h */,
+				CC52FFBD153785F3005A767A /* UAGithubJSONParser.h */,
+				CC52FFBE153785F3005A767A /* UAGithubJSONParser.m */,
+				CC52FFBF153785F3005A767A /* UAGithubURLConnection.h */,
+				CC52FFC0153785F3005A767A /* UAGithubURLConnection.m */,
+				CC52FFC1153785F3005A767A /* UAReachability.h */,
+				CC52FFC2153785F3005A767A /* UAReachability.m */,
+			);
+			name = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,7 +222,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "UAGithubEngine" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -280,6 +288,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = 4.2;
@@ -296,6 +305,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

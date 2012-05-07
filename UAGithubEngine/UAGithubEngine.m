@@ -86,7 +86,7 @@
 #pragma mark Request Management
 #pragma mark 
 
-- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page error:(NSError **)error
+- (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType withParameters:(id)params page:(NSInteger)page error:(NSError * __strong *)error
 {
     
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@/%@", API_PROTOCOL, API_DOMAIN, path];
@@ -238,7 +238,8 @@
 			break;
 	}
 	
-    __block NSError *blockError = nil;
+    NSError __block __strong *blockError = nil;
+    NSError *connectionError = nil;
 
     id returnValue = [UAGithubURLConnection asyncRequest:urlRequest 
                                 success:^(NSData *data, NSURLResponse *response)
@@ -250,7 +251,7 @@
                                     if ([[[resp allHeaderFields] allKeys] containsObject:@"X-Ratelimit-Remaining"] && [[[resp allHeaderFields] valueForKey:@"X-Ratelimit-Remaining"] isEqualToString:@"1"])
                                     {         
                                         blockError = [NSError errorWithDomain:UAGithubAPILimitReached code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
-                                        return [NSError errorWithDomain:UAGithubAPILimitReached code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
+                                        return (id)[NSNull null];
                                     }
                                     
                                     if (statusCode >= 400) 
@@ -273,7 +274,9 @@
                                             }
                                         }
                                         
-                                        return [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
+                                        blockError = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:[NSDictionary dictionaryWithObject:urlRequest forKey:@"request"]];
+                                        
+                                        return (id)[NSNull null];
                                                                                 
                                     } 
                                     
@@ -288,11 +291,16 @@
                                     }
 
                                 }
-                                error:&blockError];
+                                error:&connectionError];
    
     if (blockError)
     {
         *error = blockError;
+        return nil;
+    }
+    else if (connectionError)
+    {
+        *error = connectionError;
         return nil;
     }
 
@@ -324,34 +332,41 @@
 
 - (void)invoke:(void (^)(id obj))invocationBlock success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-    __unsafe_unretained NSError *error = nil;
-    __unsafe_unretained id result;
-    
+    NSError __unsafe_unretained *error = nil;
+    NSError __unsafe_unretained **errorPointer = &error;
+    id __unsafe_unretained result;
+
     NSInvocation *invocation = [NSInvocation jr_invocationWithTarget:self block:invocationBlock];
-    [invocation setArgument:&error atIndex:5];
+    [invocation setArgument:&errorPointer atIndex:5];
     [invocation invoke];
     [invocation getReturnValue:&result];
+    
     if (error)
     {
         failureBlock(error);
+        return;
     }
-    
+
     successBlock(result);
 }
 
 
 - (void)invoke:(void (^)(id obj))invocationBlock booleanSuccess:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-    __unsafe_unretained NSError *error = nil;
+    
+    NSError __unsafe_unretained *error = nil;
+    NSError __unsafe_unretained **errorPointer = &error;
     BOOL result;
     
     NSInvocation *invocation = [NSInvocation jr_invocationWithTarget:self block:invocationBlock];
-    [invocation setArgument:&error atIndex:5];
+    [invocation setArgument:&errorPointer atIndex:5];
     [invocation invoke];
     [invocation getReturnValue:&result];
+    
     if (error)
     {
         failureBlock(error);
+        return;
     }
     
     successBlock(result);
