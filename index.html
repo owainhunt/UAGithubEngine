@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>UAGithubEngine by owainhunt</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>UAGithubEngine</h1>
+        <p>Objective-C Wrapper for the Github API</p>
+        <p class="view"><a href="https://github.com/owainhunt/UAGithubEngine">View the Project on GitHub <small>owainhunt/UAGithubEngine</small></a></p>
+        <ul>
+          <li><a href="https://github.com/owainhunt/UAGithubEngine/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/owainhunt/UAGithubEngine/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/owainhunt/UAGithubEngine">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>UAGithubEngine</h1>
+
+<p>by <a href="http://owainrhunt.com">Owain R Hunt</a></p>
+
+<p>UAGithubEngine is a wrapper around the Github API. Check out the <a href="http://developer.github.com/">API documentation</a> for full details of what the API can do. </p>
+
+<p>UAGithubEngine is compatible with Mac OS X 10.7 and above, and iOS 5.0.</p>
+
+<h2>Note</h2>
+
+<p>The <code>master</code> branch is built on version 3 of the API, and uses up-to-date technologies such as blocks and ARC. Version 1 of UAGE, found in the branch <code>v1</code>, was built on version 2 of the API, and may be more suited to your uses if you need to support earlier versions of OS X or iOS. This branch is no longer under active development.</p>
+
+<h2>How do I use it?</h2>
+
+<ul>
+<li>
+<p>UAGithubEngine is available from <a href="http://cocoapods.org">CocoaPods</a>. Just add the following to your Podfile:</p>
+
+<p><code>dependency 'UAGithubEngine'</code></p>
+
+<p>Then run <code>pod install</code>.</p>
+</li>
+<li><p>The easiest way to use the engine is with the framework - build and link against the <code>UAGithubEngine</code> framework, and <code>#import &lt;UAGithubEngine/UAGithubEngine.h&gt;</code> where you want to use the framework.</p></li>
+<li><p>If you don't fancy using CocoaPods or the framework, either copy across all the files in the 'UAGithubEngine' group from the UAGithubEngine project into your app's project, or add the entire project to your workspace. Use <code>#import "UAGithubEngine.h"</code> where you want to use the engine.</p></li>
+<li><p>Instantiate an engine, passing a username and password. If you want to receive notifications when reachability status changes (<code>UAGithubReachabilityStatusDidChangeNotification</code>), pass <code>YES</code> as the final argument.</p></li>
+<li><p>Call some methods. </p></li>
+</ul><h2>Code speaks louder than words.</h2>
+
+<div class="highlight">
+<pre><span class="n">UAGithubEngine</span> <span class="o">*</span><span class="n">engine</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UAGithubEngine</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithUsername:</span><span class="s">@"aUser"</span> <span class="nl">password:</span><span class="s">@"aPassword"</span> <span class="nl">withReachability:</span><span class="n">YES</span><span class="p">];</span>
+
+<span class="p">[</span><span class="n">engine</span> <span class="nl">repositoriesWithSuccess:</span><span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="n">response</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Got an array of repos: %@"</span><span class="p">,</span> <span class="n">obj</span><span class="p">);</span> 
+    <span class="p">}</span> <span class="nl">failure:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Oops: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+    <span class="p">}];</span>  
+
+<span class="p">[</span><span class="n">engine</span> <span class="nl">user:</span><span class="s">@"this_guy"</span> <span class="nl">isCollaboratorForRepository:</span><span class="s">@"UAGithubEngine"</span> <span class="nl">success:</span><span class="o">^</span><span class="p">(</span><span class="kt">BOOL</span> <span class="n">collaborates</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"%d"</span><span class="p">,</span> <span class="n">collaborates</span><span class="p">);</span> 
+    <span class="p">}</span> <span class="nl">failure:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">){</span> 
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"D'oh: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span> 
+    <span class="p">}];</span>
+</pre>
+</div>
+
+
+<p>Any questions, comments, improvements and so on, either open an issue, find me on Twitter (<a href="https://github.com/orhunt" class="user-mention">@orhunt</a>) or send me an email (<a href="mailto:owain@underscoreapps.com">owain@underscoreapps.com</a>).</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/owainhunt">owainhunt</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
