@@ -154,6 +154,7 @@
 
 	switch (requestType) 
     {
+        case UAGithubIssueAddRequest:
 		case UAGithubRepositoryCreateRequest:
 		case UAGithubRepositoryDeleteConfirmationRequest:
         case UAGithubMilestoneCreateRequest:
