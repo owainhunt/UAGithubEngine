@@ -334,11 +334,12 @@
 - (void)invoke:(void (^)(id obj))invocationBlock success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
     NSError __unsafe_unretained *error = nil;
-    NSError __unsafe_unretained **errorPointer = &error;
+    NSError * __unsafe_unretained *errorPointer = &error;
     id __unsafe_unretained result;
 
     NSInvocation *invocation = [NSInvocation jr_invocationWithTarget:self block:invocationBlock];
-    [invocation setArgument:&errorPointer atIndex:5];
+    // Method signatures differ between invocations, but the last argument is always where the NSError lives
+    [invocation setArgument:&errorPointer atIndex:[[invocation methodSignature] numberOfArguments] - 1];
     [invocation invoke];
     [invocation getReturnValue:&result];
     
@@ -356,11 +357,11 @@
 {
     
     NSError __unsafe_unretained *error = nil;
-    NSError __unsafe_unretained **errorPointer = &error;
+    NSError * __unsafe_unretained *errorPointer = &error;
     BOOL result;
     
     NSInvocation *invocation = [NSInvocation jr_invocationWithTarget:self block:invocationBlock];
-    [invocation setArgument:&errorPointer atIndex:5];
+    [invocation setArgument:&errorPointer atIndex:[[invocation methodSignature] numberOfArguments] - 1];
     [invocation invoke];
     [invocation getReturnValue:&result];
     
