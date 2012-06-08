@@ -541,15 +541,17 @@
 }
 
 
-- (void)closeIssue:(NSString *)issuePath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+- (void)closeIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"issues/close/%@", issuePath] requestType:UAGithubIssueCloseRequest responseType:UAGithubIssueResponse error:nil];} success:successBlock failure:failureBlock];	
+    NSDictionary *paramsDictionary = @{ @"state" : @"closed" };
+	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%ld", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:paramsDictionary error:nil];} success:successBlock failure:failureBlock];
 }
 
 
-- (void)reopenIssue:(NSString *)issuePath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+- (void)reopenIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"issues/reopen/%@", issuePath] requestType:UAGithubIssueReopenRequest responseType:UAGithubIssueResponse error:nil];} success:successBlock failure:failureBlock];	
+    NSDictionary *paramsDictionary = @{ @"state" : @"open" };
+	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%ld", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:paramsDictionary error:nil];} success:successBlock failure:failureBlock];
 }
 
 
