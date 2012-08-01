@@ -77,6 +77,12 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 - (void)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
+#pragma mark Assignees
+
+- (void)assigneesForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)user:(NSString *)user isAssigneeForRepository:(NSString *)repositoryPath success:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+
+
 #pragma mark Comments 
 
 - (void)commentsForIssue:(NSInteger)issueNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;

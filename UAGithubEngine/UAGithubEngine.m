@@ -531,13 +531,13 @@
 
 - (void)editIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%ld", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary error:nil];} success:successBlock failure:failureBlock];	
+	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%ld", repositoryPath, issueNumber] requestType:UAGithubIssueEditRequest responseType:UAGithubIssueResponse withParameters:issueDictionary error:nil];} success:successBlock failure:failureBlock];
 }
 
 
 - (void)addIssueForRepository:(NSString *)repositoryPath withDictionary:(NSDictionary *)issueDictionary success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
-	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary error:nil];} success:successBlock failure:failureBlock];	
+	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues", repositoryPath] requestType:UAGithubIssueAddRequest responseType:UAGithubIssueResponse withParameters:issueDictionary error:nil];} success:successBlock failure:failureBlock];
 }
 
 
@@ -558,6 +558,20 @@
 - (void)deleteIssue:(NSInteger)issueNumber inRepository:(NSString *)repositoryPath success:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
     [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/%ld", repositoryPath, issueNumber] requestType:UAGithubIssueRequest responseType:UAGithubIssueResponse error:nil];} booleanSuccess:successBlock failure:failureBlock];	
+}
+
+
+#pragma mark Assignees
+
+- (void)assigneesForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self) { [self sendRequest:[NSString stringWithFormat:@"/repos/%@/assignees", repositoryPath] requestType:UAGithubAssigneesRequest responseType:UAGithubUsersResponse error:nil];} success:successBlock failure:failureBlock];
+}
+
+
+- (void)user:(NSString *)user isAssigneeForRepository:(NSString *)repositoryPath success:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"/repos/%@/assignees/%@", repositoryPath, user] requestType:UAGithubAssigneeRequest responseType:UAGithubNoContentResponse error:nil];} booleanSuccess:successBlock failure:failureBlock];
 }
 
 

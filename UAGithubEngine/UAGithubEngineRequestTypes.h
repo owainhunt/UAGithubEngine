@@ -160,6 +160,8 @@ typedef enum UAGithubRequestType
     UAGithubTeamRepositoryManagershipStatusRequest, // Get whether a team manages a specific repository
     UAGithubTeamRepositoryManagershipAddRequest,    // Add a specific repository to a team
     UAGithubTeamRepositoryManagershipRemoveRequest, // Remove a specific repository from a team
+    UAGithubAssigneesRequest,                       // Get one or more assignees
+    UAGithubAssigneeRequest,                        // Get whether one user is an assignee on a repository
 } UAGithubRequestType;
 
 
