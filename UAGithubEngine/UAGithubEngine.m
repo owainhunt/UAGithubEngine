@@ -1547,4 +1547,30 @@
     [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/git/commits", repositoryPath] requestType:UAGithubRawCommitCreateRequest responseType:UAGithubRawCommitResponse withParameters:commitDictionary error:nil];} success:successBlock failure:failureBlock];
 }
 
+
+#pragma mark -
+#pragma mark Markdown
+#pragma mark -
+
+- (void)renderAsMarkdown:(NSString *)string success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    NSDictionary *params = [@{ @"text" : string } copy];
+    [self invoke:^(id self){[self sendRequest:@"markdown" requestType:UAGithubMarkdownRequest responseType:UAGithubMarkdownResponse withParameters:params error:nil];} success:successBlock failure:failureBlock];
+}
+
+
+- (void)renderAsGitHubFlavoredMarkdown:(NSString *)string withRepositoryContext:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    NSDictionary *params = [@{ @"text" : string, @"mode" : @"gfm" } copy];
+    if (repositoryPath)
+    {
+        NSMutableDictionary *mutableParams = [params mutableCopy];
+        [mutableParams setValue:repositoryPath forKey:@"context"];
+        params = [mutableParams copy];
+    }
+    [self invoke:^(id self){[self sendRequest:@"markdown" requestType:UAGithubMarkdownRequest responseType:UAGithubMarkdownResponse withParameters:params error:nil];} success:successBlock failure:failureBlock];
+   
+}
+
+
 @end

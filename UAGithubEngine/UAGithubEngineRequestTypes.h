@@ -162,6 +162,7 @@ typedef enum UAGithubRequestType
     UAGithubTeamRepositoryManagershipRemoveRequest, // Remove a specific repository from a team
     UAGithubAssigneesRequest,                       // Get one or more assignees
     UAGithubAssigneeRequest,                        // Get whether one user is an assignee on a repository
+    UAGithubMarkdownRequest,                        // Get a string as Markdown
 } UAGithubRequestType;
 
 
@@ -230,5 +231,6 @@ typedef enum UAGithubResponseType
     UAGithubOrganizationsResponse,                  // One or more organizations
     UAGithubOrganizationResponse,                   // Exactly one organization
     UAGithubTeamsResponse,                          // One or more organization teams
-    UAGithubTeamResponse,                           // Exactly one team	
+    UAGithubTeamResponse,                           // Exactly one team
+    UAGithubMarkdownResponse,                       // HTML from Markdown
 } UAGithubResponseType;
