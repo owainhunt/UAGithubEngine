@@ -175,6 +175,7 @@
         case UAGithubPullRequestCommentCreateRequest:
         case UAGithubEmailAddRequest:    
         case UAGithubTeamCreateRequest:
+        case UAGithubMarkdownRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
