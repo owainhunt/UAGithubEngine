@@ -286,6 +286,10 @@
                                     {
                                         return (id)[NSNumber numberWithBool:YES];
                                     }
+                                    else if (requestType == UAGithubMarkdownRequest)
+                                    {
+                                        return (id)[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                    }
                                     
                                     else
                                     {
