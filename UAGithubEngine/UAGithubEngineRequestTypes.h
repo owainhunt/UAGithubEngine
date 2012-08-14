@@ -162,6 +162,7 @@ typedef enum UAGithubRequestType
     UAGithubTeamRepositoryManagershipRemoveRequest, // Remove a specific repository from a team
     UAGithubAssigneesRequest,                       // Get one or more assignees
     UAGithubAssigneeRequest,                        // Get whether one user is an assignee on a repository
+    UAGithubMarkdownRequest,                        // Get a string as Markdown
 } UAGithubRequestType;
 
 

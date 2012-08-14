@@ -366,4 +366,12 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 - (void)createRawCommit:(NSDictionary *)commitDictionary inRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
+#pragma mark -
+#pragma mark Markdown
+#pragma mark -
+
+- (void)renderAsMarkdown:(NSString *)string success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+- (void)renderAsGitHubFlavoredMarkdown:(NSString *)string withRepositoryContext:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+
+
 @end
