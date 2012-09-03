@@ -273,6 +273,11 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 - (void)deleteHook:(NSInteger)hookId fromRepository:(NSString *)repositoryPath success:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
 
 
+#pragma mark Merges
+
+- (void)mergeHead:(NSString *)head intoBranch:(NSString *)base inRepository:(NSString *)repositoryPath withMessage:(NSString *)commitMessage success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock;
+
+
 #pragma mark
 #pragma mark Users
 #pragma mark

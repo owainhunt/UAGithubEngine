@@ -182,6 +182,7 @@
         case UAGithubEmailAddRequest:    
         case UAGithubTeamCreateRequest:
         case UAGithubMarkdownRequest:
+        case UAGithubRepositoryMergeRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -1331,6 +1332,15 @@
 {
     [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/hooks/%ld", repositoryPath, hookId] requestType:UAGithubRepositoryHookDeleteRequest responseType:UAGithubNoContentResponse error:nil];} booleanSuccess:successBlock failure:failureBlock];
 }
+
+
+#pragma mark Merges
+
+- (void)mergeHead:(NSString *)head intoBranch:(NSString *)base inRepository:(NSString *)repositoryPath withMessage:(NSString *)commitMessage success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/merges", repositoryPath] requestType:UAGithubRepositoryMergeRequest responseType:UAGithubCommitResponse error:nil];} success:successBlock failure:failureBlock];
+}
+
 
 
 #pragma mark

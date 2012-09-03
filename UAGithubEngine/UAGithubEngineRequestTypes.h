@@ -163,6 +163,7 @@ typedef enum UAGithubRequestType
     UAGithubAssigneesRequest,                       // Get one or more assignees
     UAGithubAssigneeRequest,                        // Get whether one user is an assignee on a repository
     UAGithubMarkdownRequest,                        // Get a string as Markdown
+    UAGithubRepositoryMergeRequest,                 // Merge one branch into another
 } UAGithubRequestType;
 
 
