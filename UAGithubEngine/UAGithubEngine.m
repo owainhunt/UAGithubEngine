@@ -24,7 +24,12 @@
 #define API_DOMAIN @"api.github.com"
 
 
-@interface UAGithubEngine (Private)
+@interface UAGithubEngine ()
+
+@property BOOL isMultiPageRequest;
+@property (nonatomic, strong) NSURL *nextPageURL;
+@property (nonatomic, strong) NSURL *lastPageURL;
+@property (nonatomic, strong) NSMutableArray *multiPageArray;
 
 - (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType error:(NSError **)error;
 - (id)sendRequest:(NSString *)path requestType:(UAGithubRequestType)requestType responseType:(UAGithubResponseType)responseType page:(NSInteger)page error:(NSError **)error;
@@ -47,12 +52,13 @@
     self = [super init];
 	if (self) 
 	{
-		username = aUsername;
-		password = aPassword;
+		self.username = aUsername;
+		self.password = aPassword;
 		if (withReach)
 		{
-			reachability = [[UAReachability alloc] init];
+			self.reachability = [[UAReachability alloc] init];
 		}
+        self.multiPageArray = [@[] mutableCopy];
 	}
 	
 	
@@ -293,6 +299,23 @@
                                     
                                     else
                                     {
+                                        if ([[[resp allHeaderFields] allKeys] containsObject:@"Link"])
+                                        {
+                                            self.isMultiPageRequest = YES;
+                                            NSString *linkHeader = [[resp allHeaderFields] valueForKey:@"Link"];
+                                            NSArray *links = [linkHeader componentsSeparatedByString:@","];
+                                            self.nextPageURL = nil;
+                                            NSURL * __block blockURL = nil;
+                                            [links enumerateObjectsUsingBlock:^(NSString *link, NSUInteger idx, BOOL *stop) {
+                                                NSString *rel = [[link componentsSeparatedByString:@";"][1] componentsSeparatedByString:@"\""][1];
+                                                if ([rel isEqualToString:@"next"])
+                                                {
+                                                    blockURL = [NSURL URLWithString:[[link componentsSeparatedByString:@";"][0] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]];
+                                                    *stop = YES;
+                                                }
+                                            }];
+                                            self.nextPageURL = blockURL;
+                                        }
                                         return [UAGithubJSONParser parseJSON:data error:&blockError];
                                     }
 
@@ -347,14 +370,35 @@
     [invocation setArgument:&errorPointer atIndex:[[invocation methodSignature] numberOfArguments] - 1];
     [invocation invoke];
     [invocation getReturnValue:&result];
-    
+      
     if (error)
     {
         failureBlock(error);
         return;
     }
 
-    successBlock(result);
+    while (self.isMultiPageRequest && self.nextPageURL)
+    {
+        [self.multiPageArray addObjectsFromArray:result];
+        NSMutableString *requestPath = [self.nextPageURL query] ? [[[self.nextPageURL path] stringByAppendingFormat:@"?%@", [self.nextPageURL query]] mutableCopy] : [[self.nextPageURL path] mutableCopy];
+        [requestPath deleteCharactersInRange:NSMakeRange(0, 1)];
+
+        [invocation setArgument:&requestPath atIndex:2];
+        [invocation setArgument:&errorPointer atIndex:[[invocation methodSignature] numberOfArguments] - 1];
+        [invocation invoke];
+        [invocation getReturnValue:&result];
+    }
+    
+    if (self.isMultiPageRequest)
+    {
+        [self.multiPageArray addObjectsFromArray:result];
+        NSLog(@"%@", @([self.multiPageArray count]));
+        successBlock(self.multiPageArray);
+    }
+    else
+    {
+        successBlock(result);
+    }
 }
 
 
