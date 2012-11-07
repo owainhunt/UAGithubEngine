@@ -124,6 +124,11 @@ typedef enum UAGithubRequestType
     UAGithubGistCommentCreateRequest,               // Create a new gist comment
     UAGithubGistCommentUpdateRequest,               // Edit a gist comment
     UAGithubGistCommentDeleteRequest,               // Delete a gist comment
+    UAGithubNotificationsRequest,                   // List all notifications for the current user, grouped by repository
+    UAGithubNotificationsMarkReadRequest,           // Mark a notification as read
+    UAGithubNotificationsMarkThreadReadRequest,     // Mark a notification thread as read
+    UAGithubNotificationThreadSubscriptionRequest,  // Subscribe or unsubscribe from a notification thread
+    UAGithubNotificationDeleteSubscriptionRequest,  // Delete a notification thread subscription
     UAGithubIssueEventsRequest,                     // Get one or more issue events
     UAGithubIssueEventRequest,                           // Get exactly one issue event
     UAGithubPullRequestsRequest,                    // Get one or more pull requests
@@ -228,6 +233,9 @@ typedef enum UAGithubResponseType
     UAGithubPullRequestCommentsResponse,            // One or more pull request comments
     UAGithubPullRequestCommentResponse,             // Exactly one pull request comment
     UAGithubTagsResponse,							// Tags in name-SHA pairs
+    UAGithubNotificationsResponse,                  // One or more notifications
+    UAGithubNotificationThreadsResponse,            // One or more notification threads
+    UAGithubNotificationThreadSubscriptionResponse, // Exactly one notification thread subscription
     UAGithubEventsResponse,                         // One or more events of unspecified type
     UAGithubOrganizationsResponse,                  // One or more organizations
     UAGithubOrganizationResponse,                   // Exactly one organization
