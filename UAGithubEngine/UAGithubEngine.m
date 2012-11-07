@@ -196,6 +196,8 @@
         case UAGithubOrganizationMembershipPublicizeRequest:
         case UAGithubTeamMemberAddRequest:
         case UAGithubTeamRepositoryManagershipAddRequest:
+        case UAGithubNotificationsMarkReadRequest:
+        case UAGithubNotificationThreadSubscriptionRequest:
         {
             [urlRequest setHTTPMethod:@"PUT"];
         }
@@ -215,6 +217,7 @@
         case UAGithubPullRequestCommentUpdateRequest:
         case UAGithubOrganizationUpdateRequest: 
         case UAGithubTeamUpdateRequest:
+        case UAGithubNotificationsMarkThreadReadRequest:
         {
             [urlRequest setHTTPMethod:@"PATCH"];
         }
@@ -238,6 +241,7 @@
         case UAGithubTeamDeleteRequest:
         case UAGithubTeamMemberRemoveRequest:
         case UAGithubTeamRepositoryManagershipRemoveRequest:
+        case UAGithubNotificationDeleteSubscriptionRequest:
         {
             [urlRequest setHTTPMethod:@"DELETE"];
         }
@@ -657,6 +661,69 @@
 - (void)deleteComment:(NSInteger)commentNumber forRepository:(NSString *)repositoryPath success:(UAGithubEngineBooleanSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
     [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/issues/comments/%ld", repositoryPath, commentNumber] requestType:UAGithubIssueCommentDeleteRequest responseType:UAGithubIssueCommentResponse error:nil];} booleanSuccess:successBlock failure:failureBlock];
+}
+
+
+#pragma mark
+#pragma mark Activity
+#pragma mark
+
+
+#pragma mark Notifications
+
+- (void)notificationsWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:@"notifications" requestType:UAGithubNotificationsRequest responseType:UAGithubNotificationsResponse error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)notificationsForRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/notifications", repositoryPath] requestType:UAGithubNotificationsRequest responseType:UAGithubNotificationsResponse error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)notificationsForThread:(NSInteger)threadId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"notifications/threads/%ld", threadId] requestType:UAGithubNotificationsRequest responseType:UAGithubNotificationThreadsResponse error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)markNotificationsAsReadWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    NSDictionary *params = [@{ @"read" : @"true" } copy];
+    
+    [self invoke:^(id self){[self sendRequest:@"notifications" requestType:UAGithubNotificationsMarkReadRequest responseType:UAGithubNoContentResponse withParameters:params error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)markNotificationsAsReadInRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    NSDictionary *params = [@{ @"read" : @"true" } copy];
+    
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/notifications", repositoryPath] requestType:UAGithubNotificationsMarkReadRequest responseType:UAGithubNoContentResponse withParameters:params error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)markNotificationThreadAsRead:(NSInteger)threadId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    NSDictionary *params = [@{ @"read" : @"true" } copy];
+    
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"notifications/threads/%ld", threadId] requestType:UAGithubNotificationsMarkThreadReadRequest responseType:UAGithubNoContentResponse withParameters:params error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)currentUserIsSubscribedToNotificationThread:(NSInteger)threadId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"notifications/threads/%ld/subscription", threadId] requestType:UAGithubNotificationsRequest responseType:UAGithubNotificationThreadSubscriptionResponse error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)subscribeCurrentUserToNotificationThread:(NSInteger)threadId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    NSDictionary *params = [@{ @"subscribed" : @"true" } copy];
+    
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"notifications/threads/%ld/subscription", threadId] requestType:UAGithubNotificationThreadSubscriptionRequest responseType:UAGithubNotificationThreadSubscriptionResponse withParameters:params error:nil];} success:successBlock failure:failureBlock];
+}
+
+- (void)unsubscribeCurrentUserFromNotificationThread:(NSInteger)threadId success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    NSDictionary *params = [@{ @"subscribed" : @"false" } copy];
+    
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"notifications/threads/%ld/subscription", threadId] requestType:UAGithubNotificationDeleteSubscriptionRequest responseType:UAGithubNotificationThreadSubscriptionResponse withParameters:params error:nil];} success:successBlock failure:failureBlock];
 }
 
 
