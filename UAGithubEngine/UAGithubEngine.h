@@ -9,16 +9,25 @@
 #import <Foundation/Foundation.h>
 @class UAReachability;
 
+@protocol UAGitHubEngineDelegate <NSObject>
+
+- (void)didReceiveData:(NSData*)responseData forPullRequestsInRepositoryWithName:(NSString*)repositoryName;
+
+@end
+
 typedef void (^UAGithubEngineSuccessBlock)(id);
 typedef void (^UAGithubEngineBooleanSuccessBlock)(BOOL);
 typedef void (^UAGithubEngineFailureBlock)(NSError *);
 
-@interface UAGithubEngine : NSObject 
+@interface UAGithubEngine : NSObject
 
 @property (strong) NSString *username;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) UAReachability *reachability;
 @property (nonatomic, assign, readonly) BOOL isReachable;
+@property (atomic, readwrite) NSOperationQueue *operationQueue;
+@property (nonatomic, weak) id<UAGitHubEngineDelegate> delegate;
+
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword withReachability:(BOOL)withReach;
 
