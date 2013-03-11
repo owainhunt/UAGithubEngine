@@ -259,7 +259,8 @@
 		 
 		 if (statusCode >= 400 || statusCode == 204) {
 			 
-		 } else if(requestType == UAGithubMarkdownRequest) {
+		 } else if(requestType == UAGithubUserRequest) {
+			 [_delegate didReceiveDataForUserRequest:responseData];
 			 
 		 } else {
 			 [_delegate didReceiveData:responseData forPullRequestsInRepositoryWithName:name];

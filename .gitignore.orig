@@ -13,10 +13,7 @@ build/
 /UAGithubEngine.xcodeproj/xcuserdata/owainhunt.xcuserdatad/xcschemes/UAGithubEngine.xcscheme
 /UAGithubEngine.xcodeproj/project.xcworkspace/xcuserdata/owainhunt.xcuserdatad/UserInterfaceState.xcuserstate
 /UAGithubEngine.xcodeproj/xcuserdata/mlussier.xcuserdatad/
-<<<<<<< HEAD
-UserInterfaceState.xcuserstate
-=======
 /UAGithubEngine.xcodeproj/xcuserdata/orhunt.xcuserdatad/
 /UAGithubEngine.xcodeproj/project.xcworkspace/xcuserdata/orhunt.xcuserdatad/
 /AppController.m
->>>>>>> refs/heads/api3-blocks-arc
+

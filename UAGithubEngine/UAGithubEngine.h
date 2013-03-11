@@ -11,7 +11,10 @@
 
 @protocol UAGitHubEngineDelegate <NSObject>
 
+@optional
 - (void)didReceiveData:(NSData*)responseData forPullRequestsInRepositoryWithName:(NSString*)repositoryName;
+@optional
+- (void)didReceiveDataForUserRequest:(NSData*)responseData;
 
 @end
 
