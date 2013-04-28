@@ -1106,6 +1106,15 @@
 	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"users/%@/repos", aUser] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse error:nil];} success:successBlock failure:failureBlock];	
 }
 
+- (void)repositoriesForOrganization:(NSString *)organization success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self repositoriesForOrganization:organization page:1 success:successBlock failure:failureBlock];
+}
+
+- (void)repositoriesForOrganization:(NSString *)organization page:(int)page success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
+{
+    [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"orgs/%@/repos", organization] requestType:UAGithubRepositoriesRequest responseType:UAGithubRepositoriesResponse error:nil];} success:successBlock failure:failureBlock];
+}
 
 - (void)repositoriesWithSuccess:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
