@@ -183,6 +183,7 @@
         case UAGithubTeamCreateRequest:
         case UAGithubMarkdownRequest:
         case UAGithubRepositoryMergeRequest:
+        case UAGithubRepositoryForkRequest:
 		{
 			[urlRequest setHTTPMethod:@"POST"];
 		}
@@ -1278,6 +1279,7 @@
     if (org)
     {
         [self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/forks", repositoryPath] requestType:UAGithubRepositoryForkRequest responseType:UAGithubRepositoryResponse withParameters:[NSDictionary dictionaryWithObject:org forKey:@"org"] error:nil];} success:successBlock failure:failureBlock];
+        return;
     }
 	[self invoke:^(id self){[self sendRequest:[NSString stringWithFormat:@"repos/%@/forks", repositoryPath] requestType:UAGithubRepositoryForkRequest responseType:UAGithubRepositoryResponse error:nil];} success:successBlock failure:failureBlock];
 }
