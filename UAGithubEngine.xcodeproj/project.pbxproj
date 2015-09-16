@@ -11,8 +11,8 @@
 		CC52FFA615378566005A767A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC52FFA415378566005A767A /* InfoPlist.strings */; };
 		CC52FFC3153785F3005A767A /* NSArray+Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = CC52FFAE153785F3005A767A /* NSArray+Utilities.h */; };
 		CC52FFC4153785F3005A767A /* NSArray+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CC52FFAF153785F3005A767A /* NSArray+Utilities.m */; };
-		CC52FFC5153785F3005A767A /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = CC52FFB0153785F3005A767A /* NSData+Base64.h */; };
-		CC52FFC6153785F3005A767A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC52FFB1153785F3005A767A /* NSData+Base64.m */; };
+		CC52FFC5153785F3005A767A /* NSData+UAGithubEngineBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = CC52FFB0153785F3005A767A /* NSData+UAGithubEngineBase64.h */; };
+		CC52FFC6153785F3005A767A /* NSData+UAGithubEngineBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC52FFB1153785F3005A767A /* NSData+UAGithubEngineBase64.m */; };
 		CC52FFC7153785F3005A767A /* NSInvocation+Blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = CC52FFB2153785F3005A767A /* NSInvocation+Blocks.h */; };
 		CC52FFC8153785F3005A767A /* NSInvocation+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = CC52FFB3153785F3005A767A /* NSInvocation+Blocks.m */; };
 		CC52FFC9153785F3005A767A /* NSString+UAGithubEngineUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = CC52FFB4153785F3005A767A /* NSString+UAGithubEngineUtilities.h */; };
@@ -46,8 +46,8 @@
 		CC52FFA715378566005A767A /* UAGithubEngine-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UAGithubEngine-Prefix.pch"; sourceTree = "<group>"; };
 		CC52FFAE153785F3005A767A /* NSArray+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Utilities.h"; sourceTree = "<group>"; };
 		CC52FFAF153785F3005A767A /* NSArray+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Utilities.m"; sourceTree = "<group>"; };
-		CC52FFB0153785F3005A767A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		CC52FFB1153785F3005A767A /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		CC52FFB0153785F3005A767A /* NSData+UAGithubEngineBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+UAGithubEngineBase64.h"; sourceTree = "<group>"; };
+		CC52FFB1153785F3005A767A /* NSData+UAGithubEngineBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+UAGithubEngineBase64.m"; sourceTree = "<group>"; };
 		CC52FFB2153785F3005A767A /* NSInvocation+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Blocks.h"; sourceTree = "<group>"; };
 		CC52FFB3153785F3005A767A /* NSInvocation+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Blocks.m"; sourceTree = "<group>"; };
 		CC52FFB4153785F3005A767A /* NSString+UAGithubEngineUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UAGithubEngineUtilities.h"; sourceTree = "<group>"; };
@@ -153,8 +153,8 @@
 				CC52FFB9153785F3005A767A /* UAGithubEngine.m */,
 				CC52FFAE153785F3005A767A /* NSArray+Utilities.h */,
 				CC52FFAF153785F3005A767A /* NSArray+Utilities.m */,
-				CC52FFB0153785F3005A767A /* NSData+Base64.h */,
-				CC52FFB1153785F3005A767A /* NSData+Base64.m */,
+				CC52FFB0153785F3005A767A /* NSData+UAGithubEngineBase64.h */,
+				CC52FFB1153785F3005A767A /* NSData+UAGithubEngineBase64.m */,
 				CC52FFB2153785F3005A767A /* NSInvocation+Blocks.h */,
 				CC52FFB3153785F3005A767A /* NSInvocation+Blocks.m */,
 				CC52FFB4153785F3005A767A /* NSString+UAGithubEngineUtilities.h */,
@@ -183,7 +183,7 @@
 			files = (
 				CC52FFCD153785F3005A767A /* UAGithubEngine.h in Headers */,
 				CC52FFC3153785F3005A767A /* NSArray+Utilities.h in Headers */,
-				CC52FFC5153785F3005A767A /* NSData+Base64.h in Headers */,
+				CC52FFC5153785F3005A767A /* NSData+UAGithubEngineBase64.h in Headers */,
 				CC52FFC7153785F3005A767A /* NSInvocation+Blocks.h in Headers */,
 				CC52FFC9153785F3005A767A /* NSString+UAGithubEngineUtilities.h in Headers */,
 				CC52FFCB153785F3005A767A /* NSString+UUID.h in Headers */,
@@ -257,7 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC52FFC4153785F3005A767A /* NSArray+Utilities.m in Sources */,
-				CC52FFC6153785F3005A767A /* NSData+Base64.m in Sources */,
+				CC52FFC6153785F3005A767A /* NSData+UAGithubEngineBase64.m in Sources */,
 				CC52FFC8153785F3005A767A /* NSInvocation+Blocks.m in Sources */,
 				CC52FFCA153785F3005A767A /* NSString+UAGithubEngineUtilities.m in Sources */,
 				CC52FFCC153785F3005A767A /* NSString+UUID.m in Sources */,
