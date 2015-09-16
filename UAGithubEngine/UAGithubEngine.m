@@ -15,7 +15,7 @@
 #import "UAGithubURLConnection.h"
 
 #import "NSString+UAGithubEngineUtilities.h"
-#import "NSData+Base64.h"
+#import "NSData+UAGithubEngineBase64.h"
 #import "NSString+UUID.h"
 
 #import "NSInvocation+Blocks.h"
@@ -149,7 +149,7 @@
 	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
 	if (self.username && self.password)
 	{
-		[urlRequest setValue:[NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];	
+		[urlRequest setValue:[NSString stringWithFormat:@"Basic %@", [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] ua_base64EncodedString]] forHTTPHeaderField:@"Authorization"];
 	}
 
 	if (jsonData)
